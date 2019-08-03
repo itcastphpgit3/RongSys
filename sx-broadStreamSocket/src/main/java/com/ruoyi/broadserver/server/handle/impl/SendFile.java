@@ -72,7 +72,7 @@ public class SendFile extends DefaultCommand {
                     if(!datainfo.equals("list.txt"))
                         info.setByteCount(info.getByteCount()+ ReturnData.length);
                 }
-                return returnBytes(ProtocolsToClient.LIST, byteOrder, new String(ReturnData,GBK));
+                return returnBytes(ProtocolsToClient.LIST, byteOrder, new String(ReturnData,GBK),true);
             }else{
                 logger.info("未获取终端信息");
             }

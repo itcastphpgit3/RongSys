@@ -26,7 +26,7 @@ public class Register extends DefaultCommand {
             String command = save(get(datainfo))?"1":"0";//保存信息
             String data = df.format(new Date());//返回当前时间给终端
             loggersession();//插入日志
-            return returnBytes(ProtocolsToClient.REGISTER, command, data);
+            return returnBytes(ProtocolsToClient.REGISTER, command, data,true);
         }catch (Exception e){
             logger.error("终端注册登录失败"+e);
         }

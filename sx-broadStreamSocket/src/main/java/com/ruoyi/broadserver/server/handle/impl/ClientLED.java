@@ -21,7 +21,7 @@ public class ClientLED extends DefaultCommand {
 			loggersession();//插入日志
 
 			String returnStr = (String)get(session);
-			return returnBytes(ProtocolsToClient.UPDATELED, command, returnStr);
+			return returnBytes(ProtocolsToClient.UPDATELED, command, returnStr,false);
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

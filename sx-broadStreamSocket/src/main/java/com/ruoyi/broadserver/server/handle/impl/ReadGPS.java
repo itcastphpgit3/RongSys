@@ -24,7 +24,7 @@ public class ReadGPS extends DefaultCommand {
 
 		loggersession();//插入日志
 		
-		return returnBytes(ProtocolsToClient.POSITION, command, null);
+		return returnBytes(ProtocolsToClient.POSITION, command, null,false);
 	}
 
 	@Override

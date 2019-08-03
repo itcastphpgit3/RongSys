@@ -74,6 +74,12 @@ public class bConst {
     public static final int CommdPort = 8600;
     // 终端物联网数据交互端口
     public static final int IOTPort = 8900;
+    // 终端物联网数据交互类型及线程名
+    public static final String IOTTYPE = "IOTThread";
+    // 终端命令数据交互类型及线程名
+    public static final String COMMANDTYPE = "CommandThread";
+    // 终端心跳数据交互类型及线程名
+    public static final String HEARTTYPE = "HeartThread";
     // 服务器下载文件路径
     public static final String ServerPath = "110.53.162.164/Broad/";
     //终端系统升级文件路径

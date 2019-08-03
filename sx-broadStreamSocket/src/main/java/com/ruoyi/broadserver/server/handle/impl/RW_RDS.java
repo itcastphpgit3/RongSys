@@ -28,9 +28,9 @@ public class RW_RDS extends DefaultCommand {
 			e.printStackTrace();
 		}
 		if(reinfo != null)
-			return returnBytes(ProtocolsToClient.E_FM_RECIVE, command, reinfo);
+			return returnBytes(ProtocolsToClient.E_FM_RECIVE, command, reinfo,false);
 		else
-			return returnBytes(ProtocolsToClient.E_FM_RECIVE, command, datainfo);
+			return returnBytes(ProtocolsToClient.E_FM_RECIVE, command, datainfo,false);
 	}
 	
 	@Override

@@ -12,8 +12,10 @@ package com.ruoyi.broadserver.server;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
+import com.ruoyi.broad.utils.bConst;
 import com.ruoyi.broad.utils.bConvert;
 import com.ruoyi.broadserver.domain.SocketInfo;
+import com.sun.javafx.css.CssError;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -35,6 +37,10 @@ public class MinaCastHandler extends IoHandlerAdapter
     public static final CharsetDecoder decoder = (Charset.forName("ISO-8859-1")).newDecoder();
 	public static final String CLIENTINFO = "CLIENTINFO";
 	private static final SimpleCommandFactory commandFactory = new SimpleCommandFactory();
+	private String type;
+	public  MinaCastHandler(String type){
+        this.type = type;
+    }
 	//private int Number = 1;
     /**
      * MINA的异常回调方法。
@@ -71,7 +77,14 @@ public class MinaCastHandler extends IoHandlerAdapter
 		byte[] content = new byte[buffer.limit()];
 		buffer.get(content);
 		byte[] returndata = null;
-		DefaultCommand command = commandFactory.createCommand(session, content);
+        DefaultCommand command = null;
+		if(type.equals(bConst.HEARTTYPE)) {//heart
+		    command = commandFactory.createHeart(session, content);
+        }else if(type.equals(bConst.IOTTYPE)){//iot
+            command = commandFactory.createIOT(session, content);
+        }else{//command
+            command = commandFactory.createCommand(session, content);
+        }
 		if(command != null) {
 			returndata = command.execute();
 		}

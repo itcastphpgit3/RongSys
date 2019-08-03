@@ -21,7 +21,7 @@ public class ReadClientFM  extends DefaultCommand {
 
 		loggersession();//插入日志
 		
-		return returnBytes(ProtocolsToClient.CLIENTREAD, command, null);
+		return returnBytes(ProtocolsToClient.CLIENTREAD, command, null,false);
 	}
 
 	@Override

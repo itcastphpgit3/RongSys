@@ -26,7 +26,7 @@ public class RW_VOL extends DefaultCommand {
 		
 		loggersession();//插入日志
 
-		return returnBytes(ProtocolsToClient.VOL, command, reinfo);
+		return returnBytes(ProtocolsToClient.VOL, command, reinfo,true);
 	}
 
 	@Override

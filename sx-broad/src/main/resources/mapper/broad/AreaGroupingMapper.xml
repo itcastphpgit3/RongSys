@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.broad.mapper.AreaGroupindeleteAreaGroupinggMapper">
+    <resultMap type="AreaGrouping" id="AreaGroupingResult">
+        <result property="aid"    column="aid"    />
+        <result property="parentaid"    column="parentaid"    />
+        <result property="aname"    column="aname"    />
+        <result property="note"    column="note"    />
+        <result property="parentaname"    column="parentaname"    />
+    </resultMap>
+
+
+    <select id="list" resultMap="AreaGroupingResult">
+        select
+			a1.aid as aid,
+			a1.parentaid as parentaid,
+			a1.aname as aname,
+			a1.note as note,
+			a2.aname as parentaname
+		from area a1 left join area a2 on a1.parentaid = a2.aid
+    </select>
+    
+    <select id="deleteAreaGrouping" parameterType="String">
+        delete from area where aid = #{aid}
+    </select>
+</mapper>

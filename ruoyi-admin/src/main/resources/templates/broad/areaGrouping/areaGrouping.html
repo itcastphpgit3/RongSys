@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+
+<body class="gray-bg">
+
+<div class="container-div ui-layout-center">
+    <div class="row">
+
+        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="broad:area:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="broad:area:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+<script th:inline="javascript">
+
+
+    var prefix = ctx + "broad/areagrouping";
+
+    $(function() {
+        $('body').layout({ west__size: 185 });
+        queryAreaList();
+    });
+
+    function queryAreaList() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            exportUrl: prefix + "/export",
+            modalName: "终端地域",
+            search: false,
+            showExport: true,
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field : 'aid',
+                    title : '分组编号',
+                    visible: true
+                },
+                {
+                    field : 'aname',
+                    title : '地域名称',
+                    sortable: true
+                },
+                {
+                    field: 'note',
+                    title: '备注',
+                    sortable: true
+                }]
+        };
+        $.table.init(options);
+    };
+
+</script>
+</body>
+</html>

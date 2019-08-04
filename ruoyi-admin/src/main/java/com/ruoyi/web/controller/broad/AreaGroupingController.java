@@ -28,10 +28,10 @@ import java.util.Map;
  * 终端分组管理控制
  */
 @Controller
-@RequestMapping("/broad/areagrouping")
+@RequestMapping("/broad/areaGrouping")
 public class AreaGroupingController extends BaseController{
 
-    private String prefix = "broad/areagrouping";
+    private String prefix = "broad/areaGrouping";
 
     @Autowired
     private IAreaGroupingService iAreaGroupingService;
@@ -94,7 +94,6 @@ public class AreaGroupingController extends BaseController{
     {
         return prefix + "/add";
     }
-
 
     @Log(title = "新增分组管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")

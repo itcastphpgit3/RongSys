@@ -53,7 +53,7 @@
 <script th:inline="javascript">
 
 
-    var prefix = ctx + "broad/areagrouping";
+    var prefix = ctx + "broad/areaGrouping";
     var removeFlag = [[${@permission.hasPermi('broad:areagrouping:remove')}]];
 
     $(function() {
@@ -104,7 +104,7 @@
 
     function queryAreaTree()
     {
-        var url = ctx + "broad/areagrouping/treeData";
+        var url = ctx + "broad/areaGrouping/treeData";
         var options = {
             url: url,
 //            expandLevel: 2,

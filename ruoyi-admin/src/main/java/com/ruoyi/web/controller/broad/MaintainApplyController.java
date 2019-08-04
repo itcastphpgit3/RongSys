@@ -88,6 +88,7 @@ public class MaintainApplyController extends BaseController {
     {
         return toAjax(iMaintainApplyService.insertMaintainApply(maintainApply));
     }
+
     @PostMapping("/remove")
     @Log(title = "申请维护记录删除",businessType = BusinessType.DELETE)
     @RequiresPermissions("broad:maintainApply:remove")

@@ -43,7 +43,7 @@
 <script th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
 <script th:src="@{/js/jquery-form.js}"></script>
 <script type="text/javascript">
-    var prefix = ctx + "broad/areaGrouping"
+    var prefix = ctx + "broad/areaGrouping";
     $("#form-areaGrouping-add").validate({
         rules:{
             xxxx:{
@@ -52,14 +52,13 @@
         }
     });
 
-
     function submitHandler() {
         if ($.validate.form()) {
             $.operate.save(prefix + "/add", $('#form-areaGrouping-add').serialize());
         }
     }
+
 </script>
-<script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
 <!--与富文本框有关的js文件的引入-->
 <script th:src="@{/js/plugins/simditor/module.js}"></script>
@@ -67,7 +66,6 @@
 <script th:src="@{/js/plugins/simditor/hotkeys.js}"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script th:src="@{/js/plugins/simditor/simditor.js}"></script>
-
 <!--设置富文本插件-->
 <script>
     $(document).ready(function() {

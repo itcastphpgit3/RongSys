@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.broad.mapper.AreaGroupindeleteAreaGroupinggMapper">
+<mapper namespace="com.ruoyi.broad.mapper.AreaGroupingMapper">
     <resultMap type="AreaGrouping" id="AreaGroupingResult">
         <result property="aid"    column="aid"    />
         <result property="parentaid"    column="parentaid"    />
@@ -12,7 +12,7 @@
     </resultMap>
 
 
-    <select id="list" resultMap="AreaGroupingResult">
+    <select id="listAreaGrouping" resultMap="AreaGroupingResult">
         select
 			a1.aid as aid,
 			a1.parentaid as parentaid,
@@ -22,7 +22,41 @@
 		from area a1 left join area a2 on a1.parentaid = a2.aid
     </select>
     
-    <select id="deleteAreaGrouping" parameterType="String">
+    <delete id="deleteAreaGrouping" parameterType="String">
         delete from area where aid = #{aid}
-    </select>
+    </delete>
+
+    <delete id="deleteAreaGroupingByIds" parameterType="String">
+        delete from area where aid IN
+        <foreach item="aid" collection="array" open="(" separator="," close=")">
+            #{aid}
+        </foreach>
+    </delete>
+
+    <insert id="insertAreaGrouping" parameterType="AreaGrouping">
+        insert into area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aid != null  and aid != '' ">aid,</if>
+            <if test="parentaid != null  and parentaid != '' ">parentaid,</if>
+            <if test="aname != null  and aname != '' ">aname,</if>
+            <if test="note != null  and note != '' ">note</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aid != null  and aid != '' ">#{aid},</if>
+            <if test="parentaid != null  and parentaid != '' ">#{parentaid},</if>
+            <if test="aname != null  and aname != '' ">#{aname},</if>
+            <if test="note != null  and note != '' ">#{note}</if>
+        </trim>
+    </insert>
+
+    <update id="updateAreaGrouping" parameterType="AreaGrouping">
+        update area
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teraddress != null  and teraddress != ''  ">aid = #{aid},</if>
+            <if test="maid != null  and maid != ''  ">parentaid = #{parentaid},</if>
+            <if test="linkman != null  and linkman != ''  ">aname = #{aname},</if>
+            <if test="linkphone != null  and linkphone != ''  ">note = #{note}</if>
+        </trim>
+        where aid = #{aid}
+    </update>
 </mapper>

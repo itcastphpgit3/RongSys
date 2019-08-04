@@ -1,8 +1,12 @@
 package com.ruoyi.web.controller.broad;
 
 import com.ruoyi.broad.domain.AreaGrouping;
+import com.ruoyi.broad.domain.BroadMessage;
+import com.ruoyi.broad.domain.MaintainApply;
 import com.ruoyi.broad.service.IAreaGroupingService;
+import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -10,14 +14,13 @@ import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.framework.web.domain.server.Sys;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2019/8/2.
@@ -42,6 +45,9 @@ public class AreaGroupingController extends BaseController{
         return prefix + "/areaGrouping";
     }
 
+    @Autowired
+    private IMessageService messageService;
+
     @PostMapping("/list")
     @Log(title = "分组管理列表")
     @ResponseBody
@@ -54,13 +60,47 @@ public class AreaGroupingController extends BaseController{
         if(roleid == 1)
         {
             startPage();
-            List<AreaGrouping> list = iAreaGroupingService.list();
+            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping();
             return getDataTable(list);
         }else {
             startPage();
             areaGrouping.setUid(userid);
-            List<AreaGrouping> list = iAreaGroupingService.list();
+            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping();
             return getDataTable(list);
         }
+    }
+
+    /**
+     * 加载部门列表树
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Map<String, Object>> treeData() {
+        List<Map<String, Object>> tree = messageService.selectMessageList((new BroadMessage()));
+        return tree;
+    }
+
+    @PostMapping("/remove")
+    @Log(title = "分组管理删除",businessType = BusinessType.DELETE)
+    @RequiresPermissions("broad:areagrouping:remove")
+    @ResponseBody
+    public AjaxResult removeAreagrouping(String ids)
+    {
+        return toAjax(iAreaGroupingService.deleteAreaGrouping(ids));
+    }
+
+    @GetMapping("/add")
+    public String addareaGrouping()
+    {
+        return prefix + "/add";
+    }
+
+
+    @Log(title = "新增分组管理", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(AreaGrouping areaGrouping)
+    {
+        return toAjax(iAreaGroupingService.insertAreaGrouping(areaGrouping));
     }
 }

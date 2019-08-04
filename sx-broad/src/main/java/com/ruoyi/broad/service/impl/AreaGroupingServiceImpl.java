@@ -5,6 +5,7 @@ import com.ruoyi.broad.mapper.AreaGroupingMapper;
 import com.ruoyi.broad.service.IAreaGroupingService;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.support.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,9 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
 
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<AreaGrouping> list()
+    public List<AreaGrouping> listAreaGrouping()
     {
-        return areaGroupingMapper.list();
+        return areaGroupingMapper.listAreaGrouping();
     }
 
     /*
@@ -42,7 +43,7 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
     @DataSource(value = DataSourceType.SLAVE)
     public int deleteAreaGrouping(String aid)
     {
-        return areaGroupingMapper.deleteAreaGrouping(aid);
+         return areaGroupingMapper.deleteAreaGrouping(aid);
     }
 
     /*
@@ -66,5 +67,11 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
     public int insertAreaGrouping(AreaGrouping areaGrouping)
     {
         return areaGroupingMapper.insertAreaGrouping(areaGrouping);
+    }
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public int deleteAreaGroupingByIds(String ids)
+    {
+        return areaGroupingMapper.deleteAreaGroupingByIds(Convert.toStrArray(ids));
     }
 }

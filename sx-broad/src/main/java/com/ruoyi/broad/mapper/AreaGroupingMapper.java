@@ -15,7 +15,7 @@ public interface AreaGroupingMapper {
     *
     * @return 终端分组列表
     * */
-    public List<AreaGrouping> list();
+    public List<AreaGrouping> listAreaGrouping();
 
     /*
     * 删除分组列表
@@ -24,6 +24,8 @@ public interface AreaGroupingMapper {
     *@return 终端分组列表
     * */
     public int deleteAreaGrouping(String aid);
+
+    public int deleteAreaGroupingByIds(String[] aid);
 
     /*
     * 更新分组列表

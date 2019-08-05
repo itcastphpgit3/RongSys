@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+
+<body class="gray-bg">
+<div class="ui-layout-west">
+    <div class="main-content">
+        <div class="box box-main" style="width: 3000px">
+            <div class="box-header">
+                <div class="box-title">
+                    <i class="fa icon-grid"></i> 终端列表
+                </div>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;">
+                        <i class="fa fa-chevron-up"></i></button>
+                    <button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠">
+                        <i class="fa fa-chevron-down"></i></button>
+                    <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新">
+                        <i class="fa fa-refresh"></i></button>
+                </div>
+            </div>
+            <div class="ui-layout-content">
+                <div id="tree" class="ztree" style="overflow: auto"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-div ui-layout-center">
+    <div class="row">
+
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            分组编号：<input type="text" name="aid" id="aid"/>
+                        </li>
+
+                        <li>
+                            <input type="hidden" name="parentaid" id="parentaid"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <!--<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="broad:area:edit">-->
+                <!--<i class="fa fa-edit"></i> 修改-->
+            <!--</a>-->
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+<script th:inline="javascript">
+
+
+    var prefix = ctx + "broad/areaGrouping";
+    var removeFlag = [[${@permission.hasPermi('broad:areagrouping:remove')}]];
+
+    $(function() {
+        $('body').layout({ west__size: 185 });
+        queryAreaList();
+        queryAreaTree();
+    });
+
+    function queryAreaList() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            modalName: "终端地域",
+            search: false,
+            showExport: true,
+            columns: [{
+                checkbox: true
+                },
+                {
+                    field : 'aid',
+                    title : '分组编号',
+                    visible: true
+                },
+                {
+                    field : 'parentaid',
+                    title : '父编号',
+                    visible: false
+                },
+                {
+                    field : 'aname',
+                    title : '地域名称',
+                    sortable: true
+                },
+                {
+                    field: 'note',
+                    title: '备注',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.aid + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    };
+
+    function queryAreaTree()
+    {
+        var url = ctx + "broad/areaGrouping/treeData";
+        var options = {
+            url: url,
+//            expandLevel: 2,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+
+        function zOnClick(event, treeId, treeNode) {
+            $("#parentaid").val(treeNode.aid);
+            $.table.search();
+        }
+        $.tree.init(options);
+    }
+
+</script>
+</body>
+</html>

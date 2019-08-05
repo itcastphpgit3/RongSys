@@ -234,12 +234,12 @@ public class OrganizationController extends BaseController
 		}else {
 			String aid;
 			aid = sysUserService.selectAid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Aid
-			Area update_area = new Area() ;
+			Area update_area = new Area();
 			update_area.setAid(aid);
 			List<Map<String, Object>> tree = areaService.selectAreaTree(update_area);
 			return tree;
 		}
-	}
+}
 
 	/**
 	 * 选择区域树

@@ -60,12 +60,12 @@ public class AreaGroupingController extends BaseController{
         if(roleid == 1)
         {
             startPage();
-            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping();
+            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping(areaGrouping);
             return getDataTable(list);
         }else {
             startPage();
             areaGrouping.setUid(userid);
-            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping();
+            List<AreaGrouping> list = iAreaGroupingService.listAreaGrouping(areaGrouping);
             return getDataTable(list);
         }
     }

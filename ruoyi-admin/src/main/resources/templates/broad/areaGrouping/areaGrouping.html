@@ -30,16 +30,39 @@
     </div>
 </div>
 
+
+
 <div class="container-div ui-layout-center">
     <div class="row">
+
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            分组编号：<input type="text" name="aid" id="aid"/>
+                        </li>
+
+                        <li>
+                           <input type="hidden" name="parentaid" id="parentaid"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
 
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
             <a class="btn btn-success" onclick="$.operate.add()">
                 <i class="fa fa-plus"></i> 添加
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="broad:area:edit">
-                <i class="fa fa-edit"></i> 修改
-            </a>
+            <!--<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="broad:area:edit">-->
+                <!--<i class="fa fa-edit"></i> 修改-->
+            <!--</a>-->
         </div>
 
         <div class="col-sm-12 select-table table-striped">
@@ -73,11 +96,16 @@
             showExport: true,
             columns: [{
                 checkbox: true
-            },
+                },
                 {
                     field : 'aid',
                     title : '分组编号',
                     visible: true
+                },
+                {
+                    field : 'parentaid',
+                    title : '父编号',
+                    visible: false
                 },
                 {
                     field : 'aname',
@@ -113,7 +141,7 @@
         $.tree.init(options);
 
         function zOnClick(event, treeId, treeNode) {
-            $("#aid").val(treeNode.id);
+            $("#parentaid").val(treeNode.aid);
             $.table.search();
         }
         $.tree.init(options);

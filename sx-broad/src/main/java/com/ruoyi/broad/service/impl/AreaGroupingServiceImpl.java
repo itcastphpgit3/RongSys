@@ -28,9 +28,9 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
 
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<AreaGrouping> listAreaGrouping()
+    public List<AreaGrouping> listAreaGrouping(AreaGrouping areaGrouping)
     {
-        return areaGroupingMapper.listAreaGrouping();
+        return areaGroupingMapper.listAreaGrouping(areaGrouping);
     }
 
     /*

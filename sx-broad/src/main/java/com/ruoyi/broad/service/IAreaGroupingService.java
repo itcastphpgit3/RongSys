@@ -14,7 +14,7 @@ public interface IAreaGroupingService {
    *
    * @return 终端分组列表
    * */
-    public List<AreaGrouping> listAreaGrouping();
+    public List<AreaGrouping> listAreaGrouping(AreaGrouping areaGrouping);
 
     /*
     * 删除分组列表

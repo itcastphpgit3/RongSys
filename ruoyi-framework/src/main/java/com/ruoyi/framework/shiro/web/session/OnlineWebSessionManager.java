@@ -1,9 +1,10 @@
 package com.ruoyi.framework.shiro.web.session;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import com.ruoyi.common.constant.ShiroConstants;
+import com.ruoyi.framework.shiro.session.OnlineSession;
+import com.ruoyi.framework.util.SpringUtils;
+import com.ruoyi.system.domain.SysUserOnline;
+import com.ruoyi.system.service.ISysUserOnlineService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.session.ExpiredSessionException;
 import org.apache.shiro.session.InvalidSessionException;
@@ -13,21 +14,21 @@ import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ruoyi.common.constant.ShiroConstants;
-import com.ruoyi.framework.shiro.session.OnlineSession;
-import com.ruoyi.framework.util.SpringUtils;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 主要是在此如果会话的属性修改了 就标识下其修改了 然后方便 OnlineSessionDao同步
- * 
+ *
  * @author ruoyi
  */
 public class OnlineWebSessionManager extends DefaultWebSessionManager
 {
     private static final Logger log = LoggerFactory.getLogger(OnlineWebSessionManager.class);
-    
+
     @Override
     public void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) throws InvalidSessionException
     {

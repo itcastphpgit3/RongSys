@@ -54,10 +54,10 @@ public class TempgroupController extends BaseController{
     * */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list()
+    public TableDataInfo list(Tempgroup tempgroup)
     {
         startPage();
-        List<Tempgroup> list = iTempgroupService.selectAllTempgroup();
+        List<Tempgroup> list = iTempgroupService.selectAllTempgroup(tempgroup);
         return getDataTable(list);
     }
 

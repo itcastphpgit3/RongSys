@@ -8,6 +8,7 @@
         <result property="tname"    column="tname"    />
         <result property="aname"    column="aname"    />
         <result property="address"    column="address"    />
+        <result property="parentaid" column="parentaid"/>
     </resultMap>
 
     <!--字段-->
@@ -59,8 +60,10 @@
         user.userinfo
     </sql>
     <!--查询所有临时列表-->
-    <select id="selectAllTempgroup" resultMap="TempgroupResult">
+    <select id="selectAllTempgroup" parameterType="Tempgroup" resultMap="TempgroupResult">
        select
+            tt.aid as aid,
+            aa.parentaid as parentaid,
             tid,
             tname,
             aname,
@@ -68,6 +71,14 @@
         from
             <include refid="tertableName"/> tt left join <include refid="areatableName"/> aa
         on tt.aid = aa.aid
+        <where>
+            <if test="aid != null  and aid != '' ">and tt.aid like CONCAT('%',#{aid},'%')</if>
+            <if test="parentaid != null  and parentaid != '' ">and aa.parentaid like CONCAT('%',#{parentaid},'%')</if>
+            <if test="tid != null  and tid != '' ">and tid like CONCAT('%',#{tid},'%')</if>
+            <if test="tname != null  and tname != '' ">and tname like CONCAT('%',#{tname},'%')</if>
+            <if test="aname != null  and aname != '' ">and aa.aname like CONCAT('%',#{aname},'%')</if>
+            <if test="address != null  and address != '' ">and aa.address like CONCAT('%',#{address},'%')</if>
+        </where>
     </select>
 
     <!--根据分组编号查询终端列表-->

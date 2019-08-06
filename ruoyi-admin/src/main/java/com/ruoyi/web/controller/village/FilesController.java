@@ -37,18 +37,18 @@ import java.util.List;
  */
 @Api("文件管理")
 @Controller
-@RequestMapping("/file")
+@RequestMapping("/village/file")
 public class FilesController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(FilesController.class);
     private static String Save_Url = FileUploadUtils2.getDefaultBaseDir();
-    private String prefix = "file";
+    private String prefix = "village/file";
     @Autowired
     private IFilesService filesService;
 
     @Autowired
     private IPlayOrderService playOrderService;
 
-    @RequiresPermissions("file:view")
+    @RequiresPermissions("village:file:view")
     @GetMapping()
     public String files() {
         return prefix + "/file";
@@ -57,7 +57,7 @@ public class FilesController extends BaseController {
     /**
      * 查询文件上传列表
      */
-    @RequiresPermissions("file:list")
+    @RequiresPermissions("village:file:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Files2 files) {
@@ -69,7 +69,7 @@ public class FilesController extends BaseController {
     /**
      * 查询文件上传列表(不带显示的)
      */
-    @RequiresPermissions("file:list")
+    @RequiresPermissions("village:file:list")
     @PostMapping("/listWithNoSave")
     @ResponseBody
     public TableDataInfo listWithNoSave(Files2 files) {
@@ -81,7 +81,7 @@ public class FilesController extends BaseController {
     /**
      * 导出文件上传列表
      */
-    @RequiresPermissions("file:export")
+    @RequiresPermissions("village:file:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Files2 files) {
@@ -103,7 +103,7 @@ public class FilesController extends BaseController {
     /**
      * 新增保存文件上传
      */
-    @RequiresPermissions("file:add")
+    @RequiresPermissions("village:file:add")
     @Log(title = "文件上传", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -135,7 +135,7 @@ public class FilesController extends BaseController {
     /**
      * 新增保存文件上传
      */
-    @RequiresPermissions("file:add")
+    @RequiresPermissions("village:file:add")
     @Log(title = "文件上传", businessType = BusinessType.INSERT)
     @PostMapping("/addFileToShow")
     @ResponseBody
@@ -193,7 +193,7 @@ public class FilesController extends BaseController {
     /**
      * 修改保存文件上传
      */
-    @RequiresPermissions("file:edit")
+    @RequiresPermissions("village:file:edit")
     @Log(title = "文件上传", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -204,7 +204,7 @@ public class FilesController extends BaseController {
     /**
      * 删除文件上传
      */
-    @RequiresPermissions("file:remove")
+    @RequiresPermissions("village:file:remove")
     @Log(title = "文件上传", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

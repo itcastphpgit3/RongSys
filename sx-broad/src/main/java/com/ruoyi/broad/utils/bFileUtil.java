@@ -84,7 +84,7 @@ public class bFileUtil {
      * @param year
      * @return Program
      */
-    public static Program uplodeFile(String maxfileid,MultipartFile file,String fname,String flenth,String fsize,String year){
+        public static Program uplodeFile(String maxfileid,MultipartFile file,String fname,String flenth,String fsize,String year){
         Program g = new Program();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 

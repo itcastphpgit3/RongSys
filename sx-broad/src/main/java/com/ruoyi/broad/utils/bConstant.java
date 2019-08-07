@@ -6,7 +6,7 @@ public class bConstant {
     public static final String UPLOAD_PATH = System.getProperty("user.home") + "/upload/"; //bConst.FILEPATHPER
 
     /** 图片目录 */
-    public static final String IMG_FILE_NAME = "img";
+    public static final String IMG_FILE_NAME = "music";
 
     /** 图片相对路径 */
     public static final String VIRTUAL_IMG_PATH = "img/virtual";

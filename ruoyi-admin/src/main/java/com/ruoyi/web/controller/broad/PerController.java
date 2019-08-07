@@ -78,18 +78,19 @@ public class PerController extends BaseController{
     @PostMapping(value = "/add")
     @ResponseBody
     public AjaxResult addSave(@RequestParam(value = "files") MultipartFile file,
-                              @RequestParam(value = "filename", required = false) String fname,
+                              @RequestParam(value = "filename1", required = false) String fname,
                               @RequestParam(value = "flenth" ,required = false)String flenth, //时长
                               @RequestParam(value = "fsize",required = false) String fsize){//大小
 
+//        int kk = iProgramService.insertProgram(file,fname,flenth,fsize);
         String year = DateUtil.getYear();
         String maxfileid = iProgramService.getMaxFileidofYear(year); //获取当年文件最大编号
         //图片上传调用工具类
         try{
             //保存图片
             //String path =  bFileUtil.saveImg(file,filename);
-            Program g = bFileUtil.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
-            System.out.println(g.toString());
+            Program program = bFileUtil.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
+            System.out.println(program.toString());
 //            try{
 //                System.out.println("用户id:>>>"+bJurisdiction.getUserid());
 //            }catch (Exception e){

@@ -46,7 +46,7 @@ public class ProgramServiceImpl implements IProgramService {
     @Override
     @DataSource(value = DataSourceType.SLAVE)
     public int insertProgram(Program program) {
-        return 0;
+        return programMapper.insertProgram(program);
     }
 
     @Override

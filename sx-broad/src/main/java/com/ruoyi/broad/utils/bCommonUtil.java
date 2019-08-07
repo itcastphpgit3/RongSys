@@ -8,6 +8,7 @@ public class bCommonUtil {
      * @return
      */
     public static String getUuid() {
-        return UUID.randomUUID().toString().replace("-","");
+       return UUID.randomUUID().toString().replace("-","");
+
     }
 }

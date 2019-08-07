@@ -89,6 +89,7 @@
             <artifactId>sx-rivervis</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>sx-rivervis</artifactId>
@@ -99,6 +100,7 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-check</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-check</artifactId>
@@ -136,9 +138,9 @@
         <finalName>${artifactId}</finalName>
     </build>
     <!-- SpringBoot集成thymeleaf模板 -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
+    <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+    <!--</dependency>-->
 
 </project>

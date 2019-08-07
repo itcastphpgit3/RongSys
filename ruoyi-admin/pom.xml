@@ -135,5 +135,10 @@
         </plugins>
         <finalName>${artifactId}</finalName>
     </build>
+    <!-- SpringBoot集成thymeleaf模板 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
 
 </project>

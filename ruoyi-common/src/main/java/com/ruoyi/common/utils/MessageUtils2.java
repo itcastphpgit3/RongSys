@@ -1,13 +1,13 @@
-package com.ruoyi.framework.util;
+package com.ruoyi.common.utils;
 
 import org.springframework.context.MessageSource;
 
 /**
  * 获取i18n资源文件
- *
+ * 
  * @author ruoyi
  */
-public class MessageUtils
+public class MessageUtils2
 {
     /**
      * 根据消息键和参数 获取消息 委托给spring messageSource
@@ -18,7 +18,7 @@ public class MessageUtils
      */
     public static String message(String code, Object... args)
     {
-        MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
+        MessageSource messageSource = SpringUtils2.getBean(MessageSource.class);
         return messageSource.getMessage(code, args, null);
     }
 }

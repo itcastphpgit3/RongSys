@@ -32,7 +32,7 @@
             <label class="col-sm-3 control-label">文件：</label>
             <div class="col-sm-8">
                 <div class="file-loading" style="width: 80%">
-                    <input id="files" class="file" name="file" type="file" data-show-upload="false" language="zh"
+                    <input id="files" class="file" name="file" th:field="*{url}" type="file" data-show-upload="false" language="zh"
                            data-show-Cancel="false" data-theme="fas">
                 </div>
             </div>

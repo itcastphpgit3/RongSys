@@ -35,13 +35,13 @@
 			</div>
 			
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="file:add">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="village:file:add">
 					<i class="fa fa-plus"></i> 添加
 				</a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="file:edit">
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="village:file:edit">
 					<i class="fa fa-edit"></i> 修改
 				</a>
-				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="file:remove">
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="village:file:remove">
 					<i class="fa fa-remove"></i> 删除
 				</a>
 			</div>
@@ -52,11 +52,11 @@
 	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('file:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('file:remove')}]];
+        var editFlag = [[${@permission.hasPermi('village:file:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('village:file:remove')}]];
         var flag = [[${@dict.getType('sys_normal_disable')}]];
         var types = [[${@dict.getType('sys_file_type')}]];
-        var prefix = ctx + "file";
+        var prefix = ctx + "village/file";
 
         $(function() {
             var options = {

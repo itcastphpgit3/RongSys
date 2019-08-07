@@ -3,12 +3,11 @@
 <meta charset="utf-8">
 <head th:include="include :: header">
     <link th:href="@{/ajax/libs/summernote/summernote-bs3.css}" rel="stylesheet"/>
-    <div th:include="include::file"></div>
     <link th:href="@{/ajax/libs/summernote/summernote.css}" rel="stylesheet"/>
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-file-add" action="/file/add" name="form-file-add" method="POST"
+    <form class="form-horizontal m" id="form-file-add" action="village/file/add" name="form-file-add" method="POST"
           enctype="multipart/form-data" th:object="${files}"> <!--method="POST"  enctype="multipart/form-data">-->
         <input type="hidden" id="id" th:field="*{id}" name="id">
         <div class="form-group">
@@ -129,7 +128,7 @@
         lang: 'zh-CN'
     });
 
-    var prefix = ctx + "file";
+    var prefix = ctx + "village/file";
     $("#form-file-add").validate({
         rules: {
             fileName: {

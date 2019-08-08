@@ -90,35 +90,31 @@
         where filename = #{name}
     </select>
     <insert id="insertProgram" parameterType="Program">
-        insert into <include refid="tableName"/>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="fid != null  and fid != '' ">fid,</if>
-            <if test="fname != null  and fname != '' ">fname,</if>
-            <if test="filename != null  and filename != '' ">filename,</if>
-            <if test="urls != null  and urls != '' ">urls,</if>
-            <if test="userid != null  and userid != '' ">userid,</if>
-            <if test="ispublic != null  and ispublic != '' ">ispublic,</if>
-            <if test="flength != null  and flength != '' ">flength,</if>
-            <if test="fsize != null  and fsize != '' ">fsize,</if>
-            <if test="createdtime != null  and createdtime != '' ">createdtime,</if>
-            <if test="remark != null  and remark != '' ">remark,</if>
-            <if test="islisten != null  and islisten != '' ">islisten,</if>
-            <if test="ptype != null  and ptype != '' ">ptype</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="fid != null  and fid != '' ">#{fid},</if>
-            <if test="fname != null  and fname != '' ">#{fname},</if>
-            <if test="filename != null  and filename != '' ">#{filename},</if>
-            <if test="urls != null  and urls != '' ">#{urls},</if>
-            <if test="userid != null  and userid != '' ">#{userid},</if>
-            <if test="ispublic != null  and ispublic != '' ">#{ispublic},</if>
-            <if test="flength != null  and flength != '' ">#{flength},</if>
-            <if test="fsize != null  and fsize != '' ">#{fsize},</if>
-            <if test="createdtime != null  and createdtime != '' ">#{createdtime},</if>
-            <if test="remark != null  and remark != '' ">#{remark},</if>
-            <if test="islisten != null  and islisten != '' ">#{islisten},</if>
-            <if test="ptype != null  and ptype != '' ">#{ptype}</if>
-        </trim>
+        insert into
+        <include refid="tableName"></include>
+        (
+	     fname,
+	     filename,
+	     userid,
+	     ispublic,
+	     urls,
+	     address,
+	     flenth,
+	     fsize,
+	     createdtime,
+	     islisten,ptype,uname
+		) values (
+	     #{fname},
+         #{filename},
+         #{userid},
+	     #{ispublic},
+	     #{urls},
+	     #{address},
+	     #{flenth},
+	     #{fsize},
+	     #{createdtime},
+	     #{islisten},#{ptype},#{uname}
+		)
     </insert>
 
 </mapper>

@@ -19,29 +19,29 @@ public class bFileUtil {
      * @param file
      * @return 返回相对路径
      */
-    public static String saveImg(MultipartFile file) {
+    public static String saveImg(MultipartFile file,String saveName) {
         //获取文件上传的根目录 C:\Users\wanghao/upload/img
         String  path = bConstant.UPLOAD_PATH + bConstant.IMG_FILE_NAME; //改为bConstant.UPLOAD_PATH
 
         //拿到文件的后缀名和UUID进行拼接形成新的文件名
         //4ca64e85b1544c96b4a6154bb521476f.jpg
-        String saveName = bCommonUtil.getUuid() + "." + getFileSuffix(file.getOriginalFilename());
-        logger.info(" --- 图片保存路径：{}, 图片保存名称：{},文件名称：{} --- ", path, saveName,file.getOriginalFilename());
+        //String saveName = bCommonUtil.getUuid() + "." + getFileSuffix(file.getOriginalFilename());
+        logger.info(" --- 音频保存路径：{}, 音频保存名称：{},文件名称：{} --- ", path, saveName,file.getOriginalFilename());
 
         // 保存
         try {
-            // 保存文件图片
+            // 保存文件音频
             File targetFile = new File(path);
             if (!targetFile.exists()) {
                 targetFile.mkdirs();
             }
-            file.transferTo(new File(path + "/" + saveName));
+            file.transferTo(new File(path + "/" + saveName));  //文件保存，写入内存
         } catch (Exception e) {
             e.printStackTrace();
-            logger.debug("--- 图片保存异常：{} ---" + e.getMessage());
+            logger.debug("--- 音频保存异常：{} ---" + e.getMessage());
             return null;
         }
-        String filePath =  bConstant.UPLOAD_PATH;;
+        String filePath =  bConstant.UPLOAD_PATH;
         //返回相对路径  img/virtual/4ca64e85b1544c96b4a6154bb521476f.jpg
         return saveName; //filePath + "/" + saveName
     }
@@ -84,7 +84,7 @@ public class bFileUtil {
      * @param year
      * @return Program
      */
-    public static Program uplodeFile(String maxfileid,MultipartFile file,String fname,String flenth,String fsize,String year){
+    public static Program uplodeFile(String maxfileid,MultipartFile file,String fname,String flenth,String fsize,String year,String uname){
         Program g = new Program();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 
@@ -117,7 +117,7 @@ public class bFileUtil {
                 //System.out.println("fname:--"+fname);
                 g.setFname(fname); //fname.substring(0, fname.lastIndexOf("."))
                 //String filePath = bPathUtil.getClasspath() + bConst.FILEPATHPER;			//文件上传路径
-                String path =  bFileUtil.saveImg(file);//////////////////////////
+                String path = saveImg(file,filename);//////////////////////////
                 //System.out.println("filename:--"+filename);
                 g.setFilename(filename);
                 //System.out.println("Userid:--"+bJurisdiction.getUserid()); //有错误///////////////////////////////
@@ -126,6 +126,7 @@ public class bFileUtil {
                 g.setAddress(bPathUtil.getClasspath() + bConst.FILEPATHPER+path);
                 //System.out.println("Urls:--"+bConst.FILEPATHPER+path);
                 g.setUrls(bConst.FILEPATHPER+path);
+                g.setUname(uname);
                 //System.out.println("Createdtime:--"+df.format(new Date()));
                 g.setCreatedtime(df.format(new Date()));
                 g.setIspublic(false);

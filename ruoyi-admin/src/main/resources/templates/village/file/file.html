@@ -3,7 +3,6 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -33,7 +32,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="village:file:add">
 					<i class="fa fa-plus"></i> 添加
@@ -72,7 +71,7 @@
 		            checkbox: true
 		        },
 				{
-					field : 'id', 
+					field : 'id',
 					title : '',
 					visible: false
 				},
@@ -118,7 +117,7 @@
 
 				},
 				{
-					field : 'delFlag', 
+					field : 'delFlag',
 					title : '有效标识',
 					sortable: true,
                     formatter: function(value, row, index) {
@@ -126,7 +125,7 @@
                     }
 				},
 				{
-					field : 'createBy', 
+					field : 'createBy',
 					title : '创建者',
 					sortable: true
 				},

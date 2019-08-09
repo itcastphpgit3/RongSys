@@ -40,4 +40,11 @@ public interface ProgramMapper {
      * @return 结果
      */
     public int insertProgram(Program program);
+
+    /**
+     * 删除节目
+     * @param fid 节目编号
+     * @return 结果
+     */
+    public int deleteProgram(String[] fid);
 }

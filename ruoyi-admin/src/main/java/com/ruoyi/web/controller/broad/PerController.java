@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.broad;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ruoyi.broad.domain.Program;
@@ -46,7 +47,9 @@ public class PerController extends BaseController {
 
     @RequiresPermissions("broad:per:view")
     @GetMapping()
-    public String per() {
+    public String per(ModelMap mmp) {
+        String path = System.getProperty("user.home");
+        mmp.put("path",path);
         return prefix + "/per";
     }
 
@@ -81,6 +84,7 @@ public class PerController extends BaseController {
 //		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
         mmp.put("username", username);
         // mmp.put("userphone", phone);
+
         return prefix + "/add";
     }
 
@@ -108,5 +112,13 @@ public class PerController extends BaseController {
         System.out.println(g.toString());
         iProgramService.insertProgram(g);
         return toAjax(1);
+    }
+
+    @PostMapping("/remove")
+    @Log(title = "节目单删除",businessType = BusinessType.DELETE)
+    @ResponseBody
+    public AjaxResult removeProgram(String ids)
+    {
+        return toAjax(iProgramService.deleteProgram(ids));
     }
 }

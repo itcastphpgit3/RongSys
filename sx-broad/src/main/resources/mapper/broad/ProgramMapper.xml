@@ -117,4 +117,10 @@
 		)
     </insert>
 
+    <delete id="deleteProgram" parameterType="String">
+            delete from programs where fid in
+        <foreach item="fid" collection="array" open="(" separator="," close=")">
+            #{fid}
+        </foreach>
+    </delete>
 </mapper>

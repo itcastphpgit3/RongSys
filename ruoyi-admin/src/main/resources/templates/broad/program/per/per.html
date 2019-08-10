@@ -16,6 +16,10 @@
 							</li>
 
 							<li>
+								后台传值：<input type="text" th:value="${path}" id="path"/>
+							</li>
+
+							<li>
 								节目名称：<input type="text" name="fname"/>
 							</li>
 
@@ -49,7 +53,11 @@
 					</div>
 				</form>
 			</div>
-			
+
+			<div class="ibox-content">
+				<audio src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" style="width:70%" controls preload="none"></audio>
+			</div>
+
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="broad:per:add">
 					<i class="fa fa-plus"></i> 添加
@@ -172,11 +180,13 @@
 		            }
 				},
 				{
+				    field:'urls',
 					title: '试听',
 					align: 'center',
 					visible: true,
 					formatter: function(value, row, index) {
-						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
+//						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
+						var actions = '<button class="btn btn-xs btn-success" onclick="listen1('+value.toString()+')">试听</button>';
 						return actions;
 					}
 				},
@@ -192,22 +202,12 @@
             };
             $.table.init(options);
         });
-        function listen1(urls){
-            var diag = new top.Dialog();
-            diag.Title ="试听";
-            diag.Width = 300;
-            diag.Height = 80;
-            var path ='${path}';
-            diag.InnerHtml=' <div class="music-player"> <div class="player-bottom">  <div class="music-right" > <div class="audio-player">'+
-                '<audio id="audio-player" style="width: 200px;margin-top:20px;"  controls="controls"> '+
-                '<source src="'+path+urls+'"></source></audio> </div> </div> </div> </div>	';
-            diag.CancelEvent = function(){
-                diag.close();
-            };
-// 			 diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
-            diag.show();
+        function listen1(value){
+            var path = $("#path").val();
+            document.getElementById("vids").src = path+value;
+            document.getElementById("vids").play();
         }
-    </script>
+     </script>
 	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
 	 <script>

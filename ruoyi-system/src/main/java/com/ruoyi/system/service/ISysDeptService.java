@@ -1,9 +1,11 @@
 package com.ruoyi.system.service;
 
-import java.util.List;
 import com.ruoyi.common.base.Ztree;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysRole;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 部门管理 服务层
@@ -20,6 +22,8 @@ public interface ISysDeptService
      */
     public List<SysDept> selectDeptList(SysDept dept);
 
+    public List<SysDept> chooseDeptList(SysDept dept);
+
     /**
      * 查询部门管理树
      *
@@ -27,6 +31,8 @@ public interface ISysDeptService
      * @return 所有部门信息
      */
     public List<Ztree> selectDeptTree(SysDept dept);
+
+    public List<Map<String, Object>> selectDeptTree2(SysDept dept);
 
     /**
      * 根据角色ID查询菜单
@@ -84,6 +90,7 @@ public interface ISysDeptService
      */
     public SysDept selectDeptById(Long deptId);
 
+    public SysDept selectDeptById2(Long deptId);
     /**
      * 校验部门名称是否唯一
      *

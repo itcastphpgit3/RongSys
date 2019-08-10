@@ -1,37 +1,28 @@
 package com.ruoyi.web.controller.broad;
 
-import java.util.List;
-import java.util.Map;
-
 import com.ruoyi.broad.domain.Area;
+import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.service.IAreaService;
-import com.ruoyi.common.support.Convert;
+import com.ruoyi.broad.service.IOrganizationService;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysDept;
-import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.broad.domain.Organization;
-import com.ruoyi.broad.service.IOrganizationService;
-import com.ruoyi.framework.web.base.BaseController;
-import com.ruoyi.common.page.TableDataInfo;
-import com.ruoyi.common.base.AjaxResult;
-import com.ruoyi.common.utils.ExcelUtil;
+import org.springframework.web.bind.annotation.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 /**
  * 终端信息操作处理
  *
@@ -218,7 +209,7 @@ public class OrganizationController extends BaseController
 
 
 	/**
-	 * 加载部门列表树
+	 * 加载区域列表树
 	 */
 	@GetMapping("/treeData")
 	@ResponseBody

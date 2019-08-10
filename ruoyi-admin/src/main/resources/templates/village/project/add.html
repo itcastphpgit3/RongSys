@@ -26,6 +26,20 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label class="col-sm-3 control-label">选择用户：</label>
+			<div class="col-sm-8">
+				<input class="form-control" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">工作用户：</label>
+			<div class="col-sm-8">
+				<input id="imea" name="imea" class="form-control" type="text" placeholder="请选择项目工作用户">
+			</div>
+		</div>
+
+
+		<div class="form-group">
 			<label class="col-sm-3 control-label">项目上传：</label>
 			<div class="col-sm-8">
 				<input id="files" name="files" class="form-control" type="file">
@@ -256,8 +270,44 @@
 <script>
     var editor2 = new Simditor({placeholder: "输入项目内容", toolbar: ['title', 'bold', 'underline', 'color', '|', 'ol', 'ul', 'table'], textarea: '#content',});
 </script>
+</body>
 <script th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
 <script th:src="@{/js/jquery-form.js}"></script>
+<script>
+	/*流媒体直播-选择终端树*/
+	function selectOrganTree() {
+		$('#imea').html('');
+		var _url = "/village/project/selectDeptTree/0";
+		var _title = '选择部门';
+		var _width = "800";
+		var _height = ($(window).height() - 50);
+		layer.open({
+			type: 2,
+			maxmin: true,
+			shade: 0.3,
+			title: _title,
+			fix: false,
+			area: [_width + 'px', _height + 'px'],
+			content: _url,
+			shadeClose: true,
+			btn: ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'],
+			yes: function (index, layero) {
+				imea = parent.document.getElementById("treeId");
+				console.log("add页面输出imea："+imea);
+				doSubmit(index, layero)
+			}, cancel: function () {
+				return true;
+			}
+		});
+	}
 
-</body>
+	function doSubmit(index, layero){
+		var tree = layero.find("iframe")[0].contentWindow.$._tree;
+		var body = layer.getChildFrame('body', index);
+		$("#treeId").val(body.find('#treeId').val());
+		$("#treeName").val(body.find('#treeName').val());
+		layer.close(index);
+	}
+</script>
+
 </html>

@@ -3,11 +3,17 @@
 <meta charset="utf-8">
 <head th:include="include :: header">
     <link th:href="@{/ajax/libs/summernote/summernote-bs3.css}" rel="stylesheet"/>
+    <th:block th:include="include :: files" />
     <link th:href="@{/ajax/libs/summernote/summernote.css}" rel="stylesheet"/>
+    <link th:href="@{/css/fileinput.min.css}" rel="stylesheet"/>
 </head>
+
+<script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+<script th:src="@{/js/fileinput.min.js}"></script>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-file-add" action="village/file/add" name="form-file-add" method="POST"
+    <form class="form-horizontal m" id="form-file-add" action="/file/add" name="form-file-add" method="POST"
           enctype="multipart/form-data" th:object="${files}"> <!--method="POST"  enctype="multipart/form-data">-->
         <input type="hidden" id="id" th:field="*{id}" name="id">
         <div class="form-group">
@@ -128,24 +134,11 @@
         lang: 'zh-CN'
     });
 
-    var prefix = ctx + "village/file";
+    var prefix = ctx + "file";
     $("#form-file-add").validate({
         rules: {
             fileName: {
                 required: true,
-                // remote: {
-                //     url: prefix + "/checkFileNameUnqiue",
-                //     type: "post",
-                //     dataType: "json",
-                //     data: {
-                //         "fileName": function () {
-                //             return $.common.trim($("#fileName").val());
-                //         }
-                //     },
-                //     dataFilter: function (data, type) {
-                //         return $.validate.unique(data);
-                //     }
-                // }
             },
             url: {
                 required: true
@@ -187,17 +180,7 @@
                 form.append("type", $("input[name='type']:checked").val());
             }
             form.append("remark", $("#remark").val());
-            $.ajax({
-                url: prefix + "/add",
-                data: form,
-                type: "POST",
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                success: function (result) {
-                    $.operate.saveSuccess(result);
-                }
-            });
+            $.operate.save(prefix + "/add", $('#form-file-add').serialize());
         }
     }
 

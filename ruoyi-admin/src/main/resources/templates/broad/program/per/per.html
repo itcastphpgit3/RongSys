@@ -55,7 +55,7 @@
 			</div>
 
 			<div class="ibox-content">
-				<audio src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" style="width:70%" controls preload="none"></audio>
+				<audio src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" id="vids" style="width:70%" controls preload="none"></audio>
 			</div>
 
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
@@ -185,8 +185,12 @@
 					align: 'center',
 					visible: true,
 					formatter: function(value, row, index) {
-//						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
-						var actions = '<button class="btn btn-xs btn-success" onclick="listen1('+value.toString()+')">试听</button>';
+			//			var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
+                        var actions = '<button class="btn btn-xs btn-success" onclick="listen1()">试听</button>';
+//                        function listen1(){
+//                            var path = $("#path").val();
+//                            $("#vids").src = path+value;
+//                        }
 						return actions;
 					}
 				},
@@ -202,11 +206,7 @@
             };
             $.table.init(options);
         });
-        function listen1(value){
-            var path = $("#path").val();
-            document.getElementById("vids").src = path+value;
-            document.getElementById("vids").play();
-        }
+
      </script>
 	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>

@@ -40,7 +40,7 @@ public class ProreApplyController extends BaseController
 	private IProreApplyService proreApplyService;
 	@Autowired
 	private ISysUserService sysUserService;
-	@RequiresPermissions("broad:proreApply:view")
+//	@RequiresPermissions("broad:proreApply:view")
 	@GetMapping()
 	public String proreApply()
 	{

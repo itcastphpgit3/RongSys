@@ -53,17 +53,18 @@
 				<input id="proname" name="proname" class="form-control" type="text" placeholder="请输入项目名称">
 			</div>
 		</div>
-		<div class="form-group">
-        <label class="col-sm-3 control-label">选择用户：</label>
-        <div class="col-sm-8">
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">选择用户：</label>
+            <div class="col-sm-8">
             <input class="form-control" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName" placeholder="点击选择工作用户">
         </div>
-    </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">工作用户：</label>
             <div class="col-sm-8">
-                <input class="form-control" type="text" id="showpeople" name="showpeople"  readonly="true" >
-                <input class="form-control" id="wpeople"  name="wpeople"  type="hidden"  readonly="true">
+                <input class="form-control" id="wpeoplename" name="wpeoplename" type="text" readonly="true" >
+                <input class="form-control" id="wpeopleid"  name="wpeopleid"  type="hidden"  readonly="true">
             </div>
         </div>
 
@@ -337,8 +338,8 @@
 
 	/*供子页面listProBroa调用的方法*/
     function ccc(userid,username){
-        $("#wpeople").val(userid);
-        $("#showpeople").val(username);
+        $("#wpeopleid").val(userid);
+        $("#wpeoplename").val(username);
         console.log("add页面采集到的userid:" + userid);
         console.log("add页面采集到的username:" + username);
     }

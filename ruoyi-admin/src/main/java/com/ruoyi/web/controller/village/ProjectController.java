@@ -1,33 +1,32 @@
 package com.ruoyi.web.controller.village;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import com.ruoyi.common.utils.file.FileUtils;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.village.util.bFileUtil1;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.common.utils.DateUtil;
+import com.ruoyi.common.utils.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.system.domain.SysDept;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysDeptService;
+import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.village.domain.Files;
+import com.ruoyi.village.domain.Project;
+import com.ruoyi.village.service.IProjectService;
+import com.ruoyi.village.util.bFileUtil1;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.village.domain.Project;
-import com.ruoyi.village.domain.Files;
-import com.ruoyi.village.service.IProjectService;
-import com.ruoyi.framework.web.base.BaseController;
-import com.ruoyi.common.page.TableDataInfo;
-import com.ruoyi.common.base.AjaxResult;
-import com.ruoyi.common.utils.ExcelUtil;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 重大项目 信息操作处理
@@ -45,6 +44,9 @@ public class ProjectController extends BaseController
 	private IProjectService projectService;
     @Autowired
     private ISysUserService sysUserService;
+	@Autowired
+	private ISysDeptService deptService;
+
 	@RequiresPermissions("village:project:view")
 	@GetMapping()
 	public String project()
@@ -201,16 +203,49 @@ public class ProjectController extends BaseController
 	}
 
 	/**
-	 * 下载文件
+	 * 选择部门树
 	 */
-//	@GetMapping("/downloadFile/{fileId}")
-//	public void downloadFile(@PathVariable("fileId") Integer fileId, HttpServletResponse response, HttpServletRequest request) throws Exception
-//	{
-//		String path = "http://110.53.162.165/test/a.jpg";
-//		response.setCharacterEncoding("utf-8");
-//		response.setContentType("multipart/form-data");
-//		response.setHeader("Content-Disposition",
-//				"attachment;fileName=" + "aaa.jpg");
-//		FileUtils.writeBytes(path, response.getOutputStream());
-//	}
+	@GetMapping("/selectDeptTree/{deptId}")
+	public String selectDeptTree(@PathVariable("deptId") String deptId, ModelMap mmap)
+	{
+		Long did=Long.parseLong(deptId);//返回基本数据类型long
+		mmap.put("dept", deptService.selectDeptById2(did));//传到tree页面
+		/*return prefix + "/tree";*/
+		return prefix + "/listProBroadTree";
+	}
+
+	/**
+	 * 查询用户列表
+	 */
+	@PostMapping("/listProBroad")
+	@ResponseBody
+	public TableDataInfo listProBroad(SysUser user)
+	{
+		startPage();
+		List<SysUser> list = sysUserService.selectUserList(user);
+		return getDataTable(list);
+	}
+
+	/**
+	 * 加载用户选择列表树
+	 */
+	@GetMapping("/listProBroadTree")
+	@ResponseBody
+	public List<Map<String, Object>> listProBroadTree()
+	{
+		List<Map<String, Object>> tree = deptService.selectDeptTree2(new SysDept());
+		return tree;
+	}
+
+	/**
+	 * 加载部门列表树
+	 */
+	@GetMapping("/treeData")
+	@ResponseBody
+	public List<Map<String, Object>> treeData()
+	{
+		List<Map<String, Object>> tree = deptService.selectDeptTree2(new SysDept());
+		return tree;
+
+	}
 }

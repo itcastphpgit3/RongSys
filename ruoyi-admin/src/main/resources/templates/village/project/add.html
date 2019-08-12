@@ -7,16 +7,44 @@
 
 <!--①注意head是否有样式冲突，引入需要的css文件-->
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{favicon.ico}" rel="shortcut icon"/>
-    <link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
-    <link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
-    <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/plugins/simditor/simditor.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{favicon.ico}" rel="shortcut icon"/>
+	<link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
+	<link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
+	<link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/plugins/simditor/simditor.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
 </head>
 
 <body class="white-bg">
+
+<script>
+	var buttonStyle = ["btn btn-primary","btn btn-success","btn btn-info","btn btn-warning","btn btn-danger"];
+	var imea = new Array();
+	var imeiName = new Array();
+	function imeiYes(data) {
+		layer.msg('你确定要取消选择该IMEI吗', {
+			time: 0 //不自动关闭
+			,btn: ['确定', '取消']
+			,yes: function(index){
+				layer.close(index);
+				imeiButton(data);
+			}
+		});
+	}
+	function imeiButton(data) {
+		var str = '';
+		for(var i = 0; i <imea.length; i++) {
+			if(imea[i] == data)
+				imea[i] = '';
+			else if(imea[i] != '' && imea[i] != null)
+				str += '<button class="'+buttonStyle[i%5]+'" onclick="imeiYes('+imea[i]+')" ' +
+						'style="margin: 2px 2px;color: white">终端名称:'+imeiName[i] +'<br>IMEI:'+ imea[i]+'</button>';
+		}
+		$('#imea').html(str);
+	}
+</script>
+
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
 	<form class="form-horizontal m" id="form-filemanager-add" enctype="multipart/form-data" th:action="@{add}" method="post">
 		<div class="form-group">
@@ -26,20 +54,20 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">选择用户：</label>
-			<div class="col-sm-8">
-				<input class="form-control" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label">工作用户：</label>
-			<div class="col-sm-8">
-				<input id="imea" name="imea" class="form-control" type="text" placeholder="请选择项目工作用户">
-			</div>
-		</div>
+        <label class="col-sm-3 control-label">选择用户：</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName" placeholder="点击选择工作用户">
+        </div>
+    </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">工作用户：</label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" id="showpeople" name="showpeople"  readonly="true" >
+                <input class="form-control" id="wpeople"  name="wpeople"  type="hidden"  readonly="true">
+            </div>
+        </div>
 
-
-		<div class="form-group">
+        <div class="form-group">
 			<label class="col-sm-3 control-label">项目上传：</label>
 			<div class="col-sm-8">
 				<input id="files" name="files" class="form-control" type="file">
@@ -49,14 +77,14 @@
 			<label class="col-sm-3 control-label">项目类别：</label>
 			<div class="col-sm-8">
 				<!--<input id="protype" name="protype" class="form-control" type="text" placeholder="请输入项目类别">-->
-                <input list="protype"  name="protype" class="form-control" placeholder="请输入/选择项目类别"/>
-                <datalist id="protype">
-                      <option value="新建项目">
-                      <option value="扩建项目">
-                      <option value="改建项目">
-                       <option value="迁建项目">
-                       <option value="恢复项目">
-                </datalist>
+				<input list="protype"  name="protype" class="form-control" placeholder="请输入/选择项目类别"/>
+				<datalist id="protype">
+					  <option value="新建项目">
+					  <option value="扩建项目">
+					  <option value="改建项目">
+					<option value="迁建项目">
+					<option value="恢复项目">
+				</datalist>
 			</div>
 		</div>
 		<div class="form-group">
@@ -78,13 +106,13 @@
 				<input id="content" name="content" class="form-control" type="text" >
 			</div>
 		</div>-->
-        <div class="form-group">
-            <label class="col-sm-3 control-label">项目内容：</label>
-            <div class="col-sm-8">
-                <textarea id="content" name="content" placeholder="这里输入内容" autofocus></textarea>
-                <!--②使用textare去作为文本输入框-->
-            </div>
-        </div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">项目内容：</label>
+			<div class="col-sm-8">
+				<textarea id="content" name="content" placeholder="这里输入内容" autofocus></textarea>
+				<!--②使用textare去作为文本输入框-->
+			</div>
+		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">项目地址：</label>
 			<div class="col-sm-8">
@@ -104,45 +132,45 @@
 			</div>
 		</div>
 		<!--<div class="form-group">-->
-			<!--<label class="col-sm-3 control-label">项目发布日期：</label>-->
-			<!--<div class="col-sm-8">-->
-				<!--<input id="pushdate" name="pushdate" class="form-control" type="text">-->
-			<!--</div>-->
+		<!--<label class="col-sm-3 control-label">项目发布日期：</label>-->
+		<!--<div class="col-sm-8">-->
+		<!--<input id="pushdate" name="pushdate" class="form-control" type="text">-->
 		<!--</div>-->
-        <div class="form-group">
-            <label class="col-sm-3 control-label">是否有效：</label>
-            <div class="col-sm-8">
-                <select class="chosen-select form-control" id="remark" name="remark"  type="text">
-                    <option value=1>是</option>
-                    <option value=0>否</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">项目状态：</label>
-            <div class="col-sm-8">
-                <select class="chosen-select form-control" id="ptype" name="ptype"  type="text">
-                    <option value=1>在建</option>
-                    <option value=0>未建</option>
-                    <option value=2>已建</option>
-                </select>
-            </div>
-        </div>
+		<!--</div>-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label">是否有效：</label>
+			<div class="col-sm-8">
+				<select class="chosen-select form-control" id="remark" name="remark"  type="text">
+					<option value=1>是</option>
+					<option value=0>否</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">项目状态：</label>
+			<div class="col-sm-8">
+				<select class="chosen-select form-control" id="ptype" name="ptype"  type="text">
+					<option value=1>在建</option>
+					<option value=0>未建</option>
+					<option value=2>已建</option>
+				</select>
+			</div>
+		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">发布人姓名：</label>
 			<div class="col-sm-8">
 				<input id="uname" name="uname" th:value="${uname}" class="form-control" type="text">
 			</div>
 		</div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">区域编号：</label>
-            <div class="col-sm-8">
-                <input id="aid" name="aid" th:value="${aid}" class="form-control" type="text" hidden readonly>
-            </div>
-        </div>
-        <!--因为文件上传功能隐藏的bug，故这文件时长、大小两个字段不能删掉-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label">区域编号：</label>
+			<div class="col-sm-8">
+				<input id="aid" name="aid" th:value="${aid}" class="form-control" type="text" hidden readonly>
+			</div>
+		</div>
+		<!--因为文件上传功能隐藏的bug，故这文件时长、大小两个字段不能删掉-->
 		<input id="flenth" name="flenth" class="form-control" type="hidden" readonly value="">
-        <input id="fsize" name="fsize" class="form-control" type="hidden"  readonly value="">
+		<input id="fsize" name="fsize" class="form-control" type="hidden"  readonly value="">
 
 	</form>
 </div>
@@ -186,13 +214,13 @@
 			return false;
 		}
 		else {
-            aa();
-            $.modal.loading("正在上传中，请稍后...");
-				/** 验证文件是否导入成功  */
-				$("#form-filemanager-add").ajaxSubmit(function (data) {
-					$.operate.successCallback({"code": data.code, "msg": data.msg});
-				});
-				return false;
+			aa();
+			$.modal.loading("正在上传中，请稍后...");
+			/** 验证文件是否导入成功  */
+			$("#form-filemanager-add").ajaxSubmit(function (data) {
+				$.operate.successCallback({"code": data.code, "msg": data.msg});
+			});
+			return false;
 		}
 	}
 	function sleep(numberMillis) {
@@ -268,13 +296,13 @@
 	$(document).ready(function(){var editor = new Simditor({placeholder: "输入开支明细", toolbar: ['title', 'bold', 'underline', 'color', '|', 'ol', 'ul', 'table'], textarea: '#moneynote',});Dropzone.options.myAwesomeDropzone={autoProcessQueue:false,uploadMultiple:true,parallelUploads:100,maxFiles:100,init:function(){var myDropzone=this;this.element.querySelector("button[type=submit]").addEventListener("click",function(e){e.preventDefault();e.stopPropagation();myDropzone.processQueue()});this.on("sendingmultiple",function(){});this.on("successmultiple",function(files,response){});this.on("errormultiple",function(files,response){})}}});
 </script>
 <script>
-    var editor2 = new Simditor({placeholder: "输入项目内容", toolbar: ['title', 'bold', 'underline', 'color', '|', 'ol', 'ul', 'table'], textarea: '#content',});
+	var editor2 = new Simditor({placeholder: "输入项目内容", toolbar: ['title', 'bold', 'underline', 'color', '|', 'ol', 'ul', 'table'], textarea: '#content',});
 </script>
-</body>
+
 <script th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
 <script th:src="@{/js/jquery-form.js}"></script>
 <script>
-	/*流媒体直播-选择终端树*/
+	/*选择部门用户树*/
 	function selectOrganTree() {
 		$('#imea').html('');
 		var _url = "/village/project/selectDeptTree/0";
@@ -292,8 +320,6 @@
 			shadeClose: true,
 			btn: ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'],
 			yes: function (index, layero) {
-				imea = parent.document.getElementById("treeId");
-				console.log("add页面输出imea："+imea);
 				doSubmit(index, layero)
 			}, cancel: function () {
 				return true;
@@ -308,6 +334,14 @@
 		$("#treeName").val(body.find('#treeName').val());
 		layer.close(index);
 	}
-</script>
 
+	/*供子页面listProBroa调用的方法*/
+    function ccc(userid,username){
+        $("#wpeople").val(userid);
+        $("#showpeople").val(username);
+        console.log("add页面采集到的userid:" + userid);
+        console.log("add页面采集到的username:" + username);
+    }
+</script>
+</body>
 </html>

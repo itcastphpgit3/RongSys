@@ -53,7 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectWorklogVo"/>
         where wid = #{wid}
     </select>
-        
+
+    <select id="selectWorkLogByProId" parameterType="Integer" resultMap="WorklogResult">
+        <include refid="selectWorklogVo"/>
+        where proid = #{proid}
+    </select>
+
     <insert id="insertWorklog" parameterType="Worklog">
         insert into tb_worklog
 		<trim prefix="(" suffix=")" suffixOverrides=",">

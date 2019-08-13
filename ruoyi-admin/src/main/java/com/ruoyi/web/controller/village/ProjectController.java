@@ -15,6 +15,7 @@ import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.village.domain.Files;
 import com.ruoyi.village.domain.Project;
 import com.ruoyi.village.service.IProjectService;
+import com.ruoyi.village.service.IWorklogService;
 import com.ruoyi.village.util.bFileUtil1;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,8 @@ public class ProjectController extends BaseController
     private ISysUserService sysUserService;
 	@Autowired
 	private ISysDeptService deptService;
-
+    @Autowired
+    private IWorklogService worklogService;
 	@RequiresPermissions("village:project:view")
 	@GetMapping()
 	public String project()
@@ -202,6 +204,8 @@ public class ProjectController extends BaseController
 		int returnId = new Long(userid).intValue();
 		System.out.println("userid:"+userid+"returnId:"+returnId);
 		mmap.put("returnId",returnId);
+		/*查询该项目下的工作记录*/
+        mmap.put("listWorklog",worklogService.selectWorkLogByProId(proid));
 		mmap.put("listByid",projectService.selectProjectById(proid));
 		return prefix + "/detail";
 	}

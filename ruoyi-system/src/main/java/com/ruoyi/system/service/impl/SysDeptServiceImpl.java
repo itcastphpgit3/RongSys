@@ -1,19 +1,22 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.annotation.DataScope;
-import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.base.Ztree;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.mapper.SysDeptMapper;
 import com.ruoyi.system.service.ISysDeptService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 部门管理 服务实现
@@ -54,6 +57,34 @@ public class SysDeptServiceImpl implements ISysDeptService
         return ztrees;
     }
 
+    @Override
+    public List<SysDept> chooseDeptList(SysDept dept) {
+        return deptMapper.chooseDeptList(dept);
+    }
+
+    public List<Map<String, Object>> selectDeptTree2(SysDept dept){
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<SysDept> deptList = deptMapper.chooseDeptList(dept);
+        /*System.out.println("输出deptlist："+deptList);*/
+        trees = getTrees(deptList);
+        return trees;
+    }
+
+    public List<Map<String, Object>> getTrees(List<SysDept> deptList)
+    {
+
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        for (SysDept dept : deptList)
+        {
+            Map<String, Object> areaMap = new HashMap<String, Object>();
+            areaMap.put("id", dept.getDeptId());
+            areaMap.put("pId", dept.getParentId());
+            areaMap.put("name", dept.getDeptName());
+            areaMap.put("title", dept.getDeptName());
+            trees.add(areaMap);
+        }
+        return trees;
+    }
     /**
      * 根据角色ID查询部门（数据权限）
      *
@@ -251,6 +282,11 @@ public class SysDeptServiceImpl implements ISysDeptService
         return deptMapper.selectDeptById(deptId);
     }
 
+    @Override
+    public SysDept selectDeptById2(Long deptId)
+    {
+        return deptMapper.selectDeptById2(deptId);
+    }
     /**
      * 校验部门名称是否唯一
      *

@@ -129,7 +129,7 @@ public class WorklogController extends BaseController
 	/**
 	 * 新增保存工作记录
 	 */
-	@RequiresPermissions("village:worklog:add")
+	//@RequiresPermissions("village:worklog:add")
 	@Log(title = "工作记录", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody

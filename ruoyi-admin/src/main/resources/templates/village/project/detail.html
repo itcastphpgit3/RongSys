@@ -33,6 +33,7 @@
                     <input id="proid" name="proid" th:value="${listByid.proid}" type="hidden">
                     <input id="proname" name="proname" th:value="${listByid.proname}" type="hidden">
                     <input id="fileaddress" name="fileaddress" th:value="${listByid.propic}" type="hidden">
+                    <input id="returnId" name="returnId" th:value="${returnId}" type="hidden">
 
                     <input id="wpeopleid" name="wpeopleid" th:value="${listByid.wpeopleid}" type="hidden">
                     <input id="wpeoplename" name="wpeoplename" th:value="${listByid.wpeoplename}" type="hidden">
@@ -90,10 +91,32 @@
             document.body.removeChild(link);//从页面移除
         }
 
+        //待分隔的字符串
+        var userid = document.getElementById("wpeopleid").value;
+        var username = document.getElementById("wpeoplename").value;
+        //把str按逗号分隔后,并把分隔后的内容存放在strArr数组中
+        var strIdArr = userid.split(",");
+        var strNameArr = username.split(",");
+        //遍历并输出数组中的内容
+        for(i=0; i<strNameArr.length-1;i++)
+        {
+            alert(strNameArr[i] + "");
+        }
+
         function workInfoAdd() {
-                var projectId = $("#proid").val()+"";
+            var returnId = $("#returnId").val();
+            alert(returnId);
+            var flag = 0;
+            //用于判断用户权限
+            for (i = 0; i < strIdArr.length - 1; i++) {
+                if (returnId == strIdArr[i]) {
+                    flag = 1;
+                }
+            }
+            if (flag == 1) {
+                var projectId = $("#proid").val() + "";
                 var projectName = $("#proname").val();
-                var _url = "/village/worklog/add/"+ projectId +"/"+ projectName;
+                var _url = "/village/worklog/add/" + projectId + "/" + projectName;
                 var _title = "新增工作记录";
                 var _width = "800";
                 var _height = ($(window).height() - 50);
@@ -107,27 +130,17 @@
                     content: _url,
                     shadeClose: true
                 });
+            }if (flag == 0) {
+                alert("无操作权限！")
             }
+        }
+
         function doSubmit(index){
             layer.close(index);
         }
 </script>
 <script type="text/javascript">
-    //待分隔的字符串
-    var userid = document.getElementById("wpeopleid").value;
-    var username = document.getElementById("wpeoplename").value;
-    //把str按逗号分隔后,并把分隔后的内容存放在strArr数组中
-    var strIdArr = userid.split(",");
-    var strNameArr = username.split(",");
-    //遍历并输出数组中的内容
-    for(i=0; i<strIdArr.length-1;i++)
-    {
-        alert(strIdArr[i] + "");
-    }
-    for(i=0; i<strNameArr.length-1;i++)
-    {
-        alert(strNameArr[i] + "");
-    }
+
 </script>
 </body>
 

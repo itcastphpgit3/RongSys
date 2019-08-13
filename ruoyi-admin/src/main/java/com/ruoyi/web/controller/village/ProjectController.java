@@ -197,7 +197,11 @@ public class ProjectController extends BaseController
 	@GetMapping("/detail/{proid}")
 	public String detail(@PathVariable("proid")Integer proid,ModelMap mmap)
 	{
-		//mmap.put("proid",proid);
+		SysUser currentUser = ShiroUtils.getSysUser();
+		Long userid =  currentUser.getUserId();
+		int returnId = new Long(userid).intValue();
+		System.out.println("userid:"+userid+"returnId:"+returnId);
+		mmap.put("returnId",returnId);
 		mmap.put("listByid",projectService.selectProjectById(proid));
 		return prefix + "/detail";
 	}

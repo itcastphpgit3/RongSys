@@ -30,6 +30,8 @@
                     </div>
                     <p th:utext="${listByid.content}"></p>
 
+                    <input id="proid" name="proid" th:value="${listByid.proid}" type="hidden">
+                    <input id="proname" name="proname" th:value="${listByid.proname}" type="hidden">
                     <input id="fileaddress" name="fileaddress" th:value="${listByid.propic}" type="hidden">
 
                     <input id="wpeopleid" name="wpeopleid" th:value="${listByid.wpeopleid}" type="hidden">
@@ -89,7 +91,9 @@
         }
 
         function workInfoAdd() {
-                var _url = "/village/worklog/add";
+                var projectId = $("#proid").val()+"";
+                var projectNmae = $("#proname").val();
+                var _url = "/village/worklog/add/"+ projectId +"/"+ projectNmae;
                 var _title = "新增工作记录";
                 var _width = "800";
                 var _height = ($(window).height() - 50);

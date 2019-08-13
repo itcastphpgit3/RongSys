@@ -65,7 +65,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     public List<Map<String, Object>> selectDeptTree2(SysDept dept){
         List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
         List<SysDept> deptList = deptMapper.chooseDeptList(dept);
-        System.out.println("输出deptlist："+deptList);
+        /*System.out.println("输出deptlist："+deptList);*/
         trees = getTrees(deptList);
         return trees;
     }

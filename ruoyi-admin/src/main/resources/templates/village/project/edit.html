@@ -22,6 +22,21 @@
 					<input id="proname" name="proname" th:field="*{proname}" class="form-control" type="text">
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">选择用户：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName" placeholder="点击选择工作用户">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作用户：</label>
+				<div class="col-sm-8">
+					<input class="form-control" th:field="*{wpeoplename}" id="wpeoplename" name="wpeoplename" type="text" readonly="true" >
+					<input class="form-control" th:field="*{wpeopleid}" id="wpeopleid"  name="wpeopleid"  type="hidden"  readonly="true">
+				</div>
+			</div>
+
 			<div class="form-group">
 				<label class="col-sm-3 control-label">上传文件：</label>
 				<div class="col-sm-8">
@@ -210,6 +225,48 @@
 			if ($.validate.form()) {
 				$.operate.save(prefix + "/edit", $('#form-project-edit').serialize());
 			}
+		}
+	</script>
+	<script>
+		/*选择部门用户树*/
+		function selectOrganTree() {
+			$('#imea').html('');
+			var _url = "/village/project/selectDeptTree/0";
+			var _title = '选择部门';
+			var _width = "800";
+			var _height = ($(window).height() - 50);
+			layer.open({
+				type: 2,
+				maxmin: true,
+				shade: 0.3,
+				title: _title,
+				fix: false,
+				area: [_width + 'px', _height + 'px'],
+				content: _url,
+				shadeClose: true,
+				btn: ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'],
+				yes: function (index, layero) {
+					doSubmit(index, layero)
+				}, cancel: function () {
+					return true;
+				}
+			});
+		}
+
+		function doSubmit(index, layero){
+			var tree = layero.find("iframe")[0].contentWindow.$._tree;
+			var body = layer.getChildFrame('body', index);
+			$("#treeId").val(body.find('#treeId').val());
+			$("#treeName").val(body.find('#treeName').val());
+			layer.close(index);
+		}
+
+		/*供子页面listProBroa调用的方法*/
+		function ccc(userid,username){
+			$("#wpeopleid").val(userid);
+			$("#wpeoplename").val(username);
+			console.log("add页面采集到的userid:" + userid);
+			console.log("add页面采集到的username:" + username);
 		}
 	</script>
 </body>

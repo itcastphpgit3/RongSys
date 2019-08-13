@@ -20,6 +20,10 @@ public class Project extends BaseEntity
 	private String proname;
 	/** 项目图片路径 */
 	private String propic;
+	/** 项目工作人员 */
+	private String wpeopleid;
+	/** 项目工作人员 */
+	private String wpeoplename;
 	/** 项目类别 */
 	private String protype;
 	/** 投资金额 */
@@ -202,11 +206,30 @@ public class Project extends BaseEntity
 	{
 		return ptype;
 	}
+	public void setWpeopleid(String wpeopleid)
+	{
+		this.wpeopleid = wpeopleid;
+	}
 
+	public String getWpeopleid()
+	{
+		return wpeopleid;
+	}
+	public void setWpeoplename(String wpeoplename)
+	{
+		this.wpeoplename = wpeoplename;
+	}
+
+	public String getWpeoplename()
+	{
+		return wpeoplename;
+	}
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("proid", getProid())
             .append("proname", getProname())
+			.append("wpeopleid", getWpeopleid())
+			.append("wpeoplename", getWpeoplename())
             .append("propic", getPropic())
             .append("protype", getProtype())
             .append("money", getMoney())

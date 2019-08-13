@@ -25,6 +25,7 @@
                     </div>
                     <div class="text-center article-title">
                         <h1 th:text="${listByid.proname}"></h1>
+                        <p>工作人员：<input  id="wwname" name="wwname" type="text" readonly style= "background-color:transparent;border:0;"></p>
                         <p>项目地址：[[${listByid.address}]]  投资金额：[[${listByid.money}]]万元</p>
                         <p>投资明细：</p><p th:utext="${listByid.moneynote}"></p>
                     </div>
@@ -96,16 +97,12 @@
         var username = document.getElementById("wpeoplename").value;
         //把str按逗号分隔后,并把分隔后的内容存放在strArr数组中
         var strIdArr = userid.split(",");
-        var strNameArr = username.split(",");
-        //遍历并输出数组中的内容
-        for(i=0; i<strNameArr.length-1;i++)
-        {
-            alert(strNameArr[i] + "");
-        }
+        //var strNameArr = username.split(",");
+
+         $("#wwname").val(username);
 
         function workInfoAdd() {
             var returnId = $("#returnId").val();
-            alert(returnId);
             var flag = 0;
             //用于判断用户权限
             for (i = 0; i < strIdArr.length - 1; i++) {

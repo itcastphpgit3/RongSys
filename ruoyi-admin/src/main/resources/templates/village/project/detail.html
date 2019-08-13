@@ -20,6 +20,9 @@
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.fname}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.fphone}]]</button>
                     </div>
+                    <div class="pull-left">
+                    <a class="btn btn-success" onclick="workInfoAdd()">工作汇报</a>
+                    </div>
                     <div class="text-center article-title">
                         <h1 th:text="${listByid.proname}"></h1>
                         <p>项目地址：[[${listByid.address}]]  投资金额：[[${listByid.money}]]万元</p>
@@ -29,12 +32,12 @@
 
                     <input id="fileaddress" name="fileaddress" th:value="${listByid.propic}" type="hidden">
 
+                    <input id="wpeopleid" name="wpeopleid" th:value="${listByid.wpeopleid}" type="hidden">
+                    <input id="wpeoplename" name="wpeoplename" th:value="${listByid.wpeoplename}" type="hidden">
                     <!--<img border="0" th:src="${listByid.propic}" height="200" width="400" type="hidden">-->
-
-
                    <!-- <img th:src="${listByid.propic}" height="200" width="400"/>-->
 
-                    <button type="button" id="btn2" onclick="test()">下载文件</button>
+                    <a class="btn btn-warn" onclick="test()">下载文件</a>
 
                 </div>
 
@@ -51,10 +54,6 @@
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 
 <script type="text/javascript">
-        function aaa(fileId){
-            window.location.href = "/village/project/downloadFile/" + fileId;
-        }
-
         function test() {
             //文件路径
             var filePath = $("#fileaddress").val();
@@ -88,6 +87,44 @@
             link.click();
             document.body.removeChild(link);//从页面移除
         }
+
+        function workInfoAdd() {
+                var _url = "/village/worklog/add";
+                var _title = "新增工作记录";
+                var _width = "800";
+                var _height = ($(window).height() - 50);
+                layer.open({
+                    type: 2,
+                    maxmin: true,
+                    shade: 0.3,
+                    title: _title,
+                    fix: false,
+                    area: [_width + 'px', _height + 'px'],
+                    content: _url,
+                    shadeClose: true
+                });
+            }
+        function doSubmit(index){
+
+            layer.close(index);
+        }
+</script>
+<script type="text/javascript">
+    //待分隔的字符串
+    var userid = document.getElementById("wpeopleid").value;
+    var username = document.getElementById("wpeoplename").value;
+    //把str按逗号分隔后,并把分隔后的内容存放在strArr数组中
+    var strIdArr = userid.split(",");
+    var strNameArr = username.split(",");
+    //遍历并输出数组中的内容
+    for(i=0; i<strIdArr.length-1;i++)
+    {
+        alert(strIdArr[i] + "");
+    }
+    for(i=0; i<strNameArr.length-1;i++)
+    {
+        alert(strNameArr[i] + "");
+    }
 </script>
 </body>
 

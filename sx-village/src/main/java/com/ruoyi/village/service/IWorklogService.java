@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Worklog;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,7 +21,8 @@ public interface IWorklogService
      */
 	public Worklog selectWorklogById(Integer wid);
 
-	public List<Worklog> selectWorkLogByProId(Integer proid);
+	public  List<HashMap> selectWorkLogByProId(Integer proid);
+	public int selectWorkLogNumByProId(Integer proid);
 	/**
      * 查询工作记录列表
      * 

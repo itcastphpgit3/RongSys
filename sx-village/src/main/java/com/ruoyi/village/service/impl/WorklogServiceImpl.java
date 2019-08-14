@@ -9,6 +9,7 @@ import com.ruoyi.village.service.IWorklogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,9 +39,16 @@ public class WorklogServiceImpl implements IWorklogService
 
 	@Override
 	@DataSource(value = DataSourceType.SXVILLAGE)
-	public List<Worklog> selectWorkLogByProId(Integer proid)
+	public  List<HashMap>selectWorkLogByProId(Integer proid)
 	{
 		return worklogMapper.selectWorkLogByProId(proid);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public int selectWorkLogNumByProId(Integer proid)
+	{
+		return worklogMapper.selectWorkLogNumByProId(proid);
 	}
 
 	/**

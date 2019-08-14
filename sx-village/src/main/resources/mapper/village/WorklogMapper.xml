@@ -54,8 +54,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where wid = #{wid}
     </select>
 
-    <select id="selectWorkLogByProId" parameterType="Integer" resultMap="WorklogResult">
-        <include refid="selectWorklogVo"/>
+    <select id="selectWorkLogByProId" parameterType="Integer" resultType="hashmap">
+       select * from tb_worklog
+        where proid = #{proid}
+    </select>
+
+    <select id="selectWorkLogNumByProId" parameterType="Integer" resultType="int">
+      select count(wid) from tb_worklog
         where proid = #{proid}
     </select>
 

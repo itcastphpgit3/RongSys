@@ -120,5 +120,7 @@ public class CompanyController extends BaseController
 	{		
 		return toAjax(companyService.deleteCompanyByIds(ids));
 	}
-	
+
+
+
 }

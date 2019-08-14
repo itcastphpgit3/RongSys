@@ -44,15 +44,15 @@
 
                 </div>
                 <input id="listWorklognum" name="listWorklognum" th:value="${listWorklognum}" type="hidden">
-                <input id="uname" name="uname" th:value="${unamelist}" type="text" type="hidden">
-                <input id="wtitle" name="wtitle" th:value="${wtitlelist}" type="text" type="hidden">
-                <input id="wpic" name="wpic" th:value="${wpiclist}" type="text" type="hidden">
-                <input id="content" name="content" th:value="${contentlist}" type="text" type="hidden">
+                <input id="uname" name="uname" th:value="${unamelist}"  type="hidden">
+                <input id="wtitle" name="wtitle" th:value="${wtitlelist}" type="hidden">
+                <input id="wpic" name="wpic" th:value="${wpiclist}"  type="hidden">
+                <input id="content" name="content" th:value="${contentlist}"  type="hidden">
 
                 <HR style="border:3 double #987cb9" width="80%"color=#987cb9 SIZE=3>
 
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div >
                         <div id="box"></div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
 
         var i = 0;
         for (i=0;i<2;i++) {
-            str +=  '<div class="ibox-title"><span class="label label-primary pull-right">张鸿权</span></div><div class="ibox-content"><h4>工作汇报标题</h4><p>平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式，透过多种方式来创造和结合符号、图片和文字，借此作出用来传达想法或讯息的视觉表现。</p><div><span>当前工作进度：</span><div class="stat-percent">50%</div><div class="progress progress-mini"><div style="width: 50%;" class="progress-bar"></div></div></div>';
+            str +=  '<div class="ibox-title"><span class="label label-primary pull-right">张鸿权</span></div><div class="ibox-content"><h4>工作汇报标题</h4><p>平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式，透过多种方式来创造和结合符号、图片和文字，借此作出用来传达想法或讯息的视觉表现。</p><span>当前工作进度：</span><div class="stat-percent">50%</div><div class="progress progress-mini"><div style="width: 50%;" class="progress-bar"></div></div></div>';
         }
         oBox.innerHTML = str;
 </script>

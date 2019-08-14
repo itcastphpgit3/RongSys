@@ -1,15 +1,15 @@
 package com.ruoyi.village.service.impl;
 
-import java.util.List;
-
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.support.Convert;
+import com.ruoyi.village.domain.Worklog;
+import com.ruoyi.village.mapper.WorklogMapper;
+import com.ruoyi.village.service.IWorklogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.village.mapper.WorklogMapper;
-import com.ruoyi.village.domain.Worklog;
-import com.ruoyi.village.service.IWorklogService;
-import com.ruoyi.common.support.Convert;
+
+import java.util.List;
 
 /**
  * 工作记录 服务层实现
@@ -35,7 +35,14 @@ public class WorklogServiceImpl implements IWorklogService
 	{
 	    return worklogMapper.selectWorklogById(wid);
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Worklog selectWorkLogByProId(Integer proid)
+	{
+		return worklogMapper.selectWorkLogByProId(proid);
+	}
+
 	/**
      * 查询工作记录列表
      * 

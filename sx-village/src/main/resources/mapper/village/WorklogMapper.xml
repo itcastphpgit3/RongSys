@@ -6,6 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="Worklog" id="WorklogResult">
         <result property="wid"    column="wid"    />
+        <result property="proid"    column="proid"    />
+        <result property="proname"    column="proname"    />
         <result property="wtitle"    column="wtitle"    />
         <result property="wpic"    column="wpic"    />
         <result property="wtype"    column="wtype"    />
@@ -22,13 +24,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectWorklogVo">
-        select wid, wtitle, wpic, wtype, content, wname, wphone, uid, greadtotal, pushdate, uname, remark, aid, ptype from tb_worklog
+        select wid, proid, proname, wtitle, wpic, wtype, content, wname, wphone, uid, greadtotal, pushdate, uname, remark, aid, ptype from tb_worklog
     </sql>
 	
     <select id="selectWorklogList" parameterType="Worklog" resultMap="WorklogResult">
         <include refid="selectWorklogVo"/>
         <where>  
             <if test="wid != null "> and wid = #{wid}</if>
+            <if test="proname != null  and proname != '' "> and proname LIKE CONCAT(CONCAT('%', #{proname}),'%')</if>
              <if test="wtitle != null  and wtitle != '' "> and wtitle LIKE CONCAT(CONCAT('%', #{wtitle}),'%')</if>
              <if test="wpic != null  and wpic != '' "> and wpic LIKE CONCAT(CONCAT('%', #{wpic}),'%')</if>
              <if test="wtype != null  and wtype != '' "> and wtype LIKE CONCAT(CONCAT('%', #{wtype}),'%')</if>
@@ -50,11 +53,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectWorklogVo"/>
         where wid = #{wid}
     </select>
-        
+
+    <select id="selectWorkLogByProId" parameterType="Integer" resultMap="WorklogResult">
+        <include refid="selectWorklogVo"/>
+        where proid = #{proid}
+    </select>
+
     <insert id="insertWorklog" parameterType="Worklog">
         insert into tb_worklog
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="wid != null  ">wid,</if>
+            <if test="proid != null  and proid != ''  ">proid,</if>
+            <if test="proname != null  and proname != ''  ">proname,</if>
 			<if test="wtitle != null  and wtitle != ''  ">wtitle,</if>
 			<if test="wpic != null  and wpic != ''  ">wpic,</if>
 			<if test="wtype != null  and wtype != ''  ">wtype,</if>
@@ -71,6 +81,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="wid != null  ">#{wid},</if>
+            <if test="proid != null  and proid != ''  ">#{proid},</if>
+            <if test="proname != null  and proname != ''  ">#{proname},</if>
 			<if test="wtitle != null  and wtitle != ''  ">#{wtitle},</if>
 			<if test="wpic != null  and wpic != ''  ">#{wpic},</if>
 			<if test="wtype != null  and wtype != ''  ">#{wtype},</if>

@@ -38,7 +38,7 @@ public class WorklogServiceImpl implements IWorklogService
 
 	@Override
 	@DataSource(value = DataSourceType.SXVILLAGE)
-	public Worklog selectWorkLogByProId(Integer proid)
+	public List<Worklog> selectWorkLogByProId(Integer proid)
 	{
 		return worklogMapper.selectWorkLogByProId(proid);
 	}

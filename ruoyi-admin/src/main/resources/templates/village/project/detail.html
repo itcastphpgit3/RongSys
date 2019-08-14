@@ -3,13 +3,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../css/animate.min.css" rel="stylesheet">
+    <link href="../../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
-<body class="gray-bg" >
+<body class="gray-bg">
 <div class="wrapper wrapper-content  animated fadeInRight article">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
@@ -47,19 +47,34 @@
                 <!--<input id="proid" name="proid" th:value="${listWorklog.wtitle}" type="text">
                 <input id="proid" name="proid" th:value="${listWorklog.content}" type="text">-->
 
+                <HR style="border:3 double #987cb9" width="80%"color=#987cb9 SIZE=3>
+                <!--<a onclick="aaaa()">gggg</a>-->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="box"></div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-
 </div>
 <div th:include="include::footer"></div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
+<script src="../../../js/jquery.min.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script src="../../../js/content.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 
 <script type="text/javascript">
+
+        var oBox = document.getElementById('box');
+        var str = '';
+        var num = 3;var i = 0;
+        for (i=0;i<num;i++) {
+            str +=  '<div class="ibox"><div class="ibox-title"><span class="label label-primary pull-right">张鸿权</span></div><div class="ibox-content"><h4>工作汇报标题</h4><p>平面设计（graphic design），也称为视觉传达设计，是以“视觉”作为沟通和表现的方式，透过多种方式来创造和结合符号、图片和文字，借此作出用来传达想法或讯息的视觉表现。</p><div><span>当前工作进度：</span><div class="stat-percent">50%</div><div class="progress progress-mini"><div style="width: 50%;" class="progress-bar"></div></div></div></div>';
+        }
+        oBox.innerHTML = str;
+
         function test() {
             //文件路径
             var filePath = $("#fileaddress").val();
@@ -137,10 +152,8 @@
         function doSubmit(index){
             layer.close(index);
         }
-</script>
-<script type="text/javascript">
+
 
 </script>
 </body>
-
 </html>

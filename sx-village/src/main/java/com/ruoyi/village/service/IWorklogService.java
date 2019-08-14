@@ -19,7 +19,7 @@ public interface IWorklogService
      */
 	public Worklog selectWorklogById(Integer wid);
 
-	public Worklog selectWorkLogByProId(Integer proid);
+	public List<Worklog> selectWorkLogByProId(Integer proid);
 	/**
      * 查询工作记录列表
      * 

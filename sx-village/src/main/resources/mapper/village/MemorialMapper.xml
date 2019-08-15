@@ -26,17 +26,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectMemorialVo"/>
         <where>  
             <if test="mid != null "> and mid = #{mid}</if>
-             <if test="mtitle != null  and mtitle != '' "> and mtitle = #{mtitle}</if>
+             <if test="mtitle != null  and mtitle != '' "> and mtitle LIKE CONCAT(CONCAT('%', #{mtitle}),'%')</if>
              <if test="mpic != null  and mpic != '' "> and mpic = #{mpic}</if>
-             <if test="mcontent != null  and mcontent != '' "> and mcontent = #{mcontent}</if>
+             <if test="mcontent != null  and mcontent != '' "> and mcontent LIKE CONCAT(CONCAT('%', #{mcontent}),'%')</if>
              <if test="uid != null "> and uid = #{uid}</if>
              <if test="uname != null  and uname != '' "> and uname = #{uname}</if>
-             <if test="pushdate != null "> and pushdate = #{pushdate}</if>
-             <if test="remintime != null  and remintime != '' "> and remintime = #{remintime}</if>
+             <if test="pushdate != null and remintime != ''"> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
+             <if test="remintime != null  and remintime != '' "> and remintime LIKE CONCAT(CONCAT('%', #{remintime}),'%')</if>
              <if test="mtype != null "> and mtype = #{mtype}</if>
              <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
-             <if test="note != null  and note != '' "> and note = #{note}</if>
+            <if test="note != null  and note != '' "> and note LIKE CONCAT(CONCAT('%', #{note}),'%')</if>
          </where>
+        ORDER BY pushdate DESC
     </select>
     
     <select id="selectMemorialById" parameterType="Integer" resultMap="MemorialResult">

@@ -171,7 +171,6 @@
 				$("#form-filemanager-add").ajaxSubmit(function (data) {
 					$.operate.successCallback({"code": data.code, "msg": data.msg});
 				})
-                parent.reloadNow();
 				$.modal.close();
 				return false;
 

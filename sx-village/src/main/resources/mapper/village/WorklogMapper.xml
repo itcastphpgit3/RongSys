@@ -57,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectWorkLogByProId" parameterType="Integer" resultType="hashmap">
        select * from tb_worklog
         where proid = #{proid}
+        ORDER BY pushdate DESC
     </select>
 
     <select id="selectWorkLogNumByProId" parameterType="Integer" resultType="int">

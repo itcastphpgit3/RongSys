@@ -207,13 +207,14 @@ public class ProjectController extends BaseController
 		mmap.put("returnId",returnId);
 
         List<HashMap> listMap = worklogService.selectWorkLogByProId(proid);
-        int i;String contentlist =  "",unamelist =  "",wtitlelist =  "",wpiclist = "";
+        int i;String contentlist =  "",unamelist =  "",wtitlelist =  "",wpiclist = "",pushdatelist = "";
         for(i=0; i<listMap.size();i++){
             HashMap map = listMap.get(i);
             unamelist = unamelist + map.get("uname")+",";
             wtitlelist = wtitlelist + map.get("wtitle")+",";
             wpiclist = wpiclist + map.get("wpic")+",";
             contentlist = contentlist + map.get("content")+",";
+			pushdatelist = pushdatelist + map.get("pushdate")+",";
         }    System.out.print(unamelist);
 		/*查询该项目下的工作记录*/
         mmap.put("listWorklognum",worklogService.selectWorkLogNumByProId(proid));
@@ -221,6 +222,7 @@ public class ProjectController extends BaseController
         mmap.put("wtitlelist",wtitlelist);
         mmap.put("wpiclist",wpiclist);
         mmap.put("contentlist",contentlist);
+		mmap.put("pushdatelist",pushdatelist);
 		mmap.put("listByid",projectService.selectProjectById(proid));
 		return prefix + "/detail";
 	}

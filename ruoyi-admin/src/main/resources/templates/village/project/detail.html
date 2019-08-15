@@ -48,6 +48,7 @@
                 <input id="wtitle" name="wtitle" th:value="${wtitlelist}" type="hidden">
                 <input id="wpic" name="wpic" th:value="${wpiclist}"  type="hidden">
                 <input id="content" name="content" th:value="${contentlist}"  type="hidden">
+                <input id="pushdate" name="pushdate" th:value="${pushdatelist}"  type="hidden">
 
                 <HR style="border:3 double #987cb9" width="80%"color=#987cb9 SIZE=3>
 
@@ -154,6 +155,8 @@
         var strwpicArr = kkk.split(",");
         var jjj = $("#content").val();
         var strcontentArr = jjj.split(",");
+        var zzz = $("#pushdate").val();
+        var strpushdateArr = zzz.split(",");
 
         var oBox = document.getElementById('box');
         var str = '';
@@ -162,7 +165,7 @@
         var num = Number(wnum);
         var i = 0;
         for (i=0;i<num;i++) {
-            str += '<div class="ibox"><div class="ibox-title"><span class="label label-primary pull-right" >'+ strunameArr[i] +'</span></div><div class="ibox-content"><h3>'+ strwtitleArr[i] +'</h3>'+ strcontentArr[i] +'<div><span>当前工作进度：</span><div class="stat-percent">50%</div><div class="progress progress-mini"><div style="width: 50%;" class="progress-bar"></div></div></div></div>';        }
+            str += '<div class="ibox"><div class="ibox-title"><span class="label label-info pull-right" >'+ strpushdateArr[i] +'</span><span class="label label-primary pull-right" >'+ strunameArr[i] +'</span></div><div class="ibox-content"><h3>'+ strwtitleArr[i] +'</h3>'+ strcontentArr[i] +'<div><span>当前工作进度：</span><div class="stat-percent">50%</div><div class="progress progress-mini"><div style="width: 50%;" class="progress-bar"></div></div></div></div>';        }
         oBox.innerHTML = str;
 </script>
 </body>

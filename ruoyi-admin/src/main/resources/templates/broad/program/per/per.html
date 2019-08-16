@@ -55,7 +55,9 @@
 			</div>
 
 			<div class="ibox-content">
-				<audio src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" id="vids" style="width:70%" controls preload="none"></audio>
+				<audio  style="width:70%" controls autoplay="autoplay">
+                    <source  id="vids" src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083">
+                </audio>
 			</div>
 
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
@@ -89,124 +91,125 @@
         }
         $(function() {
 
-            var options = {
+            var options;
+            options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
-				exportUrl: prefix + "/export",
+                exportUrl: prefix + "/export",
                 modalName: "节目单管理",
-				search: false,
-		        showExport: false,
+                search: false,
+                showExport: false,
                 columns: [{
-		            checkbox: true
-		        },
-				{
-					field : 'fid',
-                    align: 'center',
-					title : '节目编号',
-					visible: true
-				},
-				{
-					field : 'fname',
-					title : '节目名称',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'filename',
-					title : '保存名称',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'flenth',
-					title : '时长',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'fsize',
-					title : '文件大小',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'uname',
-					title : '上传者',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'urls',
-					title : '上传路径',
-					align: 'center',
-					sortable: true
-				},
-				{
-					field : 'createdtime',
-					title : '创建时间',
-                    align: 'center',
-					sortable: true
-				},
-				{
-					field : 'ispublic',
-					title : '是否公共',
-                    align: 'center',
-					sortable: true,
-					width:"7%",
-					formatter:function (value) {
-						if(value == 0){
-						    var msg = "<span style='color:#e25e08;'>非公共</span>"
-						    return msg;
-						}else {
-                            var msg = "<span style='color:#13e21b;'>公共</span>"
-                            return msg;
-						}
-                    }
-				},
-				{
-                    title: '操作',
-		            align: 'center',
-                    visible: true,
-		            formatter: function(value, row, index) {
-		            	var msg = '<a class="btn btn-xs btn-primary" >设为公共</a> ';
-                        var actions = '<a class="btn btn-xs btn-success">设为非公共</a>';
-                       if(row.ispublic == 0){
-                           return msg;
-					   }else {
-                           return actions;
-					   }
-		            }
-				},
-				{
-				    field:'urls',
-					title: '试听',
-					align: 'center',
-					visible: true,
-					formatter: function(value, row, index) {
-						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
-//                        var actions = '<button class="btn btn-xs btn-success" onclick="listen1()">试听</button>';
-//                        function listen1(){
-//                            var path = $("#path").val();
-//                            $("#vids").src = path+value;
-//                        }
-						return actions;
-					}
-				},
-				{
-					title: '下载',
-					align: 'center',
-					visible: true,
-					formatter: function(value, row, index) {
-						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">下载</a>';
-						return actions;
-					}
-				}]
+                    checkbox: true
+                },
+                    {
+                        field: 'fid',
+                        align: 'center',
+                        title: '节目编号',
+                        visible: true
+                    },
+                    {
+                        field: 'fname',
+                        title: '节目名称',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'filename',
+                        title: '保存名称',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'flenth',
+                        title: '时长',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'fsize',
+                        title: '文件大小',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'uname',
+                        title: '上传者',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'urls',
+                        title: '上传路径',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'createdtime',
+                        title: '创建时间',
+                        align: 'center',
+                        sortable: true
+                    },
+                    {
+                        field: 'ispublic',
+                        title: '是否公共',
+                        align: 'center',
+                        sortable: true,
+                        width: "7%",
+                        formatter: function (value) {
+                            if (value == 0) {
+                                var msg = "<span style='color:#e25e08;'>非公共</span>"
+                                return msg;
+                            } else {
+                                var msg = "<span style='color:#13e21b;'>公共</span>"
+                                return msg;
+                            }
+                        }
+                    },
+                    {
+                        title: '操作',
+                        align: 'center',
+                        visible: true,
+                        formatter: function (value, row, index) {
+                            var msg = '<a class="btn btn-xs btn-primary" >设为公共</a> ';
+                            var actions = '<a class="btn btn-xs btn-success">设为非公共</a>';
+                            if (row.ispublic == 0) {
+                                return msg;
+                            } else {
+                                return actions;
+                            }
+                        }
+                    },
+                    {
+                        field: 'urls',
+                        title: '试听',
+                        align: 'center',
+                        visible: true,
+                        formatter: function (value, row, index) {
+//						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
+//                            var actions = '<button class="btn btn-xs btn-success" onclick="listen1('+value+')" >试听</button>';
+                            var actions = "<button onclick=func('" + value + "')>试听</button>";
+                            return actions;
+                        }
+                    },
+                    {
+                        title: '下载',
+                        align: 'center',
+                        visible: true,
+                        formatter: function (value, row, index) {
+                            var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">下载</a>';
+                            return actions;
+                        }
+                    }]
             };
             $.table.init(options);
         });
-
+        function func(value) {
+            var path = $("#path").val()+'/';
+             var test = $("#vids").src = path +  value;
+        }
      </script>
 	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -204,8 +205,24 @@ public class ProjectController extends BaseController
 		int returnId = new Long(userid).intValue();
 		System.out.println("userid:"+userid+"returnId:"+returnId);
 		mmap.put("returnId",returnId);
+
+        List<HashMap> listMap = worklogService.selectWorkLogByProId(proid);
+        int i;String contentlist =  "",unamelist =  "",wtitlelist =  "",wpiclist = "",pushdatelist = "";
+        for(i=0; i<listMap.size();i++){
+            HashMap map = listMap.get(i);
+            unamelist = unamelist + map.get("uname")+",";
+            wtitlelist = wtitlelist + map.get("wtitle")+",";
+            wpiclist = wpiclist + map.get("wpic")+",";
+            contentlist = contentlist + map.get("content")+",";
+			pushdatelist = pushdatelist + map.get("pushdate")+",";
+        }    System.out.print(unamelist);
 		/*查询该项目下的工作记录*/
-        mmap.put("listWorklog",worklogService.selectWorkLogByProId(proid));
+        mmap.put("listWorklognum",worklogService.selectWorkLogNumByProId(proid));
+        mmap.put("unamelist",unamelist);
+        mmap.put("wtitlelist",wtitlelist);
+        mmap.put("wpiclist",wpiclist);
+        mmap.put("contentlist",contentlist);
+		mmap.put("pushdatelist",pushdatelist);
 		mmap.put("listByid",projectService.selectProjectById(proid));
 		return prefix + "/detail";
 	}

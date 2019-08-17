@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="mcontent != null  and mcontent != '' "> and mcontent LIKE CONCAT(CONCAT('%', #{mcontent}),'%')</if>
             <if test="uid != null "> and uid = #{uid}</if>
             <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
-            <if test="pushdate != null and remintime != ''"> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
+            <if test="pushdate != null and pushdate != ''"> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
             <if test="mtype != null "> and mtype = #{mtype}</if>
             <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
             <if test="note != null  and note != '' "> and note LIKE CONCAT(CONCAT('%', #{note}),'%')</if>

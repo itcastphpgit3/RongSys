@@ -1,9 +1,8 @@
 package com.ruoyi.village.domain;
 
+import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.base.BaseEntity;
-import java.util.Date;
 
 /**
  * 备忘录表 memorial
@@ -28,7 +27,7 @@ public class Memorial extends BaseEntity
 	/** 发布人姓名 */
 	private String uname;
 	/** 建立日期 */
-	private Date pushdate;
+	private String pushdate;
 	/**  */
 	private String remintime;
 	/** 状态 */
@@ -92,12 +91,12 @@ public class Memorial extends BaseEntity
 	{
 		return uname;
 	}
-	public void setPushdate(Date pushdate) 
+	public void setPushdate(String pushdate)
 	{
 		this.pushdate = pushdate;
 	}
 
-	public Date getPushdate() 
+	public String getPushdate()
 	{
 		return pushdate;
 	}

@@ -145,16 +145,18 @@ public class ProjectController extends BaseController
 		System.out.println(dateFormat.format(date));
 		String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名，防止储存同名文件
 
-
         //文件上传调用工具类
 		try{
 			int i;
-			for(i=0;i<filesnum;i++){
-				//保存文件
-				Files g = bFileUtil1.uplodeFile(maxfileid,file[i],fname,flenth,fsize,year);
-				System.out.println(g.toString());//在控制台输出文件信息
-				project.setPropic(g.getAddress());//给project实体的“文件地址”赋值
-			}
+			String fileaddress = "";
+			for(i=0;i<filesnum;i++)
+				{
+					//保存文件
+					Files g = bFileUtil1.uplodeFile(maxfileid,file[i],fname,flenth,fsize,year);
+					System.out.println(g.toString());//在控制台输出文件信息
+					fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+				}
+			project.setPropic(fileaddress);//给project实体的“文件地址”赋值
 
 			return toAjax(projectService.insertProject(project));//将project实体中的值插入数据表中
 		}catch (Exception e){

@@ -87,5 +87,12 @@ public class YuqingServiceImpl implements IYuqingService
 	{
 		return yuqingMapper.deleteYuqingByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public int updateIsuseByYqid(String tid, String remark)
+	{
+		return yuqingMapper.updateIsuseByYqid(tid,remark);
+	}
+
 }

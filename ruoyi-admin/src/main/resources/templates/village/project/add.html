@@ -43,9 +43,11 @@
         <div class="form-group">
 			<label class="col-sm-3 control-label">项目上传：</label>
 			<div class="col-sm-8">
-				<input id="files" name="files" class="form-control" type="file">
+				<input id="files" name="files" class="form-control" type="file" multiple>
 			</div>
 		</div>
+		<input class="form-control" id="filesnum"  name="filesnum"  type="hidden"  readonly="true">
+
 		<div class="form-group">
 			<label class="col-sm-3 control-label">项目类别：</label>
 			<div class="col-sm-8">
@@ -158,6 +160,21 @@
 <script type="text/javascript">
 	var prefix = ctx + "village/project"
 	// 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
+
+	var Upload=document.getElementById("files");
+	//var formData=new FormData(); //通过FormData对象可以组装一组用 [XMLHttpRequest]发送请求的键/值对,它可以更灵活方便的发送表单数据。
+	Upload.onchange=function(){  //onchange在你选择完文件时触发
+		var fileList=Upload.files ; //通过input的files属性获得fileList
+		var filesnum = fileList.length;//获得文件数量
+		$("#filesnum").val(filesnum);//用于传至后台进行处理
+		for(let i=0;i<filesnum;i++)
+		{
+			var file=fileList[i];
+			//formData.append("file"+i,file);  //key:"file"+i,value:file,然后就可以把formData post到后台了
+			console.log(file.name+file.lastModifiedDate);
+		}
+	}
+
 	function checkFile(){
 		// 获取文件对象(该对象的类型是[object FileList]，其下有个length属性)
 		var fileList = $('#files')[0].files;

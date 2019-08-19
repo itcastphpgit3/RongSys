@@ -175,13 +175,14 @@
 					field : 'remark', 
 					title : '是否有效',
 					sortable: true,
-					formatter:function(value,row,index){
+					formatter:
+						function(value,row){
 						var html = "";
 						if(value == "0"){
-							html += "<label style='color: #ff5909'>无效</label>";
+							html += '<div class = "onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" class="onoffswitch-checkbox"  id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
 							return html;
 						}else {
-							html += "<label>有效</label>";
+							html += '<div class="onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" checked="true" class="onoffswitch-checkbox" id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
 							return html;
 						}
 					}
@@ -210,6 +211,23 @@
 				 type: 'time',
 			 });
 		 });
+	 </script>
+	 <script>
+		 function updateshow(id){
+			 var status = $("input[name='remark']").is(':checked') == true ? "1" : "0";
+			 $.ajax({
+				 cache : false,
+				 type : "POST",
+				 url : ctx + "village/yuqing/isuseSet",
+				 data : {
+					 "yqid": id,
+					 "remark": status,
+				 },
+				 error : function(request) {
+					 $.modal.alertError("系统错误");
+				 }
+			 });
+		 }
 	 </script>
 </body>
 </html>

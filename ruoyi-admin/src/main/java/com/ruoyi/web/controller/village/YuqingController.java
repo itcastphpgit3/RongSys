@@ -120,5 +120,11 @@ public class YuqingController extends BaseController
 	{		
 		return toAjax(yuqingService.deleteYuqingByIds(ids));
 	}
-	
+
+	@PostMapping( "/isuseSet")
+	@ResponseBody
+	public AjaxResult isuseSet(String yqid, String remark)
+	{
+		return toAjax(yuqingService.updateIsuseByYqid(yqid,remark));
+	}
 }

@@ -50,5 +50,6 @@ public interface IYuqingService
      * @return 结果
      */
 	public int deleteYuqingByIds(String ids);
-	
+
+	public int updateIsuseByYqid(String yqid, String remark);
 }

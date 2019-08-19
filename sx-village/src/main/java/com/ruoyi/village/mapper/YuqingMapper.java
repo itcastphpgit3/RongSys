@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Yuqing;
-import java.util.List;	
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 舆情上报 数据层
@@ -58,5 +60,6 @@ public interface YuqingMapper
      * @return 结果
      */
 	public int deleteYuqingByIds(String[] yqids);
-	
+
+	public int updateIsuseByYqid(@Param("tid") String yqid, @Param("remark")String remark);
 }

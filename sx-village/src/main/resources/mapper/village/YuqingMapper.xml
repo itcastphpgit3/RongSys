@@ -106,5 +106,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{yqid}
         </foreach>
     </delete>
-    
+
+    <update id="updateIsuseByYqid" parameterType="String">
+        update tb_yuqing
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="remark != null  ">remark = #{remark},</if>
+
+        </trim>
+        where yqid = #{yqid}
+    </update>
 </mapper>

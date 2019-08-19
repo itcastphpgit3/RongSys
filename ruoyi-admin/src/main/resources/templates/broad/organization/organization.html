@@ -10,6 +10,7 @@
 
 
 <body class="gray-bg">
+
 <div class="ui-layout-west">
 	<div class="main-content">
 		<div class="box box-main">
@@ -146,6 +147,7 @@
 		</div>
 	</div>
 </div>
+
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.tips.js}"></script>
@@ -238,10 +240,10 @@
                         field : 'phone',
                         title : '手机号码'
                     },
-					{
-						field : 'lastaccesstime',
-						title : '最后访问时间'
-					},
+//					{
+//						field : 'lastaccesstime',
+//						title : '最后访问时间'
+//					},
 					// {
 					// 	field : 'userid',
 					// 	title : '用户编号'
@@ -357,7 +359,7 @@
             var data = {"ids": rows.join(),"number": fmfrequencyNumber};
             $.operate.submit(url, "post", "json", data);
     });
-    }
+}
 </script>
 </body>
 </html>

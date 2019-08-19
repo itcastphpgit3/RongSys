@@ -5,6 +5,7 @@ import com.ruoyi.broad.mapper.ProgramMapper;
 import com.ruoyi.broad.service.IProgramService;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.support.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,12 +47,18 @@ public class ProgramServiceImpl implements IProgramService {
     @Override
     @DataSource(value = DataSourceType.SLAVE)
     public int insertProgram(Program program) {
-        return 0;
+        return programMapper.insertProgram(program);
     }
 
     @Override
     @DataSource(value = DataSourceType.SLAVE)
     public Program selectFileByFileName(String fname) {
         return programMapper.selectFileByFileName(fname);
+    }
+
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public int deleteProgram(String fid){
+        return programMapper.deleteProgram(Convert.toStrArray(fid));
     }
 }

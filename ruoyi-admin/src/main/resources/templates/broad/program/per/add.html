@@ -39,7 +39,7 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript">
-    var prefix = ctx + "broad/per"
+    var prefix = ctx + "broad/per";
     // 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
     function checkFile(){
         // 获取文件对象(该对象的类型是[object FileList]，其下有个length属性)
@@ -78,7 +78,7 @@
             return false;
         }
         else{
-            $("#form-filemanager-add").submit();
+//            $("#form-filemanager-add").submit();
             $(function(){
                 /** 验证文件是否导入成功  */
                 $("#form-filemanager-add").ajaxSubmit(function (data) {

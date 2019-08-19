@@ -75,6 +75,12 @@
 		where d.dept_id = #{deptId}
 	</select>
 
+	<select id="selectDeptById2" parameterType="Long" resultMap="SysDeptResult">
+		select dept_id as deptId, parent_id as parentId, dept_name as deptName
+		from sys_dept
+		where dept_id = #{deptId}
+	</select>
+
 	<select id="selectChildrenDeptById" parameterType="Long" resultMap="SysDeptResult">
 		select * from sys_dept where find_in_set(#{deptId}, ancestors)
 	</select>
@@ -151,4 +157,8 @@
 		where dept_id in (${ancestors})
 	</update>
 
+	<select id="chooseDeptList"  resultMap="SysDeptResult">
+		select dept_id , parent_id , dept_name from sys_dept
+
+	</select>
 </mapper> 

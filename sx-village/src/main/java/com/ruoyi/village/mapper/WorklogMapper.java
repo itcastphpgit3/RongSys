@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Worklog;
-import java.util.List;	
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 工作记录 数据层
@@ -18,7 +20,9 @@ public interface WorklogMapper
      * @return 工作记录信息
      */
 	public Worklog selectWorklogById(Integer wid);
-	
+
+	public  List<HashMap> selectWorkLogByProId(Integer proid);
+	public int selectWorkLogNumByProId(Integer proid);
 	/**
      * 查询工作记录列表
      * 

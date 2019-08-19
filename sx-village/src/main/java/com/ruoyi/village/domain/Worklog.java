@@ -1,9 +1,8 @@
 package com.ruoyi.village.domain;
 
+import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.base.BaseEntity;
-import java.util.Date;
 
 /**
  * 工作记录表 worklog
@@ -15,8 +14,12 @@ public class Worklog extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
-	/** 项目数据编号 */
+	/** 工作数据编号 */
 	private Integer wid;
+	/** 项目编号 */
+	private String proid;
+	/** 项目标题 */
+	private String proname;
 	/** 标题 */
 	private String wtitle;
 	/** 文件路径 */
@@ -171,9 +174,27 @@ public class Worklog extends BaseEntity
 		return ptype;
 	}
 
-    public String toString() {
+	public String getProid() {
+		return proid;
+	}
+
+	public void setProid(String proid) {
+		this.proid = proid;
+	}
+
+	public String getProname() {
+		return proname;
+	}
+
+	public void setProname(String proname) {
+		this.proname = proname;
+	}
+
+	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("wid", getWid())
+			.append("proid", getProid())
+			.append("proname", getProname())
             .append("wtitle", getWtitle())
             .append("wpic", getWpic())
             .append("wtype", getWtype())

@@ -857,7 +857,7 @@
 						return;
 					}
 					var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.uniqueId]);
-					$.modal.open("修改" + $.table._option.modalName, url);
+					 $.modal.open("修改" + $.table._option.modalName, url);
 				} else {
 					$.modal.open("修改" + $.table._option.modalName, $.operate.editUrl(id));
 				}

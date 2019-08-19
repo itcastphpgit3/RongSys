@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by ASUS on 2019/7/29.
+ * @author cx
  */
 @Service
 public class TempgroupServiceImpl implements ITempgroupService{
@@ -25,9 +26,9 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<Tempgroup> selectAllTempgroup()
+    public List<Tempgroup> selectAllTempgroup(Tempgroup tempgroup)
     {
-        return tempgroupMapper.selectAllTempgroup();
+        return tempgroupMapper.selectAllTempgroup(tempgroup);
     }
 
     /**

@@ -63,7 +63,7 @@
     <!--根据用户查询节目列表 -->
     <select id="selectProList" parameterType="com.ruoyi.broad.domain.Program" resultMap="programMap">
         select
-        fid,fname,g.userid as userid,remark,ispublic,filename,urls,address,createdtime,ptype,flenth,fsize,uname
+        fid,fname,g.userid as userid,remark,ispublic,filename,urls,address,createdtime,ptype,flenth,fsize,ui.uname
         from
         <include refid="tableName"></include> g
         LEFT JOIN <include refid="userstable"></include> ui on g.userid=ui.userid
@@ -89,4 +89,38 @@
             <include refid="tableName"></include>
         where filename = #{name}
     </select>
+    <insert id="insertProgram" parameterType="Program">
+        insert into
+        <include refid="tableName"></include>
+        (
+	     fname,
+	     filename,
+	     userid,
+	     ispublic,
+	     urls,
+	     address,
+	     flenth,
+	     fsize,
+	     createdtime,
+	     islisten,ptype,uname
+		) values (
+	     #{fname},
+         #{filename},
+         #{userid},
+	     #{ispublic},
+	     #{urls},
+	     #{address},
+	     #{flenth},
+	     #{fsize},
+	     #{createdtime},
+	     #{islisten},#{ptype},#{uname}
+		)
+    </insert>
+
+    <delete id="deleteProgram" parameterType="String">
+            delete from programs where fid in
+        <foreach item="fid" collection="array" open="(" separator="," close=")">
+            #{fid}
+        </foreach>
+    </delete>
 </mapper>

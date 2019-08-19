@@ -50,6 +50,8 @@ public class Tempgroup extends BaseEntity {
     /*终端地址*/
     private String address;
 
+    private String parentaid;
+
 
     public int getTgid() {
         return tgid;
@@ -163,6 +165,14 @@ public class Tempgroup extends BaseEntity {
         this.address = address;
     }
 
+    public String getParentaid() {
+        return parentaid;
+    }
+
+    public void setParentaid(String parentaid) {
+        this.parentaid = parentaid;
+    }
+
     @Override
     public String toString() {
         return "Tempgroup{" +
@@ -180,6 +190,7 @@ public class Tempgroup extends BaseEntity {
                 ", uname='" + uname + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", parentaid='" + parentaid + '\'' +
                 '}';
     }
 }

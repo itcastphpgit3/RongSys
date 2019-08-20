@@ -36,21 +36,21 @@ public class bConst {
     public static final String FALSE = "F";
 
     // 文件路径
-    public static final String FILEPATH = "uploadFiles/";
+    public static final String FILEPATH = "profile/";
     // 图片上传路径
-    //	public static final String FILEPATHIMG = "uploadFiles/uploadImgs/";
+    //	public static final String FILEPATHIMG = "profile/uploadImgs/";
     // 系统文件路径
-    public static final String FILEPATHFILE = "uploadFiles/file/";
+    public static final String FILEPATHFILE = "profile/file/";
     // 系统文件路径
-    public static final String FILEPATHBACKIMAGE = "uploadFiles/file/backimage/";
+    public static final String FILEPATHBACKIMAGE = "profile/file/backimage/";
     //申请文件上传路径
-    public static final String FILEPATHAPPLY = "uploadFiles/applyfile/";
+    public static final String FILEPATHAPPLY = "profile/applyfile/";
     //导出节目excel文件压缩包临时文件夹
-    public static final String FILEPATHPROTEMP = "uploadFiles/protemp/";
+    public static final String FILEPATHPROTEMP = "profile/protemp/";
     //特种节目文件夹
-    public static final String FILEPATHPROSPEC = "uploadFiles/audiofile/prospec/";
+    public static final String FILEPATHPROSPEC = "profile/audiofile/prospec/";
     //节目文件夹
-    public static final String FILEPATHPER = "uploadFiles/audiofile/";
+    public static final String FILEPATHPER = "profile/audiofile/";
 
     public static final String[] LOGTYPE=new String[]{"登陆日志","操作日志"};
 

@@ -24,7 +24,7 @@ public class ReadProInfo extends DefaultCommand {
 
 			loggersession();//插入日志
 
-			return returnBytes(ProtocolsToClient.PROGINFO, command, null);
+			return returnBytes(ProtocolsToClient.PROGINFO, command, null,false);
 		}catch (Exception e){
 			logger.error("解析信息出错",e);
 		}

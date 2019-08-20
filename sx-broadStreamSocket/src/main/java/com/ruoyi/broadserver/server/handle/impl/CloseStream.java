@@ -21,7 +21,7 @@ public class CloseStream extends DefaultCommand {
 
 			loggersession();//插入日志
 
-			return returnBytes(ProtocolsToClient.CLOSESTREAM, command, "OK");
+			return returnBytes(ProtocolsToClient.CLOSESTREAM, command, "OK",false);
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

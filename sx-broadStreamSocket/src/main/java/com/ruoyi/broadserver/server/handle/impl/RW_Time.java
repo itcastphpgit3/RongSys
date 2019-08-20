@@ -26,7 +26,7 @@ public class RW_Time extends DefaultCommand {
             else
                 logger.info("获取数据库终端交互时间为空");
             loggersession();//插入日志
-            return returnBytes(ProtocolsToClient.MUTUALTIME, command, data == null?datainfo:data);
+            return returnBytes(ProtocolsToClient.MUTUALTIME, command, data == null?datainfo:data,true);
         }catch (Exception e){
             logger.error("终端更新交互时间失败"+e);
         }

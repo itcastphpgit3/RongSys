@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								舆情类别：<input type="text" name="yqtype"/>
+							</li>
+
+							<li>
+								舆情内容：<input type="text" name="content"/>
+							</li>
+
+							<!--<li>
+								舆情图片地址：<input type="text" name="uploadimage"/>
+							</li>-->
+
+							<!--<li>
+								发送日期：<input type="text" name="reldate"/>
+							</li>-->
+
+							<!--<li>
+								报告人编号：<input type="text" name="adduid"/>
+							</li>-->
+
+							<li>
+								报告人姓名：<input type="text" name="adduname"/>
+							</li>
+
+							<li>
+								<input class="laydate-icon  layer-date"
+									   name="adddate"
+									   id="adddate"
+									   value=""
+									   readonly="readonly"
+									   style="width:150px;"
+									   placeholder="建立日期"
+									   title="建立日期"/>
+							</li>
+
+							<!--<li>
+								发送人编号：<input type="text" name="uid"/>
+							</li>
+
+							<li>
+								发送人姓名：<input type="text" name="uname"/>
+							</li>
+
+							<li>
+								用户所属地区村社区编号：<input type="text" name="aid"/>
+							</li>-->
+
+							<li>
+								是否有效：<input list="remark"  name="remark"/>
+								<datalist id="remark">
+									<option value=0>无效</option>
+									<option value=1>有效</option>
+								</datalist>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="village:yuqing:add">-->
+					<!--<i class="fa fa-plus"></i> 添加-->
+				<!--</a>-->
+				<!--<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="village:yuqing:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>-->
+				<!--<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="village:yuqing:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>-->
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="village:yuqing:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('village:yuqing:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('village:yuqing:remove')}]];
+        var prefix = ctx + "village/yuqing";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "舆情上报",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'yqid', 
+					title : '舆情数据编号',
+					visible: false
+				},
+				{
+					field : 'yqtype', 
+					title : '舆情类别',
+					sortable: true
+				},
+				{
+					field : 'content', 
+					title : '舆情内容',
+					sortable: true
+				},
+				{
+					field : 'uploadimage', 
+					title : '舆情图片',
+					sortable: true,
+					width:"200px",
+					height:"100px",
+					align: 'center',
+					formatter:function(value,row) {
+						var s;
+						var url = row.uploadimage;
+						s = '<a  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + url + '" /></a>';
+						return s;
+					}
+				},
+				/*{
+					field : 'reldate', 
+					title : '发送日期',
+					sortable: true
+				},
+				{
+					field : 'adduid', 
+					title : '报告人编号',
+					sortable: true
+				},*/
+				{
+					field : 'adduname', 
+					title : '报告人姓名',
+					sortable: true
+				},
+				/*{
+					field : 'uid', 
+					title : '发送人编号',
+					sortable: true
+				},
+				{
+					field : 'uname', 
+					title : '发送人姓名',
+					sortable: true
+				},
+				{
+					field : 'aid', 
+					title : '用户所属地区村社区编号',
+					sortable: true
+				},*/
+				{
+					field : 'remark', 
+					title : '是否有效',
+					sortable: true,
+					formatter:
+						function(value,row){
+						var html = "";
+						if(value == "0"){
+							html += '<div class = "onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" class="onoffswitch-checkbox"  id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
+							return html;
+						}else {
+							html += '<div class="onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" checked="true" class="onoffswitch-checkbox" id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
+							return html;
+						}
+					}
+				},{
+						field : 'adddate',
+						title : '报告日期',
+						sortable: true
+					}]
+            };
+            $.table.init(options);
+        });
+    </script>
+	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+	 <!--时间插件-->
+	 <script>
+		 laydate({
+			 elem:"#adddate",
+			 event:"focus"
+		 });
+		 layui.use('laydate', function(){
+			 var laydate = layui.laydate;
+			 //执行一个laydate实例
+			 laydate.render({
+				 elem:"#village",
+				 type: 'time',
+			 });
+		 });
+	 </script>
+	 <script>
+		 function updateshow(id){
+			 var status = $("input[name='remark']").is(':checked') == true ? "1" : "0";
+			 $.ajax({
+				 cache : false,
+				 type : "POST",
+				 url : ctx + "village/yuqing/isuseSet",
+				 data : {
+					 "yqid": id,
+					 "remark": status,
+				 },
+				 error : function(request) {
+					 $.modal.alertError("系统错误");
+				 }
+			 });
+		 }
+	 </script>
+</body>
+</html>

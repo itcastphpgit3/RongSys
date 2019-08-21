@@ -5,12 +5,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 备忘录表 memorial
+ * 链接管理表 link
  * 
  * @author 张鸿权
- * @date 2019-08-15
+ * @date 2019-08-18
  */
-public class Memorial extends BaseEntity
+public class Link extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -28,8 +28,8 @@ public class Memorial extends BaseEntity
 	private String uname;
 	/** 建立日期 */
 	private String pushdate;
-	/**  */
-	private String remintime;
+	/** 阅读点击数 */
+	private Integer greadtotal;
 	/** 状态 */
 	private Integer mtype;
 	/** 用户所属地区编号 */
@@ -100,14 +100,14 @@ public class Memorial extends BaseEntity
 	{
 		return pushdate;
 	}
-	public void setRemintime(String remintime) 
+	public void setGreadtotal(Integer greadtotal) 
 	{
-		this.remintime = remintime;
+		this.greadtotal = greadtotal;
 	}
 
-	public String getRemintime() 
+	public Integer getGreadtotal() 
 	{
-		return remintime;
+		return greadtotal;
 	}
 	public void setMtype(Integer mtype) 
 	{
@@ -146,7 +146,7 @@ public class Memorial extends BaseEntity
             .append("uid", getUid())
             .append("uname", getUname())
             .append("pushdate", getPushdate())
-            .append("remintime", getRemintime())
+            .append("greadtotal", getGreadtotal())
             .append("mtype", getMtype())
             .append("aid", getAid())
             .append("note", getNote())

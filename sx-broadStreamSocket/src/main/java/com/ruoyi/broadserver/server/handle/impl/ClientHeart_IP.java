@@ -24,7 +24,7 @@ public class ClientHeart_IP extends DefaultCommand {
 		try {
 			String command = save(datainfo)?"1":"0";//保存信息
 			loggersession();//插入日志
-			return returnBytes(ProtocolsToClient.IPCHANGE, command, "nothin");//暂时默认为无流媒体需求
+			return returnBytes(ProtocolsToClient.IPCHANGE, command, "nothin",false);//暂时默认为无流媒体需求
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

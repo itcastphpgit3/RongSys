@@ -22,7 +22,7 @@ public class HeartIOT extends DefaultCommand {
 			String command = save(datainfo)?"1":"0";//保存信息
 
 			loggersession();//插入日志
-			return returnBytes(ProtocolsToClient.GETPARAMATER, command, "ok");
+			return returnBytes(ProtocolsToClient.GETPARAMATER, command, "ok",false);
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

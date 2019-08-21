@@ -19,7 +19,7 @@ public class SendBand extends DefaultCommand {
 		// TODO Auto-generated method stub
 		if(content[4] == 49) {//命令为1
 			String reinfo = (String)get(session);//获取频率信息
-			return returnBytes(ProtocolsToClient.REQUEST, "1", reinfo);
+			return returnBytes(ProtocolsToClient.REQUEST, "1", reinfo,false);
 		}else {
 			return null;
 		}

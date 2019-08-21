@@ -23,7 +23,7 @@ public class RW_Tels extends DefaultCommand {
             String data = get(datainfo).toString();//返回信息
 
             loggersession();//插入日志
-            return returnBytes(ProtocolsToClient.PHONELIST, command, data);
+            return returnBytes(ProtocolsToClient.PHONELIST, command, data,true);
         }catch (Exception e){
             logger.error("终端更新维护授权电话失败"+e);
         }

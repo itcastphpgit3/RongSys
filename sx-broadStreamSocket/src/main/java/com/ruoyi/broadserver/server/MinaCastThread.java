@@ -62,7 +62,7 @@ public class MinaCastThread implements Runnable {
 	 */
 	@Override
 	public void run() {
-		mHandler = new MinaCastHandler();
+		mHandler = new MinaCastHandler(type);
 		// TODO Auto-generated method stub
 		// ** loginAcceptor设置
         Acceptor = new NioSocketAcceptor();

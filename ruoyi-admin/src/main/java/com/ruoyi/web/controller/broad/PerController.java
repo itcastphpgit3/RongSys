@@ -49,6 +49,7 @@ public class PerController extends BaseController {
     @GetMapping()
     public String per(ModelMap mmp) {
         String path = System.getProperty("user.home");
+        path = path.replace("\\","/");
         System.out.println(path);
         mmp.put("path",path);
         return prefix + "/per";

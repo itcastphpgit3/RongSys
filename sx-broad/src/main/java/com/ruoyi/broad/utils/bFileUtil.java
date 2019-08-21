@@ -141,4 +141,28 @@ public class bFileUtil {
         }
         return g;
     }
+
+    /**
+     * 删除文件
+     * @param filePathAndName
+     *            String 文件路径及名称 如c:/fqf.txt
+     * @param filePathAndName
+     *            String
+     * @return boolean
+     */
+    public static boolean delFile(String filePathAndName) {
+        try {
+            String filePath = filePathAndName;
+            filePath = filePath.toString();
+            java.io.File myDelFile = new java.io.File(filePath);
+            if(myDelFile.exists()) {
+                myDelFile.delete();
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("删除文件操作出错");
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

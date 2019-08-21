@@ -7,7 +7,7 @@ ruoyi:
   # 版权年份
   copyrightYear: 2018
   # 文件上传路径
-  # profile: D:/profile/
+  profile: /profile/
   # 获取ip地址开关
   addressEnabled: true
 
@@ -19,12 +19,12 @@ server:
     # 项目contextPath
     context-path: /
   tomcat:
-    # tomcat的URI编码
-    uri-encoding: UTF-8
-    # tomcat最大线程数，默认为200
-    max-threads: 800
-    # Tomcat启动初始化的线程数，默认值25
-    min-spare-threads: 30
+      # tomcat的URI编码
+      uri-encoding: UTF-8
+      # tomcat最大线程数，默认为200
+      max-threads: 800
+      # Tomcat启动初始化的线程数，默认值25
+      min-spare-threads: 30
 
 # 日志配置
 logging:

@@ -247,6 +247,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
+        filterChainDefinitionMap.put("/profile/**", "anon");
         // 开放一个Api端口用来前台调用
         filterChainDefinitionMap.put("/api/**","anon");
         // 退出 logout地址，shiro去清除session

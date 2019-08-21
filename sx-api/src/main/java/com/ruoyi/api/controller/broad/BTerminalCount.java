@@ -2,7 +2,7 @@ package com.ruoyi.api.controller.broad;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.TerminalCountService;
+import com.ruoyi.broad.service.ITerminalCountService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,13 +21,13 @@ import java.util.List;
 @RequestMapping("/api/terminal")
 public class BTerminalCount {
     @Autowired
-    private TerminalCountService terminalCountService;
+    private ITerminalCountService iTerminalCountService;
 
     @CrossOrigin
     @GetMapping("/bt")
     @ApiOperation(value = "根据时间统计终端维护量")
     public RongApiRes getAllTerminal(){
-        List pre = terminalCountService.getAllTerminal();
+        List pre = iTerminalCountService.getAllTerminal();
         RongApiRes test = RongApiService.get_list(pre);
         return test;
     }

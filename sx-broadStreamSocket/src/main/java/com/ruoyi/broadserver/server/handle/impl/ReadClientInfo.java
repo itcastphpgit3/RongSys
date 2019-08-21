@@ -25,7 +25,7 @@ public class ReadClientInfo extends DefaultCommand {
 
             loggersession();//插入日志
 
-            return returnBytes(ProtocolsToClient.STATU, command, null);
+            return returnBytes(ProtocolsToClient.STATU, command, null,true);
         }catch (Exception e){
             logger.error("解析信息出错",e);
         }

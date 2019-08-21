@@ -91,7 +91,7 @@
     var temp = 0;
     /**
      * 选择文件
-     * @param fid
+     * @param fid,fname,filename,flenth
      */
     function selectFiles(fname,fid,filename,flenth) {
         var num = $("#orgs").val();
@@ -129,7 +129,7 @@
                     title : '节目名称',
                     sortable: true,
                     width: '20%',
-                    formatter:function (value,row,index,) {
+                    formatter:function (value,row,index) {
                         var results = value;
                         if(results.toString().length>20){
                             results = results.toString().substring(0,12)+"...";

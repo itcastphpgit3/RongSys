@@ -26,4 +26,25 @@ public interface ProgramMapper {
      * @return
      */
     public String getMaxFileidofYear(String year);
+
+    /**
+     * 查询节目
+     * @param fname 节目名称
+     * @return 结果
+     */
+    public Program selectFileByFileName(String fname);
+
+    /**
+     * 新增节目
+     * @param program 节目名称
+     * @return 结果
+     */
+    public int insertProgram(Program program);
+
+    /**
+     * 删除节目
+     * @param fid 节目编号
+     * @return 结果
+     */
+    public int deleteProgram(String[] fid);
 }

@@ -223,8 +223,6 @@
                     console.log("异常")
                 }
             }
-
-
         }
     </script>
     <script>
@@ -255,7 +253,7 @@
             publishRtmp();
         }
         function clo() {
-            addlog("close",streamid,list, nameList);
+            addlog("close", streamid, list, nameList);
 
             console.log("关闭成功1");
             if(rec){
@@ -524,7 +522,7 @@
                 yes: function (index, layero) {
                     imea = String(document.getElementById("treeId").value).split(',');
                     imeiName = String(document.getElementById("tname").value).split(',');
-                    //console.log("treeId: " + document.getElementById("treeId").value);
+                    console.log("aaaaaa: " + document.getElementById("treeId").value);
                     doSubmit(index, layero)
                 }, cancel: function () {
                     return true;

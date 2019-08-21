@@ -24,10 +24,14 @@
 					<input id="uname" name="uname" th:field="*{uname}" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">性别：</label>
 				<div class="col-sm-8">
-					<input id="sex" name="sex" th:field="*{sex}" class="form-control" type="text">
+					<select class="chosen-select form-control" th:field="*{sex}" id="sex" name="sex"  type="text">
+						<option value="男">男</option>
+						<option value="女">女</option>
+						<option value="未知">未知</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -42,22 +46,34 @@
 					<input id="idcard" name="idcard" th:field="*{idcard}" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">学历：</label>
 				<div class="col-sm-8">
-					<input id="edulevel" name="edulevel" th:field="*{edulevel}" class="form-control" type="text">
+					<select class="chosen-select form-control" id="edulevel" name="edulevel" th:field="*{edulevel}" type="text">
+						<option value="硕士研究生">硕士研究生</option>
+						<option value="本科">本科</option>
+						<option value="大专">大专</option>
+						<option value="中专">中专</option>
+						<option value="高中">高中</option>
+						<option value="初中">初中</option>
+						<option value="小学">小学</option>
+					</select>
 				</div>
 			</div>
-			<div class="form-group">	
+			<div class="form-group">
 				<label class="col-sm-3 control-label">出生年月：</label>
 				<div class="col-sm-8">
-					<input id="birthday" name="birthday" th:field="*{birthday}" class="form-control" type="text">
+					<input class="form-control laydate-icon  layer-date" name="birthday"
+						   id="birthday" th:field="*{birthday}" value="" readonly="readonly"
+						   style="width:120px;" placeholder="出生年月" title="出生年月"/>
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">入党时间：</label>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">入党年月：</label>
 				<div class="col-sm-8">
-					<input id="partyjoindate" name="partyjoindate" th:field="*{partyjoindate}" class="form-control" type="text">
+					<input class="form-control laydate-icon  layer-date" name="partyjoindate"
+						   id="partyjoindate" th:field="*{partyjoindate}" value="" readonly="readonly"
+						   style="width:120px;" placeholder="入党日期" title="入党日期"/>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -78,36 +94,106 @@
 					<input id="notes" name="notes" th:field="*{notes}" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">微信用户编号：</label>
-				<div class="col-sm-8">
-					<input id="uid" name="uid" th:field="*{uid}" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">微信号：</label>
-				<div class="col-sm-8">
-					<input id="wcid" name="wcid" th:field="*{wcid}" class="form-control" type="text">
-				</div>
-			</div>
+			<!--<div class="form-group">	-->
+				<!--<label class="col-sm-3 control-label">微信用户编号：</label>-->
+				<!--<div class="col-sm-8">-->
+					<!--<input id="uid" name="uid" th:field="*{uid}" class="form-control" type="text">-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="form-group">	-->
+				<!--<label class="col-sm-3 control-label">微信号：</label>-->
+				<!--<div class="col-sm-8">-->
+					<!--<input id="wcid" name="wcid" th:field="*{wcid}" class="form-control" type="text">-->
+				<!--</div>-->
+			<!--</div>-->
 		</form>
     </div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
 		var prefix = ctx + "village/partymember"
-		$("#form-partymember-edit").validate({
-			rules:{
-				xxxx:{
-					required:true,
-				},
-			}
-		});
+        $("#form-partymember-edit").validate({
+            rules: {
+                aid: {
+                    required: true,
+                    minlength: 2
+                },
+                grouptype: {
+                    required: true,
+                    minlength: 2
+                },
+                nations: {
+                    required: true,
+                    minlength: 2
+                },
+                uname: {
+                    required: true,
+                    minlength: 2
+                },
+                idcard: {
+                    required: true,
+                    minlength: 15
+                },
+                phone: {
+                    required: true,
+                    minlength: 11
+                }
+            },
+            messages: {
+                aid: {
+                    required: "请输入地域编号",
+                    minlength: "地域编号不能小于2个字符"
+                },
+                grouptype: {
+                    required: "请输入党员小组",
+                    minlength: "党员小组不能小于2位"
+                },
+                nations: {
+                    required: "请输入名族",
+                    minlength: "名族不能小于2个字符"
+                },
+                uname: {
+                    required: "请输入党员姓名",
+                    minlength: "党员姓名不能小于2个字符"
+                },
+                idcard: {
+                    required: "请输入身份证号码",
+                    minlength: "身份证号码不能小于15个字符"
+                },
+                phone: {
+                    required: "请输入手机号码",
+                    minlength: "号码长度不能小于11位"
+                }
+            }
+        });
 		
 		function submitHandler() {
 	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/edit", $('#form-partymember-edit').serialize());
 	        }
 	    }
+	</script>
+        <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+	<script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+	<!--时间插件-->
+	<script>
+        laydate({
+            elem:"#partyjoindate",
+            event:"focus"
+        });
+        laydate({
+            elem:"#birthday",
+            event:"focus"
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem:"#village",
+                type: 'time',
+
+            });
+        });
 	</script>
 </body>
 </html>

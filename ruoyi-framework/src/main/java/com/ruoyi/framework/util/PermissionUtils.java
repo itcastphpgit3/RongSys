@@ -5,14 +5,14 @@ import com.ruoyi.common.constant.PermissionConstants;
 
 /**
  * permission 工具类
- * 
+ *
  * @author ruoyi
  */
 public class PermissionUtils
 {
     /**
      * 权限错误消息提醒
-     * 
+     *
      * @param errorMsg 错误信息
      * @return
      */

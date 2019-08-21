@@ -7,6 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="Project" id="ProjectResult">
         <result property="proid"    column="proid"    />
         <result property="proname"    column="proname"    />
+        <result property="wpeopleid"    column="wpeopleid"    />
+        <result property="wpeoplename"    column="wpeoplename"    />
         <result property="propic"    column="propic"    />
         <result property="protype"    column="protype"    />
         <result property="money"    column="money"    />
@@ -25,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectProjectVo">
-        select proid, proname, propic, protype, money, moneynote, content, address, fname, fphone, greadtotal, pushdate, uid, uname, remark, aid, ptype from tb_project
+        select proid, proname,wpeopleid,wpeoplename, propic, protype, money, moneynote, content, address, fname, fphone, greadtotal, pushdate, uid, uname, remark, aid, ptype from tb_project
     </sql>
 	
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
@@ -62,7 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="proid != null  ">proid,</if>
 			<if test="proname != null  and proname != ''  ">proname,</if>
-			<if test="propic != null  and propic != ''  ">propic,</if>
+            <if test="propic != null  and propic != ''  ">propic,</if>
+			<if test="wpeopleid != null  and wpeopleid != ''  ">wpeopleid,</if>
+            <if test="wpeoplename != null  and wpeoplename != ''  ">wpeoplename,</if>
 			<if test="protype != null  and protype != ''  ">protype,</if>
 			<if test="money != null  ">money,</if>
 			<if test="moneynote != null  and moneynote != ''  ">moneynote,</if>
@@ -81,6 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="proid != null  ">#{proid},</if>
 			<if test="proname != null  and proname != ''  ">#{proname},</if>
 			<if test="propic != null  and propic != ''  ">#{propic},</if>
+            <if test="wpeopleid != null  and wpeopleid != ''  ">#{wpeopleid},</if>
+            <if test="wpeoplename != null  and wpeoplename != ''  ">#{wpeoplename},</if>
 			<if test="protype != null  and protype != ''  ">#{protype},</if>
 			<if test="money != null  ">#{money},</if>
 			<if test="moneynote != null  and moneynote != ''  ">#{moneynote},</if>
@@ -102,6 +108,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update tb_project
         <trim prefix="SET" suffixOverrides=",">
             <if test="proname != null  and proname != ''  ">proname = #{proname},</if>
+            <if test="wpeopleid != null  and wpeopleid != ''  ">wpeopleid = #{wpeopleid},</if>
+            <if test="wpeoplename != null  and wpeoplename != ''  ">wpeoplename = #{wpeoplename},</if>
             <if test="propic != null  and propic != ''  ">propic = #{propic},</if>
             <if test="protype != null  and protype != ''  ">protype = #{protype},</if>
             <if test="money != null  ">money = #{money},</if>

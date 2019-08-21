@@ -26,39 +26,44 @@ public class Program extends BaseEntity {
     private Boolean ptype;//节目类型，是否是录制节目
     private String uname;//上传用户名
 
-    public String getUname() {
-        return uname;
-    }
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
     public String getFid() {
         return fid;
     }
+
     public void setFid(String fid) {
         this.fid = fid;
     }
+
     public String getFname() {
         return fname;
     }
+
     public void setFname(String fname) {
         this.fname = fname;
     }
+
     public String getUserid() {
         return userid;
     }
+
     public void setUserid(String userid) {
         this.userid = userid;
     }
+
+    @Override
     public String getRemark() {
         return remark;
     }
+
+    @Override
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
     public Boolean getIspublic() {
         return ispublic;
     }
+
     public void setIspublic(Boolean ispublic) {
         this.ispublic = ispublic;
     }
@@ -66,50 +71,73 @@ public class Program extends BaseEntity {
     public String getFilename() {
         return filename;
     }
+
     public void setFilename(String filename) {
         this.filename = filename;
     }
-    public String getUrls() {
-        return urls;
-    }
-    public void setUrls(String urls) {
-        this.urls = urls;
-    }
-    public String getCreatedtime() {
-        return createdtime;
-    }
-    public void setCreatedtime(String createdtime) {
-        this.createdtime = createdtime;
-    }
-    public String getFlenth() {
-        return flenth;
-    }
-    public void setFlenth(String flenth) {
-        this.flenth = flenth;
-    }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
-    public Boolean getPtype() {
-        return ptype;
+
+    public String getUrls() {
+        return urls;
     }
-    public void setPtype(Boolean ptype) {
-        this.ptype = ptype;
+
+    public void setUrls(String urls) {
+        this.urls = urls;
     }
-    public Boolean getIslisten() {
-        return islisten;
+
+    public String getCreatedtime() {
+        return createdtime;
     }
-    public void setIslisten(Boolean islisten) {
-        this.islisten = islisten;
+
+    public void setCreatedtime(String createdtime) {
+        this.createdtime = createdtime;
     }
+
+    public String getFlenth() {
+        return flenth;
+    }
+
+    public void setFlenth(String flenth) {
+        this.flenth = flenth;
+    }
+
     public Double getFsize() {
         return fsize;
     }
+
     public void setFsize(Double fsize) {
         this.fsize = fsize;
+    }
+
+    public Boolean getIslisten() {
+        return islisten;
+    }
+
+    public void setIslisten(Boolean islisten) {
+        this.islisten = islisten;
+    }
+
+    public Boolean getPtype() {
+        return ptype;
+    }
+
+    public void setPtype(Boolean ptype) {
+        this.ptype = ptype;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
     @Override

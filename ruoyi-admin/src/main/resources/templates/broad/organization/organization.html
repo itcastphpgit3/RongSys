@@ -10,6 +10,7 @@
 
 
 <body class="gray-bg">
+
 <div class="ui-layout-west">
 	<div class="main-content">
 		<div class="box box-main">
@@ -44,9 +45,9 @@
 								<li>
 									终端名称：<input type="text" name="tname"/>
 								</li>
-								<li>
-									区域名称：<input type="text" name="aname"/>
-								</li>
+								<!--<li>-->
+									<!--区域名称：<input type="text" name="aname"/>-->
+								<!--</li>-->
 
 								<!--<li>
 									出厂编号：<input type="text" name="facid"/>
@@ -77,20 +78,20 @@
 								<!--<li>
 									终端交互时间：<input type="text" name="intertime"/>
 								</li>-->
-								<li>
-									创建时间：<!--<input type="text" name="createdtime"/>-->
-                                        <input name="createdtime" class="laydate-icon form-control layer-date"
-                                               id="broaddate" value="" readonly="readonly" style="width:120px;"
-                                               placeholder="创建时间" title="创建时间"/>
-								</li>
+								<!--<li>-->
+									<!--创建时间：&lt;!&ndash;<input type="text" name="createdtime"/>&ndash;&gt;-->
+                                        <!--<input name="createdtime" class="laydate-icon form-control layer-date"-->
+                                               <!--id="broaddate" value="" readonly="readonly" style="width:120px;"-->
+                                               <!--placeholder="创建时间" title="创建时间"/>-->
+								<!--</li>-->
 								<li>
 									最后修改时间：<input type="text" name="lastaccesstime"/>
 								</li>
-								<li>
-									是否可用：<!--<input type="text" name="isuse"/>-->
-										<input type="radio" name="isuse" value="1" style="width: 50px" checked="checked">是
-										<input type="radio" name="isuse" value="0" style="width: 50px">否
-								</li>
+								<!--<li>-->
+									<!--是否可用：&lt;!&ndash;<input type="text" name="isuse"/>&ndash;&gt;-->
+										<!--<input type="radio" name="isuse" value="1" style="width: 50px" checked="checked">是-->
+										<!--<input type="radio" name="isuse" value="0" style="width: 50px">否-->
+								<!--</li>-->
 								<!--<li>
 									终端号码：<input type="text" name="phone"/>
 								</li>-->
@@ -146,6 +147,7 @@
 		</div>
 	</div>
 </div>
+
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.tips.js}"></script>
@@ -238,10 +240,10 @@
                         field : 'phone',
                         title : '手机号码'
                     },
-					{
-						field : 'lastaccesstime',
-						title : '最后访问时间'
-					},
+//					{
+//						field : 'lastaccesstime',
+//						title : '最后访问时间'
+//					},
 					// {
 					// 	field : 'userid',
 					// 	title : '用户编号'
@@ -357,7 +359,7 @@
             var data = {"ids": rows.join(),"number": fmfrequencyNumber};
             $.operate.submit(url, "post", "json", data);
     });
-    }
+}
 </script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 package com.ruoyi.village.domain;
 
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.base.BaseEntity;
 
 /**
  * 暮云党员表 myc_partymember
@@ -17,32 +18,46 @@ public class Partymember extends BaseEntity
 	/** 数据编号 */
 	private Integer pid;
 	/** 地域编号 */
+	@Excel(name = "地域编号")
 	private String aid;
 	/** 党员小组 */
+	@Excel(name = "党员小组")
 	private String grouptype;
 	/** 党员姓名 */
+	@Excel(name = "党员姓名")
 	private String uname;
 	/** 性别 */
+	@Excel(name = "性别")
 	private String sex;
 	/** 民族 */
+	@Excel(name = "名族")
 	private String nations;
 	/** 身份证号码 */
+	@Excel(name = "身份证号码")
 	private String idcard;
 	/** 学历 */
+	@Excel(name = "学历")
 	private String edulevel;
 	/** 出生年月 */
+	@Excel(name = "出生年月")
 	private String birthday;
 	/** 入党时间 */
+	@Excel(name = "入党时间")
 	private String partyjoindate;
 	/** 手机号 */
+	@Excel(name = "手机号")
 	private String phone;
 	/** 家庭住址 */
+	@Excel(name = "家庭住址")
 	private String address;
 	/** 备注 */
+	@Excel(name = "备注")
 	private String notes;
 	/** 微信用户编号 */
+	@Excel(name = "微信用户编号")
 	private Integer uid;
 	/** 微信号 */
+	@Excel(name = "微信号")
 	private String wcid;
 
 	public void setPid(Integer pid) 

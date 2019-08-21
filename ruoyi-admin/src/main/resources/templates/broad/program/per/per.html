@@ -10,11 +10,35 @@
 
 <body class="gray-bg">
 
-<button class="btn btn-primary" onclick="startRecording(this);">录音</button>
-<button class="btn btn-success" onclick="stopRecording(this);" disabled>停止录音</button>
 
-<h2>录音</h2>
-<ul id="recordingslist"></ul>
+	<div class="row">
+		<div class="col-sm-2">
+			<div class="ibox">
+				<div class="ibox-content">
+					<button class="btn btn-primary" onclick="startRecording(this);">录音</button>
+					<button class="btn btn-success" onclick="stopRecording(this);" disabled>停止录音</button>
+					<h2>录音</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3">
+			<div class="ibox">
+				<div class="ibox-content">
+					<h1 id="count_dev" class="no-margins"></h1>
+					<ul id="recordingslist"></ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-7">
+			<div class="ibox">
+				<div class="ibox-content">
+					<audio class="recPlay" style="width:100%"></audio>
+				</div>
+			</div>
+		</div>
+	</div>
 
      <div class="container-div">
 		<div class="row">
@@ -60,12 +84,12 @@
 				</form>
 			</div>
 
-			<div class="ibox-content">
-                <div class="ibox-content">
-<!--                    <audio class="recPlays" style="width:70%" id="vids"  controls src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083"></audio>-->
-						<audio class="recPlay" style="width:100%"></audio>
-				</div>
-			</div>
+			<!--<div class="ibox-content">-->
+                <!--<div class="ibox-content">-->
+<!--&lt;!&ndash;                    <audio class="recPlays" style="width:70%" id="vids"  controls src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083"></audio>&ndash;&gt;-->
+						<!--<audio class="recPlay" style="width:100%"></audio>-->
+				<!--</div>-->
+			<!--</div>-->
 
 
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
@@ -82,8 +106,10 @@
 			<div class="col-sm-12 select-table table-striped">
 				<table id="bootstrap-table" data-mobile-responsive="true"></table>
 			</div>
+
 		</div>
 	</div>
+
     <div th:include="include :: footer"></div>
 
     <script th:inline="javascript">

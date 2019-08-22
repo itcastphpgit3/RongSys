@@ -133,8 +133,9 @@ public class ProjectController extends BaseController
 	@PostMapping(value = "/add")
 	@ResponseBody
     /*这里加入Project project是为了获得html页面form返回来的数据*/
-	public AjaxResult addSave(Project project,@RequestParam(value = "files") MultipartFile file[],
-							  @RequestParam(value = "filesnum", required = false) int filesnum,
+	public AjaxResult addSave(/*Project project,@RequestParam(value = "files") MultipartFile file[],*/
+							 /* @RequestParam(value = "filesnum", required = false) int filesnum,*/
+							Project project,@RequestParam(value = "files") MultipartFile file,
 							  @RequestParam(value = "filename", required = false) String fname,
 							  @RequestParam(value = "flenth" ,required = false)String flenth, //时长
 							  @RequestParam(value = "fsize",required = false) String fsize){//大小
@@ -147,15 +148,17 @@ public class ProjectController extends BaseController
 
         //文件上传调用工具类
 		try{
-			int i;
+			/*int i;
 			String fileaddress = "";
 			for(i=0;i<filesnum;i++)
-				{
+				{*/
+					String fileaddress = "";
 					//保存文件
-					Files g = bFileUtil1.uplodeFile(maxfileid,file[i],fname,flenth,fsize,year);
+					Files g = bFileUtil1.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
+					/*Files g = bFileUtil1.uplodeFile(maxfileid,file[i],fname,flenth,fsize,year);*/
 					System.out.println(g.toString());//在控制台输出文件信息
 					fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
-				}
+				/*}*/
 			project.setPropic(fileaddress);//给project实体的“文件地址”赋值
 
 			return toAjax(projectService.insertProject(project));//将project实体中的值插入数据表中

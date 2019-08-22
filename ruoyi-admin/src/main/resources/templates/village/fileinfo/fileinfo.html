@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link th:href="@{favicon.ico}" rel="shortcut icon"/>
-	<link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
-	<link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
-	<link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
-	<link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
+	<link th:href="@{../../css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
+	<link th:href="@{../../css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
+	<link th:href="@{../../css/animate.min.css}" rel="stylesheet"/>
+	<link th:href="@{../../css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
 </head>
-
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
 	<div class="row">
@@ -57,7 +57,7 @@
 									<i class="fa fa-file"></i>
 								</div>
 								<div class="file-name">
-									Document_2014.doc
+									aa
 									<br/>
 									<small>添加时间：2019-07-27</small>
 								</div>
@@ -167,12 +167,20 @@
 		</div>
 	</div>
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
+
+<div th:include="include :: footer"></div>
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/content.min.js?v=1.0.0"></script>
 <script>
 	$(document).ready(function(){$(".file-box").each(function(){animationHover(this,"pulse")})});
 </script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script th:inline="javascript">
+
+	var cc =  [[${filedate}]];
+	alert(cc);
+
+</script>
 </body>
 </html>

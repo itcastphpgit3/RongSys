@@ -159,7 +159,6 @@
 
 <script type="text/javascript">
 	var prefix = ctx + "village/project"
-	// 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
 
 	var Upload=document.getElementById("files");
 	//var formData=new FormData(); //通过FormData对象可以组装一组用 [XMLHttpRequest]发送请求的键/值对,它可以更灵活方便的发送表单数据。
@@ -175,6 +174,7 @@
 		}
 	}
 
+	// 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
 	function checkFile(){
 		// 获取文件对象(该对象的类型是[object FileList]，其下有个length属性)
 		var fileList = $('#files')[0].files;

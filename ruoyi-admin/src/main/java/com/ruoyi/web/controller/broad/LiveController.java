@@ -84,16 +84,16 @@ public class LiveController extends BaseController {
      * @param mmap
      * @return
      */
-    @GetMapping("/getdoFile")
+    @GetMapping("/getdofile")
     public String doFile(ModelMap mmap){
-        return prefix+"/listFile";
+        return prefix+"/listfile";
     }
     /**
      * 获取节目单数据
      * @param program
      * @return
      */
-    @PostMapping("/listFile")
+    @PostMapping("/listfile")
     @ResponseBody
     public TableDataInfo listFile(Program program)
     {

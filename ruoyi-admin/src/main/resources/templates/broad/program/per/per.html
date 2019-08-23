@@ -10,7 +10,6 @@
 
 <body class="gray-bg">
 
-
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="ibox">
@@ -224,7 +223,7 @@
                         formatter: function (value, row, index) {
 //						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
 //                            var actions = '<button class="btn btn-xs btn-success" onclick="listen1('+value+')" >试听</button>';
-							var actions = "<a class=\"btn btn-xs btn-success\"  onclick=func(\'" + value + "\')>试听</a>";
+							var actions = '<a class=\"btn btn-xs btn-success\"  onclick=func(\'' + value + '\')>试听</a>';
 							return actions;
                         }
                     },
@@ -245,6 +244,7 @@
             //  var test = $("#vids").src;
             //  var vid  =$("#vids");
 			// console.log(test);
+
 			value = "../"+value;
 
 			var audio=$(".recPlay")[0];
@@ -253,6 +253,7 @@
 				audio.pause();
 			};
 			audio.src=value;
+			console.log(audio);
 			audio.play();
         }
      </script>

@@ -5,6 +5,7 @@ import com.ruoyi.broad.domain.Manage;
 import com.ruoyi.broad.service.IManageService;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.framework.web.base.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * @author cx
  * @Time 2019/8/20 16:24
- * @Description
+ * @Description 管理参数 控制层
  */
 @Controller
 @RequestMapping("/broad/manage")
@@ -29,12 +30,14 @@ public class ManageController extends BaseController{
     private IManageService iManageService;
 
     @GetMapping()
+    @RequiresPermissions("broad:manage:view")
     public String manage()
     {
         return prefix + "/manage";
     }
 
     @PostMapping("/list")
+    @RequiresPermissions("broad:manage:list")
     @ResponseBody
     public TableDataInfo list(Manage manage)
     {

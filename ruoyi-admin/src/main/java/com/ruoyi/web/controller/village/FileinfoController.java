@@ -4,17 +4,26 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.village.domain.Fileinfo;
+import com.ruoyi.village.domain.Files;
 import com.ruoyi.village.service.IFileinfoService;
+import com.ruoyi.village.util.bFileUtil1;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +42,8 @@ public class FileinfoController extends BaseController
 	
 	@Autowired
 	private IFileinfoService fileinfoService;
-	
+    @Autowired
+    private ISysUserService sysUserService;
 	@RequiresPermissions("village:fileinfo:view")
 	@GetMapping()
 	public String fileinfo()
@@ -74,13 +84,20 @@ public class FileinfoController extends BaseController
 	@ResponseBody
 	public ModelAndView fileData(Fileinfo fileinfo,String str)
 	{
-		List<Fileinfo> filedata ;
-		filedata = fileinfoService.selectFileinfoList(fileinfo);
+        List<Fileinfo> fileList = fileinfoService.selectFileinfoList(fileinfo);
+        Map<String, Object> fileMap = new HashMap<String, Object>();
+        for (Fileinfo file : fileList)
+        {
+            fileMap.put("id", file.getAid());
+            fileMap.put("filename", file.getFilename());
+            fileMap.put("furl", file.getFurl());
+            fileMap.put("filesize", file.getFilesize());
+            fileMap.put("pushdate", file.getPushdate());
+            fileMap.put("suffix", file.getSuffix());
+        }
 		System.out.println("！！！下面输出的是filedata数据：");
-		System.out.println(filedata);
-		Map<String,Object> attribute = new HashMap<String,Object>();
-		attribute.put("filedata",filedata);
-		return new ModelAndView(prefix + "/fileinfo",attribute);
+		System.out.println(fileMap);
+		return new ModelAndView(prefix + "/fileinfo",fileMap);
 	}
 	/**
 	 * 导出文件夹管理列表
@@ -98,23 +115,59 @@ public class FileinfoController extends BaseController
 	/**
 	 * 新增文件夹管理
 	 */
-	@GetMapping("/add")
-	public String add()
-	{
-	    return prefix + "/add";
-	}
+    @GetMapping("/add")
+    public String add(ModelMap mmap)
+    {
+        //从session中获取当前登陆用户的 username、phone、userid
+        SysUser currentUser = ShiroUtils.getSysUser();
+        String username =  currentUser.getUserName();
+        String phone =  currentUser.getPhonenumber();
+        Long userid =  currentUser.getUserId();
+        String aid;
+        int returnId = new Long(userid).intValue();
+        //通过所获取的userid去广播用户表中查询用户所属区域的Aid
+        aid = sysUserService.selectAid(returnId);
+        //	将aid、fname、uname传至add.html中
+        mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+        mmap.put("fname", username);
+        mmap.put("fphone", phone);
+        mmap.put("uid", returnId);
+        mmap.put("uname", username);
+        return prefix + "/add";
+    }
 	
 	/**
 	 * 新增保存文件夹管理
 	 */
 	@RequiresPermissions("village:fileinfo:add")
 	@Log(title = "文件夹管理", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(Fileinfo fileinfo)
-	{		
-		return toAjax(fileinfoService.insertFileinfo(fileinfo));
-	}
+    @PostMapping(value = "/add")
+    @ResponseBody
+    /*这里加入Project project是为了获得html页面form返回来的数据*/
+    public AjaxResult addSave(Fileinfo fileinfo,@RequestParam(value = "files") MultipartFile file,
+            @RequestParam(value = "filename", required = false) String fname,
+            @RequestParam(value = "flenth" ,required = false)String flenth, //时长
+            @RequestParam(value = "fsize",required = false) String fsize){//大小
+        String year = DateUtil.getYear();
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddhhmmss");
+        System.out.println(dateFormat.format(date));
+        String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名，防止储存同名文件
+        //文件上传调用工具类
+        try{
+            String fileaddress = "";
+            //保存文件
+            Files g = bFileUtil1.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
+            System.out.println(g.toString());//在控制台输出文件信息
+            fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+            fileinfo.setFurl(fileaddress);//给project实体的“文件地址”赋值
+            return toAjax(fileinfoService.insertFileinfo(fileinfo));//将project实体中的值插入数据表中
+        }catch (Exception e){
+            //return "上传文件失败";
+            System.out.println("失败");
+            return toAjax(0);
+        }
+    }
 
 	/**
 	 * 修改文件夹管理

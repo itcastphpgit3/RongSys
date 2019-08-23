@@ -27,12 +27,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFileinfoVo"/>
         <where>  
             <if test="fileid != null "> and fileid = #{fileid}</if>
-             <if test="filename != null  and filename != '' "> and filename = #{filename}</if>
+             <if test="filename != null  and filename != '' ">and filename LIKE CONCAT(CONCAT('%', #{filename}),'%')</if>
              <if test="furl != null  and furl != '' "> and furl = #{furl}</if>
              <if test="filesize != null  and filesize != '' "> and filesize = #{filesize}</if>
-             <if test="pushdate != null  and pushdate != '' "> and pushdate = #{pushdate}</if>
-             <if test="fsname != null  and fsname != '' "> and fsname = #{fsname}</if>
-             <if test="suffix != null  and suffix != '' "> and suffix = #{suffix}</if>
+             <if test="pushdate != null  and pushdate != '' "> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
+             <if test="fsname != null  and fsname != '' "> and fsname LIKE CONCAT(CONCAT('%', #{fsname}),'%')</if>
+             <if test="suffix != null  and suffix != '' ">
+              <if test="suffix ==0 ">
+                and suffix ="jpg" or suffix ="jpeg" or suffix ="TIFF" or suffix ="RAW" or suffix ="BMP"or suffix ="GIF"
+              </if>
+              <if test="suffix ==1 ">
+                and suffix = "avi" or suffix ="wma" or suffix ="rmvb" or suffix ="rm" or suffix ="flash" or suffix ="mp4"or suffix ="3GP"
+              </if>
+               <if test="suffix ==2 ">
+                and suffix = "doc" or suffix ="pdf" or suffix ="pdf" or suffix ="html" or suffix ="docx" or suffix ="ppt" or suffix ="pptx" or suffix ="zip"or suffix ="txt" or suffix ="xlsx" or suffix ="xls"
+               </if>
+             </if>
              <if test="downloadnum != null "> and downloadnum = #{downloadnum}</if>
              <if test="uid != null  and uid != '' "> and uid = #{uid}</if>
              <if test="uname != null  and uname != '' "> and uname = #{uname}</if>

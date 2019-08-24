@@ -116,5 +116,11 @@ public class FileinfoServiceImpl implements IFileinfoService
 	{
 		return fileinfoMapper.deleteFileinfoByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public double selectFilesizeSum(String uid)
+	{
+		return fileinfoMapper.selectFilesizeSum(uid);
+	}
 }

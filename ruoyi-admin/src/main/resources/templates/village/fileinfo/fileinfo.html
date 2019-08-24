@@ -85,8 +85,7 @@
 			<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="village:fileinfo:remove">
 				<i class="fa fa-remove"></i> 删除
 			</a>
-			<a class="btn btn-primary ">
-				剩余储存空间 ：186MB
+			<a id="box">
 			</a>
 		</div>
 		<div class="col-sm-12 select-table table-striped">
@@ -188,7 +187,7 @@
 </script>
 <script>
 	function down(){
-		var aa = "http://110.53.162.165:1080/docs/RUNNING.txt";
+		var aa = "http://vcc.szu.edu.cn/file/upload_file/image/research/1511169378305.docx";
 		window.location.href=aa;
 	}
 </script>
@@ -208,6 +207,33 @@
 			type: 'time',
 		});
 	});
+</script>
+<script>
+	$.ajax(
+			{
+				url: prefix + '/filesizeSum',
+				type: 'POST',   // 请求方式
+				success: function (result) {
+					$("#sizenum").val(result);
+					var num = 300 - result;
+					var num2 = Math.floor(num * 100) / 100;
+					var oBox = document.getElementById('box');
+					var str = '';
+					if(num2 > 100){
+						str += '<a class="btn btn-primary" >剩余储存空间 ：'+ num2 +'MB</a>'
+					}
+					if(num2 < 100){
+						str += '<a class="btn btn-danger" >剩余储存空间 ：'+ num2 +'MB</a>'
+					}
+					oBox.innerHTML = str;
+				console.log(result); // 请求成功后的回调函数
+					console.log("success"); // 请求成功后的回调函数
+				},
+				error: function () {
+					console.log('Send Request Fail..'); // 请求失败时的回调函数
+				}
+			}
+	)
 </script>
 </body>
 </html>

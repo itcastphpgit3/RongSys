@@ -59,12 +59,12 @@ public class FileinfoController extends BaseController
 	@ResponseBody
 	public TableDataInfo list(Fileinfo fileinfo)
 	{
+		SysUser currentUser = ShiroUtils.getSysUser();
+		Long userid =  currentUser.getUserId();
+		String uid = userid + "";
+		fileinfo.setUid(uid);
 		startPage();
         List<Fileinfo> list = fileinfoService.selectFileinfoList(fileinfo);
-        /*System.out.println("运行到list方法里面啦！！！");*/
-		//List<Map<String, Object>> filedata = fileinfoService.selectFileTree(new Fileinfo());
-//		System.out.println("！！！下面输出的是filedata数据：");
-////		System.out.println(filedata);
 		return getDataTable(list);
 	}
 
@@ -123,6 +123,9 @@ public class FileinfoController extends BaseController
         String username =  currentUser.getUserName();
         String phone =  currentUser.getPhonenumber();
         Long userid =  currentUser.getUserId();
+		String uid = userid + "";
+		double sizesum ;
+		sizesum = fileinfoService.selectFilesizeSum(uid);
         String aid;
         int returnId = new Long(userid).intValue();
         //通过所获取的userid去广播用户表中查询用户所属区域的Aid
@@ -133,6 +136,7 @@ public class FileinfoController extends BaseController
         mmap.put("fphone", phone);
         mmap.put("uid", returnId);
         mmap.put("uname", username);
+		mmap.put("sizesum", sizesum);
         return prefix + "/add";
     }
 	
@@ -203,5 +207,17 @@ public class FileinfoController extends BaseController
 	{		
 		return toAjax(fileinfoService.deleteFileinfoByIds(ids));
 	}
-	
+
+	@PostMapping("/filesizeSum")
+	@ResponseBody
+	public  double filesizeSum()
+	{
+		SysUser currentUser = ShiroUtils.getSysUser();
+		Long userid =  currentUser.getUserId();
+		String uid = userid + "";
+		double sizesum ;
+		sizesum = fileinfoService.selectFilesizeSum(uid);
+		System.out.println("文件总大小："+ sizesum);
+		return sizesum;
+	}
 }

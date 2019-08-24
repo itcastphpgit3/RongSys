@@ -55,7 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFileinfoVo"/>
         where fileid = #{fileid}
     </select>
-        
+
+    <select id="selectFilesizeSum" parameterType="String"  resultType="double">
+        select sum(filesize) from fileinfo
+        where uid = #{uid}
+    </select>
+
     <insert id="insertFileinfo" parameterType="Fileinfo">
         insert into fileinfo
 		<trim prefix="(" suffix=")" suffixOverrides=",">

@@ -98,22 +98,33 @@
 		};
 		function aa(){
 			let  file = checkFile();
-			let size = file.size;
-			console.log("文件大小",size);
+			let size = file.size / 1048576;
+			var fsize2 = Math.floor(size * 100) / 100;
+			console.log("文件大小",fsize2);
 			//获取录音时长
 			let url = URL.createObjectURL(file);
 			let audioElement = new Audio(url);
 			let duration = audioElement.duration/60; //音频长度 视频不行
 			$("#flenth").attr("value",duration);
-			$("#fsize").attr("value",size);
+			$("#fsize").attr("value",fsize2);
 			console.log(duration,size)
 		};
 		function submitHandler() {
+			let  file = checkFile();
+			let size = file.size / 1048576;
+			var fsize2 = Math.floor(size * 100) / 100;
+			/*检查当前的总空间*/
+			var oldsize = 300 - [[${sizesum}]];
+			var oldsize2 = Math.floor(oldsize * 100) / 100;
+			var nowsize = oldsize2 - fsize2;
 			if (!checkFile()) {
 				alert('请先选择文件');
 				return false;
-			}
-			else {
+			}else if(nowsize < 0)
+			{
+				alert("文件上传空间不足！当前文件为"+fsize2+"MB,剩余云空间为："+ oldsize2 +"MB");
+				return false;
+			} else {
 				aa();
 				$.modal.loading("正在上传中，请稍后...");
 				/** 验证文件是否导入成功  */

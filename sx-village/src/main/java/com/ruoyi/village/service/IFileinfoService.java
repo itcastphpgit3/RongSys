@@ -53,5 +53,6 @@ public interface IFileinfoService
      * @return 结果
      */
 	public int deleteFileinfoByIds(String ids);
-	
+
+	public double selectFilesizeSum(String uid);
 }

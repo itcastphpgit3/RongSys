@@ -174,7 +174,7 @@
             var data = $("#broaddate").val();
 
             //console.log("timeFile="+time);
-            var _url = "/broad/live/getdoFile";
+            var _url = "/broad/live/getdofile";
             var _title = '文件选择';
             var _width = "1200";
             var _height = ($(window).height() - 50);
@@ -193,19 +193,19 @@
                     //获取子页面关闭前的回调函数获取到的值
                     var res = $(layero).find("iframe")[0].contentWindow.callbackfile();
                     var filename = res.data_filename;
-                    var fid = res.data_file;
-                    console.log("文件id:"+fid+",文件名称："+filename);
+                    var url = res.data_file;
+                    console.log("文件id:"+url+",文件名称："+filename);
                     $("#file").attr("name",fid);
                     $("#file").val(filename);
-                    console.log(fid);
-                    fid = "../"+fid;
-                    fid = "../"+fid;
+                    console.log(url);
+                    url = "../"+fid;
+                    url = "../"+fid;
                     var audio=$(".recPlay")[0];
                     audio.controls=true;
                     if(!(audio.ended || audio.paused)){
                         audio.pause();
                     };
-                    audio.src=fid;
+                    audio.src=url;
                     console.log(audio);
                 }, cancel: function () {
                     return true;

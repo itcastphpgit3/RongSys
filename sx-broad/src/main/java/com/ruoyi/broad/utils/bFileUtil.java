@@ -21,7 +21,7 @@ public class bFileUtil {
      */
     public static String saveImg(MultipartFile file,String saveName) {
         //获取文件上传的根目录 C:\Users\wanghao/upload/img
-        String  path = bConstant.UPLOAD_PATH + bConstant.IMG_FILE_NAME; //改为bConstant.UPLOAD_PATH
+        String  path = bConstant.UPLOAD_PATH + bConstant.MP3_FILE_NAME; //改为bConstant.UPLOAD_PATH
 
         //拿到文件的后缀名和UUID进行拼接形成新的文件名
         //4ca64e85b1544c96b4a6154bb521476f.jpg
@@ -117,15 +117,15 @@ public class bFileUtil {
                 //System.out.println("fname:--"+fname);
                 g.setFname(fname); //fname.substring(0, fname.lastIndexOf("."))
                 //String filePath = bPathUtil.getClasspath() + bConst.FILEPATHPER;			//文件上传路径
-                String path = saveImg(file,filename);//////////////////////////
+                String mp3 = saveImg(file,filename);//////////////////////////
                 //System.out.println("filename:--"+filename);
                 g.setFilename(filename);
                 //System.out.println("Userid:--"+bJurisdiction.getUserid()); //有错误///////////////////////////////
                 //g.setUserid(bJurisdiction.getUserid());
                 //System.out.println("Address:--"+bPathUtil.getClasspath() + bConst.FILEPATHPER+path);
-                g.setAddress(bPathUtil.getClasspath() + bConst.FILEPATHPER+path);
+                g.setAddress(bPathUtil.getClasspath() + bConst.FILEPATHPER+mp3);
                 //System.out.println("Urls:--"+bConst.FILEPATHPER+path);
-                g.setUrls(bConst.FILEPATHPER+path);
+                g.setUrls(bConst.FILEPATHPER+mp3);
                 g.setUname(uname);
                 //System.out.println("Createdtime:--"+df.format(new Date()));
                 g.setCreatedtime(df.format(new Date()));
@@ -140,5 +140,29 @@ public class bFileUtil {
 
         }
         return g;
+    }
+
+    /**
+     * 删除文件
+     * @param filePathAndName
+     *            String 文件路径及名称 如c:/fqf.txt
+     * @param filePathAndName
+     *            String
+     * @return boolean
+     */
+    public static boolean delFile(String filePathAndName) {
+        try {
+            String filePath = filePathAndName;
+            filePath = filePath.toString();
+            java.io.File myDelFile = new java.io.File(filePath);
+            if(myDelFile.exists()) {
+                myDelFile.delete();
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("删除文件操作出错");
+            e.printStackTrace();
+        }
+        return false;
     }
 }

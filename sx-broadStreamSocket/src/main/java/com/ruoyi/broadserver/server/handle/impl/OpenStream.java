@@ -20,7 +20,7 @@ public class OpenStream extends DefaultCommand {
 
 			loggersession();//插入日志
 
-			return returnBytes(ProtocolsToClient.OPENSTREAM, command, "OK");
+			return returnBytes(ProtocolsToClient.OPENSTREAM, command, "OK",false);
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

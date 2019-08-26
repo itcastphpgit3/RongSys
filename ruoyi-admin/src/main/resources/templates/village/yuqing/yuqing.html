@@ -11,11 +11,11 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								舆情类别：<input type="text" name="yqtype"/>
+								类别：<input type="text" name="yqtype"/>
 							</li>
 
 							<li>
-								舆情内容：<input type="text" name="content"/>
+								内容：<input type="text" name="content"/>
 							</li>
 
 							<!--<li>
@@ -31,7 +31,7 @@
 							</li>-->
 
 							<li>
-								报告人姓名：<input type="text" name="adduname"/>
+								报告人：<input type="text" name="adduname"/>
 							</li>
 
 							<li>
@@ -153,7 +153,7 @@
 				},*/
 				{
 					field : 'adduname', 
-					title : '报告人姓名',
+					title : '报告人',
 					sortable: true
 				},
 				/*{
@@ -171,21 +171,36 @@
 					title : '用户所属地区村社区编号',
 					sortable: true
 				},*/
+				// {
+				// 	field : 'remark',
+				// 	title : '是否有效',
+				// 	sortable: true,
+				// 	formatter:
+				// 		function(value,row){
+				// 		var html = "";
+				// 		if(value == "0"){
+				// 			html += '<div class = "onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" class="onoffswitch-checkbox"  id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
+				// 			return html;
+				// 		}else {
+				// 			html += '<div class="onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" checked="true" class="onoffswitch-checkbox" id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
+				// 			return html;
+				// 		}
+				// 	}
+				// }
 				{
-					field : 'remark', 
-					title : '是否有效',
-					sortable: true,
-					formatter:
-						function(value,row){
-						var html = "";
-						if(value == "0"){
-							html += '<div class = "onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" class="onoffswitch-checkbox"  id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
-							return html;
-						}else {
-							html += '<div class="onoffswitch" onclick="updateshow("+row.yqid+")" style="float:left;"><input type="checkbox" checked="true" class="onoffswitch-checkbox" id="remark" name="remark"><label class="onoffswitch-label" for="remark"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch" style="height: 20px;"></span></label></div>';
-							return html;
+						field : 'remark',
+						title : '状态',
+						sortable: true,
+						formatter:function(value,row,index){
+							var html = "";
+							if(value == "0"){
+								html += "<label style='color: #ff5909'>无效</label>";
+								return html;
+							}else {
+								html += "<label>有效</label>";
+								return html;
+							}
 						}
-					}
 				},{
 						field : 'adddate',
 						title : '报告日期',

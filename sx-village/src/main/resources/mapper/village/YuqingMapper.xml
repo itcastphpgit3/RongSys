@@ -39,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
              <if test="remark != null and remark != ''"> and remark = #{remark}</if>
          </where>
+        ORDER BY adddate DESC
     </select>
     
     <select id="selectYuqingById" parameterType="Integer" resultMap="YuqingResult">

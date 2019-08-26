@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
 public abstract class DefaultCommand implements Command{
 	private static Map<String, SocketInfo> IMEI_SocketInfo = new HashMap<>();//终端IMEI与其对应信息
 	protected static final Logger logger = LoggerFactory.getLogger(DefaultCommand.class);
-	protected static IOrganizationService organizationService = (OrganizationServiceImpl) SpringUtils.getBean(OrganizationServiceImpl.class);
-	protected static IConditionsService conditionsService = (ConditionsServiceImpl) SpringUtils.getBean(ConditionsServiceImpl.class);
+	protected static IOrganizationService organizationService = (OrganizationServiceImpl) SpringUtils.getBean(OrganizationServiceImpl.class);//终端配置信息处理
+	protected static IConditionsService conditionsService = (ConditionsServiceImpl) SpringUtils.getBean(ConditionsServiceImpl.class);//终端设备硬件信息处理
 	public final static String GBK = "GBK";
     //private SessionManager sessionservice = (SessionService) SpringContextUtils.getBeanByClass(SessionService.class);
     
@@ -52,24 +52,28 @@ public abstract class DefaultCommand implements Command{
 	}
 
 	//默认调用返回的格式
-	protected byte[] returnBytes(String type,String command,String data) {//data可能为null
+	protected byte[] returnBytes(String type,String command,String data,boolean isChecked) {//data可能为null
 		try {
 			byte[] res = data!= null?data.getBytes(GBK):new byte[0];
-			byte[] checkData = new byte[res.length+3];//用来计算校验和
 			ByteBuffer encoded = ByteBuffer.allocate(res.length+7);
 			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.PACKETHEAD));//发包的数据头
 			encoded.put(bConvert.hexStringToBytes(type));//发包的类型
 			byte[] length = bConvert.intToByteArray(2+res.length);
-			System.arraycopy(length, 0, checkData, 0, length.length);
-			checkData[2] = (byte)Integer.parseInt(command);
-			if(data != null)
-				System.arraycopy(res, 0, checkData, 3, res.length);
-			String check = bConvert.checksum(checkData);
 			encoded.put(length);//发包的数据长度 命令1字节+data长度+校验1字节
 			encoded.put(bConvert.hexStringToBytes(command));//发包命令
 			if(data != null)
 				encoded.put(res);//发包数据
-			encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的校验
+            if(isChecked){//是否启用动态校验
+                byte[] checkData = new byte[res.length+3];//用来计算校验和
+                System.arraycopy(length, 0, checkData, 0, length.length);
+                checkData[2] = (byte)Integer.parseInt(command);
+                if(data != null)
+                    System.arraycopy(res, 0, checkData, 3, res.length);
+                String check = bConvert.checksum(checkData);
+                encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的动态校验
+            }else{
+                encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.CHECKCODE));//发包的默认校验
+            }
 			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.ENDCHECK));//发包的结尾
 			encoded.flip();
 			byte[] bs = new byte[encoded.remaining()];

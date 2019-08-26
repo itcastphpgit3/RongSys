@@ -19,7 +19,7 @@ public class BroadCast extends DefaultCommand {
 			String[] infos = datainfo.split(",");
 			String command = save(infos)?"1":"0";//保存信息并执行对应操作
 			loggersession();//插入日志
-			return returnBytes(ProtocolsToClient.BROADCAST, command, null);
+			return returnBytes(ProtocolsToClient.BROADCAST, command, null,false);
 		} catch (Exception e) {
 			logger.error("解析信息出错",e);
 		}

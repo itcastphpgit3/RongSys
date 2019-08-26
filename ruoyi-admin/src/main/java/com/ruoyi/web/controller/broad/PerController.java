@@ -45,10 +45,11 @@ public class PerController extends BaseController {
     @Autowired
     private IProgramService iProgramService;
 
-    @RequiresPermissions("broad:per:view")
+//    @RequiresPermissions("broad:per:view")
     @GetMapping()
     public String per(ModelMap mmp) {
         String path = System.getProperty("user.home");
+        path = path.replace("\\","/");
         System.out.println(path);
         mmp.put("path",path);
         return prefix + "/per";
@@ -57,7 +58,7 @@ public class PerController extends BaseController {
     /**
      * 查询节目库列表
      */
-    @RequiresPermissions("broad:per:list")
+//    @RequiresPermissions("broad:per:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Program program) {
@@ -72,6 +73,7 @@ public class PerController extends BaseController {
      * @return
      */
     @GetMapping("/add")
+    @RequiresPermissions("broad:per:add")
     public String addper(ModelMap mmp) {
         //从session中获取当前登陆用户的 username、phone、userid
         SysUser currentUser = ShiroUtils.getSysUser();

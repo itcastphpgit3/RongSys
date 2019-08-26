@@ -1,6 +1,5 @@
 package com.ruoyi.broadserver.server.handle;
 
-import com.ruoyi.broad.service.IMaintainService;
 import com.ruoyi.broadserver.server.MinaCastThread;
 import org.apache.mina.core.session.IoSession;
 import com.ruoyi.broad.utils.bConvert;
@@ -11,14 +10,12 @@ import org.slf4j.LoggerFactory;
 
 
 public class SimpleCommandFactory {
-	private static Logger logger = LoggerFactory.getLogger(MinaCastThread.class);
+	//private static Logger logger = LoggerFactory.getLogger(MinaCastThread.class);
+
 	public DefaultCommand createCommand(IoSession session, byte[] content) {
 		if(bConvert.byteToHexString(content[0]).equals(ProtocolsToClient.PACKETHEAD)) {
 			DefaultCommand command = null;
 			switch (bConvert.byteToHexString(content[1])) {//类型判断
-				case ProtocolsToClient.IPCHANGE://获取终端IP(读)，并为流媒体心跳包
-					command = new ClientHeart_IP(session,content);
-					break;
 				case ProtocolsToClient.REGISTER://终端命令端口注册登录
 					command = new Register(session,content);
 					break;
@@ -33,12 +30,6 @@ public class SimpleCommandFactory {
 					break;
 				case ProtocolsToClient.MUTUALTIME://设置终端交互时间
 					command = new RW_Time(session,content);
-					break;
-				case ProtocolsToClient.OPENSTREAM://启动流媒体传输
-					command = new OpenStream(session,content);
-					break;
-				case ProtocolsToClient.CLOSESTREAM://关闭流媒体传输
-					command = new CloseStream(session,content);
 					break;
 				case ProtocolsToClient.E_FM_RECIVE://获取RDS码(读写)
 					command = new RW_RDS(session,content);
@@ -70,6 +61,46 @@ public class SimpleCommandFactory {
 				case ProtocolsToClient.BROADCAST://紧急界面播出回执（新建连接）
 					command = new BroadCast(session,content);
 					break;
+				default:
+					break;
+			}
+			return command;
+		}else {
+			return null;
+		}
+	}
+
+	public DefaultCommand createIOT(IoSession session, byte[] content) {
+		if(bConvert.byteToHexString(content[0]).equals(ProtocolsToClient.PACKETHEAD)) {
+			DefaultCommand command = null;
+			switch (bConvert.byteToHexString(content[1])) {//类型判断
+				case ProtocolsToClient.GETPARAMATER://物联网终端参数透传接口（终端主动请求获取，端口:8900）
+					command = new HeartIOT(session,content);
+					break;
+				default://后续增加接口
+					break;
+			}
+			return command;
+		}else if(new String(content).contains("aa") && new String(content).contains("cc") || new String(content).contains("AA")&& new String(content).contains("CC")){
+			return new ReadIOT(session,content);
+		}else {
+			return null;
+		}
+	}
+
+	public DefaultCommand createHeart(IoSession session, byte[] content) {
+		if(bConvert.byteToHexString(content[0]).equals(ProtocolsToClient.PACKETHEAD)) {
+			DefaultCommand command = null;
+			switch (bConvert.byteToHexString(content[1])) {//类型判断
+				case ProtocolsToClient.IPCHANGE://获取终端IP(读)，并为流媒体心跳包
+					command = new ClientHeart_IP(session,content);
+					break;
+				case ProtocolsToClient.OPENSTREAM://启动流媒体传输
+					command = new OpenStream(session,content);
+					break;
+				case ProtocolsToClient.CLOSESTREAM://关闭流媒体传输
+					command = new CloseStream(session,content);
+					break;
 				case ProtocolsToClient.VOL://终端设置音量
 					command = new RW_VOL(session,content);
 					break;
@@ -77,8 +108,6 @@ public class SimpleCommandFactory {
 					break;
 			}
 			return command;
-		}else if(new String(content).contains("aa") && new String(content).contains("cc") || new String(content).contains("AA")&& new String(content).contains("CC")){
-			return new ReadIOT(session,content);
 		}else {
 			return null;
 		}

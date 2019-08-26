@@ -7,6 +7,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysUser;
@@ -127,5 +128,21 @@ public class MaintainApplyController extends BaseController {
     public AjaxResult editSave(MaintainApply maintainApply)
     {
         return toAjax(iMaintainApplyService.updateMaintainApply(maintainApply));
+    }
+
+    /*
+    * 导出Excel表
+    * */
+    /**
+     * 导出终端维护记录列表
+     */
+    @RequiresPermissions("broad:maintainApply:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(MaintainApply maintainApply)
+    {
+        List<MaintainApply> list = iMaintainApplyService.selectMaintainApplyList(maintainApply);
+        ExcelUtil<MaintainApply> util = new ExcelUtil<MaintainApply>(MaintainApply.class);
+        return util.exportExcel(list, "maintainApply");
     }
 }

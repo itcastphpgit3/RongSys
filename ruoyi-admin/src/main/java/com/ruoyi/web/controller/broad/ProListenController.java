@@ -43,12 +43,14 @@ public class ProListenController extends BaseController{
     private ISysUserService sysUserService;
 
     @GetMapping()
+    @RequiresPermissions("broad:prolisten:view")
     public String proreApply()
     {
         return prefix + "/prolisten";
     }
 
-//    @RequiresPermissions("broad:prolisten:list")
+
+    @RequiresPermissions("broad:prolisten:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(ProListen proListen)

@@ -218,4 +218,12 @@ public class FileinfoController extends BaseController
 		System.out.println("文件总大小："+ sizesum);
 		return sizesum;
 	}
+
+	@PostMapping("/query/{fileid}")
+	@ResponseBody
+	public  String query(@PathVariable("fileid")Integer fileid)
+	{
+		String  frullist = fileinfoService.selectFileurlById(fileid);
+		return frullist;
+	}
 }

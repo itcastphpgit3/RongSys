@@ -62,6 +62,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where uid = #{uid}
     </select>
 
+    <select id="selectFileurlById" parameterType="Integer"  resultType="String">
+        select furl from fileinfo
+        where fileid = #{fileid}
+    </select>
+
     <insert id="insertFileinfo" parameterType="Fileinfo">
         insert into fileinfo
 		<trim prefix="(" suffix=")" suffixOverrides=",">

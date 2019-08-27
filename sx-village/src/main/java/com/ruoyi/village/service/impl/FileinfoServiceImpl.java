@@ -123,4 +123,11 @@ public class FileinfoServiceImpl implements IFileinfoService
 	{
 		return fileinfoMapper.selectFilesizeSum(uid);
 	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public String selectFileurlById(Integer fileid)
+	{
+		return fileinfoMapper.selectFileurlById(fileid);
+	}
 }

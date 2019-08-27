@@ -34,6 +34,7 @@ public class bFileUtil1 {
             //file.transferTo(new File(path + "/" + saveName));
             /*文件上传地址：在本地用户根目录bPathUtil1.getClasspath()+指定文件夹路径"/profile/img/"+文件名*/
             file.transferTo(new File(bPathUtil1.getClasspath() + bConst1.FILEPATHPER2 +saveName));
+            System.out.println("文件上传路径为：" + bPathUtil1.getClasspath() + bConst1.FILEPATHPER2 +saveName);//在控制台输出文件信息
         } catch (Exception e) {
             e.printStackTrace();
             logger.debug("--- 文件保存异常：{} ---" + e.getMessage());

@@ -55,4 +55,6 @@ public interface IFileinfoService
 	public int deleteFileinfoByIds(String ids);
 
 	public double selectFilesizeSum(String uid);
+
+	public String selectFileurlById(Integer fileid);
 }

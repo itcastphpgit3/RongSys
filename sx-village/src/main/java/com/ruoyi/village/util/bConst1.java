@@ -52,7 +52,7 @@ public class bConst1 {
     //节目文件夹
     public static final String FILEPATHPER = "profile/audiofile/";
     //项目文件夹
-    public static final String FILEPATHPER2 = "/profile/img/";
+    public static final String FILEPATHPER2 = "img/";
 
     public static final String[] LOGTYPE=new String[]{"登陆日志","操作日志"};
 

@@ -114,20 +114,21 @@
 					title : '标题',
 					sortable: true
 				},
-				{
-					field : 'mpic',
-					title : '标题图片',
-					sortable: true,
-					width:"200px",
-					height:"100px",
-					align: 'center',
+					{
+						field : 'mpic',
+						title : '标题图片',
+						sortable: true,
+						width:"200px",
+						height:"100px",
+						align: 'center',
 						formatter:function(value,row) {
 							var s;
 							var url = row.mpic;
-							s = '<a  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + url + '" /></a>';
+							var imgdata = url.split(";");
+							s = '<a  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + imgdata[0] + '" /></a>';
 							return s;
 						}
-				},
+					},
 				{
 					field : 'mcontent', 
 					title : '内容',

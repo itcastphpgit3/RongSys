@@ -60,4 +60,6 @@ public interface FileinfoMapper
 	public int deleteFileinfoByIds(String[] fileids);
 
 	public double selectFilesizeSum(String uid);
+
+	public String selectFileurlById(Integer fileid);
 }

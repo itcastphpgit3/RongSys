@@ -49,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
              <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
          </where>
+        ORDER BY pushdate DESC
     </select>
     
     <select id="selectFileinfoById" parameterType="Integer" resultMap="FileinfoResult">
@@ -59,6 +60,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectFilesizeSum" parameterType="String"  resultType="double">
         select sum(filesize) from fileinfo
         where uid = #{uid}
+    </select>
+
+    <select id="selectFileurlById" parameterType="Integer"  resultType="String">
+        select furl from fileinfo
+        where fileid = #{fileid}
     </select>
 
     <insert id="insertFileinfo" parameterType="Fileinfo">

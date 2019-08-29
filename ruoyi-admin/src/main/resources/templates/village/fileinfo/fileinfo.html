@@ -177,7 +177,7 @@
 					align: 'center',
 					formatter: function(value, row) {
 						var actions = [];
-						actions.push('<a class="btn btn-success btn-xs" onclick="down()"><i class="fa fa-download"></i>下载</a> ');
+						actions.push('<a class="btn btn-success btn-xs" onclick="down('+ row.fileid +')"><i class="fa fa-download"></i>下载</a> ');
 						return actions.join('');
 					}
 				}]
@@ -186,9 +186,21 @@
 	});
 </script>
 <script>
-	function down(){
-		var aa = "http://vcc.szu.edu.cn/file/upload_file/image/research/1511169378305.docx";
-		window.location.href=aa;
+	function down(fileid){
+		$.ajax(
+				{
+					url: prefix + "/query/"+fileid,
+					type: 'POST',   // 请求方式
+					success: function (result) {
+						window.location.href = result;
+						console.log(result); // 请求成功后的回调函数
+						console.log("success"); // 请求成功后的回调函数
+					},
+					error: function () {
+						console.log('Send Request Fail..'); // 请求失败时的回调函数
+					}
+				}
+		)
 	}
 </script>
 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>

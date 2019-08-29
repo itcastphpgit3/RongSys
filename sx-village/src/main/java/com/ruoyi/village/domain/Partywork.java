@@ -1,9 +1,8 @@
 package com.ruoyi.village.domain;
 
+import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.base.BaseEntity;
-import java.util.Date;
 
 /**
  * 党员值班表 tb_partywork
@@ -23,7 +22,6 @@ public class Partywork extends BaseEntity
 	private String uname;
 	/** 值班时间 */
 	private String worktime;
-
 	/** 值班地点 */
 	private String address;
 	/** 值班要求 */
@@ -33,7 +31,7 @@ public class Partywork extends BaseEntity
 	/** 备注 */
 	private String note;
 	/** 添加时间 */
-	private Date adddate;
+	private String adddate;
 	/** 值班地点 */
 	private String phone;
 	/** 地域编号 */
@@ -113,12 +111,12 @@ public class Partywork extends BaseEntity
 	{
 		return note;
 	}
-	public void setAdddate(Date adddate) 
+	public void setAdddate(String adddate)
 	{
 		this.adddate = adddate;
 	}
 
-	public Date getAdddate() 
+	public String getAdddate()
 	{
 		return adddate;
 	}

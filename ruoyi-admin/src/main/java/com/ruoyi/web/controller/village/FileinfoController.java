@@ -159,12 +159,10 @@ public class FileinfoController extends BaseController
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名，防止储存同名文件
         //文件上传调用工具类
         try{
-            String fileaddress = "";
             //保存文件
             Files g = bFileUtil1.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
             System.out.println(g.toString());//在控制台输出文件信息
-            fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
-            fileinfo.setFurl(fileaddress);//给project实体的“文件地址”赋值
+            fileinfo.setFurl(g.getAddress());//给project实体的“文件地址”赋值
             return toAjax(fileinfoService.insertFileinfo(fileinfo));//将project实体中的值插入数据表中
         }catch (Exception e){
             //return "上传文件失败";
@@ -219,5 +217,13 @@ public class FileinfoController extends BaseController
 		sizesum = fileinfoService.selectFilesizeSum(uid);
 		System.out.println("文件总大小："+ sizesum);
 		return sizesum;
+	}
+
+	@PostMapping("/query/{fileid}")
+	@ResponseBody
+	public  String query(@PathVariable("fileid")Integer fileid)
+	{
+		String  frullist = fileinfoService.selectFileurlById(fileid);
+		return frullist;
 	}
 }

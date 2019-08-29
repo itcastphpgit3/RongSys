@@ -103,7 +103,8 @@ public class MeetingController extends BaseController
 	@PostMapping("/add")
 	@ResponseBody
 	/*这里加入Meeting meeting是为了获得html页面form返回来的数据*/
-	public AjaxResult addSave(Meeting meeting,@RequestParam(value = "files") MultipartFile file,
+	public AjaxResult addSave(Meeting meeting,@RequestParam(value = "files") MultipartFile file[],
+							  @RequestParam(value = "filesnum", required = false) int filesnum,
 							  @RequestParam(value = "filename", required = false) String fname,
 							  @RequestParam(value = "flenth" ,required = false)String flenth, //时长
 							  @RequestParam(value = "fsize",required = false) String fsize){//大小
@@ -115,11 +116,16 @@ public class MeetingController extends BaseController
 
 		//图片上传调用工具类
 		try{
-			//保存图片
-			Files g = bFileUtil1.uplodeFile(maxfileid,file,fname,flenth,fsize,year);
-			System.out.println(g.toString());//在控制台输出文件信息
-
-			meeting.setMpic(g.getAddress());//给project实体的“文件地址”赋值
+			int i;
+			String fileaddress = "";
+			for(i=0;i<filesnum;i++)
+			{
+				//保存文件
+				Files g = bFileUtil1.uplodeFile(maxfileid,file[i],fname,flenth,fsize,year);
+				System.out.println(g.toString());//在控制台输出文件信息
+				fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
+			}
+			meeting.setMpic(fileaddress);//给project实体的“文件地址”赋值
 
 			return toAjax(meetingService.insertMeeting(meeting));//将project实体中的值插入数据表中
 		}catch (Exception e){

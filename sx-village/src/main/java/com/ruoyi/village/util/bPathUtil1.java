@@ -1,5 +1,6 @@
 package com.ruoyi.village.util;
 
+import com.ruoyi.common.config.Global;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -54,12 +55,13 @@ public class bPathUtil1 {
     public static String getClasspath(){
 //        String path = (String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../../").replaceAll("file:/", "").replaceAll("%20", " ").trim();
        /*文件上传到本地用户路径底下*/
-        String path = System.getProperty("user.home");
-
-        if(path.indexOf(":") != 1){
+        //String path = System.getProperty("user.home");
+        String path = Global.getProfile();
+        /*if(path.indexOf(":") != 1){
             path = File.separator + path;
-        }
+        }*/
         return path;
+
     }
 
     /**获取classpath2

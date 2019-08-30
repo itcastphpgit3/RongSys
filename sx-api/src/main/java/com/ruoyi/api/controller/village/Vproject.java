@@ -2,6 +2,7 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.village.domain.ProjectApi;
 import com.ruoyi.village.service.IProjectService;
 import com.ruoyi.village.domain.Project;
 import io.swagger.annotations.Api;
@@ -31,5 +32,13 @@ public class Vproject {
     public RongApiRes insertProject(Project project )
     {
         return RongApiService.get_bean(projectService.insertProject(project));
+    }
+
+    @GetMapping("/pro_all")
+    @CrossOrigin
+    @ApiOperation(value = "返回所有项目")
+    public RongApiRes searchProAll(ProjectApi project )
+    {
+        return RongApiService.get_list(projectService.selectProjectListForapp(project));
     }
 }

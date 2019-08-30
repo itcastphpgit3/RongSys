@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Project;
-import java.util.List;	
+import com.ruoyi.village.domain.ProjectApi;
+
+import java.util.List;
 
 /**
  * 重大项目 数据层
@@ -58,5 +60,6 @@ public interface ProjectMapper
      * @return 结果
      */
 	public int deleteProjectByIds(String[] proids);
-	
+
+	public List<ProjectApi> selectProjectListForapp(ProjectApi project);
 }

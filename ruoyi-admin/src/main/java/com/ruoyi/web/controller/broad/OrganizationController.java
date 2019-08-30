@@ -50,6 +50,7 @@ public class OrganizationController extends BaseController
 	}
 
 
+
 	/**
 	 * 查询终端信息列表
 	 */

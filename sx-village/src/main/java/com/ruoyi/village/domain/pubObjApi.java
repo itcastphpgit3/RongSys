@@ -2,10 +2,10 @@ package com.ruoyi.village.domain;
 import com.ruoyi.common.base.BaseEntity;
 
 
-public class ProjectApi extends BaseEntity
+public class pubObjApi extends BaseEntity
 {
 
-    private Integer userid;
+    private Integer userid; //用户id
 
     private String Title;
 

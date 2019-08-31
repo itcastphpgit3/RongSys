@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
-import com.ruoyi.village.domain.ProjectApi;
+import com.ruoyi.village.domain.pubObjApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.village.mapper.ProjectMapper;
@@ -92,7 +92,7 @@ public class ProjectServiceImpl implements IProjectService
 
 	@Override
 	@DataSource(value = DataSourceType.SXVILLAGE)
-	public List<ProjectApi> selectProjectListForapp(ProjectApi project)
+	public List<pubObjApi> selectProjectListForapp(pubObjApi project)
 	{
 		return projectMapper.selectProjectListForapp(project);
 	}

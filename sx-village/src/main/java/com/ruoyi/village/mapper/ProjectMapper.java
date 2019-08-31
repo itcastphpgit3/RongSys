@@ -1,7 +1,7 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Project;
-import com.ruoyi.village.domain.ProjectApi;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -61,5 +61,5 @@ public interface ProjectMapper
      */
 	public int deleteProjectByIds(String[] proids);
 
-	public List<ProjectApi> selectProjectListForapp(ProjectApi project);
+	public List<pubObjApi> selectProjectListForapp(pubObjApi project);
 }

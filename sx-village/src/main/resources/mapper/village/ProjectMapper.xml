@@ -137,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{proid}
         </foreach>
     </delete>
-    <select id="selectProjectListForapp" parameterType="ProjectApi" resultMap="ProjectResult">
+    <select id="selectProjectListForapp" parameterType="pubObjApi" resultMap="ProjectResult">
         <include refid="selectProjectVo"/>
         <where>
             <if test="Title != null  and Title != ''  ">proname = #{Title},</if>

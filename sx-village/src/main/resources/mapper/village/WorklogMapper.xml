@@ -135,5 +135,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{wid}
         </foreach>
     </delete>
-    
+    <select id="selectWorklogListByid" parameterType="pubObjApi" resultMap="WorklogResult">
+        <include refid="selectWorklogVo"/>
+        <where>
+            <if test="wtitle != null  and wtitle != ''  ">wtitle = #{Title},</if>
+            <if test="proid != null  and proid != ''  ">and proid = #{ProjectID},</if>
+            <if test="uid != null  and uid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+        </where>
+        ORDER BY pushdate DESC
+        limit #{PageSize} offset #{PageIndex}
+    </select>
 </mapper>

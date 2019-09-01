@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Worklog;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.WorklogMapper;
 import com.ruoyi.village.service.IWorklogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,5 +103,12 @@ public class WorklogServiceImpl implements IWorklogService
 	{
 		return worklogMapper.deleteWorklogByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Worklog> selectWorklogListByid(pubObjApi worklog)
+	{
+		return worklogMapper.selectWorklogListByid(worklog);
+	}
 }

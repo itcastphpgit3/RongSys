@@ -1,6 +1,7 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Worklog;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,5 +63,6 @@ public interface WorklogMapper
      * @return 结果
      */
 	public int deleteWorklogByIds(String[] wids);
-	
+
+	public List<Worklog> selectWorklogListByid(pubObjApi worklog);
 }

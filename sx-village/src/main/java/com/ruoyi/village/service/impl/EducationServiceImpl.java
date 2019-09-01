@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Education;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.EducationMapper;
 import com.ruoyi.village.service.IEducationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,11 @@ public class EducationServiceImpl implements IEducationService {
         @DataSource(value = DataSourceType.SXVILLAGE)
         public int updateEducation(Education education) {
             return educationmapper.updateEducation(education);
+        }
+
+        @Override
+        @DataSource(value = DataSourceType.SXVILLAGE)
+        public List<Education> selectEducationListById(pubObjApi party) {
+            return educationmapper.selectEducationListById(party);
         }
     }

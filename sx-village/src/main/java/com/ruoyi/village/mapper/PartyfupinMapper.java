@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Partyfupin;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 扶贫工作 数据层
@@ -58,5 +60,6 @@ public interface PartyfupinMapper
      * @return 结果
      */
 	public int deletePartyfupinByIds(String[] mids);
-	
+
+	public List<Partyfupin> selectfupinListById(pubObjApi party);
 }

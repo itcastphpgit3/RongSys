@@ -142,7 +142,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="Title != null  and Title != ''  ">proname = #{Title},</if>
             <if test="state != null "> and ptype LIKE CONCAT(CONCAT('%', #{state}),'%')</if>
-            <if test="userid != null  and userid != '' "> and aid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+            <if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
             <if test="beginTime != null  and EndTime != '' "> and pushdate between #{beginTime} AND #{EndTime} </if>
         </where>
         ORDER BY proid desc

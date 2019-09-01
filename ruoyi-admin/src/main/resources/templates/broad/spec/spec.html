@@ -8,6 +8,10 @@
 
 <body class="gray-bg">
 
+
+
+
+
 <div class="container-div ui-layout-center">
     <div class="row">
         <div class="col-sm-12 search-collapse">
@@ -30,6 +34,10 @@
                     </ul>
                 </div>
             </form>
+        </div>
+
+        <div class="ibox-content">
+            <audio class="recPlay" style="width:100%"></audio>
         </div>
 
         <div class="col-sm-12 select-table table-striped">
@@ -92,11 +100,12 @@
                     sortable: true
                 },
                 {
+                    field: 'urls',
                     title: '试听',
                     align: 'center',
                     visible: true,
                     formatter: function(value, row, index) {
-                        var actions = '<a class="btn btn-xs btn-success" >试听</a>';
+                        var actions = '<a class=\"btn btn-xs btn-success\"  onclick=func(\'' + value + '\')>试听</a>';
                         return actions;
                     }
                 }]
@@ -104,6 +113,18 @@
         $.table.init(options);
     }
 
+    function func(value) {
+        value = "../"+value;
+        var audio=$(".recPlay")[0];
+        audio.controls=true;
+        if(!(audio.ended || audio.paused)){
+            audio.pause();
+        };
+        audio.src=value;
+        console.log(audio);
+        audio.play();
+    }
 </script>
+
 </body>
 </html>

@@ -193,19 +193,19 @@
                     //获取子页面关闭前的回调函数获取到的值
                     var res = $(layero).find("iframe")[0].contentWindow.callbackfile();
                     var filename = res.data_filename;
-                    var url = res.data_file;
-                    console.log("文件id:"+url+",文件名称："+filename);
+                    var fid = res.data_file;
+                    console.log("文件id:"+fid+",文件名称："+filename);
                     $("#file").attr("name",fid);
                     $("#file").val(filename);
-                    console.log(url);
-                    url = "../"+fid;
-                    url = "../"+fid;
+                    console.log(fid);
+                    fid = "../"+fid;
+                    fid = "../"+fid;
                     var audio=$(".recPlay")[0];
                     audio.controls=true;
                     if(!(audio.ended || audio.paused)){
                         audio.pause();
                     };
-                    audio.src=url;
+                    audio.src=fid;
                     console.log(audio);
                 }, cancel: function () {
                     return true;
@@ -213,7 +213,7 @@
             });
         }
         //播放文件
-        function flushfile() {
+        function flushfile(){
             console.log($("#file").attr("name"));
             // 如果未选择则 提示要选择
             if(imeilist==null || imeilist==""){
@@ -243,7 +243,7 @@
             playerSource = audioContext.createMediaElementSource(player);
         playerAnalyser.connect(audioContext.destination);//声音连接到扬声器
         playerSource.connect(playerAnalyser);//截取音频信
-        function vid() {
+        function vid(){   //播放文件
 
             // 设置 streamid 为当前时间
             streamid = getCurTime();

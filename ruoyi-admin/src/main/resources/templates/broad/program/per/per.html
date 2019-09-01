@@ -9,7 +9,7 @@
 </head>
 
 <body class="gray-bg">
-
+<div class="wrapper wrapper-content" style="padding-top: 20px; padding-left: 20px;">
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="ibox">
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -228,17 +228,20 @@
                         }
                     },
                     {
+                        field: 'urls',
                         title: '下载',
                         align: 'center',
                         visible: true,
                         formatter: function (value, row, index) {
-                            var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">下载</a>';
+                            var actions = '<a class=\"btn btn-xs btn-success\"  onclick=down(\'' + value + '\')>下载</a>';
                             return actions;
                         }
                     }]
             };
             $.table.init(options);
         });
+
+        //试听按钮函数
         function func(value) {
 			// var audio = document.createElement("audio");
             //  var test = $("#vids").src;
@@ -256,7 +259,16 @@
 			console.log(audio);
 			audio.play();
         }
+
+        //下载按钮函数
+        function down(value) {
+			value = '../'+ value;
+			window.location.href = value;
+            console.log(value);
+        }
+
      </script>
+
 	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
 

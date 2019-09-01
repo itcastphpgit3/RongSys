@@ -37,11 +37,11 @@ public class TextmessagesController extends BaseController
 	    return prefix + "/textmessages";
 	}
 	@PostMapping("/list")
-		@ResponseBody
-		public TableDataInfo list() {
-			startPage();
-			List<Textmessages> list = iTextmessagesService.selectTextMessages();
-			return getDataTable(list);
+	@ResponseBody
+	public TableDataInfo list(){
+		startPage();
+		List<Textmessages> list = iTextmessagesService.selectTextMessages();
+		return getDataTable(list);
 	}
 
 }

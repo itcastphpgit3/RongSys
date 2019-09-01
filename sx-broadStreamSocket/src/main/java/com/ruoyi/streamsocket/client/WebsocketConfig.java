@@ -29,7 +29,7 @@ public class WebsocketConfig  implements WebSocketConfigurer {
      * 注册 WebSocket 业务类
      * @author 张超 teavamc
      * @date 2019/2/17
-     * @param [registry]
+     * @param registry
      * @return void
      */
     @Override

@@ -138,9 +138,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectWorklogListByid" parameterType="pubObjApi" resultMap="WorklogResult">
         <include refid="selectWorklogVo"/>
         <where>
-            <if test="wtitle != null  and wtitle != ''  ">wtitle = #{Title},</if>
-            <if test="proid != null  and proid != ''  ">and proid = #{ProjectID},</if>
-            <if test="uid != null  and uid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+            <if test="Title != null  and Title != ''  ">wtitle = #{Title},</if>
+            <if test="ProjectID != null  and ProjectID != ''  ">and proid = #{ProjectID},</if>
+            <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
         </where>
         ORDER BY pushdate DESC
         limit #{PageSize} offset #{PageIndex}

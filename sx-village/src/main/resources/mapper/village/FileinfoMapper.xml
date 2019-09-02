@@ -129,8 +129,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectMyFileListById" parameterType="pubObjApi" resultMap="FileinfoResult">
         <include refid="selectFileinfoVo"/>
         <where>
-            <if test="filename != null  and filename != ''  ">filename = #{Title},</if>
-            <if test="uid != null  and uid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+            <if test="Title != null  and Title != ''  ">filename = #{Title},</if>
+            <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
         </where>
         ORDER BY pushdate DESC
         limit #{PageSize} offset #{PageIndex}

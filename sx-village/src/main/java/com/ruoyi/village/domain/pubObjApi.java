@@ -6,18 +6,16 @@ public class pubObjApi extends BaseEntity
 {
 
     private Integer userid; //用户id
-    private String ProjectID;//项目id
-    private String Rural_Types;//美丽乡村类别
     private String Title;
-
     private String state;
-
     private String beginTime;
     private String EndTime;
     private Integer PageSize;
     private Integer PageIndex;
     private String aid; //地区编号
     private String uname; //姓名
+    private String ProjectID;//项目id
+    private String Rural_Types;//美丽乡村类别
 
     public Integer getUserid() {
         return userid;
@@ -72,24 +70,7 @@ public class pubObjApi extends BaseEntity
     }
 
     public void setPageIndex(Integer pageIndex) {
-
-        PageIndex = (pageIndex-1)*20;
-    }
-
-    public String getProjectID() {
-        return ProjectID;
-    }
-
-    public void setProjectID(String projectID) {
-        ProjectID = projectID;
-    }
-
-    public String getRural_Types() {
-        return Rural_Types;
-    }
-
-    public void setRural_Types(String rural_Types) {
-        Rural_Types = rural_Types;
+        PageIndex = pageIndex;
     }
 
     public String getAid() {
@@ -106,5 +87,21 @@ public class pubObjApi extends BaseEntity
 
     public void setUname(String uname) {
         this.uname = uname;
+    }
+
+    public String getProjectID() {
+        return ProjectID;
+    }
+
+    public void setProjectID(String projectID) {
+        ProjectID = projectID;
+    }
+
+    public String getRural_Types() {
+        return Rural_Types;
+    }
+
+    public void setRural_Types(String rural_Types) {
+        Rural_Types = rural_Types;
     }
 }

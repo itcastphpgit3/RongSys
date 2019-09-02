@@ -116,7 +116,7 @@
 		select <include refid="Field"/>
 		from <include refid="tableName"/>
 		<where>
-			<if test="courtit != null  and courtit != ''  ">courtit = #{Title},</if>
+			<if test="Title != null  and Title != ''  ">courtit = #{Title},</if>
 			<if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
 		</where>
 		ORDER BY adddate desc

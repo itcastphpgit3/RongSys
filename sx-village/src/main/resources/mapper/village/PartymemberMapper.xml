@@ -162,7 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectPartymemberListBytype" parameterType="pubObjApi" resultMap="PartymemberResult">
         <include refid="selectPartymemberVo"/>
         <where>
-            <if test="grouptype != null  and grouptype != ''  ">grouptype = #{state},</if>
+            <if test="state != null  and state != ''  ">grouptype = #{state},</if>
             <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
         </where>
         ORDER BY uname asc

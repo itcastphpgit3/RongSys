@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCompanyVo"/>
         <where>
             <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
-            <if test="pname != null  and pname != ''  ">pname = #{uname},</if>
+            <if test="uname != null  and uname != ''  ">pname = #{uname},</if>
         </where>
         ORDER BY datetime DESC
         limit #{PageSize} offset #{PageIndex}

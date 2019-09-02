@@ -107,8 +107,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectBeaCountryListByid" parameterType="pubObjApi" resultMap="VillageplanResult">
         <include refid="selectVillageplanVo"/>
         <where>
-            <if test="mtitle != null  and mtitle != ''  ">mtitle = #{Title},</if>
-            <if test="vtype != null  and vtype != ''  ">and vtype = #{Rural_Types},</if>
+            <if test="Title != null  and Title != ''  ">mtitle = #{Title},</if>
+            <if test="Rural_Types != null  and Rural_Types != ''  ">and vtype = #{Rural_Types},</if>
             <if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
         </where>
         ORDER BY pushdate DESC

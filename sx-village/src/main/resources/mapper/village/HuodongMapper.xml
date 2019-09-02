@@ -132,7 +132,7 @@
 		select <include refid="Field"/>
 		from <include refid="tableName"/>
 		<where>
-			<if test="hdtitle != null  and hdtitle != ''  ">hdtitle = #{Title},</if>
+			<if test="Title != null  and Title != ''  ">hdtitle = #{Title},</if>
 			<if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
 		</where>
 		ORDER BY hdadddate desc

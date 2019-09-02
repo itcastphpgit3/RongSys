@@ -83,7 +83,7 @@ public class User extends BaseController {
         try
         {
             subject.login(token);
-            return AjaxResult.success(sysUserService.selectUserByLoginName(loginid));
+            return AjaxResult.success(sysUserService.selectUserForAppByLoginName(loginid));
         }
         catch (AuthenticationException e)
         {

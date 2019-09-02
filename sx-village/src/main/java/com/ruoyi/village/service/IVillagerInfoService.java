@@ -1,5 +1,6 @@
 package com.ruoyi.village.service;
 
+import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
 import java.util.List;
 
@@ -50,5 +51,7 @@ public interface IVillagerInfoService
      * @return 结果
      */
 	public int deleteVillagerInfoByIds(String ids);
+
+	public List<VillagerInfo> selectPersonAllByApi(PersonApi person);
 
 }

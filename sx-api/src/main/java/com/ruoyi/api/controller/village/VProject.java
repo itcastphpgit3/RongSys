@@ -35,9 +35,9 @@ public class VProject extends BaseController {
     @PostMapping("/insert")
     @CrossOrigin
     @ApiOperation(value = "返回所有项目")
-    public RongApiRes insertProject(Project project )
+    public AjaxResult insertProject(Project project )
     {
-        return RongApiService.get_bean(projectService.insertProject(project));
+        return toAjax(projectService.insertProject(project));
     }
 
     @GetMapping("/pro_all")

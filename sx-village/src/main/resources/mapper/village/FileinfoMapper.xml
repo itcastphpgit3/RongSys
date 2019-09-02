@@ -58,8 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectFilesizeSum" parameterType="String"  resultType="double">
-        select sum(filesize) from fileinfo
-        where uid = #{uid}
+       select IFNULL(sum(filesize),0 ) from fileinfo where uid = #{uid}
     </select>
 
     <select id="selectFileurlById" parameterType="Integer"  resultType="String">

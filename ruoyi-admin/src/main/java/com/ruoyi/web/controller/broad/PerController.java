@@ -1,7 +1,10 @@
 package com.ruoyi.web.controller.broad;
 
+import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,6 +47,8 @@ public class PerController extends BaseController {
 
     @Autowired
     private IProgramService iProgramService;
+
+
 
 //    @RequiresPermissions("broad:per:view")
     @GetMapping()
@@ -93,6 +98,8 @@ public class PerController extends BaseController {
 
     /**
      * 新增保存节目单
+     *
+     * @author cx
      */
     //@RequiresPermissions("broad:per:add")
     @Log(title = "新增节目单", businessType = BusinessType.INSERT)

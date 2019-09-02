@@ -12,6 +12,7 @@
         <result property="fsize" column="fsize"/>
         <result property="uname" column="uname"/>
         <result property="createdtime" column="createdtime"/>
+        <result property="urls" column="urls"/>
     </resultMap>
 
     <sql id="selectProSpecVo">
@@ -22,7 +23,8 @@
           flenth,
           fsize,
           b.uname,
-          createdtime
+          createdtime,
+          urls
         from
           programs as a,
           userinfo as b

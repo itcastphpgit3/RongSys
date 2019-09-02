@@ -40,7 +40,7 @@ public class StreamHandler  implements WebSocketHandler {
         * 断开连接后触发的回调
         * @author 张超 teavamc
         * @date 2019/2/21
-        * @param [session, arg1]
+        * @param session arg1
         * @return void
         */
     @Override

@@ -70,7 +70,7 @@ public class pubObjApi extends BaseEntity
     }
 
     public void setPageIndex(Integer pageIndex) {
-        PageIndex = pageIndex;
+        PageIndex = (pageIndex-1)*20;
     }
 
     public String getAid() {

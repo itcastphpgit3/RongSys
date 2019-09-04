@@ -24,7 +24,7 @@ public class Tempgroup extends BaseEntity {
     private String rightuname;
 
     /*创建时间*/
-    private String createtime;
+    private String createdtime;
 
     /*这个字段数据库里没注释，暂时不知道其作用*/
     private String note;
@@ -51,7 +51,6 @@ public class Tempgroup extends BaseEntity {
     private String address;
 
     private String parentaid;
-
 
     public int getTgid() {
         return tgid;
@@ -93,12 +92,12 @@ public class Tempgroup extends BaseEntity {
         this.rightuname = rightuname;
     }
 
-    public String getCreatetime() {
-        return createtime;
+    public String getCreatedtime() {
+        return createdtime;
     }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
+    public void setCreatedtime(String createdtime) {
+        this.createdtime = createdtime;
     }
 
     public String getNote() {
@@ -175,22 +174,38 @@ public class Tempgroup extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Tempgroup{" +
-                "tgid=" + tgid +
-                ", tgname='" + tgname + '\'' +
-                ", tname='" + tname + '\'' +
-                ", userid='" + userid + '\'' +
-                ", rightuname='" + rightuname + '\'' +
-                ", createtime='" + createtime + '\'' +
-                ", note='" + note + '\'' +
-                ", isuse='" + isuse + '\'' +
-                ", tid='" + tid + '\'' +
-                ", aid='" + aid + '\'' +
-                ", aname='" + aname + '\'' +
-                ", uname='" + uname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", parentaid='" + parentaid + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Tempgroup").append('[')
+                .append("tgid=")
+                .append(tgid)
+                .append(",tgname=")
+                .append(tgname)
+                .append(",tname=")
+                .append(tname)
+                .append(",userid=")
+                .append(userid)
+                .append(",rightuname=")
+                .append(rightuname)
+                .append(",createdtime=")
+                .append(createdtime)
+                .append(",note=")
+                .append(note)
+                .append(",isuse=")
+                .append(isuse)
+                .append(",tid=")
+                .append(tid)
+                .append(",aid=")
+                .append(aid)
+                .append(",aname=")
+                .append(aname)
+                .append(",uname=")
+                .append(uname)
+                .append(",phone=")
+                .append(phone)
+                .append(",address=")
+                .append(address)
+                .append(",parentaid=")
+                .append(parentaid)
+                .append(']');
+        return sb.toString();
     }
 }

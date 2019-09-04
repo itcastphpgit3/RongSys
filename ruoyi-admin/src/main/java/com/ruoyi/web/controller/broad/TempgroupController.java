@@ -6,6 +6,7 @@ import com.ruoyi.broad.domain.Tempgroup;
 import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.broad.service.ITempgroupService;
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
@@ -13,10 +14,8 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -84,5 +83,18 @@ public class TempgroupController extends BaseController{
         List<Map<String, Object>> tree = messageService.selectMessageList((new BroadMessage()));
         return tree;
 
+    }
+    /**
+     * @author cx
+     * @param
+     *
+     * @Description 终端临时列表 详细
+     */
+    @GetMapping("/detail/{aid}")
+    @Log(title = "申请维护记录详细")
+    public String detail(@PathVariable("aid") String aid, ModelMap mmp)
+    {
+        mmp.put("tempgroup",iTempgroupService.selectTempgroupById(aid));
+        return prefix + "/detail";
     }
 }

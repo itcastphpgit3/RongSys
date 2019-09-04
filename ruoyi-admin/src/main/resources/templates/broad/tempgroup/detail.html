@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+
+
+    <table class="table table-hover">
+        <tr>
+            <th>区域id</th>
+            <th>父id</th>
+            <th>区域名称</th>
+            <th>备注</th>
+        </tr>
+
+        <tr  th:each="list : ${tempgroup}">
+            <td th:text="${list.aid}"></td>
+            <td th:text="${list.parentaid}"></td>
+            <td th:text="${list.aname}"></td>
+            <td th:text="${list.note}"></td>
+        </tr>
+    </table>
+
+</div>
+<div th:include="include::footer"></div>
+</body>
+</html>

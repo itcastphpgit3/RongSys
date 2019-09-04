@@ -9,6 +9,10 @@
         <result property="aname"    column="aname"    />
         <result property="address"    column="address"    />
         <result property="parentaid" column="parentaid"/>
+        <result property="aid" column="aid"/>
+        <result property="userid" column="userid"/>
+        <result property="createdtime" column="createdtime"/>
+
     </resultMap>
 
     <!--字段-->
@@ -54,7 +58,7 @@
         terminals
     </sql>
     <sql id="areatableName">
-        user.area
+        area
     </sql>
     <sql id="usertable">
         user.userinfo
@@ -73,11 +77,6 @@
         on tt.aid = aa.aid
         <where>
             <if test="aid != null  and aid != '' ">and tt.aid like CONCAT('%',#{aid},'%')</if>
-            <if test="parentaid != null  and parentaid != '' ">and aa.parentaid like CONCAT('%',#{parentaid},'%')</if>
-            <if test="tid != null  and tid != '' ">and tid like CONCAT('%',#{tid},'%')</if>
-            <if test="tname != null  and tname != '' ">and tname like CONCAT('%',#{tname},'%')</if>
-            <if test="aname != null  and aname != '' ">and aa.aname like CONCAT('%',#{aname},'%')</if>
-            <if test="address != null  and address != '' ">and aa.address like CONCAT('%',#{address},'%')</if>
         </where>
     </select>
 
@@ -120,4 +119,16 @@
             <if test="uid != null  and uid != '' ">#{uid}</if>
         </trim>
     </insert>
+
+    <select id="selectTempgroupById" parameterType="String" resultMap="TempgroupResult">
+        select
+        aid,
+        parentaid,
+        aname,
+        note
+        from
+        <include refid="areatableName"/>
+        where aid = #{aid}
+    </select>
+
 </mapper>

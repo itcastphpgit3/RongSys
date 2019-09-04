@@ -1,28 +1,37 @@
-<!DOCTYPE HTML>
-<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<body class="white-bg">
+<body>
+
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+<form class="form-horizontal m-t" id="tempgroup" th:if="${name == 'tempgroup'}" >
+    <div class="form-group">
+        <label class="col-sm-3 control-label">区域id：</label>
+        <div class="form-control-static" th:text="${tempgroup.aid}">
+        </div>
+    </div>
 
+    <div class="form-group">
+        <label class="col-sm-3 control-label">父id：</label>
+        <div class="form-control-static" th:text="${tempgroup.parentaid}">
+        </div>
+    </div>
 
-    <table class="table table-hover">
-        <tr>
-            <th>区域id</th>
-            <th>父id</th>
-            <th>区域名称</th>
-            <th>备注</th>
-        </tr>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">区域名称：</label>
+        <div class="form-control-static" th:text="${tempgroup.aname}">
+        </div>
+    </div>
 
-        <tr  th:each="list : ${tempgroup}">
-            <td th:text="${list.aid}"></td>
-            <td th:text="${list.parentaid}"></td>
-            <td th:text="${list.aname}"></td>
-            <td th:text="${list.note}"></td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">日志信息：</label>
+        <div class="form-control-static" th:text="${tempgroup.note}">
+        </div>
+    </div>
 
+</form>
 </div>
-<div th:include="include::footer"></div>
 </body>
 </html>

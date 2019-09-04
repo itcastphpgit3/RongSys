@@ -94,6 +94,7 @@ public class TempgroupController extends BaseController{
     @Log(title = "申请维护记录详细")
     public String detail(@PathVariable("aid") String aid, ModelMap mmp)
     {
+        mmp.put("name","tempgroup");
         mmp.put("tempgroup",iTempgroupService.selectTempgroupById(aid));
         return prefix + "/detail";
     }

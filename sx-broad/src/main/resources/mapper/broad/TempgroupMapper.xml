@@ -122,10 +122,10 @@
 
     <select id="selectTempgroupById" parameterType="String" resultMap="TempgroupResult">
         select
-        aid,
-        parentaid,
-        aname,
-        note
+            aid,
+            parentaid,
+            aname,
+            note
         from
         <include refid="areatableName"/>
         where aid = #{aid}

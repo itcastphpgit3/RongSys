@@ -76,6 +76,7 @@
     function queryAreaList() {
         var options = {
             url: prefix + "/list",
+            detailUrl: prefix + "/detail/{id}",
             modalName: "特殊分组管理",
             search: false,
             showExport: true,
@@ -99,6 +100,15 @@
                     field : 'address',
                     title : '终端地址',
                     sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+                        return actions.join('');
+                    }
                 }
             ]
         };

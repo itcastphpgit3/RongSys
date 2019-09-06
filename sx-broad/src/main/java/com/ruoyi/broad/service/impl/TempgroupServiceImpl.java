@@ -32,6 +32,19 @@ public class TempgroupServiceImpl implements ITempgroupService{
     }
 
     /**
+     * 查询终端列表 详细
+     *
+     *
+     * @return 单条终端列表记录
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public Tempgroup selectTempgroupById(String aid)
+    {
+        return tempgroupMapper.selectTempgroupById(aid);
+    }
+
+    /**
      * 更新终端临时列表
      *
      * @return 终端临时列表

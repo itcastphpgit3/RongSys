@@ -21,20 +21,11 @@
 				<input id="mtitle" name="mtitle" th:field="*{mtitle}" class="form-control" type="text">
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label">信息类别：</label>
-			<div class="col-sm-8">
-				<select class="chosen-select form-control" th:field="*{vtype}" id="vtype" name="vtype"  type="text">
-					<option value="0">乡村规划</option>
-					<option value="1">我爱我村</option>
-					<option value="2">文化活动</option>
-					<option value="3">农家乐</option>
-					<option value="4">民宿管理</option>
-					<option value="5">宣传文案</option>
-					<option value="6">信息咨询</option>
-				</select>
-			</div>
-		</div>
+
+			<!--<label class="col-sm-3 control-label">信息类别：</label>-->
+			<input  th:field="*{vtype}" id="vtype" name="vtype"  type="hidden" >
+
+
 		<!--②使用input去接收数据，textare去作为文本输入框-->
 		<input id="mcontent" name="mcontent" th:field="*{mcontent}" class="form-control" type="hidden">
 		<div class="form-group">

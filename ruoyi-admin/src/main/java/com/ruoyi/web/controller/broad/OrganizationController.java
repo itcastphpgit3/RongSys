@@ -268,4 +268,5 @@ public class OrganizationController extends BaseController
 	{
 		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
 	}
+
 }

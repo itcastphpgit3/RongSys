@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Suggest;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.SuggestMapper;
 import com.ruoyi.village.service.ISuggestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,13 @@ public class SuggestServiceImpl implements ISuggestService
 	{
 		return suggestMapper.deleteSuggestByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Suggest> selectSuggestListById(pubObjApi meet)
+	{
+		return suggestMapper.selectSuggestListById(meet);
+	}
 }

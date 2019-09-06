@@ -5,6 +5,7 @@ import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
 
 import com.ruoyi.village.domain.Partymember;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.service.IPartymemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,16 +26,18 @@ public class Group {
     @GetMapping("/all")
     @CrossOrigin
     @ApiOperation(value = "党员信息")
-    public RongApiRes searchAll(Partymember partymember)
+    public RongApiRes searchAll(pubObjApi group)
     {
-        return RongApiService.get_list(partymemberService.selectPartymemberList(partymember));
+        return RongApiService.get_list(partymemberService.selectPartymemberListBytype(group));
     }
 
     @GetMapping("/grouplist")
     @CrossOrigin
     @ApiOperation(value = "党员小组")
-    public RongApiRes selectGrouplist()
+    public RongApiRes selectGrouplist(pubObjApi group)
     {
-        return RongApiService.get_list(partymemberService.selectGrouplist());
+        return RongApiService.get_list(partymemberService.selectGrouplist(group));
     }
+
+
 }

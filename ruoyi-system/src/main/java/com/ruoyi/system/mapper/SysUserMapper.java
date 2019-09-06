@@ -129,4 +129,6 @@ public interface SysUserMapper
      * @return 用户对象信息
      */
     public int selectRoleid(int userId);
+
+    public SysUser selectUserForAppByLoginName(String userName);
 }

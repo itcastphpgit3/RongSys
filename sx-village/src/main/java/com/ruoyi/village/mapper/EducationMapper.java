@@ -1,6 +1,7 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Education;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -52,4 +53,7 @@ public interface EducationMapper {
      * @return
      */
     int deleteEducationByIds(String eid);
+
+
+    List<Education> selectEducationListById(pubObjApi party);
 }

@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Partynew;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 党员新闻 数据层
@@ -58,5 +60,6 @@ public interface PartynewMapper
      * @return 结果
      */
 	public int deletePartynewByIds(String[] mids);
-	
+
+	public List<Partynew> selectpartynewListById(pubObjApi party);
 }

@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Company;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.CompanyMapper;
 import com.ruoyi.village.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,13 @@ public class CompanyServiceImpl implements ICompanyService
 	public int deleteCompanyByIds(String ids)
 	{
 		return companyMapper.deleteCompanyByIds(Convert.toStrArray(ids));
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Company> selectCompanyListById(pubObjApi company)
+	{
+		return companyMapper.selectCompanyListById(company);
 	}
 	
 }

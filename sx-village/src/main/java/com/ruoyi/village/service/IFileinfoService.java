@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Fileinfo;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 import java.util.Map;
 
@@ -57,4 +59,6 @@ public interface IFileinfoService
 	public double selectFilesizeSum(String uid);
 
 	public String selectFileurlById(Integer fileid);
+
+	public List<Fileinfo> selectMyFileListById(pubObjApi myfile);
 }

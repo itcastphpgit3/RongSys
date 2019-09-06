@@ -3,6 +3,7 @@ package com.ruoyi.village.mapper;
 import com.ruoyi.village.domain.Partymember;
 import com.ruoyi.village.domain.Pedulevel;
 import com.ruoyi.village.domain.Pmcount;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -69,8 +70,9 @@ public interface PartymemberMapper
 	 */
 	public List<Pmcount> countbygroup();
 
-	public List<Partymember> selectGrouplist();
+	public List<Partymember> selectGrouplist(pubObjApi group);
 
 	public List<Pedulevel> countbyedulevel();
-	
+
+	public List<Partymember> selectPartymemberListBytype(pubObjApi group);
 }

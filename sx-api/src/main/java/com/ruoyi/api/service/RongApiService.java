@@ -31,7 +31,10 @@ public class RongApiService {
             res.put("data",list);
             res.put("data_size",list.size());
         }else {
-            res = res.error("数据获取失败");
+            //res = res.error("数据获取失败");
+            res = res.success("已查询到"+list.size()+"条数据");
+            res.put("data",0);
+            res.put("data_size",list.size());
         }
         return res;
     }
@@ -49,7 +52,9 @@ public class RongApiService {
             res = res.success("已查询到1条数据");
             res.put("data",obj);
         }else {
-            res = res.error("数据获取失败");
+            //res = res.error("数据获取失败");
+            res = res.success("已查询到0条数据");
+            res.put("data",0);
         }
         return res;
     }

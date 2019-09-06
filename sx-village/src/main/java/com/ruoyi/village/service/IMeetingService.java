@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Meeting;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,6 @@ public interface IMeetingService
      * @return 结果
      */
 	public int deleteMeetingByIds(String ids);
-	
+
+	public List<Meeting> selectMeetingListById(pubObjApi meet);
 }

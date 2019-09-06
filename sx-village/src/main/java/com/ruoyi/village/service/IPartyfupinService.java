@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Partyfupin;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,6 @@ public interface IPartyfupinService
      * @return 结果
      */
 	public int deletePartyfupinByIds(String ids);
-	
+
+	public List<Partyfupin> selectfupinListById(pubObjApi party);
 }

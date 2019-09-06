@@ -1,6 +1,7 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Education;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -50,4 +51,6 @@ public interface IEducationService {
      * @return
      */
     int deleteEducationByIds(String eid);
+
+    List<Education> selectEducationListById(pubObjApi party);
 }

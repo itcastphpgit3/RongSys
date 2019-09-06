@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Meeting;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.MeetingMapper;
 import com.ruoyi.village.service.IMeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,12 @@ public class MeetingServiceImpl implements IMeetingService
 	{
 		return meetingMapper.deleteMeetingByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Meeting> selectMeetingListById(pubObjApi meet)
+	{
+		return meetingMapper.selectMeetingListById(meet);
+	}
 }

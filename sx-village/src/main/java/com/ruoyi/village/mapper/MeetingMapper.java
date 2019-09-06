@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Meeting;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 会议记录 数据层
@@ -58,5 +60,6 @@ public interface MeetingMapper
      * @return 结果
      */
 	public int deleteMeetingByIds(String[] mids);
-	
+
+	public List<Meeting> selectMeetingListById(pubObjApi meet);
 }

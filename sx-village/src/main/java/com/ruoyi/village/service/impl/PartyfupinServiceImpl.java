@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Partyfupin;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.PartyfupinMapper;
 import com.ruoyi.village.service.IPartyfupinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,11 @@ public class PartyfupinServiceImpl implements IPartyfupinService
 	{
 		return partyfupinMapper.deletePartyfupinByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Partyfupin> selectfupinListById(pubObjApi party)
+	{
+		return partyfupinMapper.selectfupinListById(party);
+	}
 }

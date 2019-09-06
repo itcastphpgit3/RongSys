@@ -2,8 +2,10 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.service.IPersonalDetailService;
 import com.ruoyi.village.service.IProjectService;
+import com.ruoyi.village.service.IVillagerInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Person {
     @Autowired
     private IPersonalDetailService personalDetailService;
+    @Autowired
+    private IVillagerInfoService villagerInfoService;
 
     @GetMapping("/all")
     @CrossOrigin
@@ -26,5 +30,13 @@ public class Person {
     public RongApiRes searchPerson(Integer pdid)
     {
         return RongApiService.get_bean(personalDetailService.selectPersonalDetailById(pdid));
+    }
+
+    @GetMapping("/perAllInfo")
+    @CrossOrigin
+    @ApiOperation(value = "查询个人详细信息")
+    public RongApiRes selectPersonAll(PersonApi person)
+    {
+        return RongApiService.get_list(villagerInfoService.selectPersonAllByApi(person));
     }
 }

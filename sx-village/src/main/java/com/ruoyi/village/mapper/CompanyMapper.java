@@ -1,6 +1,7 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Company;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -59,5 +60,7 @@ public interface CompanyMapper
      * @return 结果
      */
 	public int deleteCompanyByIds(String[] cids);
+
+	public List<Company> selectCompanyListById(pubObjApi company);
 	
 }

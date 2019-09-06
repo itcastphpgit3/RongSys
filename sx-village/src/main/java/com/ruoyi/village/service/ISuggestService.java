@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Suggest;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,7 @@ public interface ISuggestService
      * @return 结果
      */
 	public int deleteSuggestByIds(String ids);
+
+	public List<Suggest> selectSuggestListById(pubObjApi meet);
 	
 }

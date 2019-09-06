@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Memorial;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.MemorialMapper;
 import com.ruoyi.village.service.IMemorialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,11 @@ public class MemorialServiceImpl implements IMemorialService
 	{
 		return memorialMapper.deleteMemorialByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Memorial> selectMemorialListById(pubObjApi memorial)
+	{
+		return memorialMapper.selectMemorialListById(memorial);
+	}
 }

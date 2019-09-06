@@ -1,6 +1,7 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Huodong;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -50,4 +51,6 @@ public interface IHuodongService {
      * @return
      */
     int deleteHuodongByIds(String hdid);
+
+    List<Huodong> selectHuodongListById(pubObjApi beavill);
 }

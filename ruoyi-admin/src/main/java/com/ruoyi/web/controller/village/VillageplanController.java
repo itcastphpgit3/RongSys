@@ -47,7 +47,248 @@ public class VillageplanController extends BaseController
 	{
 	    return prefix + "/villageplan";
 	}
-	
+
+	/*乡村规划*/
+	@GetMapping("/1")
+	public String villageplan1()
+	{
+		return prefix + "/villageplan1";
+	}
+
+	@PostMapping("/list1")
+	@ResponseBody
+	public TableDataInfo list1(Villageplan villageplan)
+	{
+		villageplan.setVtype("0");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add1")
+	public String add1(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add1";
+	}
+
+	/*我爱我村*/
+	@GetMapping("/2")
+	public String villageplan2()
+	{
+		return prefix + "/villageplan2";
+	}
+
+	@PostMapping("/list2")
+	@ResponseBody
+	public TableDataInfo list2(Villageplan villageplan)
+	{
+		villageplan.setVtype("1");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add2")
+	public String add2(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add2";
+	}
+
+	/*文化活动*/
+	@GetMapping("/3")
+	public String villageplan3()
+	{
+		return prefix + "/villageplan3";
+	}
+
+	@PostMapping("/list3")
+	@ResponseBody
+	public TableDataInfo list3(Villageplan villageplan)
+	{
+		villageplan.setVtype("2");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add3")
+	public String add3(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add3";
+	}
+
+	/*农家乐*/
+	@GetMapping("/4")
+	public String villageplan4()
+	{
+		return prefix + "/villageplan4";
+	}
+
+	@PostMapping("/list4")
+	@ResponseBody
+	public TableDataInfo list4(Villageplan villageplan)
+	{
+		villageplan.setVtype("3");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add4")
+	public String add4(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add4";
+	}
+	/*民宿管理*/
+	@GetMapping("/5")
+	public String villageplan5()
+	{
+		return prefix + "/villageplan5";
+	}
+
+	@PostMapping("/list5")
+	@ResponseBody
+	public TableDataInfo list5(Villageplan villageplan)
+	{
+		villageplan.setVtype("4");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add5")
+	public String add5(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add5";
+	}
+	/*宣传*/
+	@GetMapping("/6")
+	public String villageplan6()
+	{
+		return prefix + "/villageplan6";
+	}
+
+	@PostMapping("/list6")
+	@ResponseBody
+	public TableDataInfo list6(Villageplan villageplan)
+	{
+		villageplan.setVtype("5");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add6")
+	public String add6(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add6";
+	}
+	/*咨询*/
+	@GetMapping("/7")
+	public String villageplan7()
+	{
+		return prefix + "/villageplan7";
+	}
+
+	@PostMapping("/list7")
+	@ResponseBody
+	public TableDataInfo list7(Villageplan villageplan)
+	{
+		villageplan.setVtype("6");
+		startPage();
+		List<Villageplan> list = villageplanService.selectVillageplanList(villageplan);
+		return getDataTable(list);
+	}
+
+	@GetMapping("/add7")
+	public String add7(ModelMap mmap)
+	{
+		//从session中获取当前登陆用户的 username、phone、userid
+		SysUser currentUser = ShiroUtils.getSysUser();
+		String username =  currentUser.getUserName();
+		Long userid =  currentUser.getUserId();
+		String aid;
+		int returnId = new Long(userid).intValue();
+		//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+		aid = sysUserService.selectAid(returnId);
+		//	将aid、fname、uname传至add.html中
+		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("userid", userid);
+		mmap.put("uname", username);
+		return prefix + "/add7";
+	}
 	/**
 	 * 查询美丽乡村列表
 	 */

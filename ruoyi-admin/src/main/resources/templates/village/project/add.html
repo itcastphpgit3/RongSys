@@ -147,7 +147,7 @@
 		<!--因为文件上传功能隐藏的bug，故这文件时长、大小两个字段不能删掉-->
 		<input id="flenth" name="flenth" class="form-control" type="hidden" readonly value="">
 		<input id="fsize" name="fsize" class="form-control" type="hidden"  readonly value="">
-
+		<input id="uid" name="uid" th:value="${uid}" class="form-control" type="hidden"  readonly value="">
 	</form>
 </div>
 <div th:include="include::footer"></div>
@@ -328,9 +328,10 @@
 
 	/*供子页面listProBroa调用的方法*/
     function ccc(userid,username){
-        $("#wpeopleid").val(userid);
+    	var userid2 = userid + document.getElementById("uid").value + ",";
+        $("#wpeopleid").val(userid2);
         $("#wpeoplename").val(username);
-        console.log("add页面采集到的userid:" + userid);
+        console.log("add页面采集到的userid:" + userid2);
         console.log("add页面采集到的username:" + username);
     }
 </script>

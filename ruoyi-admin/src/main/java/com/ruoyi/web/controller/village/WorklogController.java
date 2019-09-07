@@ -62,19 +62,25 @@ public class WorklogController extends BaseController
 		int returnId = new Long(userid).intValue();
 		//通过所获取的userid去用户表中查询用户所属区域的Roleid
 		int roleid = sysUserService.selectRoleid(returnId);
+
 		if(worklog.getAid() == null && (roleid == 1)) {
-			startPage();
-			List<Worklog> list = worklogService.selectWorklogList(worklog);
-			return getDataTable(list);
-		}else if(worklog.getAid() != null){
-			startPage();
-			List<Worklog> list = worklogService.selectWorklogList(worklog);
-			return getDataTable(list);
-		}else{
+			/*最高权限用户可以看到本区域全部人的工作记录*/
 			String aid;
 			//通过所获取的userid去用户表中查询用户所属区域的Aid
 			aid = sysUserService.selectAid(returnId);
 			worklog.setAid(aid);
+			startPage();
+			List<Worklog> list = worklogService.selectWorklogList(worklog);
+			return getDataTable(list);
+		}else if(worklog.getAid() != null){
+			/*普通用户只能看自己工作记录*/
+			worklog.setUid(returnId);
+			startPage();
+			List<Worklog> list = worklogService.selectWorklogList(worklog);
+			return getDataTable(list);
+		}else{
+			/*普通用户只能看自己工作记录*/
+			worklog.setUid(returnId);
 			startPage();
 			List<Worklog> list = worklogService.selectWorklogList(worklog);
 			return getDataTable(list);
@@ -119,6 +125,7 @@ public class WorklogController extends BaseController
 		//	将aid、fname、uname传至add.html中
 		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
 		mmap.put("wname", username);
+		mmap.put("uid", returnId);
 		mmap.put("wphone", phone);
 		mmap.put("uname", username);
 		mmap.put("proid", proid);

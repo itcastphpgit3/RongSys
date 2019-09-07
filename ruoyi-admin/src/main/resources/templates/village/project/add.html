@@ -147,7 +147,7 @@
 		<!--因为文件上传功能隐藏的bug，故这文件时长、大小两个字段不能删掉-->
 		<input id="flenth" name="flenth" class="form-control" type="hidden" readonly value="">
 		<input id="fsize" name="fsize" class="form-control" type="hidden"  readonly value="">
-
+		<input id="uid" name="uid" th:value="${uid}" class="form-control" type="hidden"  readonly value="">
 	</form>
 </div>
 <div th:include="include::footer"></div>

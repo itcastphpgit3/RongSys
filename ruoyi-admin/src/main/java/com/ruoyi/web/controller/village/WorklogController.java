@@ -62,25 +62,21 @@ public class WorklogController extends BaseController
 		int returnId = new Long(userid).intValue();
 		//通过所获取的userid去用户表中查询用户所属区域的Roleid
 		int roleid = sysUserService.selectRoleid(returnId);
-
+		/*用户只能看自己工作记录*/
+		worklog.setUid(returnId);
 		if(worklog.getAid() == null && (roleid == 1)) {
-			/*最高权限用户可以看到本区域全部人的工作记录*/
-			String aid;
-			//通过所获取的userid去用户表中查询用户所属区域的Aid
-			aid = sysUserService.selectAid(returnId);
-			worklog.setAid(aid);
 			startPage();
 			List<Worklog> list = worklogService.selectWorklogList(worklog);
 			return getDataTable(list);
 		}else if(worklog.getAid() != null){
-			/*普通用户只能看自己工作记录*/
-			worklog.setUid(returnId);
 			startPage();
 			List<Worklog> list = worklogService.selectWorklogList(worklog);
 			return getDataTable(list);
 		}else{
-			/*普通用户只能看自己工作记录*/
-			worklog.setUid(returnId);
+			String aid;
+			//通过所获取的userid去用户表中查询用户所属区域的Aid
+			aid = sysUserService.selectAid(returnId);
+			worklog.setAid(aid);
 			startPage();
 			List<Worklog> list = worklogService.selectWorklogList(worklog);
 			return getDataTable(list);

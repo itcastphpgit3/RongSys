@@ -70,24 +70,17 @@ public class ProjectController extends BaseController
         int returnId = new Long(userid).intValue();
         //通过所获取的userid去用户表中查询用户所属区域的Roleid
         int roleid = sysUserService.selectRoleid(returnId);
+		/*普通用户只能看自己工作记录*/
+		project.setUid(returnId);
         if(project.getAid() == null && (roleid == 1)) {
-        /*最高权限用户可以本区域看到全部项目*/
-        String aid;
-        //通过所获取的userid去用户表中查询用户所属区域的Aid
-        aid = sysUserService.selectAid(returnId);
-         project.setAid(aid);
 		startPage();
 		List<Project> list = projectService.selectProjectList(project);
 		return getDataTable(list);
         }else if(project.getAid() != null){
-            /*普通用户只能看自己项目*/
-            project.setUid(returnId);
             startPage();
             List<Project> list = projectService.selectProjectList(project);
             return getDataTable(list);
         }else{
-            /*普通用户只能看自己项目*/
-            project.setUid(returnId);
             String aid;
             //通过所获取的userid去用户表中查询用户所属区域的Aid
             aid = sysUserService.selectAid(returnId);

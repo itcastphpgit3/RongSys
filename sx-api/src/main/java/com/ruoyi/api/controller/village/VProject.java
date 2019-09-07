@@ -45,6 +45,7 @@ public class VProject extends BaseController {
     @ApiOperation(value = "返回所有项目")
     public RongApiRes searchProAll(pubObjApi project )
     {
+        project.setPageIndex((project.getPageIndex()-1)*project.getPageSize());
         return RongApiService.get_list(projectService.selectProjectListForapp(project));
     }
 
@@ -52,6 +53,7 @@ public class VProject extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "工作记录列表")
     public RongApiRes selectWorkLog(pubObjApi workLog){
+        workLog.setPageIndex((workLog.getPageIndex()-1)*workLog.getPageSize());
         return RongApiService.get_list(workLogService.selectWorklogListByid(workLog));
     }
 

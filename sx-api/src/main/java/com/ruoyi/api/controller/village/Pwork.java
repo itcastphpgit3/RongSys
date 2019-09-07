@@ -53,6 +53,7 @@ public class Pwork extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "工作记录列表")
     public RongApiRes selectWorkLog(pubObjApi worklog){
+        worklog.setPageIndex((worklog.getPageIndex()-1)*worklog.getPageSize());
         return RongApiService.get_list(worklogService.selectWorklogListByid(worklog));
     }
 
@@ -68,6 +69,7 @@ public class Pwork extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "备忘录列表")
     public RongApiRes selectMemorial(pubObjApi memorial){
+        memorial.setPageIndex((memorial.getPageIndex()-1)*memorial.getPageSize());
         return RongApiService.get_list(memorialService.selectMemorialListById(memorial));
     }
 
@@ -83,6 +85,7 @@ public class Pwork extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "会议记录列表")
     public RongApiRes selectMeeting(pubObjApi meet){
+        meet.setPageIndex((meet.getPageIndex()-1)*meet.getPageSize());
         return RongApiService.get_list(meetingService.selectMeetingListById(meet));
     }
 
@@ -108,6 +111,7 @@ public class Pwork extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "我的建议列表")
     public RongApiRes selectSuggest(pubObjApi meet){
+        meet.setPageIndex((meet.getPageIndex()-1)*meet.getPageSize());
         return RongApiService.get_list(suggestService.selectSuggestListById(meet));
     }
 
@@ -115,6 +119,7 @@ public class Pwork extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "我的文件夹列表")
     public RongApiRes selectMyFile(pubObjApi myfile){
+        myfile.setPageIndex((myfile.getPageIndex()-1)*myfile.getPageSize());
         return RongApiService.get_list(fileinfoService.selectMyFileListById(myfile));
     }
 

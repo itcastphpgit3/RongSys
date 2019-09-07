@@ -26,6 +26,7 @@ public class Acompany extends BaseController {
     @ApiOperation(value = "企业信息列表")
     public RongApiRes selectCompanyList(pubObjApi company)
     {
+        company.setPageIndex((company.getPageIndex()-1)*company.getPageSize());
         return RongApiService.get_list(companyService.selectCompanyListById(company));
     }
 

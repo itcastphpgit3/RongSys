@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectMemorialListById" parameterType="pubObjApi" resultMap="MemorialResult">
         <include refid="selectMemorialVo"/>
         <where>
-            <if test="Title != null  and Title != ''  ">mtitle = #{Title},</if>
+            <if test="Title != null  and Title != ''  ">mtitle = #{Title}</if>
             <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
         </where>
         ORDER BY pushdate DESC

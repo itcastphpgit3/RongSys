@@ -25,6 +25,7 @@ public class BeaCountry extends BaseController {
     @CrossOrigin
     @ApiOperation(value = "美丽乡村列表")
     public RongApiRes selectBeaCountry(pubObjApi beavill){
+        beavill.setPageIndex((beavill.getPageIndex()-1)*beavill.getPageSize());
         return RongApiService.get_list(villageplanService.selectBeaCountryListByid(beavill));
     }
 

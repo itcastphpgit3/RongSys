@@ -37,6 +37,7 @@ public class Person {
     @ApiOperation(value = "查询个人详细信息")
     public RongApiRes selectPersonAll(PersonApi person)
     {
+        person.setPageIndex((person.getPageIndex()-1)*person.getPageSize());
         return RongApiService.get_list(villagerInfoService.selectPersonAllByApi(person));
     }
 }

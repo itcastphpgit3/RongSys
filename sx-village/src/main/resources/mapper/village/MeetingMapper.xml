@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectMeetingListById" parameterType="pubObjApi" resultMap="MeetingResult">
         <include refid="selectMeetingVo"/>
         <where>
-            <if test="Title != null  and Title != ''  ">mtitle = #{Title},</if>
+            <if test="Title != null  and Title != ''  ">mtitle = #{Title}</if>
             <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
         </where>
         ORDER BY pushdate DESC

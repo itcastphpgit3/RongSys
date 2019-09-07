@@ -28,6 +28,7 @@ public class Group {
     @ApiOperation(value = "党员信息")
     public RongApiRes searchAll(pubObjApi group)
     {
+        group.setPageIndex((group.getPageIndex()-1)*group.getPageSize());
         return RongApiService.get_list(partymemberService.selectPartymemberListBytype(group));
     }
 
@@ -36,6 +37,7 @@ public class Group {
     @ApiOperation(value = "党员小组")
     public RongApiRes selectGrouplist(pubObjApi group)
     {
+        group.setPageIndex((group.getPageIndex()-1)*group.getPageSize());
         return RongApiService.get_list(partymemberService.selectGrouplist(group));
     }
 

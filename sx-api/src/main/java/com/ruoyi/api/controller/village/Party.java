@@ -79,6 +79,7 @@ public class Party extends BaseController {
     @ApiOperation(value = "党建各栏目列表")
     public RongApiRes selectPartyAllById(pubObjApi party)
     {
+        party.setPageIndex((party.getPageIndex()-1)*party.getPageSize());
         switch(party.getRural_Types()){
             case "0":
                 return RongApiService.get_list(partynewService.selectpartynewListById(party));

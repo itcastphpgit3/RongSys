@@ -70,6 +70,8 @@ public class ProjectController extends BaseController
         int returnId = new Long(userid).intValue();
         //通过所获取的userid去用户表中查询用户所属区域的Roleid
         int roleid = sysUserService.selectRoleid(returnId);
+		/*普通用户只能看自己工作记录*/
+		project.setUid(returnId);
         if(project.getAid() == null && (roleid == 1)) {
 		startPage();
 		List<Project> list = projectService.selectProjectList(project);
@@ -120,6 +122,7 @@ public class ProjectController extends BaseController
 		aid = sysUserService.selectAid(returnId);
 		//	将aid、fname、uname传至add.html中
 		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
+		mmap.put("uid", returnId);
 		mmap.put("fname", username);
 		mmap.put("fphone", phone);
 		mmap.put("uname", username);

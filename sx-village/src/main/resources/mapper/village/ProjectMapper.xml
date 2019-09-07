@@ -32,7 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
     <select id="selectProjectList" parameterType="Project" resultMap="ProjectResult">
         <include refid="selectProjectVo"/>
-        <where>  
+        <where>
+            <if test="uid != null "> and FIND_IN_SET(#{uid},wpeopleid)>0</if>
             <if test="proid != null "> and proid = #{proid}</if>
              <if test="proname != null  and proname != '' "> and  proname LIKE CONCAT(CONCAT('%', #{proname}),'%')</if>
              <if test="propic != null  and propic != '' "> and propic LIKE CONCAT(CONCAT('%', #{propic}),'%')</if>
@@ -45,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="fphone != null  and fphone != '' "> and fphone LIKE CONCAT(CONCAT('%', #{fphone}),'%')</if>
              <if test="greadtotal != null "> and greadtotal LIKE CONCAT(CONCAT('%', #{greadtotal}),'%')</if>
              <if test="pushdate != null  and pushdate != '' "> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
-             <if test="uid != null "> and uid LIKE CONCAT(CONCAT('%', #{uid}),'%')</if>
+
              <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
              <if test="remark != null  and remark != '' "> and remark LIKE CONCAT(CONCAT('%', #{remark}),'%')</if>
              <if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>

@@ -249,7 +249,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         limit #{pageSize} offset #{pageIndex}
     </select>
 
-    <select id="countbyperson" parameterType="PersonApi" resultMap="mcountResult">
+    <select id="countpmBySex" parameterType="PersonApi" resultMap="mcountResult">
         select
             count(vid) as msum,
             count(sex = '男' or null ) as man,

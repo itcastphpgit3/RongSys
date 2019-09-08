@@ -80,7 +80,7 @@ public class Party extends BaseController {
     public RongApiRes selectPartyAllById(pubObjApi party)
     {
         party.setPageIndex((party.getPageIndex()-1)*party.getPageSize());
-        switch(party.getRural_Types()){
+        switch(party.getVtype()){
             case "0":
                 return RongApiService.get_list(partynewService.selectpartynewListById(party));
             case "1":

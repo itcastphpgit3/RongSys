@@ -140,7 +140,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="userid != null  and userid != '' "> uid = #{userid}</if>
             <if test="title != null  and title != ''  ">and wtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
-            <if test="projectID != null  and projectID != ''  ">and proid LIKE CONCAT(CONCAT('%', #{projectID}),'%')</if>
+            <if test="proid != null  and proid != ''  ">and proid = #{proid}</if>
         </where>
         ORDER BY pushdate DESC
         limit #{pageSize} offset #{pageIndex}

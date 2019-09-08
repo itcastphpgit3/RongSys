@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCompanyVo"/>
         <where>
             <if test="aid != null  and aid != '' "> aid = #{aid}</if>
-            <if test="uname != null  and uname != ''  ">and  pname = #{uname}</if>
+            <if test="uname != null  and uname != ''  ">and  cname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
         </where>
         ORDER BY datetime DESC
         limit #{pageSize} offset #{pageIndex}

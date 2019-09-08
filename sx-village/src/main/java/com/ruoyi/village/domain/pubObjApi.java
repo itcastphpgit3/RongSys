@@ -14,8 +14,8 @@ public class pubObjApi extends BaseEntity
     private Integer pageIndex;
     private String aid; //地区编号
     private String uname; //姓名
-    private String projectID;//项目id
-    private String rural_Types;//美丽乡村类别
+    private String proid;//项目id
+    private String vtype;//美丽乡村类别
 
     public Integer getUserid() {
         return userid;
@@ -89,19 +89,19 @@ public class pubObjApi extends BaseEntity
         this.uname = uname;
     }
 
-    public String getProjectID() {
-        return projectID;
+    public String getProid() {
+        return proid;
     }
 
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public void setProid(String proid) {
+        this.proid = proid;
     }
 
-    public String getRural_Types() {
-        return rural_Types;
+    public String getVtype() {
+        return vtype;
     }
 
-    public void setRural_Types(String rural_Types) {
-        this.rural_Types = rural_Types;
+    public void setVtype(String vtype) {
+        this.vtype = vtype;
     }
 }

@@ -39,7 +39,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="house"    column="house"    />
         <result property="prt"    column="prt"    />
     </resultMap>
-	
+
+    <resultMap type="Mcount" id="mcountResult">
+        <result property="marea"    column="marea"    />
+        <result property="msum"    column="msum"    />
+        <result property="man"    column="man"    />
+        <result property="woman"    column="woman"    />
+    </resultMap>
 	<sql id="selectVillagerInfoVo">
         select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, prt from villager_info
     </sql>
@@ -214,11 +220,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectPersonAllByApi" parameterType="PersonApi" resultMap="VillagerInfoResult">
         <include refid="selectVillagerInfoVo"/>
         <where>
-            <if test="aid != null  and aid != '' "> and aid = #{aid}</if>
-            <if test="uname != null  and uname != '' "> and vname = #{uname}</if>
+            <if test="aid != null  and aid != '' ">aid = #{aid}</if>
+            <if test="uname != null  and uname != ''  ">and vname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
             <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
         </where>
         ORDER BY vname asc
-        limit #{PageSize} offset #{PageIndex}
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+
+    <select id="selectGrouplist" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        select DISTINCT grouptype
+        <where>
+            <if test="aid != null  and aid != '' ">  aid = #{aid}</if>
+            <if test="politics != null  and politics != '' "> and politics LIKE CONCAT(CONCAT('%', #{politics}),'%')</if>
+        </where>
+        from villager_info
+        ORDER BY grouptype asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+    <select id="selectvillagerInfoListBytype" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        <include refid="selectVillagerInfoVo"/>
+        <where>
+            <if test="state != null  and state != ''  ">grouptype = #{state}</if>
+            <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
+            <if test="politics != null  and politics != '' "> and politics LIKE CONCAT(CONCAT('%', #{politics}),'%')</if>
+        </where>
+        ORDER BY uname asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+
+    <select id="countbyperson" parameterType="PersonApi" resultMap="mcountResult">
+        select
+            count(vid) as msum,
+            count(sex = '男' or null ) as man,
+            count(sex = '女' or null ) as woman
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">  aid = #{aid}</if>
+        </where>
     </select>
 </mapper>

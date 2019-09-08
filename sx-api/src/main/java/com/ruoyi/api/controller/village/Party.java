@@ -19,7 +19,7 @@ public class Party extends BaseController {
     @Autowired
     private IHuodongService huodongService;
     @Autowired
-    private IEducationService educationService;
+    private IPartystudyService partystudyService;
     @Autowired
     private IPartyaffairsService partyaffairsService;
     @Autowired
@@ -53,9 +53,9 @@ public class Party extends BaseController {
     @GetMapping("/eduAll")
     @CrossOrigin
     @ApiOperation(value = "返回所有党员学习信息")
-    public RongApiRes searchEduAll(Education education)
+    public RongApiRes searchEduAll(Partystudy partystudy)
     {
-        return RongApiService.get_list(educationService.selectEducationList(education));
+        return RongApiService.get_list(partystudyService.selectPartystudyList(partystudy));
     }
 
     @GetMapping("/affairAll")
@@ -86,7 +86,7 @@ public class Party extends BaseController {
             case "1":
                 return RongApiService.get_list(huodongService.selectHuodongListById(party));
             case "2":
-                return RongApiService.get_list(educationService.selectEducationListById(party));
+                return RongApiService.get_list(partystudyService.selectPartystudyListById(party));
             case "3":
                 return RongApiService.get_list(partyfupinService.selectfupinListById(party));
             default:
@@ -105,9 +105,9 @@ public class Party extends BaseController {
     @PostMapping("/insertEducation")
     @CrossOrigin
     @ApiOperation(value = "新增党员学习")
-    public AjaxResult insertEducation(Education education)
+    public AjaxResult insertEducation(Partystudy partystudy)
     {
-        return toAjax(educationService.inserteducation(education));
+        return toAjax(partystudyService.insertPartystudy(partystudy));
     }
 
     @PostMapping("/insertFuPin")

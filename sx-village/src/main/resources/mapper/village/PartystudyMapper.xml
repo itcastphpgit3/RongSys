@@ -101,5 +101,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{mid}
         </foreach>
     </delete>
-    
+    <select id="selectPartystudyListById" parameterType="pubObjApi" resultMap="PartystudyResult">
+        <include refid="selectPartystudyVo"/>
+        <where>
+            <if test="aid != null  and aid != '' ">aid = #{aid}</if>
+            <if test="title != null  and title != '' "> and mtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
+        </where>
+        ORDER BY pushdate DESC
+        limit #{pageSize} offset #{pageIndex}
+    </select>
 </mapper>

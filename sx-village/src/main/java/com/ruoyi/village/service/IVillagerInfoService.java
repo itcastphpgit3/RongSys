@@ -1,5 +1,6 @@
 package com.ruoyi.village.service;
 
+import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
 import java.util.List;
@@ -54,4 +55,5 @@ public interface IVillagerInfoService
 
 	public List<VillagerInfo> selectPersonAllByApi(PersonApi person);
 
+	public Mcount countpmBySex(PersonApi person);
 }

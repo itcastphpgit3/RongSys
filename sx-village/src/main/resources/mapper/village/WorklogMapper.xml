@@ -138,11 +138,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectWorklogListByid" parameterType="pubObjApi" resultMap="WorklogResult">
         <include refid="selectWorklogVo"/>
         <where>
-            <if test="Title != null  and Title != ''  ">wtitle = #{Title}</if>
-            <if test="ProjectID != null  and ProjectID != ''  ">and proid LIKE CONCAT(CONCAT('%', #{ProjectID}),'%')</if>
-            <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+            <if test="userid != null  and userid != '' "> uid = #{userid}</if>
+            <if test="title != null  and title != ''  ">and wtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
+            <if test="projectID != null  and projectID != ''  ">and proid LIKE CONCAT(CONCAT('%', #{projectID}),'%')</if>
         </where>
         ORDER BY pushdate DESC
-        limit #{PageSize} offset #{PageIndex}
+        limit #{pageSize} offset #{pageIndex}
     </select>
 </mapper>

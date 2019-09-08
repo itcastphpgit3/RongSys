@@ -109,6 +109,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="uname != null  and uname != ''  ">and  pname = #{uname}</if>
         </where>
         ORDER BY datetime DESC
-        limit #{PageSize} offset #{PageIndex}
+        limit #{pageSize} offset #{pageIndex}
     </select>
 </mapper>

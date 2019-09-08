@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Partystudy;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -45,10 +47,12 @@ public interface IPartystudyService
 		
 	/**
      * 删除党员学习信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
 	public int deletePartystudyByIds(String ids);
+
+	public List<Partystudy> selectPartystudyListById(pubObjApi partystudy);
 	
 }

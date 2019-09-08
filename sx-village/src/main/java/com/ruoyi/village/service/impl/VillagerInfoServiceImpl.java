@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,4 +96,12 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	{
 		return villagerInfoMapper.selectPersonAllByApi(person);
 	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXBAODIAN)
+	public Mcount countpmBySex(PersonApi person)
+	{
+		return villagerInfoMapper.countpmBySex(person);
+	}
+
 }

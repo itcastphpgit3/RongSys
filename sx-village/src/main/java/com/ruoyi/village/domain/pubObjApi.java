@@ -6,16 +6,16 @@ public class pubObjApi extends BaseEntity
 {
 
     private Integer userid; //用户id
-    private String Title;
+    private String title;
     private String state;
     private String beginTime;
-    private String EndTime;
-    private Integer PageSize;
-    private Integer PageIndex;
+    private String endTime;
+    private Integer pageSize;
+    private Integer pageIndex;
     private String aid; //地区编号
     private String uname; //姓名
-    private String ProjectID;//项目id
-    private String Rural_Types;//美丽乡村类别
+    private String projectID;//项目id
+    private String rural_Types;//美丽乡村类别
 
     public Integer getUserid() {
         return userid;
@@ -26,11 +26,11 @@ public class pubObjApi extends BaseEntity
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getState() {
@@ -50,27 +50,27 @@ public class pubObjApi extends BaseEntity
     }
 
     public String getEndTime() {
-        return EndTime;
+        return endTime;
     }
 
     public void setEndTime(String endTime) {
-        EndTime = endTime;
+        this.endTime = endTime;
     }
 
     public Integer getPageSize() {
-        return PageSize;
+        return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {
-        PageSize = pageSize;
+        this.pageSize = pageSize;
     }
 
     public Integer getPageIndex() {
-        return PageIndex;
+        return pageIndex;
     }
 
     public void setPageIndex(Integer pageIndex) {
-        PageIndex = pageIndex;
+        this.pageIndex = pageIndex;
     }
 
     public String getAid() {
@@ -90,18 +90,18 @@ public class pubObjApi extends BaseEntity
     }
 
     public String getProjectID() {
-        return ProjectID;
+        return projectID;
     }
 
     public void setProjectID(String projectID) {
-        ProjectID = projectID;
+        this.projectID = projectID;
     }
 
     public String getRural_Types() {
-        return Rural_Types;
+        return rural_Types;
     }
 
     public void setRural_Types(String rural_Types) {
-        Rural_Types = rural_Types;
+        this.rural_Types = rural_Types;
     }
 }

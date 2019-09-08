@@ -132,10 +132,10 @@
 		select <include refid="Field"/>
 		from <include refid="tableName"/>
 		<where>
-			<if test="Title != null  and Title != ''  ">hdtitle = #{Title}</if>
-			<if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
+			<if test="aid != null  and aid != '' "> aid = #{aid}</if>
+			<if test="title != null  and title != ''  ">and hdtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
 		</where>
 		ORDER BY hdadddate desc
-		limit #{PageSize} offset #{PageIndex}
+		limit #{pageSize} offset #{pageIndex}
 	</select>
 </mapper>

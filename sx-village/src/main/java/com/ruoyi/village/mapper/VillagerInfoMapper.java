@@ -1,5 +1,6 @@
 package com.ruoyi.village.mapper;
 
+import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
 import java.util.List;	
@@ -61,4 +62,6 @@ public interface VillagerInfoMapper
 	public int deleteVillagerInfoByIds(String[] vids);
 
 	public List<VillagerInfo> selectPersonAllByApi(PersonApi person);
+
+	public Mcount countpmBySex(PersonApi person);
 }

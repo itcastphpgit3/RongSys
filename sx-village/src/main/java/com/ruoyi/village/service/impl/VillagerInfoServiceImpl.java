@@ -32,7 +32,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
      * @return 村民信息
      */
     @Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public VillagerInfo selectVillagerInfoById(Integer vid)
 	{
 	    return villagerInfoMapper.selectVillagerInfoById(vid);
@@ -45,7 +45,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
      * @return 村民集合
      */
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public List<VillagerInfo> selectVillagerInfoList(VillagerInfo villagerInfo)
 	{
 	    return villagerInfoMapper.selectVillagerInfoList(villagerInfo);
@@ -58,7 +58,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
      * @return 结果
      */
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public int insertVillagerInfo(VillagerInfo villagerInfo)
 	{
 	    return villagerInfoMapper.insertVillagerInfo(villagerInfo);
@@ -71,7 +71,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
      * @return 结果
      */
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public int updateVillagerInfo(VillagerInfo villagerInfo)
 	{
 	    return villagerInfoMapper.updateVillagerInfo(villagerInfo);
@@ -84,21 +84,21 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
      * @return 结果
      */
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public int deleteVillagerInfoByIds(String ids)
 	{
 		return villagerInfoMapper.deleteVillagerInfoByIds(Convert.toStrArray(ids));
 	}
 
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public List<VillagerInfo> selectPersonAllByApi(PersonApi person)
 	{
 		return villagerInfoMapper.selectPersonAllByApi(person);
 	}
 
 	@Override
-	@DataSource(value = DataSourceType.SXBAODIAN)
+	@DataSource(value = DataSourceType.SXVILLAGE)
 	public Mcount countpmBySex(PersonApi person)
 	{
 		return villagerInfoMapper.countpmBySex(person);

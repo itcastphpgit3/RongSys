@@ -1,5 +1,7 @@
 package com.ruoyi.village.domain;
 
+import java.util.List;
+
 public class PersonApi {
     private Integer userid; //用户id
     private String aid; //地区编号
@@ -8,7 +10,7 @@ public class PersonApi {
     private String politics;//政治面貌
     private Integer pageSize;
     private Integer pageIndex;
-
+    private List<String> listaid;
     public Integer getUserid() {
         return userid;
     }
@@ -63,5 +65,13 @@ public class PersonApi {
 
     public void setPolitics(String politics) {
         this.politics = politics;
+    }
+
+    public List<String> getListaid() {
+        return listaid;
+    }
+
+    public void setListaid(List<String> listaid) {
+        this.listaid = listaid;
     }
 }

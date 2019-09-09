@@ -141,7 +141,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectProjectListForapp" parameterType="pubObjApi" resultMap="ProjectResult">
         <include refid="selectProjectVo"/>
         <where>
-            <if test="aid != null  and aid != '' ">aid = #{aid}</if>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
             <if test="title != null  and title != '' "> and proname LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
             <if test="state != null "> and ptype LIKE CONCAT(CONCAT('%', #{state}),'%')</if>
             <if test="beginTime != null  and endTime != '' "> and pushdate between #{beginTime} AND #{endTime} </if>

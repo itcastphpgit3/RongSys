@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 村务模块中党员值班功能的接口
@@ -60,7 +61,10 @@ public class Pwork extends BaseController {
     @PostMapping("/insertWorkLog")
     @CrossOrigin
     @ApiOperation(value = "新增工作记录")
-    public AjaxResult insertWorkLog(Worklog worklog )
+    public AjaxResult insertWorkLog(Worklog worklog,@RequestParam(value = "files") MultipartFile file,
+                                    @RequestParam(value = "filename", required = false) String fname,
+                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String fsize )
     {
         return toAjax(worklogService.insertWorklog(worklog));
     }

@@ -132,7 +132,10 @@
 		select <include refid="Field"/>
 		from <include refid="tableName"/>
 		<where>
-			<if test="aid != null  and aid != '' "> aid = #{aid}</if>
+			<if test="aid != null  and aid != '' ">aid in
+				<foreach collection="listaid" item="item" separator="," open="(" close=")">
+					#{item}
+				</foreach></if>
 			<if test="title != null  and title != ''  ">and hdtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
 		</where>
 		ORDER BY hdadddate desc

@@ -105,7 +105,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectfupinListById" parameterType="pubObjApi" resultMap="PartyfupinResult">
         <include refid="selectPartyfupinVo"/>
         <where>
-            <if test="aid != null  and aid != '' "> aid = #{aid}</if>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
             <if test="title != null  and title != ''  ">and mtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
         </where>
         ORDER BY pushdate DESC

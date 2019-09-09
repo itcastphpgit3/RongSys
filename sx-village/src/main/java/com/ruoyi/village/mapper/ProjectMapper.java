@@ -61,5 +61,5 @@ public interface ProjectMapper
      */
 	public int deleteProjectByIds(String[] proids);
 
-	public List<pubObjApi> selectProjectListForapp(pubObjApi project);
+	public List<Project> selectProjectListForapp(pubObjApi project);
 }

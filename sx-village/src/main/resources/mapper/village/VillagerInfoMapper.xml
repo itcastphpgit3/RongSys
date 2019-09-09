@@ -256,7 +256,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             count(sex = '女' or null ) as woman
         from villager_info
         <where>
-            <if test="aid != null  and aid != '' ">  aid = #{aid}</if>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
         </where>
     </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.ruoyi.village.domain;
 import com.ruoyi.common.base.BaseEntity;
 
+import java.util.List;
+
 
 public class pubObjApi extends BaseEntity
 {
@@ -16,6 +18,7 @@ public class pubObjApi extends BaseEntity
     private String uname; //姓名
     private String proid;//项目id
     private String vtype;//美丽乡村类别
+    private List<String> listaid;
 
     public Integer getUserid() {
         return userid;
@@ -103,5 +106,13 @@ public class pubObjApi extends BaseEntity
 
     public void setVtype(String vtype) {
         this.vtype = vtype;
+    }
+
+    public List<String> getListaid() {
+        return listaid;
+    }
+
+    public void setListaid(List<String> listaid) {
+        this.listaid = listaid;
     }
 }

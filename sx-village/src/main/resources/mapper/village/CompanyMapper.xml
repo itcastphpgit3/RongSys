@@ -105,7 +105,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCompanyListById" parameterType="pubObjApi" resultMap="CompanyResult">
         <include refid="selectCompanyVo"/>
         <where>
-            <if test="aid != null  and aid != '' "> aid = #{aid}</if>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
             <if test="uname != null  and uname != ''  ">and  cname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
         </where>
         ORDER BY datetime DESC

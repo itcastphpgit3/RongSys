@@ -11,7 +11,7 @@
         <result property="parentaid" column="parentaid"/>
         <result property="aid" column="aid"/>
         <result property="userid" column="userid"/>
-        <result property="createdtime" column="createdtime"/>
+        <result property="createdtime" column="createtime"/>
 
     </resultMap>
 
@@ -92,6 +92,16 @@
         <!--where tt.tgid = #{tgid}-->
         <!--order by tt.tid-->
     <!--</select>-->
+
+    <select id="selectTempgroup" parameterType="Tempgroup" resultMap="TempgroupResult">
+        select
+        tgid,
+        tgname,
+        userid,
+        createtime,
+        note
+        from tempgroup
+    </select>
 
     <!--插入临时列表-->
     <insert id="insertTempgroup" parameterType="Tempgroup">

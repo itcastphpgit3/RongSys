@@ -4,7 +4,7 @@ import com.ruoyi.common.base.BaseEntity;
 
 /**
  * Created by ASUS on 2019/7/29.
- * @author 陈霞
+ * @author cx
  */
 public class Tempgroup extends BaseEntity {
 

@@ -60,6 +60,15 @@ public class TempgroupController extends BaseController{
         return getDataTable(list);
     }
 
+    @PostMapping("/list1")
+    @ResponseBody
+    public TableDataInfo list1(Tempgroup tempgroup)
+    {
+        startPage();
+        List<Tempgroup> list = iTempgroupService.selectTempgroup(tempgroup);
+        return getDataTable(list);
+    }
+
     @GetMapping("/treeData")
     @ResponseBody
     public List<Map<String,Object>> treedata()

@@ -45,4 +45,12 @@ public interface TempgroupMapper {
      * @return 终端临时列表
      */
     public int insertTempgroup(Tempgroup tempgroup);
+
+    /**
+     * 临时分组列表
+     *
+     * @return 终端临时列表
+     */
+
+    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup);
 }

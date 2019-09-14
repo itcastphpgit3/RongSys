@@ -12,6 +12,7 @@
         <result property="aid" column="aid"/>
         <result property="userid" column="userid"/>
         <result property="createdtime" column="createtime"/>
+        <result property="listId" column="listid"/>
 
     </resultMap>
 
@@ -95,12 +96,14 @@
 
     <select id="selectTempgroup" parameterType="Tempgroup" resultMap="TempgroupResult">
         select
-        tgid,
-        tgname,
-        userid,
-        createtime,
-        note
+            tgid,
+            tgname,
+            userid,
+            createtime,
+            note,
+            listid
         from tempgroup
+        order by listid asc
     </select>
 
     <!--插入临时列表-->
@@ -140,5 +143,10 @@
         <include refid="areatableName"/>
         where aid = #{aid}
     </select>
+
+    <delete id="deleteTempgroup" parameterType="Integer">
+        delete * from tempgroup
+        where listid = #{listid}
+    </delete>
 
 </mapper>

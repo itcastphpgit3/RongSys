@@ -63,9 +63,9 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public int deleteTempgroup(int tgid)
+    public int deleteTempgroup(int listId)
     {
-        return tempgroupMapper.deleteTempgroup(tgid);
+        return tempgroupMapper.deleteTempgroup(listId);
     }
 
     /**

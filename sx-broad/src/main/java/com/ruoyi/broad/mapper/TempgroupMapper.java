@@ -37,7 +37,7 @@ public interface TempgroupMapper {
      *
      * @return 终端临时列表
      */
-    public int deleteTempgroup(int tgid);
+    public int deleteTempgroup(int listId);
 
     /**
      * 插入终端临时列表

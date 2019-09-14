@@ -80,13 +80,17 @@ public class AreaGroupingController extends BaseController{
         return tree;
     }
 
+    /**
+     * @author cx
+     * @Description 此删除方式可以批量删除，可以单独删除
+     */
     @PostMapping("/remove")
     @Log(title = "分组管理删除",businessType = BusinessType.DELETE)
     @RequiresPermissions("broad:areagrouping:remove")
     @ResponseBody
     public AjaxResult removeAreagrouping(String ids)
     {
-        return toAjax(iAreaGroupingService.deleteAreaGrouping(ids));
+        return toAjax(iAreaGroupingService.deleteAreaGroupingByIds(ids));
     }
 
     @GetMapping("/add")

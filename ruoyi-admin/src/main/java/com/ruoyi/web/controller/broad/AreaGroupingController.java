@@ -83,6 +83,8 @@ public class AreaGroupingController extends BaseController{
     /**
      * @author cx
      * @Description 此删除方式可以批量删除，可以单独删除
+     * @param ids
+     * 注意 这个地方的参数一定要写ids 和前端绑定的固定格式
      */
     @PostMapping("/remove")
     @Log(title = "分组管理删除",businessType = BusinessType.DELETE)

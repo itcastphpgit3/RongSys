@@ -10,6 +10,7 @@
         <result property="address"    column="address"    />
         <result property="parentaid" column="parentaid"/>
         <result property="aid" column="aid"/>
+        <result property="tgid" column="tgid"/>
         <result property="userid" column="userid"/>
         <result property="createdtime" column="createtime"/>
         <result property="listId" column="listid"/>
@@ -144,9 +145,9 @@
         where aid = #{aid}
     </select>
 
-    <delete id="deleteTempgroup" parameterType="Integer">
-        delete * from tempgroup
-        where listid = #{listid}
+    <delete id="deleteTempgroup" parameterType="String">
+        delete from tempgroup
+        where createtime = #{createtime}
     </delete>
 
 </mapper>

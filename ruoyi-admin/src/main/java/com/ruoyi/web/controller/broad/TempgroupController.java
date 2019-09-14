@@ -75,9 +75,9 @@ public class TempgroupController extends BaseController{
     @PostMapping("/remove")
     @Log(title = "临时分组删除",businessType = BusinessType.DELETE)
     @ResponseBody
-    public AjaxResult remove(int listId)
+    public AjaxResult remove(String ids)
     {
-        return toAjax(iTempgroupService.deleteTempgroup(listId));
+        return toAjax(iTempgroupService.deleteTempgroup(ids));
     }
 
     @GetMapping("/treeData")

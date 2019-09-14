@@ -38,7 +38,7 @@ public interface ITempgroupService {
      *
      * @return 终端临时列表
      */
-    public int deleteTempgroup(int listId);
+    public int deleteTempgroup(String createdtime);
 
     /**
      * 插入终端临时列表

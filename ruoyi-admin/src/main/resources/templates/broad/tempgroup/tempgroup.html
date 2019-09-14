@@ -3,27 +3,21 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:margin-left="http://java.sun.com/jsf/composite"
       xmlns:margin-right="http://java.sun.com/jsf/core">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: header">
+
+</head>
 <body class="gray-bg">
 
 <div class="container-div ui-layout-center">
     <div class="row">
-        <div class="col-sm-12 search-collapse">
+        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-right: 2%" >
+            <p class="select-title">临时分组列表</p>
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
 
-            <div class="container-div">
-                <div class="row">
-                    <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-right: 2%" >
-                        <p class="select-title">临时分组列表</p>
-                        <table id="bootstrap-table" data-mobile-responsive="true"></table>
-                    </div>
-
-                    <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-left: 2%" >
-                        <p class="select-title">终端列表</p>
-                        <table id="bootstrap-table-form" data-mobile-responsive="true"></table>
-                    </div>
-                </div>
-            </div>
-
+        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-left: 2%" >
+            <p class="select-title">终端列表</p>
+            <table id="bootstrap-table-form" data-mobile-responsive="true"></table>
         </div>
     </div>
 </div>
@@ -43,6 +37,16 @@
                 {
                     field : 'tgname',
                     title : '终端IEME',
+                    sortable: true
+                },
+                {
+                    field : 'listId',
+                    title : '排序id',
+                    sortable: true
+                },
+                {
+                    field : 'tgid',
+                    title : '分组id',
                     sortable: true
                 },
                 {
@@ -68,7 +72,7 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-danger btn-xs ' +  '" href="#" onclick="$.operate.remove(\'' + row.listid + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-danger btn-xs ' + '" href="#" onclick="$.operate.remove(\'' + row.createdtime + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }
@@ -77,48 +81,48 @@
         $.table.init(options);
     });
 
-    $(function() {
-        var options = {
-            url: prefix + "/list",
-            id: "bootstrap-table-form",
-            detailUrl: prefix + "/detail/{id}",
-            modalName: "终端列表",
-            search: false,
-            showExport: true,
-            columns: [
-                {
-                    field : 'tid',
-                    title : '终端IEME',
-                    sortable: true
-                },
-                {
-                    field : 'tname',
-                    title : '终端名称',
-                    sortable: true
-                },
-                {
-                    field : 'aname',
-                    title : '所属分组',
-                    sortable: true
-                },
-                {
-                    field : 'address',
-                    title : '终端地址',
-                    sortable: true
-                },
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
-                        return actions.join('');
-                    }
-                }
-            ]
-        };
-        $.table.init(options);
-    });
+//    $(function() {
+//        var options = {
+//            url: prefix + "/list",
+//            id: "bootstrap-table-form",
+//            detailUrl: prefix + "/detail/{id}",
+//            modalName: "终端列表",
+//            search: false,
+//            showExport: true,
+//            columns: [
+//                {
+//                    field : 'tid',
+//                    title : '终端IEME',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'tname',
+//                    title : '终端名称',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'aname',
+//                    title : '所属分组',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'address',
+//                    title : '终端地址',
+//                    sortable: true
+//                },
+//                {
+//                    title: '操作',
+//                    align: 'center',
+//                    formatter: function (value, row, index) {
+//                        var actions = [];
+//                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+//                        return actions.join('');
+//                    }
+//                }
+//            ]
+//        };
+//        $.table.init(options);
+//    });
 
 </script>
 </body>

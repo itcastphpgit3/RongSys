@@ -18,11 +18,11 @@ import java.util.List;
  */
 @Service
 public class AreaGroupingServiceImpl implements IAreaGroupingService{
-    /*
+    /**
    * 查询分组列表，连表查询
    *
    * @return 终端分组列表
-   * */
+   */
     @Autowired
     private AreaGroupingMapper areaGroupingMapper;
 
@@ -33,35 +33,22 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
         return areaGroupingMapper.listAreaGrouping(areaGrouping);
     }
 
-    /*
-    * 删除分组列表
-    *
-    *
-    *@return 终端分组列表
-    * */
-    @Override
-    @DataSource(value = DataSourceType.SLAVE)
-    public int deleteAreaGrouping(String aid)
-    {
-         return areaGroupingMapper.deleteAreaGrouping(aid);
-    }
-
-    /*
+    /**
     * 更新分组列表
     *
     * @return 终端分组列表
-    * */
+    */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
     public int updateAreaGrouping(AreaGrouping areaGrouping)
     {
         return areaGroupingMapper.updateAreaGrouping(areaGrouping);
     }
-    /*
+    /**
     * 插入分组列表
     *
     * @return 终端分组列表
-    * */
+    */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
     public int insertAreaGrouping(AreaGrouping areaGrouping)

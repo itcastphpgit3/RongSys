@@ -8,7 +8,7 @@
 
 <div class="container-div ui-layout-center">
     <div class="row">
-        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-right: 2%" >
+        <div class="col-sm-12 select-table table-striped" style="width: 49%; margin-right: 1%" >
             <p class="select-title">临时分组列表</p>
             <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
                 <a class="btn btn-success" onclick="$.operate.add()">
@@ -18,7 +18,7 @@
             <table id="bootstrap-table-test" data-mobile-responsive="true"></table>
         </div>
 
-        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-left: 2%" >
+        <div class="col-sm-12 select-table table-striped" style="width: 49%; margin-left: 1%" >
             <p class="select-title">终端列表</p>
             <table id="bootstrap-table-form" data-mobile-responsive="true"></table>
         </div>
@@ -79,53 +79,61 @@
                         return actions.join('');
                     }
                 }
-            ]
+            ],
+            onClickRow:function (row, $element) {
+                teble2(row.tgname);
+            }
         };
         $.table.init(options);
     });
 
-//    $(function() {
-//        var options = {
-//            url: prefix + "/list",
-//            id: "bootstrap-table-form",
-//            detailUrl: prefix + "/detail/{id}",
-//            modalName: "终端列表",
-//            search: false,
-//            showExport: true,
-//            columns: [
-//                {
-//                    field : 'tid',
-//                    title : '终端IEME',
-//                    sortable: true
-//                },
-//                {
-//                    field : 'tname',
-//                    title : '终端名称',
-//                    sortable: true
-//                },
-//                {
-//                    field : 'aname',
-//                    title : '所属分组',
-//                    sortable: true
-//                },
-//                {
-//                    field : 'address',
-//                    title : '终端地址',
-//                    sortable: true
-//                },
-//                {
-//                    title: '操作',
-//                    align: 'center',
-//                    formatter: function (value, row, index) {
-//                        var actions = [];
-//                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
-//                        return actions.join('');
-//                    }
-//                }
-//            ]
-//        };
-//        $.table.init(options);
-//    });
+   // $(
+       function teble2(tgname) {
+       var temp = tgname
+       var options = {
+           url: prefix + `/list/${temp}`,
+           id: "bootstrap-table-form",
+           detailUrl: prefix + "/detail/{id}",
+           modalName: "终端列表",
+           search: false,
+           showExport: true,
+           columns: [
+               {
+                   field : 'tid',
+                   title : '终端IEME',
+                   sortable: true
+               },
+               {
+                   field : 'tname',
+                   title : '终端名称',
+                   sortable: true
+               },
+               {
+                   field : 'aname',
+                   title : '所属分组',
+                   sortable: true
+               },
+               {
+                   field : 'uname',
+                   title : '所属用户',
+                   sortable: true
+               },
+               {
+                   title: '操作',
+                   align: 'center',
+                   formatter: function (value, row, index) {
+                       var actions = [];
+                       actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+                       return actions.join('');
+                   }
+               }
+           ]
+       };
+       $.table.destroy("bootstrap-table-form");
+       $.table.init(options);
+       }
+
+   // );
 
 </script>
 </body>

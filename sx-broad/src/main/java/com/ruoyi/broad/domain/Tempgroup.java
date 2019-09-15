@@ -14,6 +14,10 @@ public class Tempgroup extends BaseEntity {
     /*临时分组名称*/
     private String tgname;
 
+    /*是否启用*/
+
+    private boolean issue;
+
     /*终端名称*/
     private String tname;
 
@@ -24,7 +28,7 @@ public class Tempgroup extends BaseEntity {
     private String rightuname;
 
     /*创建时间*/
-    private String createdtime;
+    private String createtime;
 
     /*这个字段数据库里没注释，暂时不知道其作用*/
     private String note;
@@ -54,6 +58,8 @@ public class Tempgroup extends BaseEntity {
 
     private int listId;
 
+    private String rightuserid;
+
     public int getTgid() {
         return tgid;
     }
@@ -68,6 +74,14 @@ public class Tempgroup extends BaseEntity {
 
     public void setTgname(String tgname) {
         this.tgname = tgname;
+    }
+
+    public boolean isIssue() {
+        return issue;
+    }
+
+    public void setIssue(boolean issue) {
+        this.issue = issue;
     }
 
     public String getTname() {
@@ -94,12 +108,12 @@ public class Tempgroup extends BaseEntity {
         this.rightuname = rightuname;
     }
 
-    public String getCreatedtime() {
-        return createdtime;
+    public String getCreatetime() {
+        return createtime;
     }
 
-    public void setCreatedtime(String createdtime) {
-        this.createdtime = createdtime;
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
     }
 
     public String getNote() {
@@ -182,6 +196,14 @@ public class Tempgroup extends BaseEntity {
         this.listId = listId;
     }
 
+    public String getRightuserid() {
+        return rightuserid;
+    }
+
+    public void setRightuserid(String rightuserid) {
+        this.rightuserid = rightuserid;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Tempgroup").append('[')
@@ -189,14 +211,16 @@ public class Tempgroup extends BaseEntity {
                 .append(tgid)
                 .append(",tgname=")
                 .append(tgname)
+                .append(",issue=")
+                .append(issue)
                 .append(",tname=")
                 .append(tname)
                 .append(",userid=")
                 .append(userid)
                 .append(",rightuname=")
                 .append(rightuname)
-                .append(",createdtime=")
-                .append(createdtime)
+                .append(",createtime=")
+                .append(createtime)
                 .append(",note=")
                 .append(note)
                 .append(",isuse=")
@@ -217,6 +241,8 @@ public class Tempgroup extends BaseEntity {
                 .append(parentaid)
                 .append(",listId=")
                 .append(listId)
+                .append(",rightuserid=")
+                .append(rightuserid)
                 .append(']');
         return sb.toString();
     }

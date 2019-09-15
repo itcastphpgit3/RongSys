@@ -3,16 +3,19 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:margin-left="http://java.sun.com/jsf/composite"
       xmlns:margin-right="http://java.sun.com/jsf/core">
 <meta charset="utf-8">
-<head th:include="include :: header">
-
-</head>
+<head th:include="include :: header"></head>
 <body class="gray-bg">
 
 <div class="container-div ui-layout-center">
     <div class="row">
         <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-right: 2%" >
             <p class="select-title">临时分组列表</p>
-            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+            <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+            </div>
+            <table id="bootstrap-table-test" data-mobile-responsive="true"></table>
         </div>
 
         <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-left: 2%" >
@@ -29,6 +32,8 @@
         var options = {
             url: prefix + "/list1",
             detailUrl: prefix + "/detail/{id}",
+            id: "bootstrap-table-test",
+            createUrl: prefix + "/add",
             removeUrl: prefix + "/remove",
             modalName: "临时分组",
             search: false,
@@ -36,29 +41,27 @@
             columns: [
                 {
                     field : 'tgname',
-                    title : '终端IEME',
-                    sortable: true
-                },
-                {
-                    field : 'listId',
-                    title : '排序id',
+                    title : '分组名称',
                     sortable: true
                 },
                 {
                     field : 'tgid',
                     title : '分组id',
-                    sortable: true
+                    sortable: true,
+                    visible: false
                 },
                 {
+                    field : 'uname',
                     title : '权限人',
-                    sortable: true
+                    sortable: true,
+                    visible: true
                 },
                 {
                     title : '开启权限',
                     sortable: true
                 },
                 {
-                    field : 'createdtime',
+                    field : 'createtime',
                     title : '创建时间',
                     sortable: true
                 },
@@ -72,7 +75,7 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-danger btn-xs ' + '" href="#" onclick="$.operate.remove(\'' + row.createdtime + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-danger btn-xs ' + '" href="#" onclick="$.operate.remove(\'' + row.createtime + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }

@@ -72,6 +72,20 @@ public class TempgroupController extends BaseController{
         return getDataTable(list);
     }
 
+    @GetMapping("/add")
+    public String addMaintainApply()
+    {
+        return prefix + "/add";
+    }
+
+    @Log(title = "新增临时分组", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Tempgroup tempgroup)
+    {
+        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
+    }
+
     @PostMapping("/remove")
     @Log(title = "临时分组删除",businessType = BusinessType.DELETE)
     @ResponseBody

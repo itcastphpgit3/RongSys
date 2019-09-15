@@ -12,8 +12,9 @@
         <result property="aid" column="aid"/>
         <result property="tgid" column="tgid"/>
         <result property="userid" column="userid"/>
-        <result property="createdtime" column="createtime"/>
+        <result property="createtime" column="createtime"/>
         <result property="listId" column="listid"/>
+        <result property="uname" column="uname"/>
 
     </resultMap>
 
@@ -99,38 +100,31 @@
         select
             tgid,
             tgname,
-            userid,
+            tempgroup.userid,
             createtime,
-            note,
+            tempgroup.note,
+			tempgroup.uname,
             listid
-        from tempgroup
-        order by listid asc
+        from tempgroup left join userinfo on tempgroup.rightuserid = userinfo.userid
+        order by createtime desc
     </select>
 
     <!--插入临时列表-->
     <insert id="insertTempgroup" parameterType="Tempgroup">
         insert into <include refid="tableName"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tgid != null  and tgid != '' ">tgid,</if>
             <if test="tgname != null  and tgname != '' ">tgname,</if>
             <if test="userid != null  and userid != '' ">userid,</if>
-            <if test="createtime != null  and linkman != '' ">linkman,</if>
-            <if test="linkphone != null  and linkphone != '' ">linkphone,</if>
-            <if test="downtime != null  and downtime != '' ">downtime,</if>
-            <if test="applytime != null  and applytime != '' ">applytime,</if>
-            <if test="status != null  and status != '' ">status,</if>
-            <if test="remark != null  and remark != '' ">remark,</if>
-            <if test="uid != null  and uid != '' ">uid</if>
+            <if test="createtime != null  and createtime != '' ">createtime,</if>
+            <if test="note != null  and note != '' ">note,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="teraddress != null  and teraddress != '' ">#{teraddress},</if>
-            <if test="maid != null  and maid != '' ">#{maid},</if>
-            <if test="linkman != null  and linkman != '' ">#{linkman},</if>
-            <if test="linkphone != null  and linkphone != '' ">#{linkphone},</if>
-            <if test="downtime != null  and downtime != '' ">#{downtime},</if>
-            <if test="applytime != null  and applytime != '' ">#{applytime},</if>
-            <if test="status != null  and status != '' ">#{status},</if>
-            <if test="remark != null  and remark != '' ">#{remark},</if>
-            <if test="uid != null  and uid != '' ">#{uid}</if>
+            <if test="tgid != null  and tgid != '' ">tgid,</if>
+            <if test="tgname != null  and tgname != '' ">tgname,</if>
+            <if test="userid != null  and userid != '' ">userid,</if>
+            <if test="createtime != null  and createtime != '' ">createtime,</if>
+            <if test="note != null  and note != '' ">note,</if>
         </trim>
     </insert>
 

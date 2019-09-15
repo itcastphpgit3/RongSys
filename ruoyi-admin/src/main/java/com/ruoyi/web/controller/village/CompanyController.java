@@ -1,11 +1,16 @@
 package com.ruoyi.web.controller.village;
 
+import com.ruoyi.broad.domain.Area;
+import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.common.utils.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.village.domain.Company;
 import com.ruoyi.village.service.ICompanyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -15,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 企业 信息操作处理
@@ -30,6 +36,13 @@ public class CompanyController extends BaseController
 	
 	@Autowired
 	private ICompanyService companyService;
+
+	@Autowired
+	private IAreaService areaService;
+
+	@Autowired
+	private ISysUserService sysUserService;
+
 	
 	@RequiresPermissions("village:company:view")
 	@GetMapping()
@@ -50,7 +63,40 @@ public class CompanyController extends BaseController
         List<Company> list = companyService.selectCompanyList(company);
 		return getDataTable(list);
 	}
-	
+	/**
+	 * 加载区域列表树
+	 */
+	@GetMapping("/treeData")
+	@ResponseBody
+	public List<Map<String, Object>> treeData()
+	{
+		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
+		Long userid =  currentUser.getUserId();
+		int returnId = new Long(userid).intValue();
+		int roleid = sysUserService.selectRoleid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Roleid
+		if(roleid == 1) {
+			List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
+			return tree;
+		}else {
+			String aid;
+			aid = sysUserService.selectAid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+			Area update_area = new Area();
+			update_area.setAid(aid);
+			List<Map<String, Object>> tree = areaService.selectAreaTree(update_area);
+			return tree;
+		}
+	}
+
+
+
+	/**
+	 * 选择区域树
+	 */
+	@GetMapping("/selectAidTree")
+	public String selectAidTree()
+	{
+		return prefix + "/aidTree";
+	}
 	
 	/**
 	 * 导出企业列表

@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Villageplan;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 美丽乡村 数据层
@@ -58,5 +60,7 @@ public interface VillageplanMapper
      * @return 结果
      */
 	public int deleteVillageplanByIds(String[] mids);
+
+	public List<Villageplan> selectBeaCountryListByid(pubObjApi beavill);
 	
 }

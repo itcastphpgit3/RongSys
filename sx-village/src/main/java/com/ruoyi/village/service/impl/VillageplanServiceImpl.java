@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Villageplan;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.VillageplanMapper;
 import com.ruoyi.village.service.IVillageplanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,11 @@ public class VillageplanServiceImpl implements IVillageplanService
 	{
 		return villageplanMapper.deleteVillageplanByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Villageplan> selectBeaCountryListByid(pubObjApi beavill)
+	{
+		return villageplanMapper.selectBeaCountryListByid(beavill);
+	}
 }

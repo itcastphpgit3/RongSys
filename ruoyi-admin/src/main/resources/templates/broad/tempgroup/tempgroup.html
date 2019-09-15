@@ -1,104 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:margin-left="http://java.sun.com/jsf/composite"
+      xmlns:margin-right="http://java.sun.com/jsf/core">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
-<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<head th:include="include :: header">
 
+</head>
 <body class="gray-bg">
-
-
-    <div class="ui-layout-west">
-        <div class="main-content">
-            <div class="box box-main">
-                <div class="box-header">
-                    <div class="box-title">
-                        <i class="fa icon-grid"></i> 测试树
-                    </div>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
-                        <button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
-                        <button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新"><i class="fa fa-refresh"></i></button>
-                    </div>
-                </div>
-                <div class="ui-layout-content">
-                    <div id="tree" class="ztree"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <div class="container-div ui-layout-center">
     <div class="row">
-        <div class="col-sm-12 search-collapse">
-            <form id="user-form">
-                <input type="hidden" name="aid"/>
-                <input type="hidden" name="parentaid" id="parentaid"/>
-                <div class="select-list">
-                    <ul>
-                        <li>
-                            终端名称： <input type="text" name="tname" id="tname"/>
-                        </li>
-
-                        <li>
-                            所属分组：<input type="text" name="aname" id="aname"/>
-                        </li>
-
-                        <li>
-                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
+        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-right: 2%" >
+            <p class="select-title">临时分组列表</p>
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
         </div>
 
-        <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        <div class="col-sm-12 select-table table-striped" style="width: 48%; margin-left: 2%" >
+            <p class="select-title">终端列表</p>
+            <table id="bootstrap-table-form" data-mobile-responsive="true"></table>
         </div>
     </div>
 </div>
 
 <div th:include="include :: footer"></div>
-<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
-<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 <script th:inline="javascript">
-
     var prefix = ctx + "broad/tempgroup";
-
     $(function() {
-        $('body').layout({ west__size: 185 });
-        queryAreaList();
-        queryAreaTree();
-    });
-
-    function queryAreaList() {
         var options = {
-            url: prefix + "/list",
+            url: prefix + "/list1",
             detailUrl: prefix + "/detail/{id}",
-            modalName: "特殊分组管理",
+            removeUrl: prefix + "/remove",
+            modalName: "临时分组",
             search: false,
             showExport: true,
             columns: [
                 {
-                    field : 'tid',
+                    field : 'tgname',
                     title : '终端IEME',
                     sortable: true
                 },
                 {
-                    field : 'tname',
-                    title : '终端名称',
+                    field : 'listId',
+                    title : '排序id',
                     sortable: true
                 },
                 {
-                    field : 'aname',
-                    title : '所属分组',
+                    field : 'tgid',
+                    title : '分组id',
                     sortable: true
                 },
                 {
-                    field : 'address',
-                    title : '终端地址',
+                    title : '权限人',
+                    sortable: true
+                },
+                {
+                    title : '开启权限',
+                    sortable: true
+                },
+                {
+                    field : 'createdtime',
+                    title : '创建时间',
+                    sortable: true
+                },
+                {
+                    field : 'note',
+                    title : '备注',
                     sortable: true
                 },
                 {
@@ -106,48 +72,57 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + '" href="#" onclick="$.operate.remove(\'' + row.createdtime + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }
             ]
         };
         $.table.init(options);
-    }
-
-    function queryAreaTree()
-    {
-        var url = ctx + "broad/tempgroup/treeData";
-        var options = {
-            url: url,
-            onClick : zOnClick
-        };
-        $.tree.init(options);
-
-        function zOnClick(event, treeId, treeNode) {
-            $("#parentaid").val(treeNode.aid);
-            $.table.search();
-        }
-        $.tree.init(options);
-    }
-
-
-
-    $('#btnExpand').click(function() {
-        $._tree.expandAll(true);
-        $(this).hide();
-        $('#btnCollapse').show();
     });
 
-    $('#btnCollapse').click(function() {
-        $._tree.expandAll(false);
-        $(this).hide();
-        $('#btnExpand').show();
-    });
-
-    $('#btnRefresh').click(function() {
-        queryAreaTree();
-    });
+//    $(function() {
+//        var options = {
+//            url: prefix + "/list",
+//            id: "bootstrap-table-form",
+//            detailUrl: prefix + "/detail/{id}",
+//            modalName: "终端列表",
+//            search: false,
+//            showExport: true,
+//            columns: [
+//                {
+//                    field : 'tid',
+//                    title : '终端IEME',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'tname',
+//                    title : '终端名称',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'aname',
+//                    title : '所属分组',
+//                    sortable: true
+//                },
+//                {
+//                    field : 'address',
+//                    title : '终端地址',
+//                    sortable: true
+//                },
+//                {
+//                    title: '操作',
+//                    align: 'center',
+//                    formatter: function (value, row, index) {
+//                        var actions = [];
+//                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+//                        return actions.join('');
+//                    }
+//                }
+//            ]
+//        };
+//        $.table.init(options);
+//    });
 
 </script>
 </body>

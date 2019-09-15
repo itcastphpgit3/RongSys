@@ -7,11 +7,14 @@ import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.broad.service.ITempgroupService;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -58,6 +61,23 @@ public class TempgroupController extends BaseController{
         startPage();
         List<Tempgroup> list = iTempgroupService.selectAllTempgroup(tempgroup);
         return getDataTable(list);
+    }
+
+    @PostMapping("/list1")
+    @ResponseBody
+    public TableDataInfo list1(Tempgroup tempgroup)
+    {
+        startPage();
+        List<Tempgroup> list = iTempgroupService.selectTempgroup(tempgroup);
+        return getDataTable(list);
+    }
+
+    @PostMapping("/remove")
+    @Log(title = "临时分组删除",businessType = BusinessType.DELETE)
+    @ResponseBody
+    public AjaxResult remove(String ids)
+    {
+        return toAjax(iTempgroupService.deleteTempgroup(ids));
     }
 
     @GetMapping("/treeData")

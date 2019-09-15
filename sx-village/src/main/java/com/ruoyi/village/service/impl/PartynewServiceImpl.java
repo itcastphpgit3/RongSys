@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Partynew;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.PartynewMapper;
 import com.ruoyi.village.service.IPartynewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,12 @@ public class PartynewServiceImpl implements IPartynewService
 	{
 		return partynewMapper.deletePartynewByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Partynew> selectpartynewListById(pubObjApi party)
+	{
+		return partynewMapper.selectpartynewListById(party);
+	}
 }

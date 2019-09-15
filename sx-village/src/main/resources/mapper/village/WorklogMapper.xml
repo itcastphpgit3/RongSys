@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="content != null  and content != '' "> and content LIKE CONCAT(CONCAT('%', #{content}),'%')</if>
              <if test="wname != null  and wname != '' "> and wname LIKE CONCAT(CONCAT('%', #{wname}),'%')</if>
              <if test="wphone != null  and wphone != '' "> and wphone LIKE CONCAT(CONCAT('%', #{wphone}),'%')</if>
-             <if test="uid != null "> and uid LIKE CONCAT(CONCAT('%', #{uid}),'%')</if>
+             <if test="uid != null "> and uid =#{uid}</if>
              <if test="greadtotal != null "> and greadtotal LIKE CONCAT(CONCAT('%', #{greadtotal}),'%')</if>
              <if test="pushdate != null "> and pushdate LIKE CONCAT(CONCAT('%', #{pushdate}),'%')</if>
              <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
@@ -135,5 +135,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{wid}
         </foreach>
     </delete>
-    
+    <select id="selectWorklogListByid" parameterType="pubObjApi" resultMap="WorklogResult">
+        <include refid="selectWorklogVo"/>
+        <where>
+            <if test="Title != null  and Title != ''  ">wtitle = #{Title}</if>
+            <if test="ProjectID != null  and ProjectID != ''  ">and proid LIKE CONCAT(CONCAT('%', #{ProjectID}),'%')</if>
+            <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+        </where>
+        ORDER BY pushdate DESC
+        limit #{PageSize} offset #{PageIndex}
+    </select>
 </mapper>

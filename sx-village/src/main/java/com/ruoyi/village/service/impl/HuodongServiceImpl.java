@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Huodong;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.HuodongMapper;
 import com.ruoyi.village.service.IHuodongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,11 @@ public class HuodongServiceImpl implements IHuodongService {
         @DataSource(value = DataSourceType.SXVILLAGE)
         public int updateHuodong(Huodong huodong) {
             return huodongmapper.updateHuodong(huodong);
+        }
+
+        @Override
+        @DataSource(value = DataSourceType.SXVILLAGE)
+        public List<Huodong> selectHuodongListById(pubObjApi beavill) {
+            return huodongmapper.selectHuodongListById(beavill);
         }
     }

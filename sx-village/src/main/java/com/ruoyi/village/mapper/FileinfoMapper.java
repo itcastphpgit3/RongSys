@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Fileinfo;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 文件夹管理 数据层
@@ -62,4 +64,6 @@ public interface FileinfoMapper
 	public double selectFilesizeSum(String uid);
 
 	public String selectFileurlById(Integer fileid);
+
+	public List<Fileinfo> selectMyFileListById(pubObjApi myfile);
 }

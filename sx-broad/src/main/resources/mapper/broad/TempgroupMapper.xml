@@ -10,8 +10,10 @@
         <result property="address"    column="address"    />
         <result property="parentaid" column="parentaid"/>
         <result property="aid" column="aid"/>
+        <result property="tgid" column="tgid"/>
         <result property="userid" column="userid"/>
-        <result property="createdtime" column="createdtime"/>
+        <result property="createdtime" column="createtime"/>
+        <result property="listId" column="listid"/>
 
     </resultMap>
 
@@ -93,6 +95,18 @@
         <!--order by tt.tid-->
     <!--</select>-->
 
+    <select id="selectTempgroup" parameterType="Tempgroup" resultMap="TempgroupResult">
+        select
+            tgid,
+            tgname,
+            userid,
+            createtime,
+            note,
+            listid
+        from tempgroup
+        order by listid asc
+    </select>
+
     <!--插入临时列表-->
     <insert id="insertTempgroup" parameterType="Tempgroup">
         insert into <include refid="tableName"/>
@@ -130,5 +144,10 @@
         <include refid="areatableName"/>
         where aid = #{aid}
     </select>
+
+    <delete id="deleteTempgroup" parameterType="String">
+        delete from tempgroup
+        where createtime = #{createtime}
+    </delete>
 
 </mapper>

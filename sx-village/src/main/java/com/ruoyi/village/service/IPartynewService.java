@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Partynew;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,8 @@ public interface IPartynewService
      * @return 结果
      */
 	public int deletePartynewByIds(String ids);
+
+
+	public List<Partynew> selectpartynewListById(pubObjApi party);
 	
 }

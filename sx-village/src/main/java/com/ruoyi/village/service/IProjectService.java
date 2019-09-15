@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Project;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,6 @@ public interface IProjectService
      * @return 结果
      */
 	public int deleteProjectByIds(String ids);
-	
+
+	public List<pubObjApi> selectProjectListForapp(pubObjApi project);
 }

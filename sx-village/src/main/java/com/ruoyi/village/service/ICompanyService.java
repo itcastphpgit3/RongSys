@@ -1,6 +1,7 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Company;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -51,5 +52,7 @@ public interface ICompanyService
      * @return 结果
      */
 	public int deleteCompanyByIds(String ids);
+
+	public List<Company> selectCompanyListById(pubObjApi company);
 	
 }

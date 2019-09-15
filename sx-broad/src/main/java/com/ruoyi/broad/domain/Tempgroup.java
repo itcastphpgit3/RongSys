@@ -4,7 +4,7 @@ import com.ruoyi.common.base.BaseEntity;
 
 /**
  * Created by ASUS on 2019/7/29.
- * @author 陈霞
+ * @author cx
  */
 public class Tempgroup extends BaseEntity {
 
@@ -51,6 +51,8 @@ public class Tempgroup extends BaseEntity {
     private String address;
 
     private String parentaid;
+
+    private int listId;
 
     public int getTgid() {
         return tgid;
@@ -172,6 +174,14 @@ public class Tempgroup extends BaseEntity {
         this.parentaid = parentaid;
     }
 
+    public int getListId() {
+        return listId;
+    }
+
+    public void setListId(int listId) {
+        this.listId = listId;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Tempgroup").append('[')
@@ -205,6 +215,8 @@ public class Tempgroup extends BaseEntity {
                 .append(address)
                 .append(",parentaid=")
                 .append(parentaid)
+                .append(",listId=")
+                .append(listId)
                 .append(']');
         return sb.toString();
     }

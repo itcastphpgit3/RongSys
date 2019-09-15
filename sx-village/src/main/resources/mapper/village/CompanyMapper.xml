@@ -101,5 +101,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{cid}
         </foreach>
     </delete>
-    
+
+    <select id="selectCompanyListById" parameterType="pubObjApi" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        <where>
+            <if test="aid != null  and aid != '' "> aid = #{aid}</if>
+            <if test="uname != null  and uname != ''  ">and  pname = #{uname}</if>
+        </where>
+        ORDER BY datetime DESC
+        limit #{PageSize} offset #{PageIndex}
+    </select>
 </mapper>

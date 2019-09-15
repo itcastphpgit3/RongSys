@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Memorial;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 备忘录 数据层
@@ -58,5 +60,6 @@ public interface MemorialMapper
      * @return 结果
      */
 	public int deleteMemorialByIds(String[] mids);
-	
+
+	public List<Memorial> selectMemorialListById(pubObjApi memorial);
 }

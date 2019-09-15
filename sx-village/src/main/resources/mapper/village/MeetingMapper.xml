@@ -101,5 +101,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{mid}
         </foreach>
     </delete>
-    
+    <select id="selectMeetingListById" parameterType="pubObjApi" resultMap="MeetingResult">
+        <include refid="selectMeetingVo"/>
+        <where>
+            <if test="Title != null  and Title != ''  ">mtitle = #{Title}</if>
+            <if test="userid != null  and userid != '' "> and uid LIKE CONCAT(CONCAT('%', #{userid}),'%')</if>
+        </where>
+        ORDER BY pushdate DESC
+        limit #{PageSize} offset #{PageIndex}
+    </select>
 </mapper>

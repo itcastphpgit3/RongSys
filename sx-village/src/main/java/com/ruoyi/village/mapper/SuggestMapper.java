@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Suggest;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 我的建议 数据层
@@ -58,5 +60,7 @@ public interface SuggestMapper
      * @return 结果
      */
 	public int deleteSuggestByIds(String[] mids);
+
+	public List<Suggest> selectSuggestListById(pubObjApi meet);
 	
 }

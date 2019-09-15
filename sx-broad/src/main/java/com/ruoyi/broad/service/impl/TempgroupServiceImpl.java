@@ -63,9 +63,9 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public int deleteTempgroup(int tgid)
+    public int deleteTempgroup(String createdtime)
     {
-        return tempgroupMapper.deleteTempgroup(tgid);
+        return tempgroupMapper.deleteTempgroup(createdtime);
     }
 
     /**
@@ -79,4 +79,13 @@ public class TempgroupServiceImpl implements ITempgroupService{
     {
         return tempgroupMapper.insertTempgroup(tempgroup);
     }
+
+    /**
+     * 临时分组列表
+     *
+     * @return 终端临时列表
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup){return tempgroupMapper.selectTempgroup(tempgroup);}
 }

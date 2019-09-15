@@ -150,10 +150,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{pid}
         </foreach>
     </delete>
-    <select id="selectGrouplist"  resultMap="PartymemberResult">
+    <select id="selectGrouplist" parameterType="pubObjApi" resultMap="PartymemberResult">
        select DISTINCT grouptype
-
+        <where>
+            <if test="aid != null  and aid != '' ">  aid = #{aid}</if>
+        </where>
       from myc_partymember
+      ORDER BY grouptype asc
+      limit #{PageSize} offset #{PageIndex}
     </select>
-
+    <select id="selectPartymemberListBytype" parameterType="pubObjApi" resultMap="PartymemberResult">
+        <include refid="selectPartymemberVo"/>
+        <where>
+            <if test="state != null  and state != ''  ">grouptype = #{state}</if>
+            <if test="uname != null  and uname != '' "> and uname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
+        </where>
+        ORDER BY uname asc
+        limit #{PageSize} offset #{PageIndex}
+    </select>
 </mapper>

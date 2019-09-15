@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Villageplan;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,6 @@ public interface IVillageplanService
      * @return 结果
      */
 	public int deleteVillageplanByIds(String ids);
-	
+
+	public List<Villageplan> selectBeaCountryListByid(pubObjApi beavill);
 }

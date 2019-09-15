@@ -1,6 +1,8 @@
 package com.ruoyi.village.service;
 
 import com.ruoyi.village.domain.Memorial;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,6 @@ public interface IMemorialService
      * @return 结果
      */
 	public int deleteMemorialByIds(String ids);
-	
+
+	public List<Memorial> selectMemorialListById(pubObjApi memorial);
 }

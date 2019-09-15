@@ -26,9 +26,9 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<Tempgroup> selectAllTempgroup(Tempgroup tempgroup)
+    public List<Tempgroup> selectAllTempgroup(String tgname)
     {
-        return tempgroupMapper.selectAllTempgroup(tempgroup);
+        return tempgroupMapper.selectAllTempgroup(tgname);
     }
 
     /**

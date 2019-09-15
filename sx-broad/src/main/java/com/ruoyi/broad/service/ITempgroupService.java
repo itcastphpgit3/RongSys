@@ -16,7 +16,7 @@ public interface ITempgroupService {
      *
      * @return 终端临时列表
      */
-    public List<Tempgroup> selectAllTempgroup(Tempgroup tempgroup);
+    public List<Tempgroup> selectAllTempgroup(String tgname);
 
     /**
      * 查询终端列表 详细

@@ -54,12 +54,12 @@ public class TempgroupController extends BaseController{
     * 终端临时列表
     *
     * */
-    @PostMapping("/list")
+    @PostMapping("/list/{tgname}")
     @ResponseBody
-    public TableDataInfo list(Tempgroup tempgroup)
+    public TableDataInfo list(@PathVariable("tgname") String tgname,Tempgroup tempgroup)
     {
         startPage();
-        List<Tempgroup> list = iTempgroupService.selectAllTempgroup(tempgroup);
+        List<Tempgroup> list = iTempgroupService.selectAllTempgroup(tgname);
         return getDataTable(list);
     }
 

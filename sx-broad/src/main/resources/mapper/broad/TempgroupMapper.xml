@@ -14,6 +14,7 @@
         <result property="userid" column="userid"/>
         <result property="createdtime" column="createtime"/>
         <result property="listId" column="listid"/>
+        <result property="uname" column="uname"/>
 
     </resultMap>
 
@@ -66,20 +67,25 @@
         user.userinfo
     </sql>
     <!--查询所有临时列表-->
-    <select id="selectAllTempgroup" parameterType="Tempgroup" resultMap="TempgroupResult">
-       select
-            tt.aid as aid,
-            aa.parentaid as parentaid,
-            tid,
-            tname,
-            aname,
-            address
-        from
-            <include refid="tertableName"/> tt left join <include refid="areatableName"/> aa
-        on tt.aid = aa.aid
-        <where>
-            <if test="aid != null  and aid != '' ">and tt.aid like CONCAT('%',#{aid},'%')</if>
-        </where>
+    <select id="selectAllTempgroup" parameterType="String" resultMap="TempgroupResult">
+        SELECT
+            te.tid,
+            te.tname,
+            a.aname,
+            u.uname
+        FROM
+            terminals te,
+            tempgroup tg,
+            tempgroup_ter tgt,
+            area a,
+            userinfo u
+        WHERE
+            te.tid = tgt.tid
+        AND tg.tgid = tgt.tgid
+        AND a.aid = te.aid
+        AND u.userid = te.userid
+        AND tg.tgname = #{tgname}
+
     </select>
 
     <!--根据分组编号查询终端列表-->

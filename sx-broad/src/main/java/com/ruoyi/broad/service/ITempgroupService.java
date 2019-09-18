@@ -16,7 +16,7 @@ public interface ITempgroupService {
      *
      * @return 终端临时列表
      */
-    public List<Tempgroup> selectAllTempgroup(Tempgroup tempgroup);
+    public List<Tempgroup> selectAllTempgroup(String tgname);
 
     /**
      * 查询终端列表 详细
@@ -38,7 +38,7 @@ public interface ITempgroupService {
      *
      * @return 终端临时列表
      */
-    public int deleteTempgroup(int tgid);
+    public int deleteTempgroup(String createdtime);
 
     /**
      * 插入终端临时列表
@@ -46,4 +46,12 @@ public interface ITempgroupService {
      * @return 终端临时列表
      */
     public int insertTempgroup(Tempgroup tempgroup);
+
+    /**
+     * 临时分组列表
+     *
+     * @return 终端临时列表
+     */
+
+    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup);
 }

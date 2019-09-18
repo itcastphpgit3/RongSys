@@ -9,28 +9,27 @@ import java.util.List;
  * @author 陈霞
  */
 public interface IAreaGroupingService {
-    /*
+  /**
    * 查询分组列表，连表查询
    *
    * @return 终端分组列表
-   * */
+   */
     public List<AreaGrouping> listAreaGrouping(AreaGrouping areaGrouping);
 
-    /*
-    * 删除分组列表
-    *
-    *
-    *@return 终端分组列表
-    * */
-    public int deleteAreaGrouping(String aid);
 
+    /**
+     * @author cx
+     * @param aid
+     *
+     * @Description 分组管理批量删除
+     */
     public int deleteAreaGroupingByIds(String aid);
 
-    /*
+    /**
     * 更新分组列表
     *
     * @return 终端分组列表
-    * */
+    */
     public int updateAreaGrouping(AreaGrouping areaGrouping);
 
     /*

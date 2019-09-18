@@ -3,11 +3,7 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
-<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
-
 <body class="gray-bg">
-
 <div class="container-div ui-layout-center">
     <div class="row">
         <div class="col-sm-12 search-collapse">
@@ -44,6 +40,7 @@
                                    placeholder="结束日期"
                                    title="结束日期"/>
                         </li>
+
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -52,19 +49,15 @@
                 </div>
             </form>
         </div>
+
         <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
             <a class="btn btn-success" onclick="$.operate.add()">
                 <i class="fa fa-plus"></i> 添加
             </a>
+
             <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="broad:maintain:edit">
-            <i class="fa fa-edit"></i> 编辑
+                <i class="fa fa-edit"></i> 编辑
             </a>
-            <!--&lt;!&ndash;<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="broad:maintain:remove">&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="fa fa-remove"></i> 删除&ndash;&gt;-->
-            <!--&lt;!&ndash;</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="broad:maintain:export">&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="fa fa-download"></i> 导出&ndash;&gt;-->
-            <!--&lt;!&ndash;</a>&ndash;&gt;-->
         </div>
 
         <div class="col-sm-12 select-table table-striped">
@@ -73,8 +66,9 @@
     </div>
 </div>
 <div th:include="include :: footer"></div>
+
+<!--这个脚本文件负责显示表格等可视化界面-->
 <script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
-<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 <script th:inline="javascript">
 
     var prefix = ctx + "broad/maintainApply";
@@ -136,24 +130,6 @@
                     title : '提交时间',
                     sortable: true
                 },
-
-
-//                {
-//                    field : 'status',
-//                    title : '状态',
-//                    sortable: true,
-//                    align: 'center',
-//                    formatter: function (value,row,index) {
-//                        var action = [];
-//                        if(value == 1){
-//                            action.push('<a class="btn btn-xs btn-success" >已维护</a>');
-//                            return action;
-//                        }else if(value == 0){
-//                            action.push('<a class="btn btn-xs btn-success" >未维护</a>');
-//                            return action;
-//                        }
-//                    }
-//                },
                 {
                     field : 'remark',
                     title : '故障原因',

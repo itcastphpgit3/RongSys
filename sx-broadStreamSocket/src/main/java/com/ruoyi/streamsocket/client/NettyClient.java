@@ -69,7 +69,7 @@ public class NettyClient {
                     // 使用NioSocketChannel来作为连接用的channel类 ， TCP Socket
                     .channel(NioSocketChannel.class)
                     // 绑定连接端口和host信息
-                    .remoteAddress(new InetSocketAddress(this.host, this.port))
+                    .remoteAddress(new InetSocketAddress(this.port))
                     // 绑定连接初始化器
                     .handler(new ChannelInitializer<SocketChannel>() {
                         // 注册通道

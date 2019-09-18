@@ -83,13 +83,6 @@
 				</form>
 			</div>
 
-			<!--<div class="ibox-content">-->
-                <!--<div class="ibox-content">-->
-<!--&lt;!&ndash;                    <audio class="recPlays" style="width:70%" id="vids"  controls src="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083"></audio>&ndash;&gt;-->
-						<!--<audio class="recPlay" style="width:100%"></audio>-->
-				<!--</div>-->
-			<!--</div>-->
-
 
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="broad:per:add">
@@ -116,12 +109,7 @@
         var removeFlag = [[${@permission.hasPermi('broad:per:remove')}]];
         var prefix = ctx + "broad/per";
 
-        function setpublic(fid){
 
-        }
-        function setUnpublic(fid){
-
-        }
         $(function() {
 
             var options;
@@ -221,8 +209,6 @@
                         align: 'center',
                         visible: true,
                         formatter: function (value, row, index) {
-//						var actions = '<a class="btn btn-xs btn-success" href="https://7465-test-b37cdc-1258150595.tcb.qcloud.la/许嵩 - 南山忆.mp3?sign=7ff582dcd4a4ff735488469d36701a73&t=1553838083" download="南山忆.mp3">试听</a>';
-//                            var actions = '<button class="btn btn-xs btn-success" onclick="listen1('+value+')" >试听</button>';
 							var actions = '<a class=\"btn btn-xs btn-success\"  onclick=func(\'' + value + '\')>试听</a>';
 							return actions;
                         }

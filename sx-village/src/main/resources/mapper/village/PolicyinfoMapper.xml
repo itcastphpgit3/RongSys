@@ -18,6 +18,20 @@
 		<result column="aid" property="aid"/>
 		<result column="remark" property="remark"/>
 	</resultMap>
+
+	<resultMap type="Comment" id="CommentResult">
+		<result property="coid"    column="coid"    />
+		<result property="pcid"    column="pcid"    />
+		<result property="replyid"    column="replyid"    />
+		<result property="uid"    column="uid"    />
+		<result property="uname"    column="uname"    />
+		<result property="ccontent"    column="ccontent"    />
+		<result property="issensitive"    column="issensitive"    />
+		<result property="cdate"    column="cdate"    />
+		<result property="aid"    column="aid"    />
+		<result property="to_uid"    column="to_uid"    />
+		<result property="to_name"    column="to_name"    />
+	</resultMap>
 	<!-- 字段值 -->
 	<!--还有一个 aid 字段-->
 	<sql id="Field">
@@ -135,4 +149,24 @@
 		</trim>
 		where poinid = #{poinid}
 	</update>
+
+	<select id="selectinfocommentListlimit" parameterType="pubObjApi" resultMap="CommentResult">
+		select coid,pcid,replyid,uid,uname,ccontent,cdate,to_uid,to_name,good
+		from tb_policyinfocomment
+		<where>
+			<if test="proid != null  and proid != '' "> pcid = #{proid}</if>
+			and replyid is null
+		</where>
+		ORDER BY cdate desc
+		limit #{pageSize} offset #{pageIndex}
+	</select>
+
+	<select id="selectinforecommentList" parameterType="String" resultMap="CommentResult">
+		select coid,pcid,replyid,uid,uname,ccontent,cdate,to_uid,to_name,good
+		from tb_policyinfocomment
+		<where>
+			replyid = #{coid}
+		</where>
+		ORDER BY cdate desc
+	</select>
 </mapper>

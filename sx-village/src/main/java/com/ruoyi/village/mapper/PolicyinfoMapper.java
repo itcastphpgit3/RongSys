@@ -1,6 +1,8 @@
 package com.ruoyi.village.mapper;
 
+import com.ruoyi.village.domain.Comment;
 import com.ruoyi.village.domain.Policyinfo;
+import com.ruoyi.village.domain.pubObjApi;
 
 import java.util.List;
 
@@ -60,4 +62,7 @@ public interface PolicyinfoMapper {
      */
     List<Policyinfo> selectpoliclimitten();
 
+    public List<Comment> selectinfocommentListlimit(pubObjApi info);
+
+    public List<Comment> selectinforecommentList(String coid);
 }

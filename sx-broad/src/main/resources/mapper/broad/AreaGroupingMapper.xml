@@ -28,10 +28,7 @@
             <if test="aname != null  and aname != '' ">and a2.aname like CONCAT('%',#{aname},'%')</if>
         </where>
     </select>
-    
-    <delete id="deleteAreaGrouping" parameterType="String">
-        delete from area where aid = #{aid}
-    </delete>
+
 
     <delete id="deleteAreaGroupingByIds" parameterType="String">
         delete from area where aid IN

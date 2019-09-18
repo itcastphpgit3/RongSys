@@ -5,17 +5,23 @@ import com.ruoyi.api.service.RongApiService;
 import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.village.domain.Files;
 import com.ruoyi.village.domain.Worklog;
 import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.service.IProjectService;
 import com.ruoyi.village.domain.Project;
 import com.ruoyi.village.service.IWorklogService;
+import com.ruoyi.village.util.bFileUtil1;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -41,8 +47,26 @@ public class VProject extends BaseController {
     @PostMapping("/insert")
     @CrossOrigin
     @ApiOperation(value = "返回所有项目")
-    public AjaxResult insertProject(Project project )
+    public AjaxResult insertProject(Project project,@RequestParam(value = "files", required = false) MultipartFile file,
+                                    @RequestParam(value = "filename", required = false) String fname,
+                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String fsize )
     {
+        String year = DateUtil.getYear();
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+        System.out.println(dateFormat.format(date));
+        String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
+        try{
+            //保存图片
+            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
+            project.setPropic(g.getAddress());//给project实体的“文件地址”赋值
+        } catch (Exception e) {
+            //return "上传图片失败";
+            System.out.println("失败");
+            return toAjax(0);
+        }
         return toAjax(projectService.insertProject(project));
     }
 
@@ -87,8 +111,37 @@ public class VProject extends BaseController {
     @PostMapping("/insertWorkLog")
     @CrossOrigin
     @ApiOperation(value = "新增工作记录")
-    public AjaxResult insertWorkLog(Worklog worklog )
+    public AjaxResult insertWorkLog(Worklog worklog,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                    @RequestParam(value = "filename", required = false) String[] fnames,
+                                    @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String[] fsize  )
     {
+        String year = DateUtil.getYear();
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+        System.out.println(dateFormat.format(date));
+        String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
+        }
+        worklog.setWpic(address);//给project实体的“文件地址”赋值
         return toAjax(workLogService.insertWorklog(worklog));
     }
 

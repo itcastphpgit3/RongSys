@@ -152,13 +152,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     <select id="selectGrouplist" parameterType="pubObjApi" resultMap="PartymemberResult">
        select DISTINCT grouptype
+      from myc_partymember
         <where>
             <if test="aid != null  and aid != '' ">aid in
                 <foreach collection="listaid" item="item" separator="," open="(" close=")">
                     #{item}
                 </foreach></if>
         </where>
-      from myc_partymember
       ORDER BY grouptype asc
       limit #{pageSize} offset #{pageIndex}
     </select>

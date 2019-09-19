@@ -1,13 +1,16 @@
 package com.ruoyi.village.domain;
 
+import java.util.List;
+
 public class PersonApi {
     private Integer userid; //用户id
     private String aid; //地区编号
     private String uname; //姓名
     private String sex; //姓名
-    private Integer PageSize;
-    private Integer PageIndex;
-
+    private String politics;//政治面貌
+    private Integer pageSize;
+    private Integer pageIndex;
+    private List<String> listaid;
     public Integer getUserid() {
         return userid;
     }
@@ -41,18 +44,34 @@ public class PersonApi {
     }
 
     public Integer getPageSize() {
-        return PageSize;
+        return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {
-        PageSize = pageSize;
+        this.pageSize = pageSize;
     }
 
     public Integer getPageIndex() {
-        return PageIndex;
+        return pageIndex;
     }
 
     public void setPageIndex(Integer pageIndex) {
-        PageIndex = (pageIndex-1)*20;
+        this.pageIndex = pageIndex;
+    }
+
+    public String getPolitics() {
+        return politics;
+    }
+
+    public void setPolitics(String politics) {
+        this.politics = politics;
+    }
+
+    public List<String> getListaid() {
+        return listaid;
+    }
+
+    public void setListaid(List<String> listaid) {
+        this.listaid = listaid;
     }
 }

@@ -43,6 +43,9 @@ public class Vcount {
     private IAssetAssessmentService assetAssessmentService;
     @Autowired
     private IVillagegroupStatisticsInfoService villagegroupStatisticsInfoService;
+
+    @Autowired
+    private IVillagerInfoService villagerInfoService;
     /**
         * 党员统计数据api
         * @author 张超 teavamc
@@ -116,6 +119,12 @@ public class Vcount {
         return RongApiService.get_list(memberService.countbygroup());
     }
 
+    @GetMapping("/pmBySex")
+    @CrossOrigin
+    @ApiOperation(value = "性别比例分析")
+    public RongApiRes countpmBySex(PersonApi person){
+        return RongApiService.get_bean(villagerInfoService.countpmBySex(person));
+    }
     /**
         * （快排）按照地区统计村民数据：地区、总数、男性、女性
         * @author 张超 teavamc

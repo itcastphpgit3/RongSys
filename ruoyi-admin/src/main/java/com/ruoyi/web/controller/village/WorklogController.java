@@ -100,11 +100,11 @@ public class WorklogController extends BaseController
 	/**
 	 * 新增工作记录
 	 */
-	/*@GetMapping("/add")
+	@GetMapping("/add2")
 	public String add()
 	{
-	    return prefix + "/add";
-	}*/
+	    return prefix + "/add2";
+	}
 
 	@GetMapping("/add/{proid}/{proname}")
 	public String add( @PathVariable("proid") String proid ,@PathVariable("proname") String proname,ModelMap mmap)
@@ -156,6 +156,18 @@ public class WorklogController extends BaseController
 
 			worklog.setWpic(g.getAddress());//给project实体的“文件地址”赋值
 
+			//从session中获取当前登陆用户的 username、phone、userid
+			SysUser currentUser = ShiroUtils.getSysUser();
+			String username =  currentUser.getUserName();
+			String phone =  currentUser.getPhonenumber();
+			Long userid =  currentUser.getUserId();
+			String aid;
+			int returnId = new Long(userid).intValue();
+			aid = sysUserService.selectAid(returnId);
+
+			worklog.setUid(returnId);
+			worklog.setAid(aid);
+			worklog.setUname(username);
 			return toAjax(worklogService.insertWorklog(worklog));//将project实体中的值插入数据表中
 		} catch (Exception e) {
 			//return "上传图片失败";

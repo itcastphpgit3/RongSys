@@ -53,5 +53,5 @@ public interface IProjectService
      */
 	public int deleteProjectByIds(String ids);
 
-	public List<pubObjApi> selectProjectListForapp(pubObjApi project);
+	public List<Project> selectProjectListForapp(pubObjApi project);
 }

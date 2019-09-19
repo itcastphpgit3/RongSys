@@ -394,4 +394,11 @@ public class SysUserServiceImpl implements ISysUserService
     {
         return userMapper.selectUserForAppByLoginName(userName);
     }
+
+
+    @Override
+    public int updateUserHeadImg(SysUser user)
+    {
+        return userMapper.updateUserHeadImg(user);
+    }
 }

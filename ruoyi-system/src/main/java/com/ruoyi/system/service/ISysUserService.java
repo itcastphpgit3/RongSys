@@ -164,4 +164,6 @@ public interface ISysUserService
     public int selectRoleid(int userId);
 
     public SysUser selectUserForAppByLoginName(String userName);
+
+    public int updateUserHeadImg(SysUser user);
 }

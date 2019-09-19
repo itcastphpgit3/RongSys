@@ -3,7 +3,9 @@ package com.ruoyi.village.service.impl;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
+import com.ruoyi.village.domain.Comment;
 import com.ruoyi.village.domain.Policyinfo;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.PolicyinfoMapper;
 import com.ruoyi.village.service.IPolicyinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +64,21 @@ public class PolicyinfoServiceImpl implements IPolicyinfoService {
         @DataSource(value = DataSourceType.SXVILLAGE)
         public List<Policyinfo> selectpoliclimitten(){
             return policyinfoMapper.selectpoliclimitten();
+        }
+
+
+
+        @Override
+        @DataSource(value = DataSourceType.SXVILLAGE)
+        public List<Comment> selectinfocommentListlimit(pubObjApi info){
+            return policyinfoMapper.selectinfocommentListlimit(info);
+        }
+
+
+
+        @Override
+        @DataSource(value = DataSourceType.SXVILLAGE)
+        public List<Comment> selectinforecommentList(String coid){
+            return policyinfoMapper.selectinforecommentList(coid);
         }
     }

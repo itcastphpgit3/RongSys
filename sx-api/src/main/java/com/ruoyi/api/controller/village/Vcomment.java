@@ -2,6 +2,7 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.village.domain.Comment;
 import com.ruoyi.village.domain.pubObjApi;
@@ -9,10 +10,7 @@ import com.ruoyi.village.service.IPolicyinfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +34,14 @@ public class Vcomment extends BaseController {
             comment.setRecomment(policyinfoService.selectinforecommentList(comment.getCoid()));
         }
         return RongApiService.get_list(commentlist);
+    }
+
+    @PostMapping("/insertInfoCM")
+    @CrossOrigin
+    @ApiOperation(value = "新增公告评论")
+    public AjaxResult insertInfoCM(Comment comment){
+
+        System.out.println(comment.getPcid());
+        return toAjax(policyinfoService.insertInfoCM(comment));
     }
 }

@@ -47,6 +47,9 @@
 	<sql id="tableName">
 		tb_policyinfo
 	</sql>
+	<sql id="CommenttableName">
+		tb_policyinfocomment
+	</sql>
 	<!--获取所有公告信息 -->
 	<select id="selectPolicyinfoList" parameterType="com.ruoyi.village.domain.Policyinfo" resultMap="PolicyinfoResult">
 		select <include refid="Field"/>
@@ -161,7 +164,7 @@
 		limit #{pageSize} offset #{pageIndex}
 	</select>
 
-	<select id="selectinforecommentList" parameterType="String" resultMap="CommentResult">
+	<select id="selectinforecommentList" parameterType="int" resultMap="CommentResult">
 		select coid,pcid,replyid,uid,uname,ccontent,cdate,to_uid,to_name,good
 		from tb_policyinfocomment
 		<where>
@@ -169,4 +172,32 @@
 		</where>
 		ORDER BY cdate desc
 	</select>
+
+	<insert id="insertInfoCM" parameterType="com.ruoyi.village.domain.Comment">
+		insert into <include refid="CommenttableName"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			<if test="pcid != null  and pcid != ''  ">pcid,</if>
+			<if test="replyid != null  and replyid != ''  ">replyid,</if>
+			<if test="uid != null  and uid != ''  ">uid,</if>
+			<if test="uname != null  and uname != ''  ">uname,</if>
+			<if test="ccontent != null  and ccontent != ''  ">ccontent,</if>
+			<if test="cdate != null  and cdate != ''  ">cdate,</if>
+			<if test="aid != null  and aid != ''  ">aid,</if>
+			<if test="to_uid != null  and to_uid != ''  ">to_uid,</if>
+			<if test="to_name != null  and to_name != ''  ">to_name,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			<if test="pcid != null  and pcid != ''  ">#{pcid},</if>
+			<if test="replyid != null  and replyid != ''  ">#{replyid},</if>
+			<if test="uid != null  and uid != ''  ">#{uid},</if>
+			<if test="uname != null  and uname != ''  ">#{uname},</if>
+			<if test="ccontent != null  and ccontent != ''  ">#{ccontent},</if>
+			<if test="cdate != null  and cdate != ''  ">#{cdate},</if>
+			<if test="aid != null  and aid != ''  ">#{aid},</if>
+			<if test="to_uid != null  and to_uid != ''  ">#{to_uid},</if>
+			<if test="to_name != null  and to_name != ''  ">#{to_name},</if>
+		</trim>
+	</insert>
 </mapper>

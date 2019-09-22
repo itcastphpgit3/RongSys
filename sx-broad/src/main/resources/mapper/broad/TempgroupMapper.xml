@@ -70,17 +70,17 @@
     <!--    返回表格数据-->
     <select id="selectTempgroup" resultMap="TempgroupResult">
         SELECT
-        tempgroup.tgid as tgid,
-        tempgroup.tgname as tgname,
-        userinfo.uname as userid,
-        tempgroup.createtime as createtime,
-        tempgroup.note as note,
-        tempgroup.isuse as isuse
+            tempgroup.tgid as tgid,
+            tempgroup.tgname as tgname,
+            userinfo.uname as userid,
+            tempgroup.createtime as createtime,
+            tempgroup.note as note,
+            tempgroup.isuse as isuse
         FROM
-        tempgroup,
-        userinfo
+            tempgroup,
+            userinfo
         WHERE
-        tempgroup.userid = userinfo.userid
+            tempgroup.userid = userinfo.userid
     </select>
 
     <!--    删除-->

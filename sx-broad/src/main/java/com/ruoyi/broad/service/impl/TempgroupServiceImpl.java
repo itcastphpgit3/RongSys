@@ -26,8 +26,7 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<Tempgroup> selectAllTempgroup(String tgname)
-    {
+    public List<Tempgroup> selectAllTempgroup(String tgname){
         return tempgroupMapper.selectAllTempgroup(tgname);
     }
 
@@ -63,9 +62,8 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public int deleteTempgroup(String createdtime)
-    {
-        return tempgroupMapper.deleteTempgroup(createdtime);
+    public int deleteTempgroup(String tgid){
+        return tempgroupMapper.deleteTempgroup(tgid);
     }
 
     /**
@@ -87,5 +85,5 @@ public class TempgroupServiceImpl implements ITempgroupService{
      */
     @Override
     @DataSource(value = DataSourceType.SLAVE)
-    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup){return tempgroupMapper.selectTempgroup(tempgroup);}
+    public List<Tempgroup> selectTempgroup(){return tempgroupMapper.selectTempgroup();}
 }

@@ -19,7 +19,7 @@
 
     </resultMap>
 
-<!--根据tgname查询结果    -->
+    <!--根据tgname查询结果    -->
     <select id="selectAllTempgroup" parameterType="String" resultMap="TempgroupResult">
         SELECT
             te.tid as tid,
@@ -44,7 +44,7 @@
         select * from tempgroup where tgid=#{tgid};
     </select>
 
-<!--    新增-->
+    <!--    新增-->
     <insert id="insertTempgroup" parameterType="Tempgroup">
         INSERT INTO `tempgroup`
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,7 +67,7 @@
 
     </insert>
 
-<!--    返回表格数据-->
+    <!--    返回表格数据-->
     <select id="selectTempgroup" resultMap="TempgroupResult">
         SELECT
             tempgroup.tgid as tgid,
@@ -83,12 +83,12 @@
             tempgroup.userid = userinfo.userid
     </select>
 
-<!--    删除-->
+    <!--    删除-->
     <delete id="deleteTempgroup" parameterType="String">
         DELETE tempgroup
         FROM
             tempgroup
-        LEFT JOIN tempgroup_ter ON tempgroup.tgid = tempgroup_ter.tgid
+                LEFT JOIN tempgroup_ter ON tempgroup.tgid = tempgroup_ter.tgid
         WHERE
             tempgroup.tgid = #{tgid}
     </delete>

@@ -39,6 +39,14 @@ public interface OrganizationMapper
 	public List<Organization> selectOrganizationList(Organization organization);
 
 	/**
+	 * 终端管理显示页面
+	 *
+	 * @param organization
+	 * @return 终端管理页面集合
+	 */
+	public List<Organization> selectOrganizationList1(Organization organization);
+
+	/**
 	 * 新增终端地域
 	 *
 	 * @param organization 终端地域信息

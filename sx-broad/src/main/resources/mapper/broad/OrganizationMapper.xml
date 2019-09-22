@@ -12,7 +12,8 @@
         <result property="lastaccesstime"    column="lastaccesstime"    />
         <result property="intertime"    column="intertime"    />
         <result property="terminaltype"    column="terminaltype"    />
-        <result property="longitude"    column="Longitude"    />
+        <result property="Longitude"    column="Longitude"    />
+        <result property="Latitude"    column="Latitude"    />
         <result property="basestation"    column="basestation"    />
         <result property="phone"    column="phone"    />
         <result property="MaintenanceFunds"    column="MaintenanceFunds"    />
@@ -151,7 +152,81 @@
             <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower = #{transmitpower}</if>
             <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower = #{reflectedpower}</if>
             <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage = #{workvoltage}</if>
-            <if test="batteryworkvoltage != null  and batteryworkvoltage != '' "> and t.batteryworkvoltage = #{batteryworkvoltage}</if>
+            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage = #{batteryvoltage}</if>
+            <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent = #{loadcurrent}</if>
+            <if test="pdmode != null  and pdmode != '' "> and t.pdmode = #{pdmode}</if>
+            <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent = #{chargecurrent}</if>
+            <if test="fmfrequency != null and fmfrequency != '' "> and t.fmfrequency = #{fmfrequency}</if>
+            <if test="manager != null and manager != '' "> and t.manager = #{manager}</if>
+            <if test="managertel != null and managertel != '' "> and t.managertel = #{managertel}</if>
+            <if test="createdtime != null and createdtime != '' "> and t.createdtime = #{createdtime}</if>
+            <if test="isuse != null and isuse != '' "> and t.isuse = #{isuse}</if>
+            <if test="address != null and address != '' "> and t.address = #{address}</if>
+            <if test="aid != null and aid != '' "> and t.aid = #{aid}</if>
+        </where>
+    </select>
+
+    <select id="selectOrganizationList1" parameterType="Organization" resultMap="OrganizationResult">
+        SELECT
+        t.tid,
+        t.tname,
+        userinfo.username,
+        area.aname,
+        t.lastaccesstime,
+        t.intertime,
+        t.terminaltype,
+        terminal_management.Longitude,
+        terminal_management.Latitude,
+        ter_conditions.basestation,
+        t.phone,
+        terminal_management.MaintenanceFunds,
+        t.ypowerconsumption,
+        terminal_traffic.usetraffic,
+        t.onlinestate,
+        t.dcs,
+        t.transmitpower,
+        t.reflectedpower,
+        t.workvoltage,
+        t.batteryvoltage,
+        t.loadcurrent,
+        t.pdmode,
+        t.chargecurrent,
+        t.fmfrequency,
+        t.manager,
+        t.managertel,
+        t.createdtime,
+        t.isuse,
+        t.address,
+        t.aid
+        FROM
+        (
+        ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
+        left join area on t.aid = area.aid)
+        left join terminal_management on t.tid = terminal_management.tid)
+        left join ter_conditions on t.tid = ter_conditions.tid)
+        left join terminal_traffic on t.tid = terminal_traffic.tid
+        )
+        <where>
+            <if test="tid != null  and tid != '' "> and t.tid = #{tid}</if>
+            <if test="tname != null  and tname != '' "> and t.tname = #{tname}</if>
+            <if test="username != null  and username != '' "> and userinfo.username = #{username}</if>
+            <if test="aname != null  and aname != '' "> and area.aname = #{aname}</if>
+            <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime = #{lastaccesstime}</if>
+            <if test="intertime != null  and intertime != '' "> and t.intertime = #{intertime}</if>
+            <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype = #{terminaltype}</if>
+            <if test="Longitude != null  and Longitude != '' "> and terminal_management.Longitude = #{Longitude}</if>
+            <if test="Latitude != null  and Latitude != '' "> and terminal_management.Latitude = #{Latitude}</if>
+            <if test="basestation != null  and basestation != '' "> and ter_condition.basestation = #{basestation}</if>
+            <if test="phone != null  and phone != '' "> and t.phone = #{phone}</if>
+            <if test="MaintenanceFunds != null  and MaintenanceFunds != '' "> and terminal_management.MaintenanceFunds = #{MaintenanceFunds}</if>
+            <if test="ypowerconsumption != null  and ypowerconsumption != '' "> and t.ypowerconsumption = #{ypowerconsumption}</if>
+            <if test="usetraffic != null  and usetraffic != '' "> and terminal_traffic.usetraffic = #{usetraffic}</if>
+            <if test="onlinestate != null  and onlinestate != '' "> and t.onlinestate = #{onlinestate}</if>
+            <if test="dcs != null  and dcs != '' "> and t.dcs = #{dcs}</if>
+            <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower = #{transmitpower}</if>
+            <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower = #{reflectedpower}</if>
+            <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage = #{workvoltage}</if>
+            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage = #{batteryvoltage}</if>
             <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent = #{loadcurrent}</if>
             <if test="pdmode != null  and pdmode != '' "> and t.pdmode = #{pdmode}</if>
             <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent = #{chargecurrent}</if>

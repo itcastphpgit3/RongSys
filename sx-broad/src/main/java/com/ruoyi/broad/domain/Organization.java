@@ -82,6 +82,22 @@ public class Organization extends BaseEntity
     private String note;
     /**rds码*/
     private String rds;
+    /**终端授权号码*/
+    private String atphone;
+    /**广播接收频率*/
+    private String brfrequency;
+    /**出厂编号*/
+    private String facid;
+    /**网络类型*/
+    private String nettype;
+    /**月流量使用*/
+    private String mflowusing;
+    /**对讲接收频率*/
+    private String irfrequency;
+    /**终端音量*/
+    private String eovolume;
+
+    private String poscene;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -359,4 +375,67 @@ public class Organization extends BaseEntity
         this.rds = rds;
     }
 
+    public String getAtphone() {
+        return atphone;
+    }
+
+    public void setAtphone(String atphone) {
+        this.atphone = atphone;
+    }
+
+    public String getBrfrequency() {
+        return brfrequency;
+    }
+
+    public void setBrfrequency(String brfrequency) {
+        this.brfrequency = brfrequency;
+    }
+
+    public String getFacid() {
+        return facid;
+    }
+
+    public void setFacid(String facid) {
+        this.facid = facid;
+    }
+
+    public String getNettype() {
+        return nettype;
+    }
+
+    public void setNettype(String nettype) {
+        this.nettype = nettype;
+    }
+
+    public String getMflowusing() {
+        return mflowusing;
+    }
+
+    public void setMflowusing(String mflowusing) {
+        this.mflowusing = mflowusing;
+    }
+
+    public String getIrfrequency() {
+        return irfrequency;
+    }
+
+    public void setIrfrequency(String irfrequency) {
+        this.irfrequency = irfrequency;
+    }
+
+    public String getEovolume() {
+        return eovolume;
+    }
+
+    public void setEovolume(String eovolume) {
+        this.eovolume = eovolume;
+    }
+
+    public String getPoscene() {
+        return poscene;
+    }
+
+    public void setPoscene(String poscene) {
+        this.poscene = poscene;
+    }
 }

@@ -19,6 +19,7 @@
         queryAreaList();
     });
     function queryAreaList() {
+
             var options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
@@ -29,127 +30,263 @@
                 fmfrequencyUrl: prefix + "/fmfrequencySet",
                 modalName: "终端管理",
                 search: false,
-                showExport: true,
-                striped: true,
-                pagination: true,
                 pageSize: 10,
+                height: 800,
                 columns: [{
                     checkbox: true
+
                 },
 					{
 						field : 'tid',
 						title : '终端IMEI',
-						visible: true
+						visible: true,
+                        align: 'center',
+						width: 5
 					},
 					{
 						field : 'tname',
-						title : '终端名称'
+						title : '终端名称',
+                        align: 'center',
+						width: 5
 					},
 					{
 						field : 'username',
-						title : '区域编号'
+						title : '区域编号',
+                        align: 'center',
+						width: 5
 					},
 					{
 						field : 'aname',
-						title : '区域名称'
+						title : '区域名称',
+                        align: 'center',
+						width: 5
 					},
                     {
                         field : 'lastaccesstime',
-                        title : '最后访问日期'
+                        title : '最后访问日期',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'intertime',
-                        title : '交互时间'
+                        title : '交互时间',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'terminaltype',
-                        title : '终端类型'
+                        title : '终端类型',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'longitude',
-                        title : '终端经度'
+                        title : '终端经度',
+                        align: 'center',
+						width: 5
                     },
 					{
 						field : 'latitude',
-						title : '终端纬度'
+						title : '终端纬度',
+                        align: 'center',
+						width: 5
 					},
                     {
                         field : 'basestation',
-                        title : ''
+                        title : '基站编码',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'phone',
-                        title : '终端电话'
+                        title : '终端电话',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'maintenanceFunds',
-                        title : '年维护经费'
+                        title : '年维护经费',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'ypowerconsumption',
-                        title : '年好点量'
+                        title : '年耗电量',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'usetraffic',
-                        title : '终端纬度'
+                        title : '流量使用情况',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'onlinestate',
-                        title : '在线状态'
+                        title : '在线状态',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'dcs',
-                        title : 'DCS码'
+                        title : 'DCS码',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'transmitpower',
-                        title : '发射功率'
+                        title : '发射功率',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'reflectedpower',
-                        title : '反射功率'
+                        title : '反射功率',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'workvoltage',
-                        title : '工作电压'
+                        title : '工作电压',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'batteryvoltage',
-                        title : '电池电压'
+                        title : '电池电压',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'loadcurrent',
-                        title : '负载电压'
+                        title : '负载电流',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'fmfrequency',
-                        title : '发射频率'
+                        title : '发射频率',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'manager',
-                        title : '终端管理员'
+                        title : '终端管理员',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'managertel',
-                        title : '管理员电话'
+                        title : '管理员电话',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'createdtime',
-                        title : '创建时间'
+                        title : '创建时间',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'isuse',
-                        title : '是否启用'
+                        title : '是否启用',
+                        formatter: function(value, row, index) {
+                            if(value == 1)
+                                return "是";
+                            else
+                                return "否";
+                        }
                     },
                     {
                         field : 'address',
-                        title : '终端地址'
+                        title : '终端地址',
+                        align: 'center',
+						width: 5
                     },
                     {
                         field : 'aid',
                         title : '终端地域id',
-						visible: false
+						visible: false,
+                        align: 'center',
+						width: 5
                     },
+                    {
+                        field : 'nettype',
+                        title : '网络类型',
+                        visible: true,
+                        align: 'center',
+						width: 5
+                    },
+                    {
+                        field : 'facid',
+                        title : '出厂编号',
+                        visible: true,
+                        align: 'center',
+						width: 5
+                    },
+                    {
+                        field : 'rds',
+                        title : 'RDS码',
+                        visible: true,
+                        align: 'center',
+						width: 5
+                    },
+                    {
+                        field : 'pdmode',
+                        title : '供电模式',
+                        visible: true,
+                        align: 'center',
+						width: 5
+                    },
+                    {
+                        field : 'irfrequency',
+                        title : '对讲接收频率',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'chargecurrent',
+                        title : '充电电流',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'brfrequency',
+                        title : '广播接收频率',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'brfrequency',
+                        title : '流量使用（月）',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'atphone',
+                        title : '终端授权号码',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'eovolume',
+                        title : '终端音量',
+                        visible: true,
+                        align: 'center',
+                        width: 5
+                    },
+                    {
+                        field : 'poscene',
+                        title : '现场照片',
+                        visible: true,
+                        align: 'center',
+						width: 5
+                    }
 					]
             };
         $.table.init(options);

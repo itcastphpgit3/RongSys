@@ -120,13 +120,13 @@ public class TempgroupController<addtemp> extends BaseController{
         return prefix + "/add2";
     }
 
-    @Log(title = "申请维护记录增加", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(Tempgroup tempgroup){
-        System.out.println(tempgroup);
-        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
-    }
+//    @Log(title = "申请维护记录增加", businessType = BusinessType.INSERT)
+//    @PostMapping("/add")
+//    @ResponseBody
+//    public AjaxResult addSave(Tempgroup tempgroup){
+//        System.out.println(tempgroup);
+//        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
+//    }
 
     @PostMapping("/addtemp")
     @ResponseBody

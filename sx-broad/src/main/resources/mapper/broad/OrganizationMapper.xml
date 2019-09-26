@@ -12,8 +12,8 @@
         <result property="lastaccesstime"    column="lastaccesstime"    />
         <result property="intertime"    column="intertime"    />
         <result property="terminaltype"    column="terminaltype"    />
-        <result property="Longitude"    column="Longitude"    />
-        <result property="Latitude"    column="Latitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
         <result property="basestation"    column="basestation"    />
         <result property="phone"    column="phone"    />
         <result property="MaintenanceFunds"    column="MaintenanceFunds"    />
@@ -36,6 +36,15 @@
         <result property="isuse"    column="isuse"    />
         <result property="address"    column="address"    />
         <result property="aid"    column="aid"    />
+        <result property="facid"    column="facid"    />
+        <result property="atphone"    column="atphone"    />
+        <result property="aid"    column="aid"    />
+        <result property="brfrequency"    column="brfrequency"    />
+        <result property="nettype"    column="nettype"    />
+        <result property="facid"    column="facid"    />
+        <result property="mflowusing"    column="mflowusing"    />
+        <result property="eovolume"    column="eovolume"    />
+        <result property="poscene"    column="poscene"    />
     </resultMap>
 
     <resultMap type="area" id="AreatreeResult">
@@ -83,7 +92,7 @@
         left join userinfo u on t.userid = u.userid)
         left join terminals_pic p on t.tid = p.tid)
     </sql>
-    
+
     <select id="listOrgByAid" parameterType="String" resultMap="OrganizationResult">
         <include refid="selectOrganizationVo"/>
         WHERE t.aid in
@@ -99,6 +108,7 @@
             userinfo.username,
             area.aname,
             t.lastaccesstime,
+            t.irfrequency,
             t.intertime,
             t.terminaltype,
             terminal_management.Longitude,
@@ -110,6 +120,10 @@
             terminal_traffic.usetraffic,
             t.onlinestate,
             t.dcs,
+            t.rds,
+            t.pdmode,
+            t.chargecurrent,
+            t.brfrequency,
             t.transmitpower,
             t.reflectedpower,
             t.workvoltage,
@@ -123,7 +137,11 @@
             t.createdtime,
             t.isuse,
             t.address,
-            t.aid
+            t.aid,
+            ter_conditions.nettype,
+            t.note,
+            t.atphone,
+            t.facid
         FROM
         (
         ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
@@ -140,8 +158,8 @@
             <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime = #{lastaccesstime}</if>
             <if test="intertime != null  and intertime != '' "> and t.intertime = #{intertime}</if>
             <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype = #{terminaltype}</if>
-            <if test="Longitude != null  and Longitude != '' "> and terminal_management.Longitude = #{Longitude}</if>
-            <if test="Latitude != null  and Latitude != '' "> and terminal_management.Latitude = #{Latitude}</if>
+            <if test="longitude != null  and longitude != '' "> and terminal_management.longitude = #{longitude}</if>
+            <if test="latitude != null  and latitude != '' "> and terminal_management.latitude = #{latitude}</if>
             <if test="basestation != null  and basestation != '' "> and ter_condition.basestation = #{basestation}</if>
             <if test="phone != null  and phone != '' "> and t.phone = #{phone}</if>
             <if test="MaintenanceFunds != null  and MaintenanceFunds != '' "> and terminal_management.MaintenanceFunds = #{MaintenanceFunds}</if>
@@ -173,6 +191,8 @@
         userinfo.username,
         area.aname,
         t.lastaccesstime,
+        t.mflowusing,
+        t.irfrequency,
         t.intertime,
         t.terminaltype,
         terminal_management.Longitude,
@@ -184,6 +204,10 @@
         terminal_traffic.usetraffic,
         t.onlinestate,
         t.dcs,
+        t.rds,
+        t.pdmode,
+        t.chargecurrent,
+        t.brfrequency,
         t.transmitpower,
         t.reflectedpower,
         t.workvoltage,
@@ -197,7 +221,14 @@
         t.createdtime,
         t.isuse,
         t.address,
-        t.aid
+        t.aid,
+        ter_conditions.nettype,
+        t.note,
+        t.atphone,
+        t.facid,
+        t.mflowusing,
+        t.eovolume,
+        t.poscene
         FROM
         (
         ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
@@ -237,6 +268,11 @@
             <if test="isuse != null and isuse != '' "> and t.isuse = #{isuse}</if>
             <if test="address != null and address != '' "> and t.address = #{address}</if>
             <if test="aid != null and aid != '' "> and t.aid = #{aid}</if>
+            <if test="mflowusing != null and mflowusing != '' "> and t.mflowusing = #{mflowusing}</if>
+            <if test="irfrequency != null and irfrequency != '' "> and t.irfrequency = #{irfrequency}</if>
+            <if test="brfrequency != null and brfrequency != '' "> and t.brfrequency = #{brfrequency}</if>
+            <if test="eovolume != null and eovolume != '' "> and t.eovolume = #{eovolume}</if>
+            <if test="poscene != null and poscene != '' "> and t.poscene = #{poscene}</if>
         </where>
     </select>
 

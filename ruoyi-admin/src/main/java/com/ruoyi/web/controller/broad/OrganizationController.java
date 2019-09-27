@@ -64,6 +64,17 @@ public class OrganizationController extends BaseController
 		return getDataTable(list);
 	}
 
+	/**
+	 * 加载节目单播出终端选择列表树
+	 */
+	@GetMapping("/listProBroadTree")
+	@ResponseBody
+	public List<Map<String, Object>> listProBroadTree()
+	{
+		List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
+		return tree;
+	}
+
 
 //	/**
 //	 * 导出终端信息列表
@@ -160,16 +171,7 @@ public class OrganizationController extends BaseController
 //		return prefix + "/listProBroadTree";
 //	}
 //
-//	/**
-//	 * 加载节目单播出终端选择列表树
-//	 */
-//	@GetMapping("/listProBroadTree")
-//	@ResponseBody
-//	public List<Map<String, Object>> listProBroadTree()
-//	{
-//		List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
-//		return tree;
-//	}
+
 //
 //	/**
 //	 * 查询节目单终端列表

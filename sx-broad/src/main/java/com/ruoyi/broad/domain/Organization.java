@@ -96,8 +96,10 @@ public class Organization extends BaseEntity
     private String irfrequency;
     /**终端音量*/
     private String eovolume;
-
+    /**现场照片*/
     private String poscene;
+    /**父地域id*/
+    private String parentaid;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -437,5 +439,13 @@ public class Organization extends BaseEntity
 
     public void setPoscene(String poscene) {
         this.poscene = poscene;
+    }
+
+    public String getParentaid() {
+        return parentaid;
+    }
+
+    public void setParentaid(String parentaid) {
+        this.parentaid = parentaid;
     }
 }

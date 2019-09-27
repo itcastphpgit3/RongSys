@@ -38,9 +38,7 @@
           area
         <where>
             <if test="aid != null  and aid != '' ">and a.aid = #{aid}</if>
-            <if test="parentaid != null  and parentaid != '' ">and parentaid = #{parentaid}</if>
-            <if test="aname != null  and aname != '' ">and taname = #{aname}</if>
-            <if test="note != null  and note != '' ">and note = #{note}</if>
+            <if test="parentaid != null  and parentaid != '' ">and parentaid = #{aid}</if>
         </where>
         union
         select

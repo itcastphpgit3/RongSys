@@ -1,10 +1,12 @@
 package com.ruoyi.broad.mapper;
 
+import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.domain.TerminalTels;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 终端地域 数据层
@@ -20,7 +22,6 @@ public interface OrganizationMapper
 	 *
 	 * @return 终端地域信息
 	 */
-	/*public Organization selectOrganizationById(String aid);*/
 	public Organization selectAllOrganization();
 	/**
 	 * 查询终端地域信息
@@ -37,6 +38,14 @@ public interface OrganizationMapper
 	 * @return 终端地域集合
 	 */
 	public List<Organization> selectOrganizationList(Organization organization);
+
+	/**
+	 * 终端管理显示页面
+	 *
+	 * @param organization
+	 * @return 终端管理页面集合
+	 */
+	public List<Organization> selectOrganizationList1(Organization organization);
 
 	/**
 	 * 新增终端地域
@@ -131,4 +140,6 @@ public interface OrganizationMapper
 	 * @return
 	 */
 	public  List<TerminalTels> selectTelsByTid(String tid);
+
+
 }

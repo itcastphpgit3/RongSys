@@ -107,11 +107,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectBeaCountryListByid" parameterType="pubObjApi" resultMap="VillageplanResult">
         <include refid="selectVillageplanVo"/>
         <where>
-            <if test="Title != null  and Title != ''  ">mtitle = #{Title}</if>
-            <if test="Rural_Types != null  and Rural_Types != ''  ">and vtype = #{Rural_Types}</if>
-            <if test="aid != null  and aid != '' "> and aid LIKE CONCAT(CONCAT('%', #{aid}),'%')</if>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+            <if test="title != null  and title != ''  ">and mtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
+            <if test="vtype != null  and vtype != ''  ">and vtype = #{vtype}</if>
         </where>
         ORDER BY pushdate DESC
-        limit #{PageSize} offset #{PageIndex}
+        limit #{pageSize} offset #{pageIndex}
     </select>
 </mapper>

@@ -24,6 +24,7 @@ import java.util.Map;
 /**
  * Created by ASUS on 2019/7/30.
  * @author cx
+ * @description 特殊分组管理
  */
 @Controller
 @RequestMapping("/broad/tempgroup")
@@ -66,6 +67,20 @@ public class TempgroupController<addtemp> extends BaseController{
         return getDataTable(list);
     }
 
+    @GetMapping("/add")
+    public String addMaintainApply()
+    {
+        return prefix + "/add";
+    }
+
+    @Log(title = "新增临时分组", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Tempgroup tempgroup)
+    {
+        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
+    }
+
     @PostMapping("/remove")
     @Log(title = "临时分组删除",businessType = BusinessType.DELETE)
     @ResponseBody
@@ -106,13 +121,13 @@ public class TempgroupController<addtemp> extends BaseController{
         return prefix + "/add2";
     }
 
-    @Log(title = "申请维护记录增加", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(Tempgroup tempgroup){
-        System.out.println(tempgroup);
-        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
-    }
+//    @Log(title = "申请维护记录增加", businessType = BusinessType.INSERT)
+//    @PostMapping("/add")
+//    @ResponseBody
+//    public AjaxResult addSave(Tempgroup tempgroup){
+//        System.out.println(tempgroup);
+//        return toAjax(iTempgroupService.insertTempgroup(tempgroup));
+//    }
 
     @PostMapping("/addtemp")
     @ResponseBody

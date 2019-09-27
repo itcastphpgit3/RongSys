@@ -2,7 +2,10 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.broad.service.IOrganizationService;
+import com.ruoyi.village.domain.Partymember;
 import com.ruoyi.village.domain.PersonApi;
+import com.ruoyi.village.domain.VillagerInfo;
 import com.ruoyi.village.service.IPersonalDetailService;
 import com.ruoyi.village.service.IProjectService;
 import com.ruoyi.village.service.IVillagerInfoService;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/person")
 @CrossOrigin
@@ -23,6 +28,8 @@ public class Person {
     private IPersonalDetailService personalDetailService;
     @Autowired
     private IVillagerInfoService villagerInfoService;
+    @Autowired
+    private IOrganizationService organizationService;
 
     @GetMapping("/all")
     @CrossOrigin
@@ -38,6 +45,27 @@ public class Person {
     public RongApiRes selectPersonAll(PersonApi person)
     {
         person.setPageIndex((person.getPageIndex()-1)*person.getPageSize());
-        return RongApiService.get_list(villagerInfoService.selectPersonAllByApi(person));
+        List<VillagerInfo> res;
+        List<String> allaid = organizationService.listNextAid(person.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(person.getAid());
+            person.setListaid(allaid);
+            res = villagerInfoService.selectPersonAllByApi(person);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = organizationService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = organizationService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            person.setListaid(allaid);
+            res = villagerInfoService.selectPersonAllByApi(person);
+        }
+        return RongApiService.get_list(res);
     }
 }

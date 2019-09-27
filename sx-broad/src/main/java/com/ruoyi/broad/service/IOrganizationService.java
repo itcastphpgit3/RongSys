@@ -39,6 +39,14 @@ public interface IOrganizationService
 	public List<Organization> selectOrganizationList(Organization organization);
 
 	/**
+	 * 查询终端列表
+	 *
+	 * @param organization 终端信息
+	 * @return 终端集合
+	 */
+	public List<Organization> selectOrganizationList1(Organization organization);
+
+	/**
 	 * 新增终端
 	 *
 	 * @param organization 终端信息

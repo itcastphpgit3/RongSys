@@ -4,6 +4,7 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Partystudy;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.PartystudyMapper;
 import com.ruoyi.village.service.IPartystudyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,11 @@ public class PartystudyServiceImpl implements IPartystudyService
 	{
 		return partystudyMapper.deletePartystudyByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Partystudy> selectPartystudyListById(pubObjApi partystudy)
+	{
+		return partystudyMapper.selectPartystudyListById(partystudy);
+	}
 }

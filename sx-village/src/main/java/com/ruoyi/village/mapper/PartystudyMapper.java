@@ -1,7 +1,9 @@
 package com.ruoyi.village.mapper;
 
 import com.ruoyi.village.domain.Partystudy;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 党员学习 数据层
@@ -58,5 +60,6 @@ public interface PartystudyMapper
      * @return 结果
      */
 	public int deletePartystudyByIds(String[] mids);
-	
+
+	public List<Partystudy> selectPartystudyListById(pubObjApi partystudy);
 }

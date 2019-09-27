@@ -21,19 +21,13 @@ import java.util.*;
 @Service
 public class OrganizationServiceImpl implements IOrganizationService
 {
-	/*@Resource(name = "daoSupport")
-	private DaoSupport dao;*/
+
 
 	@Autowired
 	private OrganizationMapper organizationMapper;
 
 
-	//		@Override
-//		@DataSource(value = DataSourceType.SLAVE)
-//		public Organization selectOrganizationById(String aid)
-//		{
-//			return organizationMapper.selectOrganizationById(aid);
-//		}
+
 	@Override
 	@DataSource(value = DataSourceType.SLAVE)
 	public Organization selectAllOrganization()
@@ -93,7 +87,7 @@ public class OrganizationServiceImpl implements IOrganizationService
 	{
 		List<Organization> list = organizationMapper.selectOrganizationList(organization) ;
 		for(Organization data:list) {
-            data.setIsused(data.getIsuse()?"是":"否");
+            data.setIsused(data.isIsuse()?"是":"否");
 		}
 		return list;
 	}
@@ -260,7 +254,7 @@ public class OrganizationServiceImpl implements IOrganizationService
 	public List<Organization> listOrgByAid(List<String> aid){
 		List<Organization> organizations =  organizationMapper.listOrgByAid(aid);
 		for(Organization o:organizations) {
-			o.setIsused(o.getIsuse()?"是":"否");
+			o.setIsused(o.isIsuse()?"是":"否");
 		}
 		return organizations;
 	}
@@ -279,5 +273,11 @@ public class OrganizationServiceImpl implements IOrganizationService
 	@DataSource(value = DataSourceType.SLAVE)
 	public List<TerminalTels> selectTelsByTid(String tid){
 		return organizationMapper.selectTelsByTid(tid);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SLAVE)
+	public List<Organization> selectOrganizationList1(Organization organization){
+		return organizationMapper.selectOrganizationList1(organization);
 	}
 }

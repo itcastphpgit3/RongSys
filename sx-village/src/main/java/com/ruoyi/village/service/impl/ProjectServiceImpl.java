@@ -92,7 +92,7 @@ public class ProjectServiceImpl implements IProjectService
 
 	@Override
 	@DataSource(value = DataSourceType.SXVILLAGE)
-	public List<pubObjApi> selectProjectListForapp(pubObjApi project)
+	public List<Project> selectProjectListForapp(pubObjApi project)
 	{
 		return projectMapper.selectProjectListForapp(project);
 	}

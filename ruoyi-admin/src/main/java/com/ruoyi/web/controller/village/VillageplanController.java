@@ -39,8 +39,10 @@ public class VillageplanController extends BaseController
 	
 	@Autowired
 	private IVillageplanService villageplanService;
+
 	@Autowired
 	private ISysUserService sysUserService;
+
 	@RequiresPermissions("village:villageplan:view")
 	@GetMapping()
 	public String villageplan()

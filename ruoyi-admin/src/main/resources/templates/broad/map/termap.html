@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -177,11 +177,15 @@
             })();
         }
     }
+
+
     function showInfo(thisMarker,point) {
         //获取点的信息
         var thePoint=JSON.stringify(point);
         if(point.isuse==true) {
             var sContent = "<ul style=\"margin:0 0 5px 0;padding:0.2em 0\">" +
+                "<li style=\"line-height: 26px;font-size: 15px;\">" +
+                "<a style=\"width: 150px;display: inline-block;\"  href='/broad/tempgroup?params="+point.tid+"'>新增节目</a>" + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
                 "<span style=\"width: 150px;display: inline-block;\">终端IEMI：</span>" + point.tid + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
@@ -198,6 +202,8 @@
                 "</ul>";
         }else if(point.isuse==false){
             var sContent = "<ul style=\"margin:0 0 5px 0;padding:0.2em 0\">" +
+                "<li style=\"line-height: 26px;font-size: 15px;\">" +
+                "<a style=\"width: 150px;display: inline-block;\" >添加节目</a>" + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
                 "<span style=\"width: 150px;display: inline-block;\">终端IEMI：</span>" + point.tid + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +

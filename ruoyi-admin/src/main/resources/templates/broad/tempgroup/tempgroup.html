@@ -3,10 +3,9 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:margin-left="http://java.sun.com/jsf/composite"
       xmlns:margin-right="http://java.sun.com/jsf/core">
 <meta charset="utf-8">
-<head th:include="include :: header">
+<head th:include="include :: header"></head>
     <link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
     <link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
-</head>
 <body class="gray-bg">
 
 <div class="container-div ui-layout-center">
@@ -95,28 +94,29 @@
                         <form class="form-horizontal m" id="form-tempgroup-ter-add" action="#" method="POST">
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">特殊分组：</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" onclick="gettempgroupids(this,'权限人')" id="tempgroupids" name="tgname">
-                                        <option value=""    >--请选择特殊分组--</option>
-                                    </select>
+                                <label class="col-sm-3 control-label"   style="font-size: 16px;">特殊分组名称：</label>
+                                <div id="tempgroup_span" class="col-sm-3 control-label" > </div>
+                            </div>
+                            <div class="ui-layout-west">
+                                <div class="main-content">
+                                    <div class="box box-main" >
+                                        <div class="box-header">
+                                            <div class="box-title">
+                                                <i class="fa icon-grid"></i> 终端列表
+                                            </div>
+                                        </div>
+                                        <div class="ui-layout-content">
+                                            <div id="tree" class="ztree" style="overflow: auto"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">终端设备IEME：</label>
-                                <div class="col-sm-8">
-                                    <select class="form-control" onclick="getterminalsiemes(this,'终端ieme')" id="terminalsiemes" name="tid">
-                                        <option value="">--请选择终端设备--</option>
-                                    </select>
-                                </div>
-                            </div>
-
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="close-btn1">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="savetempgroupAndT()">保存</button>
                 </div>
             </div>
         </div>
@@ -125,8 +125,13 @@
 </div>
 
 <div th:include="include :: footer"></div>
+<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 <script th:inline="javascript">
     var prefix = ctx + "broad/tempgroup";
+
+    queryAreaTree();
+
     // 表格1初始化
     $(function table1() {
         var options = {
@@ -138,6 +143,7 @@
             search: false,
             showExport: true,
             onClickRow:function (row, $element) {
+                row1 = row
                 teble2(row, $element)
             },
             columns: [
@@ -198,11 +204,17 @@
 
     // 选中表格1后，点击行，查询出特殊分组下的终端信息在表格中展示
     function teble2(row, $element) {
+        $("#tempgroup_span").html(row.tgname);
+        $("#tempgroup_span").data("tgid", row.tgid);
+        if($element){
+            $element.addClass("active");
+            $element.siblings().removeClass('active');
+        }
+
         var temp = row.tgid
         var options = {
             url: prefix + `/list/${temp}`,
             id: "bootstrap-table-form",
-            detailUrl: prefix + "/detail/{id}",
             modalName: "终端列表",
             search: false,
             showExport: true,
@@ -235,7 +247,7 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.detail(\'' + row.aid + '\')"><i class="fa fa-edit"></i>详细</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="deleteTempgroupT(event)"><i class="fa fa-remove"></i>移除</a> ');
                         return actions.join('');
                     }
                 }
@@ -259,21 +271,17 @@
 
     //提交表单
     function savetempgroup() {
-        debugger
         var params = $("#form-tempgroup-add").serializeArray();
         var values = {};
         for( x in params ){
             values[params[x].name] = params[x].value;
         }
-        // var idata = JSON.stringify(values)
-
         $.ajax({
             url:"/broad/tempgroup/addtemp",
             type: "POST",
             data:values,
             success:function a(data){
                 if(data=="success"){
-                    // $.table.refresh()
                     alert("保存成功")
                     $(".fixed-table-toolbar .btn-group")[0].children[1].click();
                 }else{
@@ -362,7 +370,74 @@
         });
     }
 
+    function savetempgroupAndT() {
+        tgid =  $("#tempgroup_span").data("tgid")
+        $.ajax({
+            url:"/broad/tempgroup/tempgroup_ter",
+            type: "POST",
+            data:{tgid:tgid,tid:tid},
+            success:function a(data){
+                if(data=="success"){
+                    alert("保存成功")
+                    $("#close-btn1").click()
+                    teble2(row1);
+                }else{
+                    alert(data)
+                }
+            },
+            error:function () {
+                alert("保存失败")
+            }
+        });
+
+        $("#close-btn").click();
+    }
+
+    function deleteTempgroupT(event) {
+        var tid = $(event.currentTarget).parent().context.parentNode.parentNode.children[1].innerText;
+        $.ajax({
+            url:"/broad/tempgroup/removet",
+            type: "POST",
+            data:{tid:tid},
+            success:function a(data){
+                alert(data.msg)
+                teble2(row1);
+            },
+            error:function () {
+                alert("删除失败")
+            }
+        });
+
+    }
+
+
+    var row1;
+    var  tgid;
+    var tid;
+
+    function queryAreaTree(){
+        var url = ctx + "broad/areaGrouping/treeData";
+        var options = {
+            url: url,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+        function zOnClick(event, treeId, treeNode) {
+            tgid = $("#tempgroup_span").text();
+            tid = treeNode.id;
+
+            $("#parentaid").val(treeNode.aid);
+            $.table.search();
+        }
+        $.tree.init(options);
+    }
 
 </script>
+
+<style>
+    .active{
+        background: #f5f5f5!important;
+    }
+</style>
 </body>
 </html>

@@ -54,4 +54,9 @@ public interface ITempgroupService {
      */
 
     public List<Tempgroup> selectTempgroup();
+
+    //新增tempgroup_ter
+    public int insertTempgroupT(Tempgroup tempgroup);
+
+    public int deleteTempgroupT(String tid);
 }

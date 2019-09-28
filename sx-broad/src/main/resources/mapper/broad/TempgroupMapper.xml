@@ -93,4 +93,16 @@
             tempgroup.tgid = #{tgid}
     </delete>
 
+    <insert id="insertTempgroupT" parameterType="Tempgroup">
+        INSERT INTO `broad`.`tempgroup_ter` (`tgid`, `tid`) VALUES (#{tgid},#{tid});
+    </insert>
+
+    <delete id="deleteTempgroupT" parameterType="String">
+        DELETE
+        FROM
+            `broad`.`tempgroup_ter`
+        WHERE
+            tid = #{tid}
+    </delete>
+
 </mapper>

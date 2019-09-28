@@ -135,4 +135,18 @@ public class TempgroupController<addtemp> extends BaseController{
         int i = iTempgroupService.insertTempgroup(tempgroup);
         return "success";
     }
+
+    @PostMapping("/tempgroup_ter")
+    @ResponseBody
+    public String tempgroup_ter(Tempgroup tempgroup){
+
+        int i = iTempgroupService.insertTempgroupT(tempgroup);
+        return "success";
+    }
+
+    @PostMapping("/removet")
+    @ResponseBody
+    public AjaxResult removeT(String tid){
+        return toAjax(iTempgroupService.deleteTempgroupT(tid));
+    }
 }

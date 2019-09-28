@@ -53,4 +53,8 @@ public interface TempgroupMapper {
      */
 
     public List<Tempgroup> selectTempgroup();
+
+    public int insertTempgroupT(Tempgroup tempgroup);
+
+    public int deleteTempgroupT(String tgid);
 }

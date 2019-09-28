@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Created by ASUS on 2019/8/2.
  * @author cx
- * 终端分组管理 控制层
+ * 分组管理 控制层
  */
 @Controller
 @RequestMapping("/broad/areaGrouping")

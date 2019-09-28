@@ -14,51 +14,51 @@ import java.util.List;
 public interface VillagerInfoMapper 
 {
 	/**
-     * 查询村民信息
-     * 
-     * @param vid 村民ID
-     * @return 村民信息
-     */
+	 * 查询村民信息
+	 *
+	 * @param vid 村民ID
+	 * @return 村民信息
+	 */
 	public VillagerInfo selectVillagerInfoById(Integer vid);
-	
+
 	/**
-     * 查询村民列表
-     * 
-     * @param villagerInfo 村民信息
-     * @return 村民集合
-     */
+	 * 查询村民列表
+	 *
+	 * @param villagerInfo 村民信息
+	 * @return 村民集合
+	 */
 	public List<VillagerInfo> selectVillagerInfoList(VillagerInfo villagerInfo);
-	
+
 	/**
-     * 新增村民
-     * 
-     * @param villagerInfo 村民信息
-     * @return 结果
-     */
+	 * 新增村民
+	 *
+	 * @param villagerInfo 村民信息
+	 * @return 结果
+	 */
 	public int insertVillagerInfo(VillagerInfo villagerInfo);
-	
+
 	/**
-     * 修改村民
-     * 
-     * @param villagerInfo 村民信息
-     * @return 结果
-     */
+	 * 修改村民
+	 *
+	 * @param villagerInfo 村民信息
+	 * @return 结果
+	 */
 	public int updateVillagerInfo(VillagerInfo villagerInfo);
-	
+
 	/**
-     * 删除村民
-     * 
-     * @param vid 村民ID
-     * @return 结果
-     */
+	 * 删除村民
+	 *
+	 * @param vid 村民ID
+	 * @return 结果
+	 */
 	public int deleteVillagerInfoById(Integer vid);
-	
+
 	/**
-     * 批量删除村民
-     * 
-     * @param vids 需要删除的数据ID
-     * @return 结果
-     */
+	 * 批量删除村民
+	 *
+	 * @param vids 需要删除的数据ID
+	 * @return 结果
+	 */
 	public int deleteVillagerInfoByIds(String[] vids);
 
 	public List<VillagerInfo> selectPersonAllByApi(PersonApi person);

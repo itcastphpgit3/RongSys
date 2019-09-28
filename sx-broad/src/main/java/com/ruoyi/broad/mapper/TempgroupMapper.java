@@ -37,7 +37,7 @@ public interface TempgroupMapper {
      *
      * @return 终端临时列表
      */
-    public int deleteTempgroup(String createdtime);
+    public int deleteTempgroup(String tgid);
 
     /**
      * 插入终端临时列表
@@ -52,5 +52,9 @@ public interface TempgroupMapper {
      * @return 终端临时列表
      */
 
-    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup);
+    public List<Tempgroup> selectTempgroup();
+
+    public int insertTempgroupT(Tempgroup tempgroup);
+
+    public int deleteTempgroupT(String tgid);
 }

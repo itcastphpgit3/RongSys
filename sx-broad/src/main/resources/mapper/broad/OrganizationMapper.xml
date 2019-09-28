@@ -12,7 +12,8 @@
         <result property="lastaccesstime"    column="lastaccesstime"    />
         <result property="intertime"    column="intertime"    />
         <result property="terminaltype"    column="terminaltype"    />
-        <result property="longitude"    column="Longitude"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
         <result property="basestation"    column="basestation"    />
         <result property="phone"    column="phone"    />
         <result property="MaintenanceFunds"    column="MaintenanceFunds"    />
@@ -35,6 +36,16 @@
         <result property="isuse"    column="isuse"    />
         <result property="address"    column="address"    />
         <result property="aid"    column="aid"    />
+        <result property="facid"    column="facid"    />
+        <result property="atphone"    column="atphone"    />
+        <result property="aid"    column="aid"    />
+        <result property="brfrequency"    column="brfrequency"    />
+        <result property="nettype"    column="nettype"    />
+        <result property="facid"    column="facid"    />
+        <result property="mflowusing"    column="mflowusing"    />
+        <result property="eovolume"    column="eovolume"    />
+        <result property="poscene"    column="poscene"    />
+        <result property="parentaid"    column="parentaid"    />
     </resultMap>
 
     <resultMap type="area" id="AreatreeResult">
@@ -82,7 +93,7 @@
         left join userinfo u on t.userid = u.userid)
         left join terminals_pic p on t.tid = p.tid)
     </sql>
-    
+
     <select id="listOrgByAid" parameterType="String" resultMap="OrganizationResult">
         <include refid="selectOrganizationVo"/>
         WHERE t.aid in
@@ -98,6 +109,7 @@
             userinfo.username,
             area.aname,
             t.lastaccesstime,
+            t.irfrequency,
             t.intertime,
             t.terminaltype,
             terminal_management.Longitude,
@@ -109,6 +121,10 @@
             terminal_traffic.usetraffic,
             t.onlinestate,
             t.dcs,
+            t.rds,
+            t.pdmode,
+            t.chargecurrent,
+            t.brfrequency,
             t.transmitpower,
             t.reflectedpower,
             t.workvoltage,
@@ -122,7 +138,99 @@
             t.createdtime,
             t.isuse,
             t.address,
-            t.aid
+            t.aid,
+            ter_conditions.nettype,
+            t.note,
+            t.atphone,
+            t.facid
+        FROM
+        (
+        ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
+        left join area on t.aid = area.aid)
+        left join terminal_management on t.tid = terminal_management.tid)
+        left join ter_conditions on t.tid = ter_conditions.tid)
+        left join terminal_traffic on t.tid = terminal_traffic.tid
+        )
+        <where>
+            <if test="tid != null  and tid != '' "> and t.tid like CONCAT('%',#{fid},'%')</if>
+            <if test="tname != null  and tname != '' "> and t.tname like CONCAT('%',#{tname},'%')</if>
+            <if test="username != null  and username != '' "> and userinfo.username like CONCAT('%',#{username},'%')</if>
+            <if test="aname != null  and aname != '' "> and area.aname like CONCAT('%',#{aname},'%')</if>
+            <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime like CONCAT('%',#{lastaccesstime},'%')}</if>
+            <if test="intertime != null  and intertime != '' "> and t.intertime like CONCAT('%',#{intertime},'%')</if>
+            <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype like CONCAT('%',#{terminaltype},'%')</if>
+            <if test="longitude != null  and longitude != '' "> and terminal_management.longitude like CONCAT('%',#{longitude},'%')</if>
+            <if test="latitude != null  and latitude != '' "> and terminal_management.latitude like CONCAT('%',#{latitude},'%')</if>
+            <if test="basestation != null  and basestation != '' "> and ter_condition.basestation like CONCAT('%',#{basestation},'%')</if>
+            <if test="phone != null  and phone != '' "> and t.phone like CONCAT('%',#{phone},'%')</if>
+            <if test="MaintenanceFunds != null  and MaintenanceFunds != '' "> and terminal_management.MaintenanceFunds like CONCAT('%',#{MaintenanceFunds},'%')</if>
+            <if test="ypowerconsumption != null  and ypowerconsumption != '' "> and t.ypowerconsumption like CONCAT('%',#{ypowerconsumption},'%')</if>
+            <if test="usetraffic != null  and usetraffic != '' "> and terminal_traffic.usetraffic like CONCAT('%',#{usetraffic},'%')</if>
+            <if test="onlinestate != null  and onlinestate != '' "> and t.onlinestate like CONCAT('%',#{onlinestate},'%')}</if>
+            <if test="dcs != null  and dcs != '' "> and t.dcs = like CONCAT('%',#{dcs},'%')</if>
+            <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower like CONCAT('%',#{transmitpower},'%')</if>
+            <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower like CONCAT('%',#{reflectedpower},'%')</if>
+            <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage like CONCAT('%',#{workvoltage},'%')</if>
+            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage like CONCAT('%',#{batteryvoltage},'%')</if>
+            <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent like CONCAT('%',#{loadcurrent},'%')</if>
+            <if test="pdmode != null  and pdmode != '' "> and t.pdmode like CONCAT('%',#{pdmode},'%')</if>
+            <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent like CONCAT('%',#{chargecurrent},'%')</if>
+            <if test="fmfrequency != null and fmfrequency != '' "> and t.fmfrequency like CONCAT('%',#{fmfrequency},'%')</if>
+            <if test="manager != null and manager != '' "> and t.manager like CONCAT('%',#{manager},'%')</if>
+            <if test="managertel != null and managertel != '' "> and t.managertel like CONCAT('%',#{managertel},'%')</if>
+            <if test="createdtime != null and createdtime != '' "> and t.createdtime like CONCAT('%',#{createdtime},'%')</if>
+            <if test="isuse != null and isuse != '' "> and t.isuse like CONCAT('%',#{isuse},'%')</if>
+            <if test="address != null and address != '' "> and t.address like CONCAT('%',#{address},'%')</if>
+            <if test="aid != null and aid != '' "> and t.aid like CONCAT('%',#{aid},'%')</if>
+        </where>
+    </select>
+
+    <select id="selectOrganizationList1" parameterType="Organization" resultMap="OrganizationResult">
+        SELECT
+        t.tid,
+        t.tname,
+        userinfo.username,
+        area.aname,
+        t.lastaccesstime,
+        t.mflowusing,
+        t.irfrequency,
+        t.intertime,
+        t.terminaltype,
+        terminal_management.Longitude,
+        terminal_management.Latitude,
+        ter_conditions.basestation,
+        t.phone,
+        terminal_management.MaintenanceFunds,
+        t.ypowerconsumption,
+        terminal_traffic.usetraffic,
+        t.onlinestate,
+        t.dcs,
+        t.rds,
+        t.pdmode,
+        t.chargecurrent,
+        t.brfrequency,
+        t.transmitpower,
+        t.reflectedpower,
+        t.workvoltage,
+        t.batteryvoltage,
+        t.loadcurrent,
+        t.pdmode,
+        t.chargecurrent,
+        t.fmfrequency,
+        t.manager,
+        t.managertel,
+        t.createdtime,
+        t.isuse,
+        t.address,
+        t.aid,
+        ter_conditions.nettype,
+        t.note,
+        t.atphone,
+        t.facid,
+        t.mflowusing,
+        t.eovolume,
+        t.poscene,
+        area.parentaid
         FROM
         (
         ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
@@ -151,7 +259,7 @@
             <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower = #{transmitpower}</if>
             <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower = #{reflectedpower}</if>
             <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage = #{workvoltage}</if>
-            <if test="batteryworkvoltage != null  and batteryworkvoltage != '' "> and t.batteryworkvoltage = #{batteryworkvoltage}</if>
+            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage = #{batteryvoltage}</if>
             <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent = #{loadcurrent}</if>
             <if test="pdmode != null  and pdmode != '' "> and t.pdmode = #{pdmode}</if>
             <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent = #{chargecurrent}</if>
@@ -162,6 +270,12 @@
             <if test="isuse != null and isuse != '' "> and t.isuse = #{isuse}</if>
             <if test="address != null and address != '' "> and t.address = #{address}</if>
             <if test="aid != null and aid != '' "> and t.aid = #{aid}</if>
+            <if test="mflowusing != null and mflowusing != '' "> and t.mflowusing = #{mflowusing}</if>
+            <if test="irfrequency != null and irfrequency != '' "> and t.irfrequency = #{irfrequency}</if>
+            <if test="brfrequency != null and brfrequency != '' "> and t.brfrequency = #{brfrequency}</if>
+            <if test="eovolume != null and eovolume != '' "> and t.eovolume = #{eovolume}</if>
+            <if test="poscene != null and poscene != '' "> and t.poscene = #{poscene}</if>
+            <if test="parentaid != null and parentaid != '' "> and area.parentaid = #{parentaid}</if>
         </where>
     </select>
 

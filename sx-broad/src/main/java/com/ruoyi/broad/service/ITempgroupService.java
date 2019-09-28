@@ -53,5 +53,10 @@ public interface ITempgroupService {
      * @return 终端临时列表
      */
 
-    public List<Tempgroup> selectTempgroup(Tempgroup tempgroup);
+    public List<Tempgroup> selectTempgroup();
+
+    //新增tempgroup_ter
+    public int insertTempgroupT(Tempgroup tempgroup);
+
+    public int deleteTempgroupT(String tid);
 }

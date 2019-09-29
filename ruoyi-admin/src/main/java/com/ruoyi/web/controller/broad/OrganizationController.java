@@ -186,38 +186,37 @@ public class OrganizationController extends BaseController
 //	}
 //
 //
-//	/**
-//	 * 加载区域列表树
-//	 */
-//	@GetMapping("/treeData")
-//	@ResponseBody
-//	public List<Map<String, Object>> treeData()
-//	{
-//		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
-//		Long userid =  currentUser.getUserId();
-//		int returnId = new Long(userid).intValue();
-//		int roleid = sysUserService.selectRoleid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Roleid
-//		if(roleid == 1) {
-//			List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
-//			return tree;
-//		}else {
-//			String aid;
-//			aid = sysUserService.selectAid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Aid
-//			Area update_area = new Area();
-//			update_area.setAid(aid);
-//			List<Map<String, Object>> tree = areaService.selectAreaTree(update_area);
-//			return tree;
-//		}
-//}
-//
+	/**
+	 * 加载区域列表树
+	 */
+	@GetMapping("/treeData")
+	@ResponseBody
+	public List<Map<String, Object>> treeData(){
+		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
+		Long userid =  currentUser.getUserId();
+		int returnId = new Long(userid).intValue();
+		int roleid = sysUserService.selectRoleid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Roleid
+		if(roleid == 1) {
+			List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
+			return tree;
+		}else {
+			String aid;
+			aid = sysUserService.selectAid(returnId);//通过所获取的userid去广播用户表中查询用户所属区域的Aid
+			Area update_area = new Area();
+			update_area.setAid(aid);
+			List<Map<String, Object>> tree = areaService.selectAreaTree(update_area);
+			return tree;
+		}
+	}
+
 //	/**
 //	 * 选择区域树
 //	 */
-//	@GetMapping("/selectAidTree")
-//	public String selectAidTree()
-//	{
-//		return prefix + "/aidTree";
-//	}
+	@GetMapping("/selectAidTree")
+	public String selectAidTree()
+	{
+		return prefix + "/aidTree";
+	}
 //
 //    /**
 //     * 设置终端的RDS码
@@ -246,4 +245,19 @@ public class OrganizationController extends BaseController
 //		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
 //	}
 
+
+	@GetMapping("/add")
+	public String add(){
+		return prefix + "/add";
+	}
+
+//	@RequiresPermissions("broad:area:add")
+//	@Log(title = "终端地域", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(Organization organization){
+//		System.out.println(organization);
+
+		return toAjax(organizationService.insertOrganization(organization));
+	}
 }

@@ -104,6 +104,7 @@
 				removeUrl: prefix + "/remove",
 				rdsSetUrl: prefix + "/rdsSet",
                 fmfrequencyUrl: prefix + "/fmfrequencySet",
+				striped:true,
                 modalName: "终端管理",
                 search: false,
                 pageSize: 10,
@@ -378,7 +379,7 @@
 </script>
 
 <!--终端列表树-->
-<script>
+<script	>
     function queryAreaTree()
     {
         var url = ctx + "broad/organization/listProBroadTree";

@@ -97,11 +97,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="rth"    column="rth"    />
         <result property="winaward"    column="winaward"    />
         <result property="punish"    column="punish"    />
+        <result property="personphoto"    column="personphoto"    />
+        <result property="hkphoto"    column="hkphoto"    />
+        <result property="idphoto"    column="idphoto"    />
+        <result property="carphoto"    column="carphoto"    />
+        <result property="housephoto"    column="housephoto"    />
         <result property="isuse"    column="isuse"    />
     </resultMap>
 	
 	<sql id="selectVillagerInfoVo">
-        select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, winaward, punish, isuse from villager_info
+        select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, winaward, punish, personphoto, hkphoto, idphoto, carphoto, housephoto, isuse from villager_info
     </sql>
 	
     <select id="selectVillagerInfoList" parameterType="VillagerInfo" resultMap="VillagerInfoResult">
@@ -199,6 +204,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="rth != null "> and rth = #{rth}</if>
              <if test="winaward != null  and winaward != '' "> and winaward = #{winaward}</if>
              <if test="punish != null  and punish != '' "> and punish = #{punish}</if>
+            <if test="personphoto != null  and personphoto != '' "> and personphoto = #{personphoto}</if>
+            <if test="hkphoto != null  and hkphoto != '' "> and hkphoto = #{hkphoto}</if>
+            <if test="idphoto != null  and idphoto != '' "> and idphoto = #{idphoto}</if>
+            <if test="carphoto != null  and carphoto != '' "> and carphoto = #{carphoto}</if>
+            <if test="housephoto != null  and housephoto != '' "> and housephoto = #{housephoto}</if>
              <if test="isuse != null "> and isuse = #{isuse}</if>
          </where>
     </select>
@@ -303,6 +313,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="rth != null  ">rth,</if>
 			<if test="winaward != null  and winaward != ''  ">winaward,</if>
 			<if test="punish != null  and punish != ''  ">punish,</if>
+            <if test="personphoto != null  and personphoto != ''  ">personphoto,</if>
+            <if test="hkphoto != null  and hkphoto != ''  ">hkphoto,</if>
+            <if test="idphoto != null  and idphoto != ''  ">idphoto,</if>
+            <if test="carphoto != null  and carphoto != ''  ">carphoto,</if>
+            <if test="housephoto != null  and housephoto != ''  ">housephoto,</if>
 			<if test="isuse != null  ">isuse,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -398,6 +413,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="rth != null  ">#{rth},</if>
 			<if test="winaward != null  and winaward != ''  ">#{winaward},</if>
 			<if test="punish != null  and punish != ''  ">#{punish},</if>
+            <if test="personphoto != null  and personphoto != ''  ">#{personphoto},</if>
+            <if test="hkphoto != null  and hkphoto != ''  ">#{hkphoto},</if>
+            <if test="idphoto != null  and idphoto != ''  ">#{idphoto},</if>
+            <if test="carphoto != null  and carphoto != ''  ">#{carphoto},</if>
+            <if test="housephoto != null  and housephoto != ''  ">#{housephoto},</if>
 			<if test="isuse != null  ">#{isuse},</if>
          </trim>
     </insert>
@@ -496,6 +516,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="rth != null  ">rth = #{rth},</if>
             <if test="winaward != null  and winaward != ''  ">winaward = #{winaward},</if>
             <if test="punish != null  and punish != ''  ">punish = #{punish},</if>
+            <if test="personphoto != null  and personphoto != ''  ">personphoto = #{personphoto},</if>
+            <if test="hkphoto != null  and hkphoto != ''  ">hkphoto = #{hkphoto},</if>
+            <if test="idphoto != null  and idphoto != ''  ">idphoto = #{idphoto},</if>
+            <if test="carphoto != null  and carphoto != ''  ">carphoto = #{carphoto},</if>
+            <if test="housephoto != null  and housephoto != ''  ">housephoto = #{housephoto},</if>
             <if test="isuse != null  ">isuse = #{isuse},</if>
         </trim>
         where vid = #{vid}

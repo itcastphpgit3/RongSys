@@ -102,6 +102,7 @@ public class OrganizationServiceImpl implements IOrganizationService
 	@DataSource(value = DataSourceType.SLAVE)
 	public int insertOrganization(Organization organization)
 	{
+		organizationMapper.insertOrganizationCon(organization);
 		return organizationMapper.insertOrganization(organization);
 	}
 

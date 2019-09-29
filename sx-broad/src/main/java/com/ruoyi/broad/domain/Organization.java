@@ -20,6 +20,10 @@ public class Organization extends BaseEntity
     private String tname;
     /**所属用户*/
     private String username;
+
+    private String userid;
+    private String longitudelatitude;
+
     /**所属分组*/
     private String aname;
     /**最后访问日期*/
@@ -100,6 +104,15 @@ public class Organization extends BaseEntity
     private String poscene;
     /**父地域id*/
     private String parentaid;
+    private String uname;
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -127,6 +140,23 @@ public class Organization extends BaseEntity
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+
+    public String getLongitudelatitude() {
+        return longitudelatitude;
+    }
+
+    public void setLongitudelatitude(String longitudelatitude) {
+        this.longitudelatitude = longitudelatitude;
     }
 
     public String getAname() {

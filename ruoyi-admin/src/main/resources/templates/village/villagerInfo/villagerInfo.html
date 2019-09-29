@@ -243,13 +243,17 @@
                     sortable: true
                 },
                 {
-                    //field : 'age',
+                    field : 'age',
                     title : '年龄',
                     sortable: true,
                     formatter: function(value, row, index) {
                         var idcard = row.idcard;
-                        var len=idcard.length;
+
                         var strBirthday ="";
+                       if(idcard==null){
+                           var age="";
+                       }else{
+                           var len=idcard.length;
                         if(len == 18){
                             strBirthday=idcard.substr(6,4)+ "/" +idcard.substr(10, 2) + "/" + idcard.substr(12, 2);
                         }
@@ -259,12 +263,15 @@
                         var birthDate = new Date(strBirthday);
                         var nowDateTime = new Date();
                         var age = nowDateTime.getFullYear() - birthDate.getFullYear();
+
                         //再考虑月、天的因素;.getMonth()获取的是从0开始的，这里进行比较，不需要加1
                         if (nowDateTime.getMonth() < birthDate.getMonth() || (nowDateTime.getMonth() == birthDate.getMonth() && nowDateTime.getDate() < birthDate.getDate())) {
                             age--;
                         }
+
                         return [age,  ].join('');
 
+                    }
                     }
                 },
                 {
@@ -287,33 +294,6 @@
                     title : '婚姻状况',
                     sortable: true
                 },
-                /*{
-                    field : 'nativeplace',
-                    title : '籍贯',
-                    sortable: true
-                },
-                {
-                    field : 'nation',
-                    title : '民族',
-                    sortable: true
-                },
-
-                {
-                    field : 'partyjoindate',
-                    title : '入党年月',
-                    sortable: true
-                },
-                {
-                    field : 'edulevel',
-                    title : '文化程度',
-                    sortable: true
-                },
-
-                {
-                    field : 'idcard',
-                    title : '身份证号码',
-                    sortable: true
-                },*/
                 {
                     field : 'phone',
                     title : '联系方式',

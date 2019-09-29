@@ -22,7 +22,7 @@
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.age}]]岁</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.nation}]]族</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.politics}]]</button>
-                        <button class="btn btn-white btn-xs" type="button">[[${listByid.partyjoindate}]]入党</button>
+                        <button class="btn btn-white btn-xs" type="button">入党时间:[[${listByid.partyjoindate}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.edulevel}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.marital}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.job}]]</button>
@@ -118,6 +118,11 @@
                 <h4>是否接入燃气:</h4><p th:utext="${listByid.gfs}"></p>
                 <h4>是否垃圾分类:</h4><p th:utext="${listByid.wdr}"></p>
                 <h4>道路是否到户:</h4><p th:utext="${listByid.rth}"></p>
+                <h4>个人照片:</h4><p th:utext="${listByid.personphoto}"></p>
+                <h4>户口照片:</h4><p th:utext="${listByid.hkphoto}"></p>
+                <h4>身份证照片:</h4><p th:utext="${listByid.idphoto}"></p>
+                <h4>汽车照片:</h4><p th:utext="${listByid.carphoto}"></p>
+                <h4>房屋照片:</h4><p th:utext="${listByid.housephoto}"></p>
                 <h4>获奖情况:</h4><p th:utext="${listByid.winaward}"></p>
                 <h4>处分情况:</h4><p th:utext="${listByid.punish}"></p>
             </div>

@@ -293,8 +293,65 @@ public class VillagerInfo extends BaseEntity
 	/** 处分情况 */
 	@Excel(name = "处分情况")
 	private String punish;
+	/** 个人照片 */
+	@Excel(name= "个人照片" )
+	private String personphoto;
+	/** 户口照片 */
+	@Excel(name= "户口照片" )
+	private String hkphoto;
+	/** 身份证照片 */
+	@Excel(name= "身份证照片" )
+	private String idphoto;
+	/** 汽车照片 */
+	@Excel(name= "汽车照片" )
+	private String carphoto;
+
+	/** 房屋照片 */
+	@Excel(name= "房屋照片" )
+	private String housephoto;
 	/** 是否有效 */
 	private Integer isuse;
+
+	public String getPersonphoto() {
+		return personphoto;
+	}
+
+	public void setPersonphoto(String personphoto) {
+		this.personphoto = personphoto;
+	}
+
+	public String getHkphoto() {
+		return hkphoto;
+	}
+
+	public void setHkphoto(String hkphoto) {
+		this.hkphoto = hkphoto;
+	}
+
+	public String getIdphoto() {
+		return idphoto;
+	}
+
+	public void setIdphoto(String idphoto) {
+		this.idphoto = idphoto;
+	}
+
+	public String getCarphoto() {
+		return carphoto;
+	}
+
+	public void setCarphoto(String carphoto) {
+		this.carphoto = carphoto;
+	}
+
+	public String getHousephoto() {
+		return housephoto;
+	}
+
+	public void setHousephoto(String housephoto) {
+		this.housephoto = housephoto;
+	}
+
 
 
 	public void setVid(Integer vid)
@@ -1229,6 +1286,11 @@ public class VillagerInfo extends BaseEntity
 				.append("rth", getRth())
 				.append("winaward", getWinaward())
 				.append("punish", getPunish())
+				.append("personphoto", getPersonphoto())
+				.append("hkphoto", getPunish())
+				.append("idphoto", getIdphoto())
+				.append("carphoto", getCarphoto())
+				.append("housephoto", getHousephoto())
 				.append("isuse", getIsuse())
 				.toString();
 	}

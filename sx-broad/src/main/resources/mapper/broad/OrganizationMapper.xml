@@ -300,56 +300,79 @@
         FROM terminals
         WHERE tid = #{tid}
     </select>
-
+<!--插入的tb_organization-->
     <insert id="insertOrganization" parameterType="Organization">
-        insert into terminals
+        insert into tb_organization
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="tid != null  and tid != ''  ">tid,</if>
-            <if test="tname != null  and tname != ''  ">tname,</if>
-            <if test="aid != null  and aid != ''  ">aid,</if>
-            <if test="aname != null  and aname != ''  ">aname,</if>
+            <if test="tid != null and tid != '' ">tid,</if>
+            <if test="tname != null and tname != '' ">tname,</if>
             <if test="userid != null  and userid != ''  ">userid,</if>
-            <if test="uname != null  and uname != ''  ">uname,</if>
-            <if test="facid != null  and facid != ''  ">facid,</if>
+            <if test="aid != null and aid != '' ">aid,</if>
+            <if test="lastaccesstime != null and lastaccesstime != '' ">lastaccesstime,</if>
+            <if test="intertime != null and intertime != '' ">intertime,</if>
+            <if test="ypowerconsumption != null and ypowerconsumption != '' ">ypowerconsumption,</if>
+            <if test="MaintenanceFunds != null and MaintenanceFunds != '' ">MaintenanceFunds,</if>
+            <if test="terminaltype != null and terminaltype != '' ">terminaltype,</if>
+            <if test="longitudelatitude != null and longitudelatitude != '' ">longitudelatitude,</if>
+            <if test="poscene != null  and poscene != '' ">poscene,</if>
+            <if test="phone != null  and phone != ''  ">phone,</if>
             <if test="address != null  and address != ''  ">address,</if>
-            <if test="note != null  and note != ''  ">note,</if>
-            <if test="comstand != null  and comstand != ''  ">comstand,</if>
-            <if test="broadtel != null  and broadtel != ''  ">broadtel,</if>
-            <if test="manager != null  and manager != ''  ">manager,</if>
+            <if test="atphone != null  and atphone != ''  ">atphone,</if>
+            <if test="facid != null  and facid != ''  ">facid,</if>
+            <if test="irfrequency != null  and irfrequency != ''  ">irfrequency,</if>
+            <if test="dcs != null  and dcs != ''  ">dcs,</if>
+            <if test="fmfrequency != null  and fmfrequency != ''  ">fmfrequency,</if>
+            <if test="uname != null  and uname != ''  ">uname,</if>
             <if test="managertel != null  and managertel != ''  ">managertel,</if>
-            <if test="intertime != null  and intertime != ''  ">intertime,</if>
             <if test="createdtime != null  and createdtime != ''  ">createdtime,</if>
             <if test="isuse != null  ">isuse,</if>
-            <if test="phone != null  and phone != ''  ">phone,</if>
+            <if test="note != null  and note != ''  ">note,</if>
             <if test="rds != null  and rds != ''  ">rds,</if>
-            <if test="fmfrequency != null  and fmfrequency != ''  ">fmfrequency,</if>
-            <if test="trafficlimit != null  ">trafficlimit,</if>
-            <if test="terminaltype != null  ">terminaltype,</if>
+            <if test="transmitfrequency != null  and transmitfrequency != ''  ">transmitfrequency,</if>
+            <if test="eovolume != null  ">eovolume,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="tid != null  and tid != ''  ">#{tid},</if>
-            <if test="tname != null  and tname != ''  ">#{tname},</if>
-            <if test="aid != null  and aid != ''  ">#{aid},</if>
-            <if test="aname != null  and aname != ''  ">#{aname},</if>
+            <if test="tid != null and tid != '' ">#{tid},</if>
+            <if test="tname != null and tname != '' ">#{tname},</if>
             <if test="userid != null  and userid != ''  ">#{userid},</if>
-            <if test="uname != null  and uname != ''  ">#{uname},</if>
-            <if test="facid != null  and facid != ''  ">#{facid},</if>
+            <if test="aid != null and aid != '' ">#{aid},</if>
+            <if test="lastaccesstime != null and lastaccesstime != '' ">#{lastaccesstime},</if>
+            <if test="intertime != null and intertime != '' ">#{intertime},</if>
+            <if test="ypowerconsumption != null and ypowerconsumption != '' ">#{ypowerconsumption},</if>
+            <if test="MaintenanceFunds != null and MaintenanceFunds != '' ">#{MaintenanceFunds},</if>
+            <if test="terminaltype != null and terminaltype != '' ">#{terminaltype},</if>
+            <if test="longitudelatitude != null and longitudelatitude != '' ">#{longitudelatitude},</if>
+            <if test="poscene != null  and poscene != '' ">#{poscene},</if>
+            <if test="phone != null  and phone != ''  ">#{phone},</if>
             <if test="address != null  and address != ''  ">#{address},</if>
-            <if test="note != null  and note != ''  ">#{note},</if>
-            <if test="comstand != null  and comstand != ''  ">#{comstand},</if>
-            <if test="broadtel != null  and broadtel != ''  ">#{broadtel},</if>
-            <if test="manager != null  and manager != ''  ">#{manager},</if>
+            <if test="atphone != null  and atphone != ''  ">#{atphone},</if>
+            <if test="facid != null  and facid != ''  ">#{facid},</if>
+            <if test="irfrequency != null  and irfrequency != ''  ">#{irfrequency},</if>
+            <if test="dcs != null  and dcs != ''  ">#{dcs},</if>
+            <if test="fmfrequency != null  and fmfrequency != ''  ">#{fmfrequency},</if>
+            <if test="uname != null  and uname != ''  ">#{uname},</if>
             <if test="managertel != null  and managertel != ''  ">#{managertel},</if>
-            <if test="intertime != null  and intertime != ''  ">#{intertime},</if>
             <if test="createdtime != null  and createdtime != ''  ">#{createdtime},</if>
             <if test="isuse != null  ">#{isuse},</if>
-            <if test="phone != null  and phone != ''  ">#{phone},</if>
+            <if test="note != null  and note != ''  ">#{note},</if>
             <if test="rds != null  and rds != ''  ">#{rds},</if>
-            <if test="fmfrequency != null  and fmfrequency != ''  ">#{fmfrequency},</if>
-            <if test="trafficlimit != null  ">0,</if>
-            <if test="terminaltype != null  ">terminaltype,</if>
+            <if test="transmitfrequency != null  and transmitfrequency != ''  ">#{transmitfrequency},</if>
+            <if test="eovolume != null  ">#{eovolume},</if>
         </trim>
     </insert>
+<!--插入到ter_conditions-->
+    <insert id="insertOrganizationCon" parameterType="Organization">
+        INSERT INTO `broad`.`ter_conditions`
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="tid != null and tid != '' ">tid,</if>
+                <if test="basestation != null and basestation != '' ">basestation,</if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="tid != null and tid != '' ">#{tid},</if>
+                <if test="basestation != null and basestation != '' ">#{basestation},</if>
+            </trim>
+    </insert>
+
 
     <insert id="insertOrganizationPic" parameterType="Organization">
         insert into terminals_pic

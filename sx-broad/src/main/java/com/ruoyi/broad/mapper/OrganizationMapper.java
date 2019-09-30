@@ -55,6 +55,8 @@ public interface OrganizationMapper
 	 */
 	public int insertOrganization(Organization organization);
 
+
+	public int insertOrganizationCon(Organization organization);
 	/**
 	 * 新增终端地址图片
 	 *

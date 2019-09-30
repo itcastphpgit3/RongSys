@@ -66,10 +66,10 @@ public class Pwork extends BaseController {
     @PostMapping("/insertWorkLog")
     @CrossOrigin
     @ApiOperation(value = "新增工作记录")
-    public AjaxResult insertWorkLog(Worklog worklog,@RequestParam(value = "files", required = false) MultipartFile file,
-                                    @RequestParam(value = "filename", required = false) String fname,
-                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                    @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertWorkLog(Worklog worklog,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                    @RequestParam(value = "filename", required = false) String[] fnames,
+                                    @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -77,15 +77,26 @@ public class Pwork extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            worklog.setWpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        worklog.setWpic(address);//给project实体的“文件地址”赋值
         return toAjax(worklogService.insertWorklog(worklog));
     }
 
@@ -100,10 +111,10 @@ public class Pwork extends BaseController {
     @PostMapping("/insertMemorial")
     @CrossOrigin
     @ApiOperation(value = "新增备忘录")
-    public AjaxResult insertMemorial(Memorial memorial,@RequestParam(value = "files", required = false) MultipartFile file,
-                                     @RequestParam(value = "filename", required = false) String fname,
-                                     @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                     @RequestParam(value = "fsize",required = false) String fsize  )
+    public AjaxResult insertMemorial(Memorial memorial,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                     @RequestParam(value = "filename", required = false) String[] fnames,
+                                     @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                     @RequestParam(value = "fsize",required = false) String[] fsize  )
     {
         String year = DateUtil.getYear();
 
@@ -111,15 +122,26 @@ public class Pwork extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            memorial.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        memorial.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(memorialService.insertMemorial(memorial));
     }
 
@@ -134,10 +156,10 @@ public class Pwork extends BaseController {
     @PostMapping("/insertMeeting")
     @CrossOrigin
     @ApiOperation(value = "新增会议记录")
-    public AjaxResult insertMeeting(Meeting meeting,@RequestParam(value = "files", required = false) MultipartFile file,
-                                    @RequestParam(value = "filename", required = false) String fname,
-                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                    @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertMeeting(Meeting meeting,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                    @RequestParam(value = "filename", required = false) String[] fnames,
+                                    @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -145,15 +167,26 @@ public class Pwork extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            meeting.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        meeting.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(meetingService.insertMeeting(meeting));
     }
 
@@ -162,25 +195,36 @@ public class Pwork extends BaseController {
     @PostMapping("/insertSuggest")
     @CrossOrigin
     @ApiOperation(value = "新增我的建议")
-    public AjaxResult insertSuggest(Suggest suggest,@RequestParam(value = "files", required = false) MultipartFile file,
-                                    @RequestParam(value = "filename", required = false) String fname,
-                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                    @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertSuggest(Suggest suggest,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                    @RequestParam(value = "filename", required = false) String[] fnames,
+                                    @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            suggest.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        suggest.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(suggestService.insertSuggest(suggest));
     }
 
@@ -200,30 +244,5 @@ public class Pwork extends BaseController {
         return RongApiService.get_list(fileinfoService.selectMyFileListById(myfile));
     }
 
-    @PostMapping("/img")
-    @CrossOrigin
-    @ApiOperation(value = "图片测试接口")
-    public AjaxResult insertimg(@RequestParam(value = "files", required = false) MultipartFile file,
-                                    @RequestParam(value = "filename", required = false) String fname,
-                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                    @RequestParam(value = "fsize",required = false) String fsize )
-    {
-        String year = DateUtil.getYear();
 
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
-        System.out.println(dateFormat.format(date));
-        String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        String imgurl="";
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            imgurl=g.getAddress();
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
-        }
-        return success(imgurl);
-    }
 }

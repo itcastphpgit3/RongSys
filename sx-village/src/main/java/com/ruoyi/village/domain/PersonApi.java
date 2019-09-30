@@ -11,6 +11,7 @@ public class PersonApi {
     private Integer pageSize;
     private Integer pageIndex;
     private List<String> listaid;
+    private String state;//
     public Integer getUserid() {
         return userid;
     }
@@ -73,5 +74,13 @@ public class PersonApi {
 
     public void setListaid(List<String> listaid) {
         this.listaid = listaid;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

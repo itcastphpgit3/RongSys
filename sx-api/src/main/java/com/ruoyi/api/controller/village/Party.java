@@ -55,10 +55,10 @@ public class Party extends BaseController {
     @PostMapping("/insertHd")
     @CrossOrigin
     @ApiOperation(value = "新增党员活动信息")
-    public AjaxResult insertHd(Huodong huodong,@RequestParam(value = "files", required = false) MultipartFile file,
-                               @RequestParam(value = "filename", required = false) String fname,
-                               @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                               @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertHd(Huodong huodong,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                               @RequestParam(value = "filename", required = false) String[] fnames,
+                               @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                               @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -66,15 +66,26 @@ public class Party extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            huodong.setHdpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        huodong.setHdpic(address);//给project实体的“文件地址”赋值
         return toAjax(huodongService.inserthuodong(huodong));
     }
 
@@ -144,10 +155,10 @@ public class Party extends BaseController {
     @PostMapping("/insertPNew")
     @CrossOrigin
     @ApiOperation(value = "新增党员新闻")
-    public AjaxResult insertPartyNew(Partynew partynew,@RequestParam(value = "files", required = false) MultipartFile file,
-                                     @RequestParam(value = "filename", required = false) String fname,
-                                     @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                     @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertPartyNew(Partynew partynew,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                     @RequestParam(value = "filename", required = false) String[] fnames,
+                                     @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                     @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -155,25 +166,36 @@ public class Party extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            partynew.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        partynew.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(partynewService.insertPartynew(partynew));
     }
 
     @PostMapping("/insertEducation")
     @CrossOrigin
     @ApiOperation(value = "新增党员学习")
-    public AjaxResult insertEducation(Partystudy partystudy,@RequestParam(value = "files", required = false) MultipartFile file,
-                                      @RequestParam(value = "filename", required = false) String fname,
-                                      @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                      @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertEducation(Partystudy partystudy,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                      @RequestParam(value = "filename", required = false) String[] fnames,
+                                      @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                      @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -181,25 +203,36 @@ public class Party extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            partystudy.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        partystudy.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(partystudyService.insertPartystudy(partystudy));
     }
 
     @PostMapping("/insertFuPin")
     @CrossOrigin
     @ApiOperation(value = "新增扶贫工作")
-    public AjaxResult insertPartyfupin(Partyfupin partyfupin,@RequestParam(value = "files", required = false) MultipartFile file,
-                                       @RequestParam(value = "filename", required = false) String fname,
-                                       @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                       @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertPartyfupin(Partyfupin partyfupin,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                       @RequestParam(value = "filename", required = false) String[] fnames,
+                                       @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                       @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -207,15 +240,26 @@ public class Party extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            partyfupin.setMpic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        partyfupin.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(partyfupinService.insertPartyfupin(partyfupin));
     }
 

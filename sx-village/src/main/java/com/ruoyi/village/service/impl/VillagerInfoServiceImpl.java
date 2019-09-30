@@ -103,4 +103,22 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 		return villagerInfoMapper.countpmBySex(person);
 	}
 
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectvillagerInfoListBytype(PersonApi person)
+	{
+		return villagerInfoMapper.selectvillagerInfoListBytype(person);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectGrouplist(PersonApi person)
+	{
+		return villagerInfoMapper.selectGrouplist(person);
+	}
+
+
+
+
 }

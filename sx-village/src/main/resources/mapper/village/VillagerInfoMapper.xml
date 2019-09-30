@@ -99,7 +99,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="punish"    column="punish"    />
         <result property="isuse"    column="isuse"    />
     </resultMap>
-	
+    <resultMap type="Mcount" id="mcountResult">
+        <result property="marea"    column="marea"    />
+        <result property="msum"    column="msum"    />
+        <result property="man"    column="man"    />
+        <result property="woman"    column="woman"    />
+    </resultMap>
 	<sql id="selectVillagerInfoVo">
         select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, winaward, punish, isuse from villager_info
     </sql>
@@ -511,5 +516,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{vid}
         </foreach>
     </delete>
-    
+    <select id="selectPersonAllByApi" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        <include refid="selectVillagerInfoVo"/>
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+            <if test="uname != null  and uname != ''  ">and vname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
+            <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
+        </where>
+        ORDER BY vname asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+
+    <select id="selectGrouplist" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        select DISTINCT grouptype
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+            <if test="politics != null  and politics != '' "> and politics LIKE CONCAT(CONCAT('%', #{politics}),'%')</if>
+        </where>
+        ORDER BY grouptype asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+    <select id="selectvillagerInfoListBytype" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        <include refid="selectVillagerInfoVo"/>
+        <where>
+            <if test="state != null  and state != ''  ">grouptype = #{state}</if>
+            <if test="uname != null  and uname != '' "> and vname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
+            <if test="politics != null  and politics != '' "> and politics LIKE CONCAT(CONCAT('%', #{politics}),'%')</if>
+        </where>
+        ORDER BY vname asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+
+    <select id="countpmBySex" parameterType="PersonApi" resultMap="mcountResult">
+        select
+        count(vid) as msum,
+        count(sex = '男' or null ) as man,
+        count(sex = '女' or null ) as woman
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+        </where>
+    </select>
+
 </mapper>

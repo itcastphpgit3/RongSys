@@ -4,105 +4,209 @@
 <head th:include="include :: header"></head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+
+    <div>
+        <form style="text-align: center;" id="type_of_t">
+            <input type="radio" name="type" value="yingji" checked>应急广播终端
+            <input type="radio" name="type" value="houbei">后备能源型终端
+            <input type="radio" name="type" value="fashe">发射机型终端
+        </form>
+    </div>
+
     <form class="form-horizontal m" id="form-tbOrganization-add">
         <div class="form-group">
-            <label class="col-sm-3 control-label">区域名称：</label>
+            <label class="col-sm-3 control-label">所属分组：</label>
+            <div class="col-xs-8">
+                <input class="form-control" name="aid" id="aid"  type="text" onclick="selectAidTree()" placeholder="请输入所属分组">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">所属用户：</label>
             <div class="col-sm-8">
-                <input  class="form-control" type="text" id="aname" name="aname" onclick="selectAidTree()" readonly="true" placeholder="点击选择区域">
+<!--                <select class="form-control" onclick="getUserInfo(this,'所属用户')" id="userinfo" name="userid">-->
+                <select class="form-control" id="userinfo" name="userid">
+                    <option value="">--请选择权限人--</option>
+                </select>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">终端类型 ：</label>
+            <div class="col-sm-8">
+                <select class="form-control" id="terminaltype" name="terminaltype" disabled>
+<!--                    <option value="yingji" id="yingjis">应急广播终端</option>-->
+<!--                    <option value="houbei" id="houbeis">后备能源型终端</option>-->
+<!--                    <option value="fashe" id="fashes">发射机型终端</option>-->
+
+                    <option value="1" id="yingjis">应急广播终端</option>
+                    <option value="2" id="houbeis">后备能源型终端</option>
+                    <option value="3" id="fashes">发射机型终端</option>
+
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">IMEI号：</label>
             <div class="col-sm-8">
-                <input id="tid" name="tid" class="form-control" type="text" placeholder="请输入15位IMEI号">
+                <input id="tid" name="tid" class="form-control" required type="text"  maxlength="15" minlength="15" placeholder="请输入15位IMEI号">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">终端设备名称：</label>
             <div class="col-sm-8">
-                <input id="tname" name="tname" class="form-control" type="text" placeholder="请输入终端设备名称">
+                <input id="tname" name="tname" class="form-control" type="text" required placeholder="请输入终端设备名称">
             </div>
         </div>
+<!--        <div class="form-group">-->
+<!--            <label class="col-sm-3 control-label">设备编号：</label>-->
+<!--            <div class="col-sm-8">-->
+<!--                <input id="tid1" name="tid1" class="form-control" type="text" placeholder="请输入终端设备名称">-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="form-group">
             <label class="col-sm-3 control-label">终端交互时间：</label>
-            <div class="col-xs-8">
-                <input class="form-control" name="intertime" id="intertime"  type="time" value="23:00:00" placeholder="请输入终端交互时间">
-             </div>
-        </div>
-        <input id="aid" name="aid" class="form-control" type="hidden">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">手机号码：</label>
             <div class="col-sm-8">
-                <input id="phone" name="phone" class="form-control" type="text" placeholder="请输入手机号码">
+                <input id="intertime" name="intertime" class="form-control" type="time" value="23:00:00" placeholder="请输入交互时间">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">安装地址：</label>
+            <label class="col-sm-3 control-label">终端手机号码：</label>
             <div class="col-sm-8">
-                <input id="address" name="address" class="form-control" type="text" placeholder="请输入安装地址">
+                <input  class="form-control" type="text" id="phone" name="phone" minlength="11" maxlength="13" required placeholder="请输入终端手机号码">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端出厂编号：</label>
+            <label class="col-sm-3 control-label">终端地址：</label>
             <div class="col-sm-8">
-                <input id="facid" name="facid" class="form-control" type="text" placeholder="请输入终端出厂编号">
+                <input id="address" name="address" class="form-control" type="text" required placeholder="请输入终端地址">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端接入通信网标准：</label>
+            <label class="col-sm-3 control-label">最后访问日期：</label>
             <div class="col-sm-8">
-            <select class="chosen-select form-control" name="comstand" id="comstand">
-                <option value="WCDMA">WCDMA</option>
-                <option value="TDSCDMA">TDSCDMA</option>
-                <option value="CDMA2000">CDMA2000</option>
-                <option value="GPRS">GPRS</option>
-                <option value="WIFI">WIFI</option>
-                <option value="TDDLTE">TDDLTE</option>
-                <option value="FDDLTE">FDDLTE</option>
-            </select>
+                <input id="lastaccesstime" name="lastaccesstime" type="date" class="form-control"   onclick=" " placeholder="请输入最后访问日期">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端接入电视网模式：</label>
+            <label class="col-sm-3 control-label">年耗电量：</label>
             <div class="col-sm-8">
-                <select class="chosen-select form-control" name="broadtel" id="broadtel">
-                    <option value="有线网">有线网</option>
-                    <option value="无线网">无线网</option>
-                    <option value="数字电视网">数字电视网</option>
-                    <option value="卫星电视网">卫星电视网</option>
-                    <option value="互联网">互联网</option>
-                    <option value="其他">其他</option>
-                </select>
+                <input id="ypowerconsumption" name="ypowerconsumption" required class="form-control" type="text" placeholder="请输入年耗电量">
+            </div>
+        </div>
+<!--年维护经费-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">年维护经费：</label>
+            <div class="col-sm-8">
+                <input id="MaintenanceFunds" name="MaintenanceFunds" class="form-control" type="text" required placeholder="请输入年维护经费">
+            </div>
+        </div>
+<!--经纬度(自动/手动)-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">经纬度(自动/手动)：</label>
+            <div class="col-sm-8">
+<!--                <input id="jingweidu" name="jingweidu" class="form-control" type="text" placeholder="请输入经纬度(自动/手动)">-->
+                    <input type="radio" name="longitudelatitude" value="1">手动
+                    <input type="radio" name="longitudelatitude" value="0">自动
+            </div>
+        </div>
+<!--基站编码-->
+        <div class="form-group">
+            <label class="col-sm-3 control-label">基站编码：</label>
+            <div class="col-sm-8">
+                <input id="basestation" name="basestation" class="form-control" required type="text" placeholder="请输入基站编码">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">RDS码：</label>
+            <label class="col-sm-3 control-label">现场照片：</label>
             <div class="col-sm-8">
-                <input id="rds" name="rds" class="form-control" type="text" placeholder="请输入3位RDS码">
+                <input id="poscene" name="`poscene" disabled class="form-control" type="text" placeholder="请输入现场照片">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端可收转广播频率 ：</label>
+            <label class="col-sm-3 control-label">终端授权号码：</label>
             <div class="col-sm-8">
-                <input id="fmfrequency" name="fmfrequency" class="form-control" type="text" placeholder="请输入调频广播频率，如101.7">
+                <input id="atphone" name="atphone" class="form-control" type="text" required placeholder="请输入终端授权号码">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端管理员：</label>
+            <label class="col-sm-3 control-label">出厂编号：</label>
             <div class="col-sm-8">
-                <input id="manager" name="manager" class="form-control" type="text" placeholder="请输入终端管理员">
+                <input id="facid" name="facid" class="form-control" required type="text" placeholder="请输入出厂编号">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">终端管理员电话：</label>
+            <label class="col-sm-3 control-label">对讲接收频率：</label>
             <div class="col-sm-8">
-                <input id="managertel" name="managertel" class="form-control" type="text" placeholder="请输入终端管理员电话">
+                <input id="irfrequency" name="irfrequency" class="form-control" type="text" placeholder="请输入对讲接收频率">
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">DCS码：</label>
+            <div class="col-sm-8">
+                <input id="dcs" name="dcs" class="form-control" required type="text" placeholder="请输入DCS码">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">广播接收频率：</label>
+            <div class="col-sm-8">
+                <input id="fmfrequency" name="fmfrequency" class="form-control" required type="text" placeholder="请输入广播接收频率">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">RDS：</label>
+            <div class="col-sm-8">
+                <input id="rds" name="rds" class="form-control" type="text" required placeholder="请输入3位RDS" minlength="3" maxlength="3" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">发射频率：</label>
+            <div class="col-sm-8">
+                <input id="transmitfrequency" name="transmitfrequency" class="form-control" required type="text" placeholder="请输入发射频率" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">终端音量：</label>
+            <div class="col-sm-8">
+                <input id="eovolume" name="eovolume" class="form-control" type="text" required placeholder="请输入终端音量" disabled>
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">终端管理员 ：</label>
+            <div class="col-sm-8">
+                <input id="manager" name="uname" class="form-control" required type="text" placeholder="请输入终端管理员">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">管理员电话：</label>
+            <div class="col-sm-8">
+                <input id="managertel" name="managertel" class="form-control" required type="text" minlength="7" maxlength="13" placeholder="请输入管理员电话">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">创建时间：</label>
+            <div class="col-sm-8">
+<!--                <input id="createdtime" name="createdtime" class="form-control" required type="text" disabled placeholder="请输入创建时间">-->
+                <input id="createtime" name="createtime" class="form-control" type="text" disabled>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">备注：</label>
             <div class="col-sm-8">
                 <input id="note" name="note" class="form-control" type="text" placeholder="请输入备注">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否启用：</label>
+            <div class="col-sm-8">
+                <!--                <input id="isuse" name="isuse" class="form-control" type="text" placeholder="请输入是否启用">-->
+                <form id="use">
+                    <input type="radio" name="isuse" value="1">是
+                    <input type="radio" name="isuse" value="0">否
+                </form>
             </div>
         </div>
     </form>
@@ -117,6 +221,17 @@
             },
         }
     });
+
+    // 新增特殊分组弹窗人员下拉框调取人员信息组件
+    $(function getUserInfo(ele,msg) {
+        $.get("/broad/dto/userinfos",function getmsg(params1,params2) {
+            for (let index = 0; index < params1.length; index++) {
+                let text = params1[index].uname;
+                let value = params1[index].userid;
+                $("#userinfo").append("<option value='"+value+"'>"+text+"</option>")
+            }
+        });
+    })
 
     function submitHandler() {
         if ($.validate.form()) {
@@ -152,28 +267,60 @@
             var body = layer.getChildFrame('body', index);
             $("#aid").val(body.find('#treeId').val());
             $("#aname").val(body.find('#treeName').val());
-            /*console.log(body.find('#treeId').val());
-            console.log(body.find('#treeName').val());*/
             layer.close(index);
         }
 }
+
+    $('input[type=radio][name=type]').change(function(val) {
+
+        var terminaltype = $('input:radio:checked').val();
+        if(terminaltype == "fashe"){
+            $("#rds").attr("disabled",false);
+            $("#transmitfrequency").attr("disabled",false);
+            $("#eovolume").attr("disabled",false);
+        }else{
+            $("#rds").attr("disabled",true);
+            $("#transmitfrequency").attr("disabled",true);
+            $("#eovolume").attr("disabled",true);
+        }
+        if(terminaltype == "fashe"){
+            $("#fashes").attr("selected",true);
+        }else if(terminaltype == "houbei"){
+            $("#houbeis").attr("selected",true);
+        }else{
+            $("#yingjis").attr("selected",true);
+        }
+    });
+
+    $(function CurrentTime(){
+        var now = new Date();
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+        var ss = now.getSeconds();           //秒
+        var clock = year + "-";
+        if(month < 10)
+            clock += "0";
+        clock += month + "-";
+        if(day < 10)
+            clock += "0";
+        clock += day + " ";
+
+        if(hh < 10)
+            clock += "0";
+
+        clock += hh + ":";
+        if (mm < 10) clock += '0';
+        clock += mm + ":";
+
+        if (ss < 10) clock += '0';
+        clock += ss;
+
+        $("#createtime").val(clock);
+    })
+
 </script>
-<!--<script type="text/javascript">-->
-    <!--//日期时间框-->
-    <!--$('#datetimepicker').datetimepicker({-->
-        <!--pickDate: false    });-->
-    <!--var setting = {-->
-        <!--view: {-->
-            <!--dblClickExpand: false-->
-        <!--},-->
-        <!--data: {-->
-            <!--simpleData: {-->
-                <!--enable: true-->
-            <!--}},-->
-        <!--callback: {-->
-            <!--onClick: onClick-->
-        <!--}-->
-    <!--};-->
-    <!--</script>-->
 </body>
 </html>

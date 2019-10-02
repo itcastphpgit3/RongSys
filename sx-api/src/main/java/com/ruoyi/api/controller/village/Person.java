@@ -69,5 +69,11 @@ public class Person {
         return RongApiService.get_list(res);
     }
 
+    @GetMapping("/cadreinfo")
+    @CrossOrigin
+    @ApiOperation(value = "村工作人员列表")
+    public RongApiRes selectbycadre(PersonApi person){
+        return RongApiService.get_list(villagerInfoService.selectbycadre(person));
+    }
 
 }

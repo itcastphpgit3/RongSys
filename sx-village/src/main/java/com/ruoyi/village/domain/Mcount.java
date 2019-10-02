@@ -21,6 +21,8 @@ public class Mcount {
     /** 女 */
     private int woman;
 
+    private int sum2;
+    private int sum3;
     public String getMarea() {
         return marea;
     }
@@ -51,5 +53,21 @@ public class Mcount {
 
     public void setWoman(int woman) {
         this.woman = woman;
+    }
+
+    public int getSum2() {
+        return sum2;
+    }
+
+    public void setSum2(int sum2) {
+        this.sum2 = sum2;
+    }
+
+    public int getSum3() {
+        return sum3;
+    }
+
+    public void setSum3(int sum3) {
+        this.sum3 = sum3;
     }
 }

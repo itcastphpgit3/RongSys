@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -134,6 +135,8 @@ public class VProject extends BaseController {
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
         String address="";
+
+
         //判断file数组不能为空并且长度大于0
         if (files != null && files.length > 0) {
             //循环获取file数组中得文件
@@ -152,6 +155,7 @@ public class VProject extends BaseController {
 
             }
         }
+        System.out.println(address);
         worklog.setWpic(address);//给project实体的“文件地址”赋值
         return toAjax(workLogService.insertWorklog(worklog));
     }

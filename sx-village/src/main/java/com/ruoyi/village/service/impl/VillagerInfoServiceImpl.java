@@ -6,6 +6,7 @@ import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.mapper.VillagerInfoMapper;
 import com.ruoyi.village.service.IVillagerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,5 +121,39 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 
 
 
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countNewPre(pubObjApi per)
+	{
+		return villagerInfoMapper.countNewPre(per);
+	}
 
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectbycadre(PersonApi person)
+	{
+		return villagerInfoMapper.selectbycadre(person);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbylowincome(pubObjApi per)
+	{
+		return villagerInfoMapper.countbylowincome(per);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbydemob(pubObjApi per)
+	{
+		return villagerInfoMapper.countbydemob(per);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbyagePart(PersonApi per)
+	{
+		return villagerInfoMapper.countbyagePart(per);
+	}
 }

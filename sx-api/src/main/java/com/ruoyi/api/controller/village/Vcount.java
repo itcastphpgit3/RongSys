@@ -261,4 +261,33 @@ public class Vcount {
 //        }
 //    }
 
+    @GetMapping("/newPre")
+    @CrossOrigin
+    @ApiOperation(value = "新增人口分析")
+    public RongApiRes countbyedulevel(pubObjApi pre){
+        return RongApiService.get_bean(villagerInfoService.countNewPre(pre));
+    }
+
+
+
+    @GetMapping("/lowincome")
+    @CrossOrigin
+    @ApiOperation(value = "低保户分析")
+    public RongApiRes countbylowincome(pubObjApi pre){
+        return RongApiService.get_bean(villagerInfoService.countbylowincome(pre));
+    }
+
+    @GetMapping("/demob")
+    @CrossOrigin
+    @ApiOperation(value = "复原军人比例分析")
+    public RongApiRes countbydemob(pubObjApi pre){
+        return RongApiService.get_bean(villagerInfoService.countbydemob(pre));
+    }
+
+    @GetMapping("/agePart")
+    @CrossOrigin
+    @ApiOperation(value = "年龄段分析")
+    public RongApiRes countbyagePart(PersonApi pre){
+        return RongApiService.get_bean(villagerInfoService.countbyagePart(pre));
+    }
 }

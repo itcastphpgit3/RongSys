@@ -21,9 +21,7 @@ public class Organization extends BaseEntity
     /**所属用户*/
     private String username;
 
-    private String userid;
     private String longitudelatitude;
-
     /**所属分组*/
     private String aname;
     /**最后访问日期*/
@@ -33,15 +31,15 @@ public class Organization extends BaseEntity
     /**终端类型*/
     private String terminaltype;
     /**终端经度*/
-    private String Longitude;
+    private String longitude;
     /**终端纬度*/
-    private String Latitude;
+    private String latitude;
     /**基站编码*/
     private String basestation;
     /**终端手机号码*/
     private String phone;
     /**年度维护经费*/
-    private String MaintenanceFunds;
+    private String maintenanceFunds;
     /**年耗电量*/
     private String ypowerconsumption;
     /**流量使用情况*/
@@ -104,15 +102,37 @@ public class Organization extends BaseEntity
     private String poscene;
     /**父地域id*/
     private String parentaid;
+    /**终端接入通信网*/
+    private String comstand;
+    /**终端接入广播电视网模式*/
+    private String broadtel;
+    /**终端流量使用限制，单位MB*/
+    private String trafficlimit;
+    /**节目播出主管单位*/
+    private String supervisionUnit;
+    /**安全播出责任单位*/
+    private String accountabilityUnit;
+    /**覆盖用户*/
+    private String families;
+    /**覆盖人口数*/
+    private String population;
+    /**二次覆盖模式*/
+    private String twoOverlayMode;
+    /**二次覆盖终端数*/
+    private String twoOverlayNumber;
+    /**二次覆盖用户数*/
+    private String twoOverlayFamiles;
+    /**二次覆盖人口数*/
+    private String twoOverlayPopulations;
+    /**耗电指数*/
+    private String powerConsumption;
+    /**所属用户编号*/
+    private String userid;
+    /**心跳包时间*/
+    private String hbtime;
+    /**终端用户姓名*/
+
     private String uname;
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -140,23 +160,6 @@ public class Organization extends BaseEntity
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-
-    public String getLongitudelatitude() {
-        return longitudelatitude;
-    }
-
-    public void setLongitudelatitude(String longitudelatitude) {
-        this.longitudelatitude = longitudelatitude;
     }
 
     public String getAname() {
@@ -192,19 +195,19 @@ public class Organization extends BaseEntity
     }
 
     public String getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(String longitude) {
-        Longitude = longitude;
+        this.longitude = longitude;
     }
 
     public String getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
     public void setLatitude(String latitude) {
-        Latitude = latitude;
+        this.latitude = latitude;
     }
 
     public String getBasestation() {
@@ -224,11 +227,11 @@ public class Organization extends BaseEntity
     }
 
     public String getMaintenanceFunds() {
-        return MaintenanceFunds;
+        return maintenanceFunds;
     }
 
     public void setMaintenanceFunds(String maintenanceFunds) {
-        MaintenanceFunds = maintenanceFunds;
+        this.maintenanceFunds = maintenanceFunds;
     }
 
     public String getYpowerconsumption() {
@@ -477,5 +480,133 @@ public class Organization extends BaseEntity
 
     public void setParentaid(String parentaid) {
         this.parentaid = parentaid;
+    }
+
+    public String getComstand() {
+        return comstand;
+    }
+
+    public void setComstand(String comstand) {
+        this.comstand = comstand;
+    }
+
+    public String getBroadtel() {
+        return broadtel;
+    }
+
+    public void setBroadtel(String broadtel) {
+        this.broadtel = broadtel;
+    }
+
+    public String getTrafficlimit() {
+        return trafficlimit;
+    }
+
+    public void setTrafficlimit(String trafficlimit) {
+        this.trafficlimit = trafficlimit;
+    }
+
+    public String getSupervisionUnit() {
+        return supervisionUnit;
+    }
+
+    public void setSupervisionUnit(String supervisionUnit) {
+        this.supervisionUnit = supervisionUnit;
+    }
+
+    public String getAccountabilityUnit() {
+        return accountabilityUnit;
+    }
+
+    public void setAccountabilityUnit(String accountabilityUnit) {
+        this.accountabilityUnit = accountabilityUnit;
+    }
+
+    public String getFamilies() {
+        return families;
+    }
+
+    public void setFamilies(String families) {
+        this.families = families;
+    }
+
+    public String getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(String population) {
+        this.population = population;
+    }
+
+    public String getTwoOverlayMode() {
+        return twoOverlayMode;
+    }
+
+    public void setTwoOverlayMode(String twoOverlayMode) {
+        this.twoOverlayMode = twoOverlayMode;
+    }
+
+    public String getTwoOverlayNumber() {
+        return twoOverlayNumber;
+    }
+
+    public void setTwoOverlayNumber(String twoOverlayNumber) {
+        this.twoOverlayNumber = twoOverlayNumber;
+    }
+
+    public String getTwoOverlayFamiles() {
+        return twoOverlayFamiles;
+    }
+
+    public void setTwoOverlayFamiles(String twoOverlayFamiles) {
+        this.twoOverlayFamiles = twoOverlayFamiles;
+    }
+
+    public String getTwoOverlayPopulations() {
+        return twoOverlayPopulations;
+    }
+
+    public void setTwoOverlayPopulations(String twoOverlayPopulations) {
+        this.twoOverlayPopulations = twoOverlayPopulations;
+    }
+
+    public String getPowerConsumption() {
+        return powerConsumption;
+    }
+
+    public void setPowerConsumption(String powerConsumption) {
+        this.powerConsumption = powerConsumption;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getHbtime() {
+        return hbtime;
+    }
+
+    public void setHbtime(String hbtime) {
+        this.hbtime = hbtime;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public String getLongitudelatitude() {
+        return longitudelatitude;
+    }
+
+    public void setLongitudelatitude(String longitudelatitude) {
+        this.longitudelatitude = longitudelatitude;
     }
 }

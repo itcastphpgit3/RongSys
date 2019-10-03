@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 终端地域 服务层
  *
- * @author 张鸿权
- * @date 2019-01-17
+ * @author cx
+ * @date 2019-10-03
  */
 public interface IOrganizationService
 {
@@ -152,4 +152,12 @@ public interface IOrganizationService
 	 * @return
 	 */
 	public  List<TerminalTels> selectTelsByTid(String tid);
+
+	/**
+	 * @author cx
+	 * @param organization
+	 *
+	 * @Description 更新终端数据
+	 */
+	public int updateUsername(Organization organization);
 }

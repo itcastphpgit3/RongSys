@@ -1,8 +1,10 @@
 package com.ruoyi.web.controller.broad;
 
 import com.ruoyi.broad.domain.Area;
+import com.ruoyi.broad.domain.BroadMessage;
 import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.service.IAreaService;
+import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
@@ -37,10 +39,16 @@ public class OrganizationController extends BaseController
 
 	@Autowired
 	private IOrganizationService organizationService;
+
 	@Autowired
-	private IAreaService areaService;
+	private IMessageService messageService;
+
 	@Autowired
 	private ISysUserService sysUserService;
+
+	@Autowired
+	private IAreaService areaService;
+
 
 	@RequiresPermissions("broad:organization:view")
 	@GetMapping()
@@ -54,7 +62,7 @@ public class OrganizationController extends BaseController
 	/**
 	 * 查询终端信息列表
 	 */
-	@RequiresPermissions("broad:organization:list")
+//	@RequiresPermissions("broad:organization:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Organization organization)
@@ -71,8 +79,64 @@ public class OrganizationController extends BaseController
 	@ResponseBody
 	public List<Map<String, Object>> listProBroadTree()
 	{
-		List<Map<String, Object>> tree = areaService.selectAreaTree(new Area());
+		List<Map<String, Object>> tree = messageService.selectMessageList(new BroadMessage());
 		return tree;
+	}
+
+	/**
+	 * 删除终端信息
+	 */
+	@Log(title = "终端信息删除", businessType = BusinessType.DELETE)
+	@PostMapping( "/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids)
+	{
+		return toAjax(organizationService.deleteOrganizationByIds(ids));
+	}
+
+	/**
+	 * 编辑终端信息
+	 */
+	@GetMapping("/edit/{tid}")
+	public String edit(@PathVariable("tid") String tid, ModelMap mmap)
+	{
+		Organization organization = organizationService.selectOrganizationByTid(tid);
+		mmap.put("organization", organization);
+		return prefix + "/edit";
+	}
+
+	/**
+	 * 编辑保存终端信息
+	 */
+	@RequiresPermissions("broad:organization:edit")
+	@Log(title = "终端信息修改", businessType = BusinessType.UPDATE)
+	@PostMapping("/edit")
+	@ResponseBody
+	public AjaxResult editSave(Organization organization)
+	{
+		int test = organizationService.updateOrganization(organization);
+//        int test1 = organizationService.updateUsername(organization);
+		if (test == 0)
+		{
+			test = test + 1;
+		}
+		return toAjax(test);
+	}
+
+	@GetMapping("/add")
+	public String add(){
+		return prefix + "/add";
+	}
+
+	//	@RequiresPermissions("broad:area:add")
+//	@Log(title = "终端地域", businessType = BusinessType.INSERT)
+
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(Organization organization){
+
+
+		return toAjax(organizationService.insertOrganization(organization));
 	}
 
 
@@ -125,40 +189,11 @@ public class OrganizationController extends BaseController
 //		return toAjax(msg);
 //	}
 //
-//	/**
-//	 * 修改终端信息
-//	 */
-//	@GetMapping("/edit/{tid}")
-//	public String edit(@PathVariable("tid") String tid, ModelMap mmap)
-//	{
-//		Organization organization = organizationService.selectOrganizationById(tid);
-//		mmap.put("organization", organization);
-//		return prefix + "/edit";
-//	}
-//
-//	/**
-//	 * 修改保存终端信息
-//	 */
-//	@RequiresPermissions("broad:organization:edit")
-//	@Log(title = "终端信息", businessType = BusinessType.UPDATE)
-//	@PostMapping("/edit")
-//	@ResponseBody
-//	public AjaxResult editSave(Organization organization)
-//	{
-//		return toAjax(organizationService.updateOrganization(organization));
-//	}
-//
-//	/**
-//	 * 删除终端信息
-//	 */
-//	@RequiresPermissions("broad:organization:remove")
-//	@Log(title = "终端信息", businessType = BusinessType.DELETE)
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	public AjaxResult remove(String ids)
-//	{
-//		return toAjax(organizationService.deleteOrganizationByIds(ids));
-//	}
+
+
+
+
+
 //
 //	/**
 //	 * 选择部门树
@@ -188,10 +223,15 @@ public class OrganizationController extends BaseController
 //
 	/**
 	 * 加载区域列表树
+	 * @description 目前村务调用了这个接口广播的暂时没有调用
+	 *
 	 */
 	@GetMapping("/treeData")
 	@ResponseBody
-	public List<Map<String, Object>> treeData(){
+	public List<Map<String, Object>> treeData()
+	{
+
+
 		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
 		Long userid =  currentUser.getUserId();
 		int returnId = new Long(userid).intValue();
@@ -209,9 +249,12 @@ public class OrganizationController extends BaseController
 		}
 	}
 
-//	/**
-//	 * 选择区域树
-//	 */
+
+	/**
+	 * 选择区域树
+	 * @description 目前村务在调用此接口
+	 */
+
 	@GetMapping("/selectAidTree")
 	public String selectAidTree()
 	{
@@ -246,18 +289,5 @@ public class OrganizationController extends BaseController
 //	}
 
 
-	@GetMapping("/add")
-	public String add(){
-		return prefix + "/add";
-	}
-
-//	@RequiresPermissions("broad:area:add")
-//	@Log(title = "终端地域", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(Organization organization){
-//		System.out.println(organization);
-
-		return toAjax(organizationService.insertOrganization(organization));
-	}
 }
+

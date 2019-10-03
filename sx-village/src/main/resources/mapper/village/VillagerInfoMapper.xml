@@ -95,6 +95,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="gfs"    column="gfs"    />
         <result property="wdr"    column="wdr"    />
         <result property="rth"    column="rth"    />
+        <result property="iscadre"    column="iscadre"    />
+        <result property="cadrelevel"    column="cadrelevel"    />
+        <result property="islowincome"    column="islowincome"    />
+        <result property="getlowdate"    column="getlowdate"    />
+        <result property="isdemob"    column="isdemob"    />
+        <result property="demobdate"    column="demobdate"    />
         <result property="winaward"    column="winaward"    />
         <result property="punish"    column="punish"    />
         <result property="personphoto"    column="personphoto"    />
@@ -106,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectVillagerInfoVo">
-        select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, winaward, punish, personphoto, hkphoto, idphoto, carphoto, housephoto, isuse from villager_info
+        select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, iscadre, cadrelevel, islowincome, getlowdate, isdemob, demobdate, winaward, punish, personphoto, hkphoto, idphoto, carphoto, housephoto, isuse from villager_info
     </sql>
 	
     <select id="selectVillagerInfoList" parameterType="VillagerInfo" resultMap="VillagerInfoResult">
@@ -144,7 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="home != null  and home != '' "> and home = #{home}</if>
              <if test="grouptype != null  and grouptype != '' "> and grouptype = #{grouptype}</if>
              <if test="house != null  and house != '' "> and house = #{house}</if>
-             <if test="height != null "> and height = #{height}</if>
+             <if test="height != null  and height != '' "> and height = #{height}</if>
              <if test="hhdnum != null  and hhdnum != '' "> and hhdnum = #{hhdnum}</if>
              <if test="hhd != null  and hhd != '' "> and hhd = #{hhd}</if>
              <if test="hhdidcard != null  and hhdidcard != '' "> and hhdidcard = #{hhdidcard}</if>
@@ -202,13 +208,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="gfs != null "> and gfs = #{gfs}</if>
              <if test="wdr != null "> and wdr = #{wdr}</if>
              <if test="rth != null "> and rth = #{rth}</if>
+             <if test="iscadre != null "> and iscadre = #{iscadre}</if>
+             <if test="cadrelevel != null  and cadrelevel != '' "> and cadrelevel = #{cadrelevel}</if>
+             <if test="islowincome != null "> and islowincome = #{islowincome}</if>
+             <if test="getlowdate != null "> and getlowdate = #{getlowdate}</if>
+             <if test="isdemob != null "> and isdemob = #{isdemob}</if>
+             <if test="demobdate != null "> and demobdate = #{demobdate}</if>
              <if test="winaward != null  and winaward != '' "> and winaward = #{winaward}</if>
              <if test="punish != null  and punish != '' "> and punish = #{punish}</if>
-            <if test="personphoto != null  and personphoto != '' "> and personphoto = #{personphoto}</if>
-            <if test="hkphoto != null  and hkphoto != '' "> and hkphoto = #{hkphoto}</if>
-            <if test="idphoto != null  and idphoto != '' "> and idphoto = #{idphoto}</if>
-            <if test="carphoto != null  and carphoto != '' "> and carphoto = #{carphoto}</if>
-            <if test="housephoto != null  and housephoto != '' "> and housephoto = #{housephoto}</if>
+             <if test="personphoto != null  and personphoto != '' "> and personphoto = #{personphoto}</if>
+             <if test="hkphoto != null  and hkphoto != '' "> and hkphoto = #{hkphoto}</if>
+             <if test="idphoto != null  and idphoto != '' "> and idphoto = #{idphoto}</if>
+             <if test="carphoto != null  and carphoto != '' "> and carphoto = #{carphoto}</if>
+             <if test="housephoto != null  and housephoto != '' "> and housephoto = #{housephoto}</if>
              <if test="isuse != null "> and isuse = #{isuse}</if>
          </where>
     </select>
@@ -253,7 +265,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="home != null  and home != ''  ">home,</if>
 			<if test="grouptype != null  and grouptype != ''  ">grouptype,</if>
 			<if test="house != null  and house != ''  ">house,</if>
-			<if test="height != null  ">height,</if>
+			<if test="height != null  and height != ''  ">height,</if>
 			<if test="hhdnum != null  and hhdnum != ''  ">hhdnum,</if>
 			<if test="hhd != null  and hhd != ''  ">hhd,</if>
 			<if test="hhdidcard != null  and hhdidcard != ''  ">hhdidcard,</if>
@@ -311,13 +323,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="gfs != null  ">gfs,</if>
 			<if test="wdr != null  ">wdr,</if>
 			<if test="rth != null  ">rth,</if>
+			<if test="iscadre != null  ">iscadre,</if>
+			<if test="cadrelevel != null  and cadrelevel != ''  ">cadrelevel,</if>
+			<if test="islowincome != null  ">islowincome,</if>
+			<if test="getlowdate != null  ">getlowdate,</if>
+			<if test="isdemob != null  ">isdemob,</if>
+			<if test="demobdate != null  ">demobdate,</if>
 			<if test="winaward != null  and winaward != ''  ">winaward,</if>
 			<if test="punish != null  and punish != ''  ">punish,</if>
-            <if test="personphoto != null  and personphoto != ''  ">personphoto,</if>
-            <if test="hkphoto != null  and hkphoto != ''  ">hkphoto,</if>
-            <if test="idphoto != null  and idphoto != ''  ">idphoto,</if>
-            <if test="carphoto != null  and carphoto != ''  ">carphoto,</if>
-            <if test="housephoto != null  and housephoto != ''  ">housephoto,</if>
+			<if test="personphoto != null  and personphoto != ''  ">personphoto,</if>
+			<if test="hkphoto != null  and hkphoto != ''  ">hkphoto,</if>
+			<if test="idphoto != null  and idphoto != ''  ">idphoto,</if>
+			<if test="carphoto != null  and carphoto != ''  ">carphoto,</if>
+			<if test="housephoto != null  and housephoto != ''  ">housephoto,</if>
 			<if test="isuse != null  ">isuse,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -353,7 +371,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="home != null  and home != ''  ">#{home},</if>
 			<if test="grouptype != null  and grouptype != ''  ">#{grouptype},</if>
 			<if test="house != null  and house != ''  ">#{house},</if>
-			<if test="height != null  ">#{height},</if>
+			<if test="height != null  and height != ''  ">#{height},</if>
 			<if test="hhdnum != null  and hhdnum != ''  ">#{hhdnum},</if>
 			<if test="hhd != null  and hhd != ''  ">#{hhd},</if>
 			<if test="hhdidcard != null  and hhdidcard != ''  ">#{hhdidcard},</if>
@@ -411,13 +429,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="gfs != null  ">#{gfs},</if>
 			<if test="wdr != null  ">#{wdr},</if>
 			<if test="rth != null  ">#{rth},</if>
+			<if test="iscadre != null  ">#{iscadre},</if>
+			<if test="cadrelevel != null  and cadrelevel != ''  ">#{cadrelevel},</if>
+			<if test="islowincome != null  ">#{islowincome},</if>
+			<if test="getlowdate != null  ">#{getlowdate},</if>
+			<if test="isdemob != null  ">#{isdemob},</if>
+			<if test="demobdate != null  ">#{demobdate},</if>
 			<if test="winaward != null  and winaward != ''  ">#{winaward},</if>
 			<if test="punish != null  and punish != ''  ">#{punish},</if>
-            <if test="personphoto != null  and personphoto != ''  ">#{personphoto},</if>
-            <if test="hkphoto != null  and hkphoto != ''  ">#{hkphoto},</if>
-            <if test="idphoto != null  and idphoto != ''  ">#{idphoto},</if>
-            <if test="carphoto != null  and carphoto != ''  ">#{carphoto},</if>
-            <if test="housephoto != null  and housephoto != ''  ">#{housephoto},</if>
+			<if test="personphoto != null  and personphoto != ''  ">#{personphoto},</if>
+			<if test="hkphoto != null  and hkphoto != ''  ">#{hkphoto},</if>
+			<if test="idphoto != null  and idphoto != ''  ">#{idphoto},</if>
+			<if test="carphoto != null  and carphoto != ''  ">#{carphoto},</if>
+			<if test="housephoto != null  and housephoto != ''  ">#{housephoto},</if>
 			<if test="isuse != null  ">#{isuse},</if>
          </trim>
     </insert>
@@ -456,7 +480,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="home != null  and home != ''  ">home = #{home},</if>
             <if test="grouptype != null  and grouptype != ''  ">grouptype = #{grouptype},</if>
             <if test="house != null  and house != ''  ">house = #{house},</if>
-            <if test="height != null  ">height = #{height},</if>
+            <if test="height != null  and height != ''  ">height = #{height},</if>
             <if test="hhdnum != null  and hhdnum != ''  ">hhdnum = #{hhdnum},</if>
             <if test="hhd != null  and hhd != ''  ">hhd = #{hhd},</if>
             <if test="hhdidcard != null  and hhdidcard != ''  ">hhdidcard = #{hhdidcard},</if>
@@ -514,6 +538,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gfs != null  ">gfs = #{gfs},</if>
             <if test="wdr != null  ">wdr = #{wdr},</if>
             <if test="rth != null  ">rth = #{rth},</if>
+            <if test="iscadre != null  ">iscadre = #{iscadre},</if>
+            <if test="cadrelevel != null  and cadrelevel != ''  ">cadrelevel = #{cadrelevel},</if>
+            <if test="islowincome != null  ">islowincome = #{islowincome},</if>
+            <if test="getlowdate != null  ">getlowdate = #{getlowdate},</if>
+            <if test="isdemob != null  ">isdemob = #{isdemob},</if>
+            <if test="demobdate != null  ">demobdate = #{demobdate},</if>
             <if test="winaward != null  and winaward != ''  ">winaward = #{winaward},</if>
             <if test="punish != null  and punish != ''  ">punish = #{punish},</if>
             <if test="personphoto != null  and personphoto != ''  ">personphoto = #{personphoto},</if>

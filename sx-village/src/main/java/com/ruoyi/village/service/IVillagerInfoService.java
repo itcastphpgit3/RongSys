@@ -56,4 +56,8 @@ public interface IVillagerInfoService
 	public List<VillagerInfo> selectPersonAllByApi(PersonApi person);
 
 	public Mcount countpmBySex(PersonApi person);
+
+	public List<VillagerInfo> selectvillagerInfoListBytype(PersonApi person);
+	public List<VillagerInfo> selectGrouplist(PersonApi person);
+
 }

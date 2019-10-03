@@ -64,5 +64,8 @@ public interface PolicyinfoMapper {
 
     public List<Comment> selectinfocommentListlimit(pubObjApi info);
 
-    public List<Comment> selectinforecommentList(String coid);
+    public List<Comment> selectinforecommentList(int coid);
+
+    //新增评论
+    public int insertInfoCM(Comment comment);
 }

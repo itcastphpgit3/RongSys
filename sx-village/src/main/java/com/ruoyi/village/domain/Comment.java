@@ -8,7 +8,7 @@ public class Comment extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
     /**评论表id*/
-    private String coid;
+    private int coid;
     /**评论所属新闻编号*/
     private String pcid;
     /**回复某评论的coid*/
@@ -38,11 +38,11 @@ public class Comment extends BaseEntity {
         return serialVersionUID;
     }
 
-    public String getCoid() {
+    public int getCoid() {
         return coid;
     }
 
-    public void setCoid(String coid) {
+    public void setCoid(int coid) {
         this.coid = coid;
     }
 

@@ -78,7 +78,13 @@ public class PolicyinfoServiceImpl implements IPolicyinfoService {
 
         @Override
         @DataSource(value = DataSourceType.SXVILLAGE)
-        public List<Comment> selectinforecommentList(String coid){
+        public List<Comment> selectinforecommentList(int coid){
             return policyinfoMapper.selectinforecommentList(coid);
+        }
+
+        @Override
+        @DataSource(value = DataSourceType.SXVILLAGE)
+        public int insertInfoCM(Comment comment) {
+            return policyinfoMapper.insertInfoCM(comment);
         }
     }

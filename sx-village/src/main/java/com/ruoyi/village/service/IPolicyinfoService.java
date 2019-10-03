@@ -63,5 +63,7 @@ public interface IPolicyinfoService {
     //查询评论
     public List<Comment> selectinfocommentListlimit(pubObjApi info);
     //查询回复评论
-    public List<Comment> selectinforecommentList(String coid);
+    public List<Comment> selectinforecommentList(int coid);
+    //新增评论
+    public int insertInfoCM(Comment comment);
 }

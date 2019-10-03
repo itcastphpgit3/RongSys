@@ -47,10 +47,10 @@ public class VProject extends BaseController {
     @PostMapping("/insert")
     @CrossOrigin
     @ApiOperation(value = "返回所有项目")
-    public AjaxResult insertProject(Project project,@RequestParam(value = "files", required = false) MultipartFile file,
-                                    @RequestParam(value = "filename", required = false) String fname,
-                                    @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                    @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertProject(Project project,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                    @RequestParam(value = "filename", required = false) String[] fnames,
+                                    @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                    @RequestParam(value = "fsize",required = false) String[] fsize )
     {
         String year = DateUtil.getYear();
 
@@ -58,15 +58,26 @@ public class VProject extends BaseController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(dateFormat.format(date));
         String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
-        try{
-            //保存图片
-            Files g = bFileUtil1.uplodeFile(maxfileid, file, fname, flenth, fsize, year);
-            project.setPropic(g.getAddress());//给project实体的“文件地址”赋值
-        } catch (Exception e) {
-            //return "上传图片失败";
-            System.out.println("失败");
-            return toAjax(0);
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
         }
+        project.setPropic(address);//给project实体的“文件地址”赋值
         return toAjax(projectService.insertProject(project));
     }
 

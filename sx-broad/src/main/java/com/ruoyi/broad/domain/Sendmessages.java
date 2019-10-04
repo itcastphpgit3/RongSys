@@ -80,9 +80,16 @@ public class Sendmessages extends BaseEntity
 	{
 		return sendtime;
 	}
+	@Override
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
+	}
+
+	@Override
+	public String getRemark()
+	{
+		return remark;
 	}
 
 	public void setEndtime(String endtime)
@@ -94,10 +101,7 @@ public class Sendmessages extends BaseEntity
 	{
 		return endtime;
 	}
-	public String getRemark()
-	{
-		return remark;
-	}
+
 	public void setTid(String tid)
 	{
 		this.tid = tid;
@@ -126,6 +130,7 @@ public class Sendmessages extends BaseEntity
 		return sendtimes;
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 				.append("smid", getSmid())

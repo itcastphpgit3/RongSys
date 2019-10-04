@@ -130,6 +130,7 @@ public class ProApplyUser extends BaseEntity
     }
 
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
                 .append("paid", getPaid())

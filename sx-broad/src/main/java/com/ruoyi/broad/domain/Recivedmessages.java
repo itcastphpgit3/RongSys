@@ -74,15 +74,19 @@ public class Recivedmessages extends BaseEntity
 	{
 		return recivedtime;
 	}
+
+	@Override
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
 	}
 
+	@Override
 	public String getRemark()
 	{
 		return remark;
 	}
+
 	public void setEndtime(String endtime)
 	{
 		this.endtime = endtime;
@@ -92,6 +96,8 @@ public class Recivedmessages extends BaseEntity
 	{
 		return endtime;
 	}
+
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 				.append("rmid", getRmid())

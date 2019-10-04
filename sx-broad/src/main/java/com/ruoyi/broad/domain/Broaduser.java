@@ -141,6 +141,7 @@ public class Broaduser extends BaseEntity
 		return aid;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("userid", getUserid())

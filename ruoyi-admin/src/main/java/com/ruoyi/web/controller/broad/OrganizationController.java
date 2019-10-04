@@ -104,7 +104,6 @@ public class OrganizationController extends BaseController
 		mmap.put("organization", organization);
 		return prefix + "/edit";
 	}
-
 	/**
 	 * 编辑保存终端信息
 	 */
@@ -128,8 +127,6 @@ public class OrganizationController extends BaseController
 		return prefix + "/add";
 	}
 
-	//	@RequiresPermissions("broad:area:add")
-//	@Log(title = "终端地域", businessType = BusinessType.INSERT)
 
 	@PostMapping("/add")
 	@ResponseBody
@@ -139,88 +136,6 @@ public class OrganizationController extends BaseController
 		return toAjax(organizationService.insertOrganization(organization));
 	}
 
-
-//	/**
-//	 * 导出终端信息列表
-//	 */
-//	@RequiresPermissions("broad:organization:export")
-//	@PostMapping("/export")
-//	@ResponseBody
-//	public AjaxResult export(Organization organization)
-//	{
-//		List<Organization> list = organizationService.selectOrganizationList(organization);
-//		ExcelUtil<Organization> util = new ExcelUtil<Organization>(Organization.class);
-//		return util.exportExcel(list, "organization");
-//	}
-//
-//	/**
-//	 * 新增终端信息
-//	 */
-//	@GetMapping("/add")
-//	public String add()
-//	{
-//		return prefix + "/add";
-//	}
-//
-//	/**
-//	 * 新增保存终端信息
-//	 * 若IMEI号存在, 则改为修改该IMEI号的信息
-//	 */
-//	@RequiresPermissions("broad:organization:add")
-//	@Log(title = "终端信息", businessType = BusinessType.INSERT)
-//	@PostMapping("/add")
-//	@ResponseBody
-//	public AjaxResult addSave(Organization organization)
-//	{
-//		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
-//		Long userid =  currentUser.getUserId();
-////		organization.setUserid(String.valueOf(userid));
-//		SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
-//		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");// a为am/pm的标记
-//		Date date = new Date();// 获取当前时间
-//		organization.setCreatedtime(sdf.format(date));
-//		int msg = 1;
-//		try{
-//			organizationService.insertOrganizationPic(organization);
-//			msg = organizationService.insertOrganization(organization);
-//		} catch (Exception e) {
-//			editSave(organization);
-//		}
-//		return toAjax(msg);
-//	}
-//
-
-
-
-
-
-//
-//	/**
-//	 * 选择部门树
-//	 */
-//	@GetMapping("/selectOrganizationTree/{aid}")
-//	public String selectOrganizationTree(@PathVariable("aid") String aid, ModelMap mmap)
-//	{
-//		mmap.put("organization", areaService.selectAreaById(aid));
-//		/*return prefix + "/tree";*/
-//		return prefix + "/listProBroadTree";
-//	}
-//
-
-//
-//	/**
-//	 * 查询节目单终端列表
-//	 */
-//	@PostMapping("/listProBroad")
-//	@ResponseBody
-//	public TableDataInfo listProBroad(Organization organization)
-//	{
-//		startPage() ;
-//		List<Organization> list = organizationService.selectProBroadList(organization);
-//		return getDataTable(list);
-//	}
-//
-//
 	/**
 	 * 加载区域列表树
 	 * @description 目前村务调用了这个接口广播的暂时没有调用
@@ -230,7 +145,6 @@ public class OrganizationController extends BaseController
 	@ResponseBody
 	public List<Map<String, Object>> treeData()
 	{
-
 
 		SysUser currentUser = ShiroUtils.getSysUser();//从session中获取当前登陆用户的userid
 		Long userid =  currentUser.getUserId();
@@ -248,46 +162,31 @@ public class OrganizationController extends BaseController
 			return tree;
 		}
 	}
-
-
 	/**
 	 * 选择区域树
 	 * @description 目前村务在调用此接口
 	 */
-
 	@GetMapping("/selectAidTree")
 	public String selectAidTree()
 	{
 		return prefix + "/aidTree";
 	}
-//
-//    /**
-//     * 设置终端的RDS码
-//     */
-//    @PostMapping( "/rdsSet")
-//    @ResponseBody
-//    public AjaxResult rdsSetUrl(String ids, String number)
-//    {
-//        return toAjax(organizationService.updateRdsByIds(ids,number));
-//    }
-//
-//    /**
-//     * 设置终端的fmfrequency码
-//     */
-//    @PostMapping( "/fmfrequencySet")
-//    @ResponseBody
-//    public AjaxResult fmfrequencySet(String ids, String number)
-//    {
-//        return toAjax(organizationService.updateFmfrequencyByIds(ids,number));
-//    }
-//
-//	@PostMapping( "/isuseSet")
-//	@ResponseBody
-//	public AjaxResult isuseSet(String tid, Boolean isuse)
-//	{
-//		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
-//	}
 
 
+	/** @author cx
+	 * @description 导出终端数据
+	 *
+	 * @param organization
+	 * @return 终端管理表集合
+	 */
+	@Log(title = "终端管理", businessType = BusinessType.EXPORT)
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(Organization organization)
+	{
+		List<Organization> list = organizationService.exportOrganization(organization);
+		ExcelUtil<Organization> util = new ExcelUtil<Organization>(Organization.class);
+		return util.exportExcel(list, "终端管理表");
+	}
 }
 

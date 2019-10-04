@@ -1,5 +1,6 @@
 package com.ruoyi.broad.domain;
 
+import com.ruoyi.common.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.base.BaseEntity;
@@ -15,31 +16,123 @@ public class Organization extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /**终端imei*/
+    @Excel(name = "终端IMEI号")
     private String tid;
+
     /**设备编号*/
+    @Excel(name = "终端编号")
     private String tname;
+
+    /**所属分组*/
+    @Excel(name = "所属分组编号")
+    private String aname;
+
     /**所属用户*/
+    @Excel(name = "所属用户编号")
+    private String uname;
+
+    /**出厂编号*/
+    @Excel(name = "终端出厂编号")
+    private String facid;
+
+    /**终端地址*/
+    @Excel(name = "终端安装地址")
+    private String address;
+
+    /**终端经度*/
+    @Excel(name = "安装点经度")
+    private String longitude;
+
+    /**终端纬度*/
+    @Excel(name = "安装点纬度")
+    private String latitude;
+
+    /**终端手机号码*/
+    @Excel(name = "终端手机号码")
+    private String phone;
+
+    /**终端接入通信网*/
+    @Excel(name = "接入通信网标准")
+    private String comstand;
+
+    /**终端接入广播电视网模式*/
+    @Excel(name = "接入广播电视网模式")
+    private String broadtel;
+
+    /**调频接收频率（可收转广播频率）*/
+    @Excel(name = "终端可收转广播频率")
+    private String fmfrequency;
+
+    /**终端管理员*/
+    @Excel(name = "终端管理员姓名")
+    private String manager;
+
+    /**管理员电话*/
+    @Excel(name = "终端管理员电话")
+    private String managertel;
+
+    /**交互时间*/
+    @Excel(name = "终端交互时间")
+    private String intertime;
+
+    /**rds码*/
+    @Excel(name = "RDS码")
+    private String rds;
+
+    /**终端流量使用限制，单位MB*/
+    @Excel(name = "终端流量限制")
+    private String trafficlimit;
+
+    /**节目播出主管单位*/
+    @Excel(name = "节目播出主管单位")
+    private String supervisionUnit;
+
+    /**安全播出责任单位*/
+    @Excel(name = "安全播出责任单位")
+    private String accountabilityUnit;
+
+    /**覆盖用户*/
+    @Excel(name = "覆盖用户")
+    private String families;
+
+    /**覆盖人口数*/
+    @Excel(name = "覆盖人口数")
+    private String population;
+
+    /**二次覆盖模式*/
+    @Excel(name = "二次覆盖模式")
+    private String twoOverlayMode;
+
+    /**二次覆盖终端数*/
+    @Excel(name = "二次覆盖终端数")
+    private String twoOverlayNumber;
+
+    /**二次覆盖用户数*/
+    @Excel(name = "二次覆盖用户数")
+    private String twoOverlayFamiles;
+
+    /**二次覆盖人口数*/
+    @Excel(name = "二次覆盖人口数")
+    private String twoOverlayPopulations;
+
+    /**耗电指数*/
+    @Excel(name = "耗电指数")
+    private String powerConsumption;
+
+    /**年度维护经费*/
+    @Excel(name = "维护经费")
+    private String maintenanceFunds;
+
+    /**所属用户名称*/
     private String username;
 
     private String longitudelatitude;
-    /**所属分组*/
-    private String aname;
     /**最后访问日期*/
     private String lastaccesstime;
-    /**交互时间*/
-    private String intertime;
     /**终端类型*/
     private String terminaltype;
-    /**终端经度*/
-    private String longitude;
-    /**终端纬度*/
-    private String latitude;
     /**基站编码*/
     private String basestation;
-    /**终端手机号码*/
-    private String phone;
-    /**年度维护经费*/
-    private String maintenanceFunds;
     /**年耗电量*/
     private String ypowerconsumption;
     /**流量使用情况*/
@@ -64,32 +157,20 @@ public class Organization extends BaseEntity
     private String pdmode;
     /**充电电流*/
     private String chargecurrent;
-    /**对讲接收频率*/
-    private String fmfrequency;
-    /**终端管理员*/
-    private String manager;
-    /**管理员电话*/
-    private String managertel;
     /**创建时间*/
     private String createdtime;
     /**是否启用*/
     private boolean isuse;
 
     private String isused;
-    /**终端地址*/
-    private String address;
     /**终端地域id*/
     private String aid;
     /**备注*/
     private String note;
-    /**rds码*/
-    private String rds;
     /**终端授权号码*/
     private String atphone;
     /**广播接收频率*/
     private String brfrequency;
-    /**出厂编号*/
-    private String facid;
     /**网络类型*/
     private String nettype;
     /**月流量使用*/
@@ -102,37 +183,10 @@ public class Organization extends BaseEntity
     private String poscene;
     /**父地域id*/
     private String parentaid;
-    /**终端接入通信网*/
-    private String comstand;
-    /**终端接入广播电视网模式*/
-    private String broadtel;
-    /**终端流量使用限制，单位MB*/
-    private String trafficlimit;
-    /**节目播出主管单位*/
-    private String supervisionUnit;
-    /**安全播出责任单位*/
-    private String accountabilityUnit;
-    /**覆盖用户*/
-    private String families;
-    /**覆盖人口数*/
-    private String population;
-    /**二次覆盖模式*/
-    private String twoOverlayMode;
-    /**二次覆盖终端数*/
-    private String twoOverlayNumber;
-    /**二次覆盖用户数*/
-    private String twoOverlayFamiles;
-    /**二次覆盖人口数*/
-    private String twoOverlayPopulations;
-    /**耗电指数*/
-    private String powerConsumption;
     /**所属用户编号*/
     private String userid;
     /**心跳包时间*/
     private String hbtime;
-    /**终端用户姓名*/
-
-    private String uname;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

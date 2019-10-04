@@ -306,4 +306,14 @@ public class OrganizationServiceImpl implements IOrganizationService
 		return organizationMapper.updateUsername(organization);
 	}
 
+	/**
+	 * 根据条件分页查询终端对象
+	 *
+	 * @param organization 导出终端字段
+	 * @return 终端信息集合信息
+	 */
+	@Override
+	@DataSource(value = DataSourceType.SLAVE)
+	public List<Organization> exportOrganization(Organization organization){return organizationMapper.exportOrganization(organization);}
+
 }

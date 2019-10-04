@@ -228,61 +228,62 @@
         </where>
     </select>
 
+    <!--终端信息展示列表-->
     <select id="selectOrganizationList1" parameterType="Organization" resultMap="OrganizationResult">
         SELECT
-        t.tid,
-        t.tname,
-        userinfo.username,
-        area.aname,
-        t.lastaccesstime,
-        t.mflowusing,
-        t.irfrequency,
-        t.intertime,
-        t.terminaltype,
-        terminal_management.longitude,
-        terminal_management.latitude,
-        ter_conditions.basestation,
-        t.phone,
-        terminal_management.maintenanceFunds,
-        t.ypowerconsumption,
-        terminal_traffic.usetraffic,
-        t.onlinestate,
-        t.dcs,
-        t.rds,
-        t.pdmode,
-        t.chargecurrent,
-        t.brfrequency,
-        t.transmitpower,
-        t.reflectedpower,
-        t.workvoltage,
-        t.batteryvoltage,
-        t.loadcurrent,
-        t.pdmode,
-        t.chargecurrent,
-        t.fmfrequency,
-        t.manager,
-        t.managertel,
-        t.createdtime,
-        t.isuse,
-        t.address,
-        t.aid,
-        ter_conditions.nettype,
-        t.note,
-        t.atphone,
-        t.facid,
-        t.mflowusing,
-        t.eovolume,
-        t.poscene,
-        t.hbtime,
-        area.parentaid,
-        t.transmitfrequency
+            t.tid,
+            t.tname,
+            userinfo.username,
+            area.aname,
+            t.lastaccesstime,
+            t.mflowusing,
+            t.irfrequency,
+            t.intertime,
+            t.terminaltype,
+            terminal_management.longitude,
+            terminal_management.latitude,
+            ter_conditions.basestation,
+            t.phone,
+            terminal_management.maintenanceFunds,
+            t.ypowerconsumption,
+            terminal_traffic.usetraffic,
+            t.onlinestate,
+            t.dcs,
+            t.rds,
+            t.pdmode,
+            t.chargecurrent,
+            t.brfrequency,
+            t.transmitpower,
+            t.reflectedpower,
+            t.workvoltage,
+            t.batteryvoltage,
+            t.loadcurrent,
+            t.pdmode,
+            t.chargecurrent,
+            t.fmfrequency,
+            t.manager,
+            t.managertel,
+            t.createdtime,
+            t.isuse,
+            t.address,
+            t.aid,
+            ter_conditions.nettype,
+            t.note,
+            t.atphone,
+            t.facid,
+            t.mflowusing,
+            t.eovolume,
+            t.poscene,
+            t.hbtime,
+            area.parentaid,
+            t.transmitfrequency
         FROM
         (
-        ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
-        left join area on t.aid = area.aid)
-        left join terminal_management on t.tid = terminal_management.tid)
-        left join ter_conditions on t.tid = ter_conditions.tid)
-        left join terminal_traffic on t.tid = terminal_traffic.tid
+            ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
+            left join area on t.aid = area.aid)
+            left join terminal_management on t.tid = terminal_management.tid)
+            left join ter_conditions on t.tid = ter_conditions.tid)
+            left join terminal_traffic on t.tid = terminal_traffic.tid
         )
         <where>
             <if test="tid != null  and tid != '' "> and t.tid = #{tid}</if>
@@ -454,6 +455,37 @@
         </trim>
         where t.tid = tm.tid  and t.aid = cc.aid  and t.tid = #{tid}
     </update>
+
+    <select id="exportOrganization" parameterType="Organization" resultMap="OrganizationResult">
+        select tb_organization.tid,
+			 tb_organization.tname,
+			 tb_organization.aname,
+		     tb_organization.uname,
+			 tb_organization.facid,
+			 tb_organization.address,
+			 terminal_management.Longitude,
+		     terminal_management.Latitude,
+			 tb_organization.phone,
+			 tb_organization.comstand,
+			 tb_organization.broadtel,
+		     tb_organization.fmfrequency,
+		     tb_organization.manager,
+			 tb_organization.managertel,
+		     tb_organization.intertime,
+			 tb_organization.rds,
+			 tb_organization.trafficlimit,
+			 terminal_management.SupervisionUnit,
+			 terminal_management.AccountabilityUnit,
+			 terminal_management.Families,
+			 terminal_management.Population,
+			 terminal_management.TwoOverlayMode,
+			 terminal_management.TwoOverlayNumber,
+			 terminal_management.TwoOverlayFamiles,
+			 terminal_management.TwoOverlayPopulations,
+			 terminal_management.maintenanceFunds
+        from tb_organization,terminal_management
+        where tb_organization.tid = terminal_management.tid
+    </select>
 
     <update id="updateUsername" parameterType="Organization">
         update tb_organization t,userinfo ui

@@ -188,5 +188,19 @@ public class OrganizationController extends BaseController
 		ExcelUtil<Organization> util = new ExcelUtil<Organization>(Organization.class);
 		return util.exportExcel(list, "终端管理表");
 	}
+
+	/**
+	 * @description 选择终端树，多个地方调用了此接口
+	 *
+	 * @param
+	 * @return
+	 */
+	@GetMapping("/selectOrganizationTree/{aid}")
+	public String selectOrganizationTree(@PathVariable("aid") String aid, ModelMap mmap)
+	{
+		mmap.put("organization", areaService.selectAreaById(aid));
+		/*return prefix + "/tree";*/
+		return prefix + "/listProBroadTree";
+	}
 }
 

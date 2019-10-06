@@ -5,6 +5,7 @@ import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.util.Date;
 import java.math.BigDecimal;
 
 /**
@@ -287,24 +288,24 @@ public class VillagerInfo extends BaseEntity
 	/** 道路是否到户 */
 	@Excel(name = "道路是否到户")
 	private Integer rth;
-	/** 是否干部 */
-	@Excel(name = "是否干部")
+	/** '是否行政干部' */
+	@Excel(name = "是否行政干部")
 	private Integer iscadre;
-	/** 干部行政级别 */
-	@Excel(name = "干部行政级别")
+	/** '行政干部级别' */
+	@Excel(name = "行政干部级别")
 	private String cadrelevel;
-	/** 是否低保户 */
+	/** '是否低保户' */
 	@Excel(name = "是否低保户")
 	private Integer islowincome;
-	/** 获得低保时间 */
+	/** '获得低保时间' */
 	@Excel(name = "获得低保时间")
-	private String getlowdate;
-	/** 是否复员军人 */
+	private Date getlowdate;
+	/** '是否复员军人' */
 	@Excel(name = "是否复员军人")
 	private Integer isdemob;
-	/** 复员时间 */
+	/** '复员时间' */
 	@Excel(name = "复员时间")
-	private String demobdate;
+	private Date demobdate;
 	/** 获奖情况 */
 	@Excel(name = "获奖情况")
 	private String winaward;
@@ -1187,52 +1188,59 @@ public class VillagerInfo extends BaseEntity
 		this.winaward = winaward;
 	}
 
-	public Integer getIscadre() {
-		return iscadre;
-	}
-
-	public void setIscadre(Integer iscadre) {
+	public void setIscadre(Integer iscadre)
+	{
 		this.iscadre = iscadre;
 	}
 
-	public String getCadrelevel() {
-		return cadrelevel;
+	public Integer getIscadre()
+	{
+		return iscadre;
 	}
-
-	public void setCadrelevel(String cadrelevel) {
+	public void setCadrelevel(String cadrelevel)
+	{
 		this.cadrelevel = cadrelevel;
 	}
 
-	public Integer getIslowincome() {
-		return islowincome;
+	public String getCadrelevel()
+	{
+		return cadrelevel;
 	}
-
-	public void setIslowincome(Integer islowincome) {
+	public void setIslowincome(Integer islowincome)
+	{
 		this.islowincome = islowincome;
 	}
 
-	public String getGetlowdate() {
-		return getlowdate;
+	public Integer getIslowincome()
+	{
+		return islowincome;
 	}
-
-	public void setGetlowdate(String getlowdate) {
+	public void setGetlowdate(Date getlowdate)
+	{
 		this.getlowdate = getlowdate;
 	}
 
-	public Integer getIsdemob() {
-		return isdemob;
+	public Date getGetlowdate()
+	{
+		return getlowdate;
 	}
-
-	public void setIsdemob(Integer isdemob) {
+	public void setIsdemob(Integer isdemob)
+	{
 		this.isdemob = isdemob;
 	}
 
-	public String getDemobdate() {
-		return demobdate;
+	public Integer getIsdemob()
+	{
+		return isdemob;
+	}
+	public void setDemobdate(Date demobdate)
+	{
+		this.demobdate = demobdate;
 	}
 
-	public void setDemobdate(String demobdate) {
-		this.demobdate = demobdate;
+	public Date getDemobdate()
+	{
+		return demobdate;
 	}
 
 	public String getWinaward()
@@ -1350,12 +1358,6 @@ public class VillagerInfo extends BaseEntity
 				.append("gfs", getGfs())
 				.append("wdr", getWdr())
 				.append("rth", getRth())
-				.append("iscadre", getIscadre())
-				.append("cadrelevel", getCadrelevel())
-				.append("islowincome", getIslowincome())
-				.append("getlowdate", getGetlowdate())
-				.append("isdemob", getIsdemob())
-				.append("demobdate", getDemobdate())
 				.append("winaward", getWinaward())
 				.append("punish", getPunish())
 				.append("personphoto", getPersonphoto())

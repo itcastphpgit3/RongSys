@@ -4,6 +4,7 @@ package com.ruoyi.api.controller.system;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.StringUtils;
@@ -14,6 +15,7 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.village.domain.Files;
+import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.util.bFileUtil1;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -39,6 +42,8 @@ public class User extends BaseController {
     private ISysMenuService menuService;
     @Autowired
     private SysPasswordService passwordService;
+    @Autowired
+    private IOrganizationService organizationService;
 
     @PostMapping("/resetPwd")
     @CrossOrigin
@@ -137,5 +142,31 @@ public class User extends BaseController {
             return toAjax(0);
         }
         return toAjax(sysUserService.updateUserHeadImg(user));
+    }
+
+    @GetMapping("/aidForCli")
+    @CrossOrigin
+    @ApiOperation(value = "获得登录用户所属区域及下属区域列表")
+    public RongApiRes aidForCli(pubObjApi user)
+    {
+        List<String> allaid = organizationService.listNextAid(user.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(user.getAid());
+            user.setListaid(allaid);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = organizationService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = organizationService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            user.setListaid(allaid);
+        }
+        return RongApiService.get_bean(user.getListaid());
     }
 }

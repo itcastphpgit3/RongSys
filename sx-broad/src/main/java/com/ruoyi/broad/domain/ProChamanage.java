@@ -72,16 +72,20 @@ public class ProChamanage extends BaseEntity
 	{
 		return pronote;
 	}
+
+	@Override
 	public void setRemark(String remark) 
 	{
 		this.remark = remark;
 	}
 
+	@Override
 	public String getRemark() 
 	{
 		return remark;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("cid", getCid())

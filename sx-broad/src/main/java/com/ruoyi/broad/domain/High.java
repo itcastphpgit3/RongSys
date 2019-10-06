@@ -104,6 +104,7 @@ public class High extends BaseEntity
 		return senduserid;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("mhid", getMhid())

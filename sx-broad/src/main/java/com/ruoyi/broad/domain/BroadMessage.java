@@ -74,6 +74,7 @@ public class BroadMessage extends BaseEntity {
         return note;
     }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("aid", getAid())

@@ -108,18 +108,30 @@ public class Tempgroup {
 
     @Override
     public String toString() {
-        return "Tempgroup{" +
-                "tgid=" + tgid +
-                ", tgname='" + tgname + '\'' +
-                ", userid='" + userid + '\'' +
-                ", createtime='" + createtime + '\'' +
-                ", note='" + note + '\'' +
-                ", isuse=" + isuse +
-                ", rightuserid='" + rightuserid + '\'' +
-                ", tid='" + tid + '\'' +
-                ", tname='" + tname + '\'' +
-                ", aname='" + aname + '\'' +
-                ", uname='" + uname + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Tempgroup").append('[')
+                .append("tgid=")
+                .append(tgid)
+                .append(",tgname=")
+                .append(tgname)
+                .append(",userid=")
+                .append(userid)
+                .append(",createtime=")
+                .append(createtime)
+                .append(",note=")
+                .append(note)
+                .append(",isuse=")
+                .append(isuse)
+                .append(",rightuserid=")
+                .append(rightuserid)
+                .append(",tid=")
+                .append(tid)
+                .append(",tname=")
+                .append(tname)
+                .append(",aname=")
+                .append(aname)
+                .append(",uname=")
+                .append(uname)
+                .append(']');
+        return sb.toString();
     }
 }

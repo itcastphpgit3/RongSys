@@ -137,6 +137,7 @@ public class Wea extends BaseEntity
 		return isread;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("wid", getWid())

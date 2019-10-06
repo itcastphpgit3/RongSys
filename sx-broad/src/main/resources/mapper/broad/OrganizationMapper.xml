@@ -16,7 +16,7 @@
         <result property="latitude"    column="latitude"    />
         <result property="basestation"    column="basestation"    />
         <result property="phone"    column="phone"    />
-        <result property="MaintenanceFunds"    column="MaintenanceFunds"    />
+        <result property="maintenanceFunds"    column="maintenanceFunds"    />
         <result property="ypowerconsumption"    column="ypowerconsumption"    />
         <result property="usetraffic"    column="usetraffic"    />
         <result property="onlinestate"    column="onlinestate"    />
@@ -46,6 +46,8 @@
         <result property="eovolume"    column="eovolume"    />
         <result property="poscene"    column="poscene"    />
         <result property="parentaid"    column="parentaid"    />
+        <result property="hbtime"    column="hbtime"    />
+        <result property="transmitfrequency"    column="transmitfrequency"    />
     </resultMap>
 
     <resultMap type="area" id="AreatreeResult">
@@ -62,145 +64,41 @@
     </resultMap>
     <!--表名 -->
     <sql id="tableName">
-		terminals
-	</sql>
-    <sql id="areatableName">
-		area
-	</sql>
-    <sql id="teltableName">
-		terminaltels
-	</sql>
-    <sql id="usertable">
-		userinfo
-	</sql>
-    <sql id="terreceivestable">
-		terminal_receives
-	</sql>
-    <sql id="termanagetable">
-		terminal_management
-	</sql>
-    <sql id="termanagepictable">
-		terminals_pic
-	</sql>
-    <sql id="selectOrganizationVo">
-        select
-        t.tid as tid,tname,t.aid as aid,a.aname,t.userid as userid,uname,
-        facid,address,t.note as note,comstand,broadtel,
-        manager,managertel,intertime,createdtime,t.isuse as isuse,phone,
-        fmfrequency,rds,trafficlimit,p.pic as pic,terminaltype
-        from (((terminals t
-        left join area a on t.aid = a.aid)
-        left join userinfo u on t.userid = u.userid)
-        left join terminals_pic p on t.tid = p.tid)
+        terminals
     </sql>
-
-    <select id="listOrgByAid" parameterType="String" resultMap="OrganizationResult">
-        <include refid="selectOrganizationVo"/>
-        WHERE t.aid in
-        <foreach collection="list" item="aid" separator="," open="(" close=")">
-            #{aid}
-        </foreach>
-    </select>
-
-    <select id="selectOrganizationList" parameterType="Organization" resultMap="OrganizationResult">
-        SELECT
-            t.tid,
-            t.tname,
-            userinfo.username,
-            area.aname,
-            t.lastaccesstime,
-            t.irfrequency,
-            t.intertime,
-            t.terminaltype,
-            terminal_management.Longitude,
-            terminal_management.Latitude,
-            ter_conditions.basestation,
-            t.phone,
-            terminal_management.MaintenanceFunds,
-            t.ypowerconsumption,
-            terminal_traffic.usetraffic,
-            t.onlinestate,
-            t.dcs,
-            t.rds,
-            t.pdmode,
-            t.chargecurrent,
-            t.brfrequency,
-            t.transmitpower,
-            t.reflectedpower,
-            t.workvoltage,
-            t.batteryvoltage,
-            t.loadcurrent,
-            t.pdmode,
-            t.chargecurrent,
-            t.fmfrequency,
-            t.manager,
-            t.managertel,
-            t.createdtime,
-            t.isuse,
-            t.address,
-            t.aid,
-            ter_conditions.nettype,
-            t.note,
-            t.atphone,
-            t.facid
-        FROM
-        (
-        ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
-        left join area on t.aid = area.aid)
-        left join terminal_management on t.tid = terminal_management.tid)
-        left join ter_conditions on t.tid = ter_conditions.tid)
-        left join terminal_traffic on t.tid = terminal_traffic.tid
-        )
-        <where>
-            <if test="tid != null  and tid != '' "> and t.tid like CONCAT('%',#{fid},'%')</if>
-            <if test="tname != null  and tname != '' "> and t.tname like CONCAT('%',#{tname},'%')</if>
-            <if test="username != null  and username != '' "> and userinfo.username like CONCAT('%',#{username},'%')</if>
-            <if test="aname != null  and aname != '' "> and area.aname like CONCAT('%',#{aname},'%')</if>
-            <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime like CONCAT('%',#{lastaccesstime},'%')}</if>
-            <if test="intertime != null  and intertime != '' "> and t.intertime like CONCAT('%',#{intertime},'%')</if>
-            <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype like CONCAT('%',#{terminaltype},'%')</if>
-            <if test="longitude != null  and longitude != '' "> and terminal_management.longitude like CONCAT('%',#{longitude},'%')</if>
-            <if test="latitude != null  and latitude != '' "> and terminal_management.latitude like CONCAT('%',#{latitude},'%')</if>
-            <if test="basestation != null  and basestation != '' "> and ter_condition.basestation like CONCAT('%',#{basestation},'%')</if>
-            <if test="phone != null  and phone != '' "> and t.phone like CONCAT('%',#{phone},'%')</if>
-            <if test="MaintenanceFunds != null  and MaintenanceFunds != '' "> and terminal_management.MaintenanceFunds like CONCAT('%',#{MaintenanceFunds},'%')</if>
-            <if test="ypowerconsumption != null  and ypowerconsumption != '' "> and t.ypowerconsumption like CONCAT('%',#{ypowerconsumption},'%')</if>
-            <if test="usetraffic != null  and usetraffic != '' "> and terminal_traffic.usetraffic like CONCAT('%',#{usetraffic},'%')</if>
-            <if test="onlinestate != null  and onlinestate != '' "> and t.onlinestate like CONCAT('%',#{onlinestate},'%')}</if>
-            <if test="dcs != null  and dcs != '' "> and t.dcs = like CONCAT('%',#{dcs},'%')</if>
-            <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower like CONCAT('%',#{transmitpower},'%')</if>
-            <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower like CONCAT('%',#{reflectedpower},'%')</if>
-            <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage like CONCAT('%',#{workvoltage},'%')</if>
-            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage like CONCAT('%',#{batteryvoltage},'%')</if>
-            <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent like CONCAT('%',#{loadcurrent},'%')</if>
-            <if test="pdmode != null  and pdmode != '' "> and t.pdmode like CONCAT('%',#{pdmode},'%')</if>
-            <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent like CONCAT('%',#{chargecurrent},'%')</if>
-            <if test="fmfrequency != null and fmfrequency != '' "> and t.fmfrequency like CONCAT('%',#{fmfrequency},'%')</if>
-            <if test="manager != null and manager != '' "> and t.manager like CONCAT('%',#{manager},'%')</if>
-            <if test="managertel != null and managertel != '' "> and t.managertel like CONCAT('%',#{managertel},'%')</if>
-            <if test="createdtime != null and createdtime != '' "> and t.createdtime like CONCAT('%',#{createdtime},'%')</if>
-            <if test="isuse != null and isuse != '' "> and t.isuse like CONCAT('%',#{isuse},'%')</if>
-            <if test="address != null and address != '' "> and t.address like CONCAT('%',#{address},'%')</if>
-            <if test="aid != null and aid != '' "> and t.aid like CONCAT('%',#{aid},'%')</if>
-        </where>
-    </select>
-
-    <select id="selectOrganizationList1" parameterType="Organization" resultMap="OrganizationResult">
+    <sql id="areatableName">
+        area
+    </sql>
+    <sql id="teltableName">
+        terminaltels
+    </sql>
+    <sql id="usertable">
+        userinfo
+    </sql>
+    <sql id="terreceivestable">
+        terminal_receives
+    </sql>
+    <sql id="termanagetable">
+        terminal_management
+    </sql>
+    <sql id="termanagepictable">
+        terminals_pic
+    </sql>
+    <sql id="selectOrganizationVo">
         SELECT
         t.tid,
         t.tname,
         userinfo.username,
         area.aname,
         t.lastaccesstime,
-        t.mflowusing,
         t.irfrequency,
         t.intertime,
         t.terminaltype,
-        terminal_management.Longitude,
-        terminal_management.Latitude,
+        terminal_management.longitude,
+        terminal_management.latitude,
         ter_conditions.basestation,
         t.phone,
-        terminal_management.MaintenanceFunds,
+        terminal_management.maintenanceFunds,
         t.ypowerconsumption,
         terminal_traffic.usetraffic,
         t.onlinestate,
@@ -227,10 +125,67 @@
         t.note,
         t.atphone,
         t.facid,
-        t.mflowusing,
-        t.eovolume,
-        t.poscene,
-        area.parentaid
+        t.hbtime,
+        t.transmitfrequency
+        FROM
+        (
+        ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
+        left join area on t.aid = area.aid)
+        left join terminal_management on t.tid = terminal_management.tid)
+        left join ter_conditions on t.tid = ter_conditions.tid)
+        left join terminal_traffic on t.tid = terminal_traffic.tid
+        )
+    </sql>
+
+    <select id="listOrgByAid" parameterType="String" resultMap="OrganizationResult">
+        <include refid="selectOrganizationVo"/>
+        WHERE t.aid in
+        <foreach collection="list" item="aid" separator="," open="(" close=")">
+            #{aid}
+        </foreach>
+    </select>
+
+    <select id="selectOrganizationList" parameterType="Organization" resultMap="OrganizationResult">
+        SELECT
+        t.tid,
+        t.tname,
+        userinfo.username,
+        area.aname,
+        t.lastaccesstime,
+        t.irfrequency,
+        t.intertime,
+        t.terminaltype,
+        terminal_management.longitude,
+        terminal_management.latitude,
+        ter_conditions.basestation,
+        t.phone,
+        terminal_management.maintenanceFunds,
+        t.ypowerconsumption,
+        terminal_traffic.usetraffic,
+        t.onlinestate,
+        t.dcs,
+        t.rds,
+        t.pdmode,
+        t.chargecurrent,
+        t.brfrequency,
+        t.transmitpower,
+        t.reflectedpower,
+        t.workvoltage,
+        t.batteryvoltage,
+        t.loadcurrent,
+        t.pdmode,
+        t.chargecurrent,
+        t.fmfrequency,
+        t.manager,
+        t.managertel,
+        t.createdtime,
+        t.isuse,
+        t.address,
+        t.aid,
+        ter_conditions.nettype,
+        t.note,
+        t.atphone,
+        t.facid
         FROM
         (
         ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
@@ -240,6 +195,97 @@
         left join terminal_traffic on t.tid = terminal_traffic.tid
         )
         <where>
+            <if test="tid != null  and tid != '' "> and t.tid like CONCAT('%',#{fid},'%')</if>
+            <if test="tname != null  and tname != '' "> and t.tname like CONCAT('%',#{tname},'%')</if>
+            <if test="username != null  and username != '' "> and userinfo.username like CONCAT('%',#{username},'%')</if>
+            <if test="aname != null  and aname != '' "> and area.aname like CONCAT('%',#{aname},'%')</if>
+            <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime like CONCAT('%',#{lastaccesstime},'%')}</if>
+            <if test="intertime != null  and intertime != '' "> and t.intertime like CONCAT('%',#{intertime},'%')</if>
+            <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype like CONCAT('%',#{terminaltype},'%')</if>
+            <if test="longitude != null  and longitude != '' "> and terminal_management.longitude like CONCAT('%',#{longitude},'%')</if>
+            <if test="latitude != null  and latitude != '' "> and terminal_management.latitude like CONCAT('%',#{latitude},'%')</if>
+            <if test="basestation != null  and basestation != '' "> and ter_condition.basestation like CONCAT('%',#{basestation},'%')</if>
+            <if test="phone != null  and phone != '' "> and t.phone like CONCAT('%',#{phone},'%')</if>
+            <if test="maintenanceFunds != null  and maintenanceFunds != '' "> and terminal_management.maintenanceFunds like CONCAT('%',#{maintenanceFunds},'%')</if>
+            <if test="ypowerconsumption != null  and ypowerconsumption != '' "> and t.ypowerconsumption like CONCAT('%',#{ypowerconsumption},'%')</if>
+            <if test="usetraffic != null  and usetraffic != '' "> and terminal_traffic.usetraffic like CONCAT('%',#{usetraffic},'%')</if>
+            <if test="onlinestate != null  and onlinestate != '' "> and t.onlinestate like CONCAT('%',#{onlinestate},'%')}</if>
+            <if test="dcs != null  and dcs != '' "> and t.dcs = like CONCAT('%',#{dcs},'%')</if>
+            <if test="transmitpower != null  and transmitpower != '' "> and t.transmitpower like CONCAT('%',#{transmitpower},'%')</if>
+            <if test="reflectedpower != null  and reflectedpower != '' "> and t.reflectedpower like CONCAT('%',#{reflectedpower},'%')</if>
+            <if test="workvoltage != null  and workvoltage != '' "> and t.workvoltage like CONCAT('%',#{workvoltage},'%')</if>
+            <if test="batteryvoltage != null  and batteryvoltage != '' "> and t.batteryvoltage like CONCAT('%',#{batteryvoltage},'%')</if>
+            <if test="loadcurrent != null  and loadcurrent != '' "> and t.loadcurrent like CONCAT('%',#{loadcurrent},'%')</if>
+            <if test="pdmode != null  and pdmode != '' "> and t.pdmode like CONCAT('%',#{pdmode},'%')</if>
+            <if test="chargecurrent != null and chargecurrent != '' "> and t.chargecurrent like CONCAT('%',#{chargecurrent},'%')</if>
+            <if test="fmfrequency != null and fmfrequency != '' "> and t.fmfrequency like CONCAT('%',#{fmfrequency},'%')</if>
+            <if test="manager != null and manager != '' "> and t.manager like CONCAT('%',#{manager},'%')</if>
+            <if test="managertel != null and managertel != '' "> and t.managertel like CONCAT('%',#{managertel},'%')</if>
+            <if test="createdtime != null and createdtime != '' "> and t.createdtime like CONCAT('%',#{createdtime},'%')</if>
+            <if test="isuse != null and isuse != '' "> and t.isuse like CONCAT('%',#{isuse},'%')</if>
+            <if test="address != null and address != '' "> and t.address like CONCAT('%',#{address},'%')</if>
+            <if test="aid != null and aid != '' "> and t.aid like CONCAT('%',#{aid},'%')</if>
+        </where>
+    </select>
+
+    <!--终端信息展示列表-->
+    <select id="selectOrganizationList1" parameterType="Organization" resultMap="OrganizationResult">
+        SELECT
+            t.tid,
+            t.tname,
+            userinfo.username,
+            area.aname,
+            t.lastaccesstime,
+            t.mflowusing,
+            t.irfrequency,
+            t.intertime,
+            t.terminaltype,
+            terminal_management.longitude,
+            terminal_management.latitude,
+            ter_conditions.basestation,
+            t.phone,
+            terminal_management.maintenanceFunds,
+            t.ypowerconsumption,
+            terminal_traffic.usetraffic,
+            t.onlinestate,
+            t.dcs,
+            t.rds,
+            t.pdmode,
+            t.chargecurrent,
+            t.brfrequency,
+            t.transmitpower,
+            t.reflectedpower,
+            t.workvoltage,
+            t.batteryvoltage,
+            t.loadcurrent,
+            t.pdmode,
+            t.chargecurrent,
+            t.fmfrequency,
+            t.manager,
+            t.managertel,
+            t.createdtime,
+            t.isuse,
+            t.address,
+            t.aid,
+            ter_conditions.nettype,
+            t.note,
+            t.atphone,
+            t.facid,
+            t.mflowusing,
+            t.eovolume,
+            t.poscene,
+            t.hbtime,
+            area.parentaid,
+            t.transmitfrequency
+        FROM
+        (
+            ((((tb_organization t left join userinfo on t.userid = userinfo.userid)
+            left join area on t.aid = area.aid)
+            left join terminal_management on t.tid = terminal_management.tid)
+            left join ter_conditions on t.tid = ter_conditions.tid)
+            left join terminal_traffic on t.tid = terminal_traffic.tid
+        )
+        <where>
             <if test="tid != null  and tid != '' "> and t.tid = #{tid}</if>
             <if test="tname != null  and tname != '' "> and t.tname = #{tname}</if>
             <if test="username != null  and username != '' "> and userinfo.username = #{username}</if>
@@ -247,11 +293,11 @@
             <if test="lastaccesstime != null  and lastaccesstime != '' "> and t.lastaccesstime = #{lastaccesstime}</if>
             <if test="intertime != null  and intertime != '' "> and t.intertime = #{intertime}</if>
             <if test="terminaltype != null  and terminaltype != '' "> and t.terminaltype = #{terminaltype}</if>
-            <if test="Longitude != null  and Longitude != '' "> and terminal_management.Longitude = #{Longitude}</if>
-            <if test="Latitude != null  and Latitude != '' "> and terminal_management.Latitude = #{Latitude}</if>
+            <if test="longitude != null  and longitude != '' "> and terminal_management.longitude = #{longitude}</if>
+            <if test="latitude != null  and latitude != '' "> and terminal_management.latitude = #{latitude}</if>
             <if test="basestation != null  and basestation != '' "> and ter_condition.basestation = #{basestation}</if>
             <if test="phone != null  and phone != '' "> and t.phone = #{phone}</if>
-            <if test="MaintenanceFunds != null  and MaintenanceFunds != '' "> and terminal_management.MaintenanceFunds = #{MaintenanceFunds}</if>
+            <if test="maintenanceFunds != null  and maintenanceFunds != '' "> and terminal_management.maintenanceFunds = #{maintenanceFunds}</if>
             <if test="ypowerconsumption != null  and ypowerconsumption != '' "> and t.ypowerconsumption = #{ypowerconsumption}</if>
             <if test="usetraffic != null  and usetraffic != '' "> and terminal_traffic.usetraffic = #{usetraffic}</if>
             <if test="onlinestate != null  and onlinestate != '' "> and t.onlinestate = #{onlinestate}</if>
@@ -276,6 +322,7 @@
             <if test="eovolume != null and eovolume != '' "> and t.eovolume = #{eovolume}</if>
             <if test="poscene != null and poscene != '' "> and t.poscene = #{poscene}</if>
             <if test="parentaid != null and parentaid != '' "> and area.parentaid = #{parentaid}</if>
+            <if test="hbtime != null and hbtime != '' "> and t.hbtime = #{hbtime}</if>
         </where>
     </select>
 
@@ -300,7 +347,7 @@
         FROM terminals
         WHERE tid = #{tid}
     </select>
-<!--插入的tb_organization-->
+    <!--插入的tb_organization-->
     <insert id="insertOrganization" parameterType="Organization">
         insert into tb_organization
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -311,7 +358,7 @@
             <if test="lastaccesstime != null and lastaccesstime != '' ">lastaccesstime,</if>
             <if test="intertime != null and intertime != '' ">intertime,</if>
             <if test="ypowerconsumption != null and ypowerconsumption != '' ">ypowerconsumption,</if>
-            <if test="MaintenanceFunds != null and MaintenanceFunds != '' ">MaintenanceFunds,</if>
+            <if test="maintenanceFunds != null and maintenanceFunds != '' ">maintenanceFunds,</if>
             <if test="terminaltype != null and terminaltype != '' ">terminaltype,</if>
             <if test="longitudelatitude != null and longitudelatitude != '' ">longitudelatitude,</if>
             <if test="poscene != null  and poscene != '' ">poscene,</if>
@@ -339,7 +386,7 @@
             <if test="lastaccesstime != null and lastaccesstime != '' ">#{lastaccesstime},</if>
             <if test="intertime != null and intertime != '' ">#{intertime},</if>
             <if test="ypowerconsumption != null and ypowerconsumption != '' ">#{ypowerconsumption},</if>
-            <if test="MaintenanceFunds != null and MaintenanceFunds != '' ">#{MaintenanceFunds},</if>
+            <if test="maintenanceFunds != null and maintenanceFunds != '' ">#{maintenanceFunds},</if>
             <if test="terminaltype != null and terminaltype != '' ">#{terminaltype},</if>
             <if test="longitudelatitude != null and longitudelatitude != '' ">#{longitudelatitude},</if>
             <if test="poscene != null  and poscene != '' ">#{poscene},</if>
@@ -360,17 +407,17 @@
             <if test="eovolume != null  ">#{eovolume},</if>
         </trim>
     </insert>
-<!--插入到ter_conditions-->
+    <!--插入到ter_conditions-->
     <insert id="insertOrganizationCon" parameterType="Organization">
         INSERT INTO `broad`.`ter_conditions`
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="tid != null and tid != '' ">tid,</if>
-                <if test="basestation != null and basestation != '' ">basestation,</if>
-            </trim>
-            <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="tid != null and tid != '' ">#{tid},</if>
-                <if test="basestation != null and basestation != '' ">#{basestation},</if>
-            </trim>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tid != null and tid != '' ">tid,</if>
+            <if test="basestation != null and basestation != '' ">basestation,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tid != null and tid != '' ">#{tid},</if>
+            <if test="basestation != null and basestation != '' ">#{basestation},</if>
+        </trim>
     </insert>
 
 
@@ -387,30 +434,65 @@
     </insert>
 
     <update id="updateOrganization" parameterType="Organization">
-        update terminals
+        update tb_organization t,terminal_management tm,area cc
         <trim prefix="SET" suffixOverrides=",">
-            <if test="tname != null  and tname != ''  ">tname = #{tname},</if>
-            <if test="aid != null  and aid != ''  ">aid = #{aid},</if>
-            <if test="aname != null  and aname != ''  ">aname = #{aname},</if>
-            <if test="userid != null  and userid != ''  ">userid = #{userid},</if>
-            <if test="uname != null  and uname != ''  ">uname = #{uname},</if>
-            <if test="facid != null  and facid != ''  ">facid = #{facid},</if>
-            <if test="address != null  and address != ''  ">address = #{address},</if>
-            <if test="note != null  and note != ''  ">note = #{note},</if>
-            <if test="comstand != null  and comstand != ''  ">comstand = #{comstand},</if>
-            <if test="broadtel != null  and broadtel != ''  ">broadtel = #{broadtel},</if>
-            <if test="manager != null  and manager != ''  ">manager = #{manager},</if>
-            <if test="managertel != null  and managertel != ''  ">managertel = #{managertel},</if>
-            <if test="intertime != null  and intertime != ''  ">intertime = #{intertime},</if>
-            <if test="createdtime != null  and createdtime != ''  ">createdtime = #{createdtime},</if>
-            <if test="isuse != null  ">isuse = #{isuse},</if>
-            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
-            <if test="rds != null  and rds != ''  ">rds = #{rds},</if>
-            <if test="fmfrequency != null  and fmfrequency != ''  ">fmfrequency = #{fmfrequency},</if>
-            <if test="trafficlimit != null  ">trafficlimit = #{trafficlimit},</if>
-            <if test="terminaltype != null  ">terminaltype = #{terminaltype},</if>
+            <if test="tname != null  and tname != ''  ">t.tname = #{tname},</if>
+            <if test="ypowerconsumption != null  and ypowerconsumption != ''  ">t.ypowerconsumption = #{ypowerconsumption},</if>
+            <if test="aname != null  and aname != ''  ">cc.aname = #{aname},</if>
+            <if test="intertime != null  and intertime != ''  ">t.intertime = #{intertime},</if>
+            <if test="longitude != null  and longitude != ''  ">tm.longitude = #{longitude},</if>
+            <if test="latitude != null  and latitude != ''  ">tm.latitude = #{latitude},</if>
+            <if test="phone != null  and phone != ''  ">t.phone = #{phone},</if>
+            <if test="address != null  and address != ''  ">t.address = #{address},</if>
+            <if test="facid != null  and facid != ''  ">t.facid = #{facid},</if>
+            <if test="rds != null  and rds != ''  ">t.rds = #{rds},</if>
+            <if test="transmitfrequency != null  and transmitfrequency != ''  ">t.transmitfrequency = #{transmitfrequency},</if>
+            <if test="brfrequency != null  and brfrequency != ''  ">t.brfrequency = #{brfrequency},</if>
+            <if test="manager != null  and manager != ''  ">t.manager = #{manager},</if>
+            <if test="managertel != null  and managertel != ''  ">t.managertel = #{managertel},</if>
+            <if test="eovolume != null  and eovolume != ''  ">t.eovolume = #{eovolume},</if>
+            <if test="hbtime != null  and hbtime != ''  ">t.hbtime = #{hbtime}</if>
         </trim>
-        where tid = #{tid}
+        where t.tid = tm.tid  and t.aid = cc.aid  and t.tid = #{tid}
+    </update>
+
+    <select id="exportOrganization" parameterType="Organization" resultMap="OrganizationResult">
+        select tb_organization.tid,
+			 tb_organization.tname,
+			 tb_organization.aname,
+		     tb_organization.uname,
+			 tb_organization.facid,
+			 tb_organization.address,
+			 terminal_management.Longitude,
+		     terminal_management.Latitude,
+			 tb_organization.phone,
+			 tb_organization.comstand,
+			 tb_organization.broadtel,
+		     tb_organization.fmfrequency,
+		     tb_organization.manager,
+			 tb_organization.managertel,
+		     tb_organization.intertime,
+			 tb_organization.rds,
+			 tb_organization.trafficlimit,
+			 terminal_management.SupervisionUnit,
+			 terminal_management.AccountabilityUnit,
+			 terminal_management.Families,
+			 terminal_management.Population,
+			 terminal_management.TwoOverlayMode,
+			 terminal_management.TwoOverlayNumber,
+			 terminal_management.TwoOverlayFamiles,
+			 terminal_management.TwoOverlayPopulations,
+			 terminal_management.maintenanceFunds
+        from tb_organization,terminal_management
+        where tb_organization.tid = terminal_management.tid
+    </select>
+
+    <update id="updateUsername" parameterType="Organization">
+        update tb_organization t,userinfo ui
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null  and username != ''  ">ui.username = #{username},</if>
+        </trim>
+        where t.userid = ui.userid and t.tid = #{tid}
     </update>
 
     <delete id="deleteOrganizationById" parameterType="String">
@@ -418,7 +500,7 @@
     </delete>
 
     <delete id="deleteOrganizationByIds" parameterType="String">
-        delete from terminals where tid in
+        delete from tb_organization where tid in
         <foreach item="tid" collection="array" open="(" index=""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             separator="," close=")">
             #{tid}
         </foreach>

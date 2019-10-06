@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 终端地域 数据层
  *
- * @author 张鸿权
+ * @author cx
  * @date 2019-02-17
  */
 public interface OrganizationMapper
@@ -65,13 +65,13 @@ public interface OrganizationMapper
 	 */
 	public int insertOrganizationPic(Organization organization);
 
-	/**
-	 * 修改终端地域
-	 *
-	 * @param organization 终端地域信息
-	 * @return 结果
-	 */
-	public int updateOrganization(Organization organization);
+//	/**
+//	 * 修改终端地域
+//	 *
+//	 * @param organization 终端地域信息
+//	 * @return 结果
+//	 */
+//	public int updateOrganization(Organization organization);
 
 	/**
 	 * 删除终端地域
@@ -143,5 +143,28 @@ public interface OrganizationMapper
 	 */
 	public  List<TerminalTels> selectTelsByTid(String tid);
 
+	/**
+	 * @author cx
+	 * @param organization
+	 *
+	 * @Description 更新终端数据
+	 */
+	public int updateOrganization(Organization organization);
+
+	/**
+	 * @author cx
+	 * @param organization
+	 *
+	 * @Description 更新终端所属用户
+	 */
+	public int updateUsername(Organization organization);
+
+	/**
+	 * 根据条件分页查询终端对象
+	 *
+	 * @param organization 导出终端字段
+	 * @return 终端信息集合信息
+	 */
+	public List<Organization> exportOrganization(Organization organization);
 
 }

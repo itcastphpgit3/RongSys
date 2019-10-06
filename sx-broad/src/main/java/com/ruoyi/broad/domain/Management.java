@@ -165,6 +165,7 @@ public class Management extends BaseEntity
 
 	public void setIsuse(Boolean isuse) { this.isuse = isuse; }
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 				.append("tname", getTname())

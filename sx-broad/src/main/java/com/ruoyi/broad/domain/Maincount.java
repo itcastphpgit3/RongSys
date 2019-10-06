@@ -98,11 +98,12 @@ public class Maincount extends BaseEntity
 	{
 		return createtime;
 	}
+	@Override
 	public void setRemark(String remark) 
 	{
 		this.remark = remark;
 	}
-
+	@Override
 	public String getRemark() 
 	{
 		return remark;
@@ -165,6 +166,7 @@ public class Maincount extends BaseEntity
 	}
 
 
+	@Override
 	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("tmid", getTmid())

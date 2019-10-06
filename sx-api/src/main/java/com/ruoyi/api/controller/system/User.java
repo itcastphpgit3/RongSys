@@ -4,6 +4,7 @@ package com.ruoyi.api.controller.system;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
+import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.DateUtil;
@@ -147,26 +148,21 @@ public class User extends BaseController {
     @GetMapping("/aidForCli")
     @CrossOrigin
     @ApiOperation(value = "获得登录用户所属区域及下属区域列表")
-    public RongApiRes aidForCli(pubObjApi user)
+    public RongApiRes aidForCli(@RequestParam(value = "aid", required = false) String aid)
     {
-        List<String> allaid = organizationService.listNextAid(user.getAid());
-        if (allaid.isEmpty()){
-            allaid.add(user.getAid());
-            user.setListaid(allaid);
-        }else {
+        List<Area> allaid = organizationService.listNextAidName(aid);
+        if (allaid.size()>1){
             //获得所有的子 aid 放入 list
-            List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            List<Area> temp;
+            temp = organizationService.listNextAidName(allaid.get(0).getAid());
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<Area> l = organizationService.listNextAidName(allaid.get(i).getAid());
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
             }
             allaid.addAll(temp);
-            // 遍历所有的 aid 信息然后装入结果
-            user.setListaid(allaid);
         }
-        return RongApiService.get_bean(user.getListaid());
+        return RongApiService.get_bean(allaid);
     }
 }

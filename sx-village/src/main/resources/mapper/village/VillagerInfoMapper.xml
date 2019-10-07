@@ -115,6 +115,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="msum"    column="msum"    />
         <result property="man"    column="man"    />
         <result property="woman"    column="woman"    />
+        <result property="sum2"    column="sum2"    />
+        <result property="sum3"    column="sum3"    />
     </resultMap>
 	<sql id="selectVillagerInfoVo">
         select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, iscadre, cadrelevel, islowincome, getlowdate, isdemob, demobdate, winaward, punish, personphoto, hkphoto, idphoto, carphoto, housephoto, isuse from villager_info
@@ -622,5 +624,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 </foreach></if>
         </where>
     </select>
+    <select id="countNewPre" parameterType="pubObjApi" resultMap="mcountResult">
+        select
+        count(vid) as msum,
+        count(age BETWEEN 0 and 2) as sum2
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
 
+        </where>
+    </select>
+
+    <select id="selectbycadre" parameterType="PersonApi" resultMap="VillagerInfoResult">
+        <include refid="selectVillagerInfoVo"/>
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+            <if test="uname != null  and uname != '' "> and vname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
+            <if test="sex != null  and sex != ''  ">and sex = #{sex}</if>
+            and iscadre=1
+        </where>
+        ORDER BY vname asc
+        limit #{pageSize} offset #{pageIndex}
+    </select>
+
+    <select id="countbylowincome" parameterType="pubObjApi" resultMap="mcountResult">
+        select
+        count(vid) as msum,
+        count(islowincome = 1 or null ) as sum2,
+        count(islowincome = 0 or null ) as sum3
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+
+        </where>
+    </select>
+
+    <select id="countbydemob" parameterType="pubObjApi" resultMap="mcountResult">
+        select
+        count(vid) as msum,
+        count(isdemob = 1 or null ) as sum2,
+        count(demobdate between #{beginTime} and #{endTime}) as sum3
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+        </where>
+    </select>
+
+    <select id="countbyagePart" parameterType="PersonApi" resultMap="mcountResult">
+        select
+        count(vid) as msum,
+        count(age between #{minage} and #{maxage}  ) as sum2
+        from villager_info
+        <where>
+            <if test="aid != null  and aid != '' ">aid in
+                <foreach collection="listaid" item="item" separator="," open="(" close=")">
+                    #{item}
+                </foreach></if>
+        </where>
+    </select>
 </mapper>

@@ -69,5 +69,33 @@ public class Person {
         return RongApiService.get_list(res);
     }
 
+    @GetMapping("/cadreinfo")
+    @CrossOrigin
+    @ApiOperation(value = "村工作人员列表")
+    public RongApiRes selectbycadre(PersonApi person){
+        person.setPageIndex((person.getPageIndex()-1)*person.getPageSize());
+        List<VillagerInfo> res;
+        List<String> allaid = organizationService.listNextAid(person.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(person.getAid());
+            person.setListaid(allaid);
+            res = villagerInfoService.selectbycadre(person);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = organizationService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = organizationService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            person.setListaid(allaid);
+            res = villagerInfoService.selectbycadre(person);
+        }
+        return RongApiService.get_list(res);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.ruoyi.broad.service;
 
+import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.domain.TerminalTels;
 
@@ -138,7 +139,7 @@ public interface IOrganizationService
 	 * @return
 	 */
 	public  List<String> listNextAid(String aid);
-
+	public  List<Area> listNextAidName(String aid);
 
 	//	通过 aid 查询所有终端
 	public List<Organization> listOrgByAid(List<String> aid);

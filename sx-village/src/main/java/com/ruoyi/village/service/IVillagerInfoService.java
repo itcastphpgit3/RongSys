@@ -3,6 +3,8 @@ package com.ruoyi.village.service;
 import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
+import com.ruoyi.village.domain.pubObjApi;
+
 import java.util.List;
 
 /**
@@ -60,4 +62,13 @@ public interface IVillagerInfoService
 	public List<VillagerInfo> selectvillagerInfoListBytype(PersonApi person);
 	public List<VillagerInfo> selectGrouplist(PersonApi person);
 
+	public Mcount countNewPre(pubObjApi per);
+
+	public List<VillagerInfo> selectbycadre(PersonApi person);
+
+	public Mcount countbylowincome(pubObjApi per);
+
+	public Mcount countbydemob(pubObjApi per);
+
+	public Mcount countbyagePart(PersonApi per);
 }

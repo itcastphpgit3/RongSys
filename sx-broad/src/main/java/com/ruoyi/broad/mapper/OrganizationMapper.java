@@ -167,4 +167,6 @@ public interface OrganizationMapper
 	 */
 	public List<Organization> exportOrganization(Organization organization);
 
+	public  List<Area> listNextAidName(String aid);
+
 }

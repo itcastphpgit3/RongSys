@@ -342,6 +342,12 @@
         GROUP BY aid
     </select>
 
+    <select id="listNextAidName" parameterType="String" resultType="Area">
+        SELECT t.aid,t.aname
+        FROM area as t
+        WHERE aid = #{aid} or t.parentaid = #{aid}
+        GROUP BY aid
+    </select>
     <select id="selectRdsByTid" parameterType="String" resultType="Organization">
         SELECT rds,fmfrequency
         FROM terminals

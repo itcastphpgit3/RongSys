@@ -3,7 +3,9 @@ package com.ruoyi.village.mapper;
 import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
-import java.util.List;	
+import com.ruoyi.village.domain.pubObjApi;
+
+import java.util.List;
 
 /**
  * 村民 数据层
@@ -69,4 +71,13 @@ public interface VillagerInfoMapper
 
 	public List<VillagerInfo> selectGrouplist(PersonApi person);
 
+	public Mcount countNewPre(pubObjApi per);
+
+	public List<VillagerInfo> selectbycadre(PersonApi person);
+
+	public Mcount countbylowincome(pubObjApi per);
+
+	public Mcount countbydemob(pubObjApi per);
+
+	public Mcount countbyagePart(PersonApi per);
 }

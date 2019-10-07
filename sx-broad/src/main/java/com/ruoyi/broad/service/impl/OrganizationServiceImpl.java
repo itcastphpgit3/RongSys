@@ -1,5 +1,6 @@
 package com.ruoyi.broad.service.impl;
 
+import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.domain.TerminalTels;
 import com.ruoyi.broad.mapper.OrganizationMapper;
@@ -246,6 +247,11 @@ public class OrganizationServiceImpl implements IOrganizationService
 		return organizationMapper.listNextAid(aid);
 	}
 
+	@Override
+	@DataSource(value = DataSourceType.SLAVE)
+	public  List<Area> listNextAidName(String aid){
+		return organizationMapper.listNextAidName(aid);
+	}
 
 	/**
 	 * 	通过 aid 查询所有终端

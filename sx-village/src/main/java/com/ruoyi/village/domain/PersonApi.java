@@ -12,6 +12,8 @@ public class PersonApi {
     private Integer pageIndex;
     private List<String> listaid;
     private String state;//
+    private Integer minage;
+    private Integer maxage;
     public Integer getUserid() {
         return userid;
     }
@@ -82,5 +84,21 @@ public class PersonApi {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getMinage() {
+        return minage;
+    }
+
+    public void setMinage(Integer minage) {
+        this.minage = minage;
+    }
+
+    public Integer getMaxage() {
+        return maxage;
+    }
+
+    public void setMaxage(Integer maxage) {
+        this.maxage = maxage;
     }
 }

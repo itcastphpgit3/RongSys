@@ -39,4 +39,11 @@ public interface AreaGroupingMapper {
     * @return 终端分组列表
     */
     public int insertAreaGrouping(AreaGrouping areaGrouping);
+
+    /**
+     * 查询分组列表
+     *
+     * @return 终端分组列表
+     */
+    public AreaGrouping selectAreaGroupingByAid(String aid);
 }

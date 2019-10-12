@@ -149,4 +149,10 @@ public class TempgroupController<addtemp> extends BaseController{
     public AjaxResult removeT(String tid){
         return toAjax(iTempgroupService.deleteTempgroupT(tid));
     }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public AjaxResult update(Tempgroup tempgroup){
+        return toAjax(iTempgroupService.updateTempgroup(tempgroup));
+    }
 }

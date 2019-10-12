@@ -105,4 +105,15 @@
             tid = #{tid}
     </delete>
 
+    <!--    更新数据-->
+    <update id="updateTempgroup" parameterType="Tempgroup">
+        UPDATE tempgroup
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tgname != null  and tgname != '' ">tgname = #{tgname},</if>
+            <if test="userid != null  and userid != '' ">userid = #{userid},</if>
+            <if test="note != null  and note != '' ">note = #{note},</if>
+            <if test="isuse != null  and isuse != '' ">isuse = #{isuse},</if>
+        </trim>
+            where tgid=#{tgid}
+    </update>
 </mapper>

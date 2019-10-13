@@ -23,7 +23,70 @@
         </div>
     </div>
 
-    <!--   临时分组新增弹窗-->
+    <!--  编辑弹窗-->
+    <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <h4 class="modal-title">编辑特殊分组</h4>
+                </div>
+                <!-- 放置特殊分组表单 -->
+                <div class="modal-body">
+                    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+                        <form class="form-horizontal m" id="form-tempgroup-add1" action="#" method="POST">
+                            <div class="form-group"     style="visibility: hidden;" >
+                                <label class="col-sm-3 control-label">分组id：</label>
+                                <div class="col-sm-8">
+                                    <input id="tgid1" name="tgid" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">分组名称：</label>
+                                <div class="col-sm-8">
+                                    <input id="tgname1" name="tgname" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">权限人：</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="userinfo1" name="userid">
+                                        <option value="请选择权限人">--请选择权限人--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">是否启用：</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="isuse" id="isuse1">
+                                        <option value="">--请选择是否启用--</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">备注：</label>
+                                <div class="col-sm-8">
+                                    <input id="note1" name="note" class="form-control" type="text">
+                                </div>
+                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-sm-3 control-label">创建时间：</label>-->
+<!--                                <div class="col-sm-8">-->
+<!--                                    <input id="createtime1" name="createtime" class="form-control" disabled type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="close-btn11">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="saveedittempgroup()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  新增弹窗-->
     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -43,7 +106,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">权限人：</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" onclick="getUserInfo(this,'权限人')" id="userinfo" name="userid">
+                                    <select class="form-control" id="userinfo" name="userid">
                                         <option value="">--请选择权限人--</option>
                                     </select>
                                 </div>
@@ -67,7 +130,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">创建时间：</label>
                                 <div class="col-sm-8">
-                                    <input id="createtime" name="createtime" class="form-control" type="text">
+<!--                                    <input id="createtime" name="createtime" class="form-control" type="text">-->
+                                    <input id="createtime" name="createtime" class="form-control" type="text" disabled>
                                 </div>
                             </div>
                         </form>
@@ -193,6 +257,7 @@
                     formatter: function (value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-danger btn-xs shanchu' + '" href="#" onclick="deleteTempgroup(event)"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-danger btn-xs bianji' + '" href="#" data-toggle="modal" data-target="#myModal1" onclick="editTempgroup(event) "><i class="fa fa-remove"></i>编辑</a>');
                         return actions.join('');
                     }
                 }
@@ -258,16 +323,19 @@
     }
 
     // 新增特殊分组弹窗人员下拉框调取人员信息组件
-    function getUserInfo(ele,msg) {
+    $(function getUserInfo(ele,msg) {
         $.get("/broad/dto/userinfos",function getmsg(params1,params2) {
             console.log(params1 )
             for (let index = 0; index < params1.length; index++) {
                 let text = params1[index].uname;
-                let value = params1[index].userid;
-                $("#userinfo").append("<option value='"+value+"'>"+text+"</option>")
+                let value1 = params1[index].userid;
+                $("#userinfo").append("<option value='"+value1+"'>"+text+"</option>")
+                $("#userinfo1").append("<option value='"+value1+"'>"+text+"</option>")
             }
         });
-    }
+    })
+
+    $.modal.open(title, url, width, height, alert("hhha"));
 
     //提交表单
     function savetempgroup() {
@@ -346,28 +414,19 @@
         });
     }
 
-    function gettempgroupids(ele,msg) {
-        $("#tempgroupids").empty()
-        $.post("/broad/tempgroup/list",{},function getmsg(params,params2) {
-            let params1 = params.rows
-            for (let index = 0; index < params1.length; index++) {
-                let text = params1[index].tgname;
-                let value = params1[index].tgid;
-                $("#tempgroupids").append("<option value='"+value+"'>"+text+"</option>")
-            }
-        });
-    }
-
-    function getterminalsiemes(ele,msg) {
-        $("#terminalsiemes").empty()
-        $.post("/broad/tempgroup/list/*",{},function getmsg(params,params2) {
-            let params1 = params.rows
-            for (let index = 0; index < params1.length; index++) {
-                let text = params1[index].tname;
-                let value = params1[index].tid;
-                $("#terminalsiemes").append("<option value='"+value+"'>"+text+"</option>")
-            }
-        });
+    function editTempgroup(event) {
+        let tgname = $(event.currentTarget).parent().context.parentNode.parentNode.children[1].innerText;
+        let tgid = $(event.currentTarget).parent().context.parentNode.parentNode.children[2].innerText;
+        let userid1 = $(event.currentTarget).parent().context.parentNode.parentNode.children[3].innerText;
+        let isuse1 = $(event.currentTarget).parent().context.parentNode.parentNode.children[4].innerText=="是"?1:0;
+        let createtime = $(event.currentTarget).parent().context.parentNode.parentNode.children[5].innerText;
+        let note = $(event.currentTarget).parent().context.parentNode.parentNode.children[6].innerText;
+        $("#tgid1").val(tgid);
+        $("#tgname1").val(tgname);
+        $("#note1").val(note);
+        $("#isuse1 option[value="+isuse1+"]").attr("selected","selected");
+        $("#userinfo1 option:contains("+userid1+")").attr("selected","selected");
+        $("#createtime1").val(createtime);
     }
 
     function savetempgroupAndT() {
@@ -410,6 +469,35 @@
 
     }
 
+    function saveedittempgroup(){
+        var params = $("#form-tempgroup-add1").serializeArray();
+        var values = {};
+        for( x in params ){
+            values[params[x].name] = params[x].value;
+        }
+        // console.log(values)
+        $.ajax({
+            url:"/broad/tempgroup/update",
+            type: "POST",
+            data:values,
+            success:function a(data){
+                if(data.code==0){
+                    alert("保存成功")
+                    $("#close-btn11").click()
+                    $(".fixed-table-toolbar .btn-group")[0].children[1].click();
+                }else{
+                    alert(data)
+                }
+                // $("#form-tempgroup-add").reset()
+            },
+            error:function () {
+                alert("保存失败")
+                // $("#form-tempgroup-add").reset()
+            }
+        });
+
+        $("#close-btn").click();
+    }
 
     var row1;
     var  tgid;
@@ -431,6 +519,7 @@
         }
         $.tree.init(options);
     }
+
 
 </script>
 

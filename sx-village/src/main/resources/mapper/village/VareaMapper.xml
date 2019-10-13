@@ -66,5 +66,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{aid}
         </foreach>
     </delete>
-    
+
+    <select id="listNextAid" parameterType="String" resultType="String">
+        SELECT t.aid
+        FROM tb_area as t
+        WHERE t.parentaid = #{aid}
+        GROUP BY aid
+    </select>
+
+    <select id="listNextAidName" parameterType="String" resultType="Varea">
+        SELECT aid,parentaid,aname
+        FROM tb_area
+        WHERE aid = #{aid} or parentaid = #{aid}
+        GROUP BY aid
+    </select>
 </mapper>

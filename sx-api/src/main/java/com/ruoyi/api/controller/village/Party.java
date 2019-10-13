@@ -2,7 +2,6 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.framework.web.base.BaseController;
@@ -37,7 +36,7 @@ public class Party extends BaseController {
     @Autowired
     private IPartyfupinService partyfupinService;
     @Autowired
-    private IOrganizationService organizationService;
+    private IVareaService vareaService;
     /**
      * 返回所有党员活动信息
      * @author 施景程 teavamc
@@ -119,16 +118,16 @@ public class Party extends BaseController {
     public RongApiRes selectPartyAllById(pubObjApi party)
     {
         party.setPageIndex((party.getPageIndex()-1)*party.getPageSize());
-        List<String> allaid = organizationService.listNextAid(party.getAid());
+        List<String> allaid = vareaService.listNextAid(party.getAid());
         if (allaid.isEmpty()){
             allaid.add(party.getAid());
             party.setListaid(allaid);
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }

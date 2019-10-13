@@ -2,12 +2,12 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.village.domain.Partymember;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
 import com.ruoyi.village.service.IPersonalDetailService;
 import com.ruoyi.village.service.IProjectService;
+import com.ruoyi.village.service.IVareaService;
 import com.ruoyi.village.service.IVillagerInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +29,7 @@ public class Person {
     @Autowired
     private IVillagerInfoService villagerInfoService;
     @Autowired
-    private IOrganizationService organizationService;
+    private IVareaService vareaService;
 
     @GetMapping("/all")
     @CrossOrigin
@@ -46,7 +46,7 @@ public class Person {
     {
         person.setPageIndex((person.getPageIndex()-1)*person.getPageSize());
         List<VillagerInfo> res;
-        List<String> allaid = organizationService.listNextAid(person.getAid());
+        List<String> allaid = vareaService.listNextAid(person.getAid());
         if (allaid.isEmpty()){
             allaid.add(person.getAid());
             person.setListaid(allaid);
@@ -54,9 +54,9 @@ public class Person {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -75,7 +75,7 @@ public class Person {
     public RongApiRes selectbycadre(PersonApi person){
         person.setPageIndex((person.getPageIndex()-1)*person.getPageSize());
         List<VillagerInfo> res;
-        List<String> allaid = organizationService.listNextAid(person.getAid());
+        List<String> allaid = vareaService.listNextAid(person.getAid());
         if (allaid.isEmpty()){
             allaid.add(person.getAid());
             person.setListaid(allaid);
@@ -83,9 +83,9 @@ public class Person {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }

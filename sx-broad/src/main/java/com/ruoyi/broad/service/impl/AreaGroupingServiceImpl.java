@@ -61,4 +61,16 @@ public class AreaGroupingServiceImpl implements IAreaGroupingService{
     {
         return areaGroupingMapper.deleteAreaGroupingByIds(Convert.toStrArray(ids));
     }
+
+    /**
+     * 插入分组列表
+     *
+     * @return 终端分组列表
+     */
+    @Override
+    @DataSource(value = DataSourceType.SLAVE)
+    public AreaGrouping selectAreaGroupingByAid(String aid)
+    {
+        return areaGroupingMapper.selectAreaGroupingByAid(aid);
+    }
 }

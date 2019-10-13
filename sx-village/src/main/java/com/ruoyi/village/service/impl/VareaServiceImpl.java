@@ -86,5 +86,22 @@ public class VareaServiceImpl implements IVareaService
 	{
 		return vareaMapper.deleteVareaByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+	/**
+	 * 获取到下面所有的 aid
+	 * @param aid
+	 * @return
+	 */
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public  List<String> listNextAid(String aid){
+		return vareaMapper.listNextAid(aid);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public  List<Varea> listNextAidName(String aid){
+		return vareaMapper.listNextAidName(aid);
+	}
 }

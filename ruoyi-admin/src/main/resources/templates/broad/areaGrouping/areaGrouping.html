@@ -91,7 +91,7 @@
             createUrl: prefix + "/add",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
-            modalName: "终端地域",
+            modalName: "分组管理",
             search: false,
             showExport: true,
             columns: [{
@@ -123,6 +123,7 @@
                     formatter: function (value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.aid + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.edit(\'' + row.aid + '\')"><i class="fa fa-edit" ></i>修改</a> ');
                         return actions.join('');
                     }
                 }]

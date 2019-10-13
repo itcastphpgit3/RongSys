@@ -12,7 +12,7 @@ public class AreaGrouping {
     private String parentaid;//父区域编号
     private String aname;//区域名称
     private String note;//备注
-    private String userid;//备注
+    private String userid;//用户id
 
     private String parentaname;
     private List<Area> subArea;

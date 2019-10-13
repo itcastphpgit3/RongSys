@@ -39,4 +39,12 @@ public interface IAreaGroupingService {
     * */
 
     public int insertAreaGrouping(AreaGrouping areaGrouping);
+
+    /*
+    * 查询分组管理记录
+    *
+    * @return 分组管理
+    * */
+
+    public AreaGrouping selectAreaGroupingByAid(String aid);
 }

@@ -75,15 +75,17 @@ public class MinaCastThread implements Runnable {
 		chain.addLast(type, new ExecutorFilter(new ThreadPoolExecutor(NUMBER_OF_CORES,
 				NUMBER_OF_CORES * mul, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT,
 				mWorkQueue,Factory)));
-		Acceptor.setReuseAddress(true);//加上这句话，避免重启时提示地址被占用
+		//加上这句话，避免重启时提示地址被占用
+		Acceptor.setReuseAddress(true);
         // 设置MINA2的IoHandler实现类
         Acceptor.setHandler(mHandler);
         logger.info("创建 Acceptor");
         // 设置会话超时时间（单位：毫秒），不设置则默认是10秒，请按需设置
         //Acceptor.setSessionRecycler(new ExpiringSessionRecycler(8 * 1000));
-        // ** TCP通信配置
-		SocketSessionConfig cfg = (SocketSessionConfig) Acceptor.getSessionConfig();  
-		Acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, idletime);//超时空闲
+        //TCP通信配置
+		SocketSessionConfig cfg = (SocketSessionConfig) Acceptor.getSessionConfig();
+		//超时空闲
+		Acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, idletime);
 		//Acceptor.getSessionConfig().setUseReadOperation(true);
 		cfg.setSoLinger(0);
         // ** UDP通信配置

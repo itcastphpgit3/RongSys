@@ -117,7 +117,7 @@ public class ProListServiceImpl implements IProListService
     }
     /**
      * 根据编号列表查询节目单明细表
-     * @param pd
+     * @param progbroad
      * @return
      * @throws Exception
      */

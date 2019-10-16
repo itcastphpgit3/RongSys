@@ -21,8 +21,9 @@ public class GlobalInfo {
      * @param thread
      */
     public static void putThreadintoPool(Runnable thread){
-        if(executorService!=null)
+        if(executorService!=null) {
             executorService.execute(thread);
+        }
     }
 
 

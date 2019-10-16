@@ -67,8 +67,8 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         if(rs.length>=2){
             commd=rs[0];
             streamid=rs[1];
-            if(rs.length>2)
-                imeilist=rs[2];
+            if(rs.length>2){
+                imeilist=rs[2];}
         }
         switch(commd){
             case "start":

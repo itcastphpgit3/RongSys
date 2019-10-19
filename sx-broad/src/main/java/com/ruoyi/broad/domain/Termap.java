@@ -3,7 +3,7 @@ import com.ruoyi.common.base.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 /**
- * 地图管理 服务层
+ * 地图管理
  *
  * @author 张鸿权
  * @date 2019-01-18
@@ -151,6 +151,7 @@ public class Termap extends BaseEntity
 
     public void setIsuse(Boolean isuse) { this.isuse = isuse; }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
                 .append("tname", getTname())

@@ -1,17 +1,18 @@
 package com.ruoyi.village.service.impl;
 
-import java.util.List;
-
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.common.support.Convert;
 import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
+import com.ruoyi.village.domain.VillagerInfo;
+import com.ruoyi.village.domain.pubObjApi;
+import com.ruoyi.village.mapper.VillagerInfoMapper;
+import com.ruoyi.village.service.IVillagerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.village.mapper.VillagerInfoMapper;
-import com.ruoyi.village.domain.VillagerInfo;
-import com.ruoyi.village.service.IVillagerInfoService;
-import com.ruoyi.common.support.Convert;
+
+import java.util.List;
 
 /**
  * 村民 服务层实现
@@ -35,7 +36,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	@DataSource(value = DataSourceType.SXVILLAGE)
 	public VillagerInfo selectVillagerInfoById(Integer vid)
 	{
-	    return villagerInfoMapper.selectVillagerInfoById(vid);
+		return villagerInfoMapper.selectVillagerInfoById(vid);
 	}
 	
 	/**
@@ -48,7 +49,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	@DataSource(value = DataSourceType.SXVILLAGE)
 	public List<VillagerInfo> selectVillagerInfoList(VillagerInfo villagerInfo)
 	{
-	    return villagerInfoMapper.selectVillagerInfoList(villagerInfo);
+		return villagerInfoMapper.selectVillagerInfoList(villagerInfo);
 	}
 	
     /**
@@ -61,7 +62,7 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	@DataSource(value = DataSourceType.SXVILLAGE)
 	public int insertVillagerInfo(VillagerInfo villagerInfo)
 	{
-	    return villagerInfoMapper.insertVillagerInfo(villagerInfo);
+		return villagerInfoMapper.insertVillagerInfo(villagerInfo);
 	}
 	
 	/**
@@ -74,9 +75,8 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	@DataSource(value = DataSourceType.SXVILLAGE)
 	public int updateVillagerInfo(VillagerInfo villagerInfo)
 	{
-	    return villagerInfoMapper.updateVillagerInfo(villagerInfo);
+		return villagerInfoMapper.updateVillagerInfo(villagerInfo);
 	}
-
 	/**
      * 删除村民对象
      * 
@@ -104,4 +104,56 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 		return villagerInfoMapper.countpmBySex(person);
 	}
 
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectvillagerInfoListBytype(PersonApi person)
+	{
+		return villagerInfoMapper.selectvillagerInfoListBytype(person);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectGrouplist(PersonApi person)
+	{
+		return villagerInfoMapper.selectGrouplist(person);
+	}
+
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countNewPre(pubObjApi per)
+	{
+		return villagerInfoMapper.countNewPre(per);
+	}
+
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectbycadre(PersonApi person)
+	{
+		return villagerInfoMapper.selectbycadre(person);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbylowincome(pubObjApi per)
+	{
+		return villagerInfoMapper.countbylowincome(per);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbydemob(pubObjApi per)
+	{
+		return villagerInfoMapper.countbydemob(per);
+	}
+
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public Mcount countbyagePart(PersonApi per)
+	{
+		return villagerInfoMapper.countbyagePart(per);
+	}
 }

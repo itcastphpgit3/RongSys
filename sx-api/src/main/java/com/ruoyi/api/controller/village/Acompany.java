@@ -2,12 +2,12 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.village.domain.Company;
 import com.ruoyi.village.domain.pubObjApi;
 import com.ruoyi.village.service.ICompanyService;
+import com.ruoyi.village.service.IVareaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class Acompany extends BaseController {
     @Autowired
     private ICompanyService companyService;
     @Autowired
-    private IOrganizationService organizationService;
+    private IVareaService vareaService;
 
     @GetMapping("/companylist")
     @CrossOrigin
@@ -32,7 +32,7 @@ public class Acompany extends BaseController {
     {
         company.setPageIndex((company.getPageIndex()-1)*company.getPageSize());
         List<Company> res;
-        List<String> allaid = organizationService.listNextAid(company.getAid());
+        List<String> allaid = vareaService.listNextAid(company.getAid());
         if (allaid.isEmpty()){
             allaid.add(company.getAid());
             company.setListaid(allaid);
@@ -40,9 +40,9 @@ public class Acompany extends BaseController {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }

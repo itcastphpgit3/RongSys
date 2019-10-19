@@ -2,13 +2,13 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.village.domain.*;
 import com.ruoyi.village.service.IHouseMemberInfoService;
 import com.ruoyi.village.service.ILinkService;
+import com.ruoyi.village.service.IVareaService;
 import com.ruoyi.village.service.IVillageplanService;
 import com.ruoyi.village.util.bFileUtil1;
 import io.swagger.annotations.Api;
@@ -29,9 +29,9 @@ public class BeaCountry extends BaseController {
     @Autowired
     private IVillageplanService villageplanService;
     @Autowired
-    private IOrganizationService organizationService;
-    @Autowired
     private ILinkService linkService;
+    @Autowired
+    private IVareaService vareaService;
 
     @GetMapping("/ListBeaCountry")
     @CrossOrigin
@@ -39,7 +39,7 @@ public class BeaCountry extends BaseController {
     public RongApiRes selectBeaCountry(pubObjApi beavill){
         beavill.setPageIndex((beavill.getPageIndex()-1)*beavill.getPageSize());
         List<Villageplan> res;
-        List<String> allaid = organizationService.listNextAid(beavill.getAid());
+        List<String> allaid = vareaService.listNextAid(beavill.getAid());
         if (allaid.isEmpty()){
             allaid.add(beavill.getAid());
             beavill.setListaid(allaid);
@@ -47,9 +47,9 @@ public class BeaCountry extends BaseController {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for(int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -65,11 +65,37 @@ public class BeaCountry extends BaseController {
     @PostMapping("/insertBeaCountry")
     @CrossOrigin
     @ApiOperation(value = "新增美丽乡村")
-    public AjaxResult insertBeaCountry(Villageplan villageplan,@RequestParam(value = "files", required = false) MultipartFile file,
-                                       @RequestParam(value = "filename", required = false) String fname,
-                                       @RequestParam(value = "flenth" ,required = false)String flenth, //时长
-                                       @RequestParam(value = "fsize",required = false) String fsize )
+    public AjaxResult insertBeaCountry(Villageplan villageplan,@RequestParam(value = "files", required = false) MultipartFile[] files,
+                                       @RequestParam(value = "filename", required = false) String[] fnames,
+                                       @RequestParam(value = "flenth" ,required = false)String[] flenth, //时长
+                                       @RequestParam(value = "fsize",required = false) String[] fsize )
     {
+        String year = DateUtil.getYear();
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+        System.out.println(dateFormat.format(date));
+        String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名
+        String address="";
+        //判断file数组不能为空并且长度大于0
+        if (files != null && files.length > 0) {
+            //循环获取file数组中得文件
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                try{
+                    //保存图片
+                    Files g = bFileUtil1.uplodeFile(maxfileid, file, fnames[i], flenth[i], fsize[i], year);
+                    address +=g.getAddress()+";";
+
+                } catch (Exception e) {
+                    //return "上传图片失败";
+                    System.out.println("失败");
+                    return toAjax(0);
+                }
+
+            }
+        }
+        villageplan.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(villageplanService.insertVillageplan(villageplan));
     }
 

@@ -86,11 +86,13 @@ public class ProList extends BaseEntity
 	{
 		return broadtime;
 	}
+	@Override
 	public void setRemark(String remark) 
 	{
 		this.remark = remark;
 	}
 
+	@Override
 	public String getRemark() 
 	{
 		return remark;
@@ -112,6 +114,7 @@ public class ProList extends BaseEntity
 		this.urls = urls;
 	}
 
+	@Override
 	public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("pid", getPid())

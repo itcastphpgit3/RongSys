@@ -43,7 +43,8 @@ public class Vcount {
     private IAssetAssessmentService assetAssessmentService;
     @Autowired
     private IVillagegroupStatisticsInfoService villagegroupStatisticsInfoService;
-
+    @Autowired
+    private IVareaService vareaService;
     @Autowired
     private IVillagerInfoService villagerInfoService;
     /**
@@ -123,7 +124,28 @@ public class Vcount {
     @CrossOrigin
     @ApiOperation(value = "性别比例分析")
     public RongApiRes countpmBySex(PersonApi person){
-        return RongApiService.get_bean(villagerInfoService.countpmBySex(person));
+        Mcount res;
+        List<String> allaid = vareaService.listNextAid(person.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(person.getAid());
+            person.setListaid(allaid);
+            res = villagerInfoService.countpmBySex(person);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = vareaService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = vareaService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            person.setListaid(allaid);
+            res = villagerInfoService.countpmBySex(person);
+        }
+        return RongApiService.get_bean(res);
     }
     /**
         * （快排）按照地区统计村民数据：地区、总数、男性、女性
@@ -261,4 +283,117 @@ public class Vcount {
 //        }
 //    }
 
+    @GetMapping("/newPre")
+    @CrossOrigin
+    @ApiOperation(value = "新增人口分析")
+    public RongApiRes countbyedulevel(pubObjApi pre){
+        Mcount res;
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(pre.getAid());
+            pre.setListaid(allaid);
+            res = villagerInfoService.countNewPre(pre);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = vareaService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = vareaService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            pre.setListaid(allaid);
+            res = villagerInfoService.countNewPre(pre);
+        }
+        return RongApiService.get_bean(res);
+    }
+
+
+
+    @GetMapping("/lowincome")
+    @CrossOrigin
+    @ApiOperation(value = "低保户分析")
+    public RongApiRes countbylowincome(pubObjApi pre){
+        Mcount res;
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(pre.getAid());
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbylowincome(pre);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = vareaService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = vareaService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbylowincome(pre);
+        }
+        return RongApiService.get_bean(res);
+    }
+
+    @GetMapping("/demob")
+    @CrossOrigin
+    @ApiOperation(value = "复原军人比例分析")
+    public RongApiRes countbydemob(pubObjApi pre){
+        Mcount res;
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(pre.getAid());
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbydemob(pre);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = vareaService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = vareaService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbydemob(pre);
+        }
+        return RongApiService.get_bean(res);
+    }
+
+    @GetMapping("/agePart")
+    @CrossOrigin
+    @ApiOperation(value = "年龄段分析")
+    public RongApiRes countbyagePart(PersonApi pre){
+        Mcount res;
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
+        if (allaid.isEmpty()){
+            allaid.add(pre.getAid());
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbyagePart(pre);
+        }else {
+            //获得所有的子 aid 放入 list
+            List<String> temp;
+            temp = vareaService.listNextAid(allaid.get(0));
+            for (int i = 1; i < allaid.size(); i++){
+                List<String> l = vareaService.listNextAid(allaid.get(i));
+                if (!l.isEmpty()){
+                    temp.addAll(l);
+                }
+            }
+            allaid.addAll(temp);
+            // 遍历所有的 aid 信息然后装入结果
+            pre.setListaid(allaid);
+            res = villagerInfoService.countbyagePart(pre);
+        }
+        return RongApiService.get_bean(res);
+    }
 }

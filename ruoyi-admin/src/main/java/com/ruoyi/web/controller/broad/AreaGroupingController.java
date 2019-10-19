@@ -17,6 +17,7 @@ import com.ruoyi.system.service.ISysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.Map;
 /**
  * Created by ASUS on 2019/8/2.
  * @author cx
- * 终端分组管理 控制层
+ * 分组管理 控制层
  */
 @Controller
 @RequestMapping("/broad/areaGrouping")
@@ -107,5 +108,27 @@ public class AreaGroupingController extends BaseController{
     public AjaxResult addSave(AreaGrouping areaGrouping)
     {
         return toAjax(iAreaGroupingService.insertAreaGrouping(areaGrouping));
+    }
+
+    /**
+     * 修改分组管理记录
+     */
+    @GetMapping("/edit/{aid}")
+    public String edit(@PathVariable("aid") String aid, ModelMap mmap)
+    {
+        AreaGrouping areaGrouping = iAreaGroupingService.selectAreaGroupingByAid(aid);
+        mmap.put("areaGrouping", areaGrouping);
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存分组管理记录
+     */
+    @Log(title = "分组管理记录保存", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(AreaGrouping areaGrouping)
+    {
+        return toAjax(iAreaGroupingService.updateAreaGrouping(areaGrouping));
     }
 }

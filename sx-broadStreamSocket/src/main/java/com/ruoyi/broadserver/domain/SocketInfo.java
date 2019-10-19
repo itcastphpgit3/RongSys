@@ -94,18 +94,23 @@ public class SocketInfo {
     /*做等同判断*/
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj){
             return true;
-        if (obj == null)
+        }
+        if (obj == null){
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         SocketInfo other = (SocketInfo) obj;
         if (imei == null) {
-            if (other.imei != null)
+            if (other.imei != null){
                 return false;
-        } else if (!imei.equals(other.imei))
+            }
+        } else if (!imei.equals(other.imei)){
             return false;
+        }
         return true;
     }
     public IoSession getsession(IoSession session){

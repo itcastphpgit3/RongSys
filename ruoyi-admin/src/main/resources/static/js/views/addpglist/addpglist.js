@@ -270,15 +270,15 @@ function save(){
         }
     }
     terids = terids.substring(0,terids.length-1);
-    if(terids==""){
-        $("#tertitle").tips({
-            side:3,
-            msg:'请选择播出终端',
-            bg:'#AE81FF',
-            time:3
-        });
-        return false;
-    }
+    // if(terids==""){
+    //     $("#tertitle").tips({
+    //         side:3,
+    //         msg:'请选择播出终端',
+    //         bg:'#AE81FF',
+    //         time:3
+    //     });
+    //     return false;
+    // }
 
     var continuenum = $("#continuenum").val();
     if(/^\d+$/.test(continuenum)) { //全为数字
@@ -680,8 +680,9 @@ function saves(){
         });
         return false;
     }
-    //获取选择终端
-    //var nodes = zTree.getCheckedNodes();
+   // 获取选择终端
+    var nodes = zTree.getCheckedNodes();
+    // console.log(nodes);
     var terids = $("#treeName").val()
     console.log("选择的终端>>>",terids)
     if(terids==""){
@@ -710,6 +711,7 @@ function saves(){
         });
         return false;
     }
+    debugger
     prolist = "["+prolist.substring(0,prolist.length-1)+"]";
     console.log("表单数据>>>",JSON.stringify(prolist))
     $.ajax({

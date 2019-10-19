@@ -102,10 +102,12 @@ public class Traffic extends BaseEntity
 	}
 
 
+	@Override
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
 	}
+	@Override
 	public String getRemark()
 	{
 		return remark;
@@ -164,6 +166,7 @@ public class Traffic extends BaseEntity
 	{
 		this.maxNum = maxNum;
 	}
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 				.append("ttid", getTtid())

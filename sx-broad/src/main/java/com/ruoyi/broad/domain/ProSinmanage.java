@@ -99,15 +99,19 @@ public class ProSinmanage extends BaseEntity
 	{
 		return uname;
 	}
+
+	@Override
 	public void setRemark(String remark)
 	{
 		this.remark = remark;
 	}
 
+	@Override
 	public String getRemark()
 	{
 		return remark;
 	}
+
 	public void setBroadtimes(String broadtimes)
 	{
 		this.broadtimes = broadtimes;

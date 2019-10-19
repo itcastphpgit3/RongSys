@@ -58,5 +58,12 @@ public interface VareaMapper
      * @return 结果
      */
 	public int deleteVareaByIds(String[] aids);
-	
+
+	/**
+	 * 获取到下面所有的 aid
+	 * @param aid
+	 * @return
+	 */
+	public  List<String> listNextAid(String aid);
+	public  List<Varea> listNextAidName(String aid);
 }

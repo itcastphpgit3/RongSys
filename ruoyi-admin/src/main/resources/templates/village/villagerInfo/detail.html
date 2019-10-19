@@ -20,9 +20,9 @@
                     </div>
                     <div class="text-center">
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.age}]]岁</button>
-                        <button class="btn btn-white btn-xs" type="button">[[${listByid.nation}]]</button>
+                        <button class="btn btn-white btn-xs" type="button">[[${listByid.nation}]]族</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.politics}]]</button>
-                        <button class="btn btn-white btn-xs" type="button">[[${listByid.partyjoindate}]]入党</button>
+                        <button class="btn btn-white btn-xs" type="button">入党时间:[[${listByid.partyjoindate}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.edulevel}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.marital}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.job}]]</button>
@@ -40,11 +40,14 @@
                     <div class="text-center">
                         <button class="btn btn-white btn-xs" type="button">现居住地：[[${listByid.home}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.house}]]</button>
+                        <button class="btn btn-white btn-xs" type="button">户主：[[${listByid.hhd}]]</button>
+                        <button class="btn btn-white btn-xs" type="button">户主号：[[${listByid.hhdnum}]]</button>
                     </div>
                 </div>
             </div>
             <div>
                 <h4>健康状况:</h4><p th:utext="${listByid.health}"></p>
+                <h4>身高:</h4><p th:utext="${listByid.height}"></p>
                 <h4>驾照:</h4><p th:utext="${listByid.drive}"></p>
                 <h4>车辆:</h4><p th:utext="${listByid.car}"></p>
                 <h4>车辆类型:</h4><p th:utext="${listByid.vtype}"></p>
@@ -63,6 +66,71 @@
                 <h4>保险情况:</h4><p th:utext="${listByid.insurance}"></p>
                 <h4>犯罪史:</h4><p th:utext="${listByid.criminal}"></p>
                 <h4>吸毒史:</h4><p th:utext="${listByid.drug}"></p>
+                <h4>户主身份证号:</h4><p th:utext="${listByid.hhdidcard}"></p>
+                <h4>与户主关系:</h4><p th:utext="${listByid.hhdrelation}"></p>
+                <h4>职务等级:</h4><p th:utext="${listByid.jobrank}"></p>
+                <h4>爱好特长:</h4><p th:utext="${listByid.hobby}"></p>
+                <h4>思想动向:</h4><p th:utext="${listByid.trend}"></p>
+                <h4>就业状态:</h4><p th:utext="${listByid.jobstate}"></p>
+                <h4>大病医疗:</h4><p th:utext="${listByid.pr}"></p>
+                <h4>医保情况:</h4><p th:utext="${listByid.medinsur}"></p>
+                <h4>新农保:</h4><p th:utext="${listByid.fmi}"></p>
+                <h4>新农保状态:</h4><p th:utext="${listByid.fmistate}"></p>
+                <h4>社保:</h4><p th:utext="${listByid.security}"></p>
+                <h4>商业保险:</h4><p th:utext="${listByid.bsecurity}"></p>
+                <h4>低保情况:</h4><p th:utext="${listByid.subsis}"></p>
+                <h4>特贫/困户:</h4><p th:utext="${listByid.poor}"></p>
+                <h4>行驶证号:</h4><p th:utext="${listByid.drivenum}"></p>
+                <h4>技术类型:</h4><p th:utext="${listByid.techtype}"></p>
+                <h4>技术等级:</h4><p th:utext="${listByid.techgrade}"></p>
+                <h4>职称等级:</h4><p th:utext="${listByid.titgrade}"></p>
+                <h4>是否迁移（地址）:</h4><p th:utext="${listByid.move}"></p>
+                <h4>田地面积:</h4><p th:utext="${listByid.fieldarea}"></p>
+                <h4>林地面积:</h4><p th:utext="${listByid.forestarea}"></p>
+                <h4>水塘面积:</h4><p th:utext="${listByid.poolarea}"></p>
+                <h4>家庭收入:</h4><p th:utext="${listByid.income}"></p>
+                <h4>个人财产总额:</h4><p th:utext="${listByid.totalppt}"></p>
+                <h4>月收入:</h4><p th:utext="${listByid.mincome}"></p>
+                <h4>年收入:</h4><p th:utext="${listByid.yincome}"></p>
+                <h4>银行:</h4><p th:utext="${listByid.bank}"></p>
+                <h4>银行卡号:</h4><p th:utext="${listByid.bankcardnum}"></p>
+                <h4>土地确权:</h4><p th:utext="${listByid.landowner}"></p>
+                <h4>综治:</h4><p th:utext="${listByid.landowner}"></p>
+                <h4>房屋面积:</h4><p th:utext="${listByid.housearea}"></p>
+                <h4>村务宝典登录名:</h4><p th:utext="${listByid.loginname}"></p>
+                <h4>个体经营:</h4><p th:utext="${listByid.selfmanage}"></p>
+                <h4>经营类型:</h4><p th:utext="${listByid.managetype}"></p>
+                <h4>投入成本:</h4><p th:utext="${listByid.cost}"></p>
+                <h4>经营月收入:</h4><p th:utext="${listByid.mmincome}"></p>
+                <h4>所在组织/社团:</h4><p th:utext="${listByid.organization}"></p>
+                <h4>是否土地流转:</h4><p th:utext="${listByid.landtransfer}"></p>
+                <h4>土地流转收入:</h4><p th:utext="${listByid.landincome}"></p>
+                <h4>是否林地流转:</h4><p th:utext="${listByid.foresttransfer}"></p>
+                <h4>林地流转收入:</h4><p th:utext="${listByid.forestincome}"></p>
+                <h4>是否征收:</h4><p th:utext="${listByid.levy}"></p>
+                <h4>房租收入:</h4><p th:utext="${listByid.rent}"></p>
+                <h4>房屋使用状态:</h4><p th:utext="${listByid.housestate}"></p>
+                <h4>是否接入电力:</h4><p th:utext="${listByid.psa}"></p>
+                <h4>是否接入有线电视:</h4><p th:utext="${listByid.ca}"></p>
+                <h4>是否接入宽带:</h4><p th:utext="${listByid.woban}"></p>
+                <h4>是否接入自来水:</h4><p th:utext="${listByid.water}"></p>
+                <h4>是否接入安防系统:</h4><p th:utext="${listByid.ssa}"></p>
+                <h4>是否接入燃气:</h4><p th:utext="${listByid.gfs}"></p>
+                <h4>是否垃圾分类:</h4><p th:utext="${listByid.wdr}"></p>
+                <h4>道路是否到户:</h4><p th:utext="${listByid.rth}"></p>
+                <h4>是否干部:</h4><p th:utext="${listByid.iscadre}"></p>
+                <h4>干部行政级别:</h4><p th:utext="${listByid.cadrelevel}"></p>
+                <h4>是否低保户:</h4><p th:utext="${listByid.islowincome}"></p>
+                <h4>获得低保时间:</h4><p th:utext="${listByid.getlowdate}"></p>
+                <h4>是否复员军人:</h4><p th:utext="${listByid.isdemob}"></p>
+                <h4>复员时间:</h4><p th:utext="${listByid.demobdate}"></p>
+                <h4>个人照片:</h4><p th:utext="${listByid.personphoto}"></p>
+                <h4>户口照片:</h4><p th:utext="${listByid.hkphoto}"></p>
+                <h4>身份证照片:</h4><p th:utext="${listByid.idphoto}"></p>
+                <h4>汽车照片:</h4><p th:utext="${listByid.carphoto}"></p>
+                <h4>房屋照片:</h4><p th:utext="${listByid.housephoto}"></p>
+                <h4>获奖情况:</h4><p th:utext="${listByid.winaward}"></p>
+                <h4>处分情况:</h4><p th:utext="${listByid.punish}"></p>
             </div>
 
         </div>

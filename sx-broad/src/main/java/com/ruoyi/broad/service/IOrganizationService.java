@@ -1,5 +1,6 @@
 package com.ruoyi.broad.service;
 
+import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.domain.Organization;
 import com.ruoyi.broad.domain.TerminalTels;
 
@@ -8,8 +9,8 @@ import java.util.List;
 /**
  * 终端地域 服务层
  *
- * @author 张鸿权
- * @date 2019-01-17
+ * @author cx
+ * @date 2019-10-03
  */
 public interface IOrganizationService
 {
@@ -37,6 +38,14 @@ public interface IOrganizationService
 	 * @return 终端集合
 	 */
 	public List<Organization> selectOrganizationList(Organization organization);
+
+	/**
+	 * 查询终端列表
+	 *
+	 * @param organization 终端信息
+	 * @return 终端集合
+	 */
+	public List<Organization> selectOrganizationList1(Organization organization);
 
 	/**
 	 * 新增终端
@@ -130,7 +139,7 @@ public interface IOrganizationService
 	 * @return
 	 */
 	public  List<String> listNextAid(String aid);
-
+	public  List<Area> listNextAidName(String aid);
 
 	//	通过 aid 查询所有终端
 	public List<Organization> listOrgByAid(List<String> aid);
@@ -144,4 +153,20 @@ public interface IOrganizationService
 	 * @return
 	 */
 	public  List<TerminalTels> selectTelsByTid(String tid);
+
+	/**
+	 * @author cx
+	 * @param organization
+	 *
+	 * @Description 更新终端数据
+	 */
+	public int updateUsername(Organization organization);
+
+	/**
+	 * 根据条件分页查询终端对象
+	 *
+	 * @param organization 导出终端字段
+	 * @return 终端信息集合信息
+	 */
+	public List<Organization> exportOrganization(Organization organization);
 }

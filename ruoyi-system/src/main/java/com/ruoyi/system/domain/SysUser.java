@@ -95,6 +95,9 @@ public class SysUser extends BaseEntity
     /** 用户所属地域编号 */
     private String aid;
 
+    /** 用户所属地域 */
+    private String aname;
+
     public Long getUserId()
     {
         return userId;
@@ -333,6 +336,14 @@ public class SysUser extends BaseEntity
         this.address = address;
     }
 
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -359,6 +370,7 @@ public class SysUser extends BaseEntity
             .append("remark", getRemark())
             .append("platform", getPlatform())
             .append("aid", getAid())
+            .append("aname", getAname())
             .toString();
     }
 }

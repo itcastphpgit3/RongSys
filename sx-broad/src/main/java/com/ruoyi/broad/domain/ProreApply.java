@@ -235,6 +235,7 @@ public class ProreApply extends BaseEntity
 		return nopasstimes;
 	}
 
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("paid", getPaid())

@@ -2,13 +2,13 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.village.domain.*;
 import com.ruoyi.village.service.IHouseMemberInfoService;
 import com.ruoyi.village.service.ILinkService;
+import com.ruoyi.village.service.IVareaService;
 import com.ruoyi.village.service.IVillageplanService;
 import com.ruoyi.village.util.bFileUtil1;
 import io.swagger.annotations.Api;
@@ -29,9 +29,9 @@ public class BeaCountry extends BaseController {
     @Autowired
     private IVillageplanService villageplanService;
     @Autowired
-    private IOrganizationService organizationService;
-    @Autowired
     private ILinkService linkService;
+    @Autowired
+    private IVareaService vareaService;
 
     @GetMapping("/ListBeaCountry")
     @CrossOrigin
@@ -39,7 +39,7 @@ public class BeaCountry extends BaseController {
     public RongApiRes selectBeaCountry(pubObjApi beavill){
         beavill.setPageIndex((beavill.getPageIndex()-1)*beavill.getPageSize());
         List<Villageplan> res;
-        List<String> allaid = organizationService.listNextAid(beavill.getAid());
+        List<String> allaid = vareaService.listNextAid(beavill.getAid());
         if (allaid.isEmpty()){
             allaid.add(beavill.getAid());
             beavill.setListaid(allaid);
@@ -47,9 +47,9 @@ public class BeaCountry extends BaseController {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for(int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }

@@ -50,5 +50,13 @@ public interface IVareaService
      * @return 结果
      */
 	public int deleteVareaByIds(String ids);
+
+	/**
+	 * 获取到下面所有的 aid
+	 * @param aid
+	 * @return
+	 */
+	public  List<String> listNextAid(String aid);
+	public  List<Varea> listNextAidName(String aid);
 	
 }

@@ -61,14 +61,16 @@ public abstract class DefaultCommand implements Command{
 			byte[] length = bConvert.intToByteArray(2+res.length);
 			encoded.put(length);//发包的数据长度 命令1字节+data长度+校验1字节
 			encoded.put(bConvert.hexStringToBytes(command));//发包命令
-			if(data != null)
+			if(data != null) {
 				encoded.put(res);//发包数据
+			}
             if(isChecked){//是否启用动态校验
                 byte[] checkData = new byte[res.length+3];//用来计算校验和
                 System.arraycopy(length, 0, checkData, 0, length.length);
                 checkData[2] = (byte)Integer.parseInt(command);
-                if(data != null)
-                    System.arraycopy(res, 0, checkData, 3, res.length);
+                if(data != null) {
+					System.arraycopy(res, 0, checkData, 3, res.length);
+				}
                 String check = bConvert.checksum(checkData);
                 encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的动态校验
             }else{

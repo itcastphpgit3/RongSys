@@ -3,7 +3,6 @@ package com.ruoyi.api.controller.village;
 
 import com.ruoyi.api.domain.RongApiRes;
 import com.ruoyi.api.service.RongApiService;
-import com.ruoyi.broad.service.IOrganizationService;
 import com.ruoyi.common.utils.PageData;
 import com.ruoyi.village.domain.*;
 
@@ -45,8 +44,7 @@ public class Vcount {
     @Autowired
     private IVillagegroupStatisticsInfoService villagegroupStatisticsInfoService;
     @Autowired
-    private IOrganizationService organizationService;
-
+    private IVareaService vareaService;
     @Autowired
     private IVillagerInfoService villagerInfoService;
     /**
@@ -127,7 +125,7 @@ public class Vcount {
     @ApiOperation(value = "性别比例分析")
     public RongApiRes countpmBySex(PersonApi person){
         Mcount res;
-        List<String> allaid = organizationService.listNextAid(person.getAid());
+        List<String> allaid = vareaService.listNextAid(person.getAid());
         if (allaid.isEmpty()){
             allaid.add(person.getAid());
             person.setListaid(allaid);
@@ -135,9 +133,9 @@ public class Vcount {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -290,7 +288,7 @@ public class Vcount {
     @ApiOperation(value = "新增人口分析")
     public RongApiRes countbyedulevel(pubObjApi pre){
         Mcount res;
-        List<String> allaid = organizationService.listNextAid(pre.getAid());
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
         if (allaid.isEmpty()){
             allaid.add(pre.getAid());
             pre.setListaid(allaid);
@@ -298,9 +296,9 @@ public class Vcount {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -320,7 +318,7 @@ public class Vcount {
     @ApiOperation(value = "低保户分析")
     public RongApiRes countbylowincome(pubObjApi pre){
         Mcount res;
-        List<String> allaid = organizationService.listNextAid(pre.getAid());
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
         if (allaid.isEmpty()){
             allaid.add(pre.getAid());
             pre.setListaid(allaid);
@@ -328,9 +326,9 @@ public class Vcount {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -348,7 +346,7 @@ public class Vcount {
     @ApiOperation(value = "复原军人比例分析")
     public RongApiRes countbydemob(pubObjApi pre){
         Mcount res;
-        List<String> allaid = organizationService.listNextAid(pre.getAid());
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
         if (allaid.isEmpty()){
             allaid.add(pre.getAid());
             pre.setListaid(allaid);
@@ -356,9 +354,9 @@ public class Vcount {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }
@@ -376,7 +374,7 @@ public class Vcount {
     @ApiOperation(value = "年龄段分析")
     public RongApiRes countbyagePart(PersonApi pre){
         Mcount res;
-        List<String> allaid = organizationService.listNextAid(pre.getAid());
+        List<String> allaid = vareaService.listNextAid(pre.getAid());
         if (allaid.isEmpty()){
             allaid.add(pre.getAid());
             pre.setListaid(allaid);
@@ -384,9 +382,9 @@ public class Vcount {
         }else {
             //获得所有的子 aid 放入 list
             List<String> temp;
-            temp = organizationService.listNextAid(allaid.get(0));
+            temp = vareaService.listNextAid(allaid.get(0));
             for (int i = 1; i < allaid.size(); i++){
-                List<String> l = organizationService.listNextAid(allaid.get(i));
+                List<String> l = vareaService.listNextAid(allaid.get(i));
                 if (!l.isEmpty()){
                     temp.addAll(l);
                 }

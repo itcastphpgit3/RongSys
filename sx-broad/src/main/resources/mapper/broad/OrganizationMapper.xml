@@ -52,6 +52,7 @@
 
     <resultMap type="area" id="AreatreeResult">
         <result property="aid"    column="aid"    />
+        <result property="parentaid"    column="parentaid"    />
         <result property="aname"    column="aname"    />
     </resultMap>
 
@@ -343,7 +344,7 @@
     </select>
 
     <select id="listNextAidName" parameterType="String" resultType="Area">
-        SELECT t.aid,t.aname
+        SELECT t.aid,t.parentaid,t.aname
         FROM area as t
         WHERE aid = #{aid} or t.parentaid = #{aid}
         GROUP BY aid

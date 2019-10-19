@@ -49,7 +49,7 @@ public class AreaGroupingController extends BaseController{
     @Autowired
     private IMessageService messageService;
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     @Log(title = "分组管理列表")
     @ResponseBody
     public TableDataInfo list(AreaGrouping areaGrouping)

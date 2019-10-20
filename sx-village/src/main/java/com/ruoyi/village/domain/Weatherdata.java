@@ -19,6 +19,8 @@ public class Weatherdata extends BaseEntity{
     private String tid;
     /**采集地址编号*/
     private String addrid;
+    /**采集地区区域名*/
+    private String aname;
     /**采集时间*/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date colltime;
@@ -80,6 +82,14 @@ public class Weatherdata extends BaseEntity{
 
     public void setAddrid(String addrid) {
         this.addrid = addrid;
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
     }
 
     public Date getColltime() {
@@ -230,10 +240,11 @@ public class Weatherdata extends BaseEntity{
 
     @Override
     public String toString() {
-        return "weatherdata{" +
+        return "Weatherdata{" +
                 "id=" + id +
                 ", tid='" + tid + '\'' +
                 ", addrid='" + addrid + '\'' +
+                ", aname='" + aname + '\'' +
                 ", colltime=" + colltime +
                 ", surrtemp=" + surrtemp +
                 ", surrhumi=" + surrhumi +

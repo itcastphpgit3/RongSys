@@ -8,6 +8,7 @@
         <result property="id"    column="id"    />
         <result property="tid"    column="tid"    />
         <result property="addrid"    column="addrid"    />
+        <result property="aname"    column="aname"    />
         <result property="colltime"    column="colltime"    />
         <result property="surrtemp"    column="surrtemp"    />
         <result property="surrhumi"    column="surrhumi"    />
@@ -30,7 +31,7 @@
     </resultMap>
 
     <sql id="selectWeatherdataVo">
-        select id, tid, addrid, colltime, surrtemp, surrhumi, surrlight, soiltemp, soilhumi,atmopress,windspeed,windire,weathertype,pm25,co2,co,so2,ch4,rainfall,ph,remark from tb_weatherdata
+        select id, tid, addrid,aname, colltime, surrtemp, surrhumi, surrlight, soiltemp, soilhumi,atmopress,windspeed,windire,weathertype,pm25,co2,co,so2,ch4,rainfall,ph,remark from vw_weatherdata
     </sql>
 
     <select id="selectWeatherdataList" parameterType="Weatherdata" resultMap="WeatherdataResult">
@@ -45,93 +46,5 @@
         <include refid="selectWeatherdataVo"/>
         where id = #{id}
     </select>
-
-    <insert id="insertWeatherdata" parameterType="Weatherdata">
-        insert into tb_weatherdata
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null  ">id,</if>
-            <if test="tid != null  and tid != ''  ">tid,</if>
-            <if test="addrid != null  and addrid != '' "> addrid,</if>
-            <if test="colltime != null  and colltime != '' "> colltime,</if>
-            <if test="surrtemp != null  and surrtemp != '' "> surrtemp,</if>
-            <if test="surrhumi != null and surrhumi != '' ">surrhumi,</if>
-            <if test="surrlight != null  and surrlight != '' ">surrlight,</if>
-            <if test="soiltemp != null  and soiltemp != '' "> soiltemp,</if>
-            <if test="soilhumi != null  and soilhumi != '' "> soilhumi,</if>
-            <if test="atmopress != null  and atmopress != '' "> atmopress,</if>
-            <if test="windspeed != null  and windspeed != '' "> windspeed,</if>
-            <if test="windire != null  and windire != '' ">windire,</if>
-            <if test="weathertype != null  and weathertype != '' "> weathertype,</if>
-            <if test="pm25 != null  and pm25 != '' "> pm25,</if>
-            <if test="co2 != null  and co2 != '' ">co2,</if>
-            <if test="co != null  and co != '' ">co,</if>
-            <if test="so2 != null  and so2 != '' "> so2,</if>
-            <if test="ch4 != null  and ch4 != '' "> ch4,</if>
-            <if test="rainfall != null  and rainfall != '' ">rainfall,</if>
-            <if test="ph != null  and ph != '' "> ph,</if>
-            <if test="remark != null  and remark != '' "> remark,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null  ">#{id},</if>
-            <if test="tid != null  and tid != ''  ">#{tid},</if>
-            <if test="addrid != null  and addrid != '' ">#{addrid},</if>
-            <if test="colltime != null  and colltime != '' "> #{colltime},</if>
-            <if test="surrtemp != null  and surrtemp != '' "> #{surrtemp},</if>
-            <if test="surrhumi != null and surrhumi != '' ">#{surrhumi},</if>
-            <if test="surrlight != null  and surrlight != '' ">#{surrlight},</if>
-            <if test="soiltemp != null  and soiltemp != '' "> #{soiltemp},</if>
-            <if test="soilhumi != null  and soilhumi != '' "> #{soilhumi},</if>
-            <if test="atmopress != null  and atmopress != '' ">#{atmopress},</if>
-            <if test="windspeed != null  and windspeed != '' ">#{windspeed},</if>
-            <if test="windire != null  and windire != '' ">#{windire},</if>
-            <if test="weathertype != null  and weathertype != '' "> #{weathertype},</if>
-            <if test="pm25 != null  and pm25 != '' ">#{pm25},</if>
-            <if test="co2 != null  and co2 != '' ">#{co2},</if>
-            <if test="co != null  and co != '' ">#{co},</if>
-            <if test="so2 != null  and so2 != '' "> #{so2},</if>
-            <if test="ch4 != null  and ch4 != '' ">#{ch4},</if>
-            <if test="rainfall != null  and rainfall != '' ">#{rainfall},</if>
-            <if test="ph != null  and ph != '' "> #{ph},</if>
-            <if test="remark != null  and remark != ''  ">#{remark},</if>
-        </trim>
-    </insert>
-
-    <update id="updateWeatherdata" parameterType="Weatherdata">
-        update tb_weatherdata
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="tid != null  and tid != ''  ">tid = #{tid},</if>
-            <if test="addrid != null  and addrid != '' ">addrid = #{addrid},</if>
-            <if test="colltime != null  and colltime != '' ">colltime = #{colltime},</if>
-            <if test="surrtemp != null  and surrtemp != '' "> surrtemp = #{surrtemp},</if>
-            <if test="surrhumi != null and surrhumi != '' "> surrhumi = #{surrhumi},</if>
-            <if test="surrlight != null  and surrlight != '' ">surrlight = #{surrlight},</if>
-            <if test="soiltemp != null  and soiltemp != '' "> soiltemp = #{soiltemp},</if>
-            <if test="soilhumi != null  and soilhumi != '' "> soilhumi = #{soilhumi},</if>
-            <if test="atmopress != null  and atmopress != '' ">atmopress = #{atmopress},</if>
-            <if test="windspeed != null  and windspeed != '' ">windspeed = #{windspeed},</if>
-            <if test="windire != null  and windire != '' ">windire = #{windire},</if>
-            <if test="weathertype != null  and weathertype != '' ">weathertype = #{weathertype},</if>
-            <if test="pm25 != null  and pm25 != '' ">pm25 = #{pm25},</if>
-            <if test="co2 != null  and co2 != '' "> co2 = #{co2},</if>
-            <if test="co != null  and co != '' "> co = #{co},</if>
-            <if test="so2 != null  and so2 != '' "> so2 = #{so2},</if>
-            <if test="ch4 != null  and ch4 != '' ">ch4 = #{ch4},</if>
-            <if test="rainfall != null  and rainfall != '' ">rainfall = #{rainfall},</if>
-            <if test="ph != null  and ph != '' "> ph = #{ph},</if>
-            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
-        </trim>
-        where id = #{id}
-    </update>
-
-    <delete id="deleteWeatherdataById" parameterType="Integer">
-        delete from tb_weatherdata where id = #{id}
-    </delete>
-
-    <delete id="deleteWeatherdataByIds" parameterType="String">
-        delete from tb_weatherdata where id in
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
 
 </mapper>

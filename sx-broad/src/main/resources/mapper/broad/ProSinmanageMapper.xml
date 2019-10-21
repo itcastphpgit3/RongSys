@@ -169,4 +169,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where pt.TerminalID=#{imei} and ter.isuse=1
     </select>
 
+    <select id="selectLastInsertID" resultType="int">
+        SELECT max(sfid) FROM `broad`.`pro_sinmanage`;
+    </select>
+<!--批量新增节目单和绑定的节目执行顺序-->
+    <insert id="addProList" parameterType="java.util.List">
+        INSERT INTO `broad`.`pro_list` (`Pid`, `Ptp`, `FN`, `Fid`, `Bt`, `broadtime`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.pid},#{item.ptp},#{item.fN},#{item.fid},#{item.bt},#{item.broadtime})
+        </foreach>
+    </insert>
+
+<!--批量新增节目单绑定的终端设备-->
+    <insert id="addProTerminals">
+        INSERT INTO `broad`.`pro_terminals` (`ProgrammeID`, `TerminalID`) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.programmeID},#{item.terminalID})
+        </foreach>
+    </insert>
 </mapper>

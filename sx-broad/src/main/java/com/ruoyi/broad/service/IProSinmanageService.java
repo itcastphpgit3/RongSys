@@ -1,6 +1,8 @@
 package com.ruoyi.broad.service;
 
+import com.ruoyi.broad.domain.ProList;
 import com.ruoyi.broad.domain.ProSinmanage;
+import com.ruoyi.broad.domain.ProTerminal;
 import java.util.List;
 
 /**
@@ -73,4 +75,10 @@ public interface IProSinmanageService
 	public List<ProSinmanage> selectProSinmanagebyoneday();
 	/*通过终端ID查询其所有节目播出单*/
 	public List<ProSinmanage> selectProSinmanageByTId(String tid);
+
+//	批量将节目单批量存储
+	public int addProList(List<ProList> proList);
+
+	public int addProTerminals(List<ProTerminal> proTerminal);
+
 }

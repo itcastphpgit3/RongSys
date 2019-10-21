@@ -28,7 +28,7 @@ public class ProSinmanage extends BaseEntity
 	/** 播出日期 */
 	private String broaddate;
 	/** 操作（所属）用户 */
-	private Long userid;
+	private String userid;
 	/*操作（所属）用户名*/
 	private String username;
 	/** 操作（所属）用户 */
@@ -81,12 +81,12 @@ public class ProSinmanage extends BaseEntity
 	{
 		return broaddate;
 	}
-	public void setUserid(Long userid)
+	public void setUserid(String userid)
 	{
 		this.userid = userid;
 	}
 
-	public Long getUserid()
+	public String getUserid()
 	{
 		return userid;
 	}

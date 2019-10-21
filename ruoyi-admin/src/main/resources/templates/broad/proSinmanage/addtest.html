@@ -2,12 +2,10 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header">
-
-<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-<link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-
-
 </head>
+<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+
 <body class="gray-bg">
 <div class="container-div">
     <div class="row">
@@ -20,93 +18,93 @@
                            id="broaddate"
                            value=""
                            readonly="readonly"
-                           style="width:120px;"
+                           style="width:132px;"
                            placeholder="播出日期"
                            title="播出日期"/>
                 </td>
                 <td style="padding-left:2px;text-align: right;">连续天数：</td>
                 <td style="padding-left:2px;">
                     <input  name="continuenum" id="continuenum"  value="1" type="number" min="1" max="15" step="1" style="width:88px;"  placeholder="连续天数" title="节目单连续播出天数"/></td>
-                <td style="vertical-align:top;padding-left:2px">
+                <td style="padding-left:10px">
                     <a class="btn btn-success btn-xs" onclick="saves();"  title="保存" id="saves">
-                        <i id="nav-search-icon" class="ace-icon fa fa-floppy-o bigger-110 white"></i>&nbsp;保存
+                        <i  class="ace-icon fa fa-floppy-o bigger-110 white"></i>&nbsp;保存
                     </a>
                 </td>
-                <!--<td style="vertical-align:top;padding-left:2px">-->
-                    <!--<a class="btn btn-light btn-xs" href="/broad/proSinmanage"  title="退出">-->
-                        <!--<i id="nav-search-icon" class="ace-icon fa fa-reply bigger-110 blue"></i>&nbsp;退出-->
-                    <!--</a>-->
-                <!--</td>-->
             </tr>
             <tr style="padding-top:15px;">
                 <td style="vertical-align:top;padding-left:2px">
                     <a id="appon" class="btn btn-white btn-sm" onclick="setPro('app-on');"  style="border: none;" >
-                        <i id="nav-search-icon" class="ace-icon fa fa-play bigger-110 green"></i>&nbsp;开启功放
+                        <i  class="ace-icon fa fa-play bigger-110 green"></i>&nbsp;开启功放
                     </a>
                 </td>
                 <td style="vertical-align:top;padding-left:2px">
                     <a class="btn btn-white btn-sm" onclick="doFile();" style="border: none;"  >
-                        <i id="nav-search-icon" class="ace-icon fa fa-music bigger-110 green"></i>&nbsp;文件转播
+                        <i class="ace-icon fa fa-music bigger-110 green"></i>&nbsp;文件转播
                     </a>
                 </td>
                 <td style="vertical-align:top;padding-left:2px">
                     <a class="btn btn-white btn-sm" onclick="doCham();"  style="border: none;" >
-                        <i id="nav-search-icon" class="ace-icon fa fa-bullhorn bigger-110 green"></i>&nbsp;电台播音
+                        <i class="ace-icon fa fa-bullhorn bigger-110 green"></i>&nbsp;电台播音
                     </a>
                 </td>
                 <td style="vertical-align:top;padding-left:2px">
                     <a id="appoff" class="btn btn-white btn-sm" onclick="setPro('app-off');"  style="border: none;" >
-                        <i id="nav-search-icon" class="ace-icon fa fa-stop bigger-110 green"></i>&nbsp;关闭功放
+                        <i class="ace-icon fa fa-stop bigger-110 green"></i>&nbsp;关闭功放
                     </a>
                 </td>
                 <td style="vertical-align:top;padding-left:2px">
                     <a id="appstop" class="btn btn-white btn-sm" onclick="setPro('stop');"  style="border: none;" >
-                        <i id="nav-search-icon" class="ace-icon fa fa-power-off bigger-110 green"></i>&nbsp;停止播放
+                        <i class="ace-icon fa fa-power-off bigger-110 green"></i>&nbsp;停止播放
                     </a>
                 </td>
-                <td style="vertical-align:top;padding-left:10px;width: 700px">
-                    <div class="ibox float-e-margins">
-                        <input name="deptId"  type="hidden" id="treeId"/>
-                        <div class="form-group">
-                            <div class="col-sm-8">
-                                选择终端：<input class="btn btn-success" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName">
-                            </div>
-                        </div>
-                    </div>
-                </td>
+<!--                <td style="vertical-align:top;padding-left:10px;width: 700px">-->
+<!--                    <div class="ibox float-e-margins">-->
+<!--                        <input name="deptId"  type="hidden" id="treeId"/>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="col-sm-8">-->
+<!--                                选择终端：<input class="btn btn-success" type="text" name="organName" onclick="selectOrganTree()" readonly="true" id="treeName">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
             </tr>
         </table>
-        <div class="ibox">
-            <div class="ibox-content">
-                <table id="simple-tables"  class="table" style="margin-top:5px;">
-                    <thead style="max-height: 50px">
-                    <tr style="height: 50px">
-                        <th class="center">类型</th>
-                        <th class="center">节目编号</th>
-                        <th class="center">节目</th>
-                        <th class="center">节目文件</th>
-                        <th class="center">开始时间</th>
-                        <th class="center">节目时长</th>
-                        <th class="center">操作</th>
-                        <th class="center">上移</th>
-                    </tr>
-                    </thead>
-                        <tbody id="tbody" style="height: 60px">
-
-                        </tbody>
-                </table>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <table id="simple-tables" class="table" style="margin-top:5px;">
+                            <thead style="max-height: 50px">
+                            <tr style="height: 50px">
+                                <th class="center">类型</th>
+                                <th class="center">节目编号</th>
+                                <th class="center">节目</th>
+                                <th class="center">节目文件</th>
+                                <th class="center">开始时间</th>
+                                <th class="center">节目时长</th>
+                                <th class="center">操作</th>
+                                <th class="center">上移</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody" style="height: 60px"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+           <div class="col-md-4">
+               <div class="ui-layout-content">
+                   <div id="tree" class="ztree treeselect"></div>
+               </div>
+           </div>
         </div>
     </div>
 </div>
-<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script>
-    var userId = [[${user.userId}]];
-</script>
+<div th:include="include :: footer"></div>
+
 <script type="text/javascript">
+    var userId = [[${user.userId}]];
     //使表格行上移，接收参数为链接对象
     function moveUp(_a){
-
         //通过链接对象获取表格行的引用
         var _row=_a.parentNode.parentNode.parentNode;
         //如果不是第一行，则与上一行交换顺序
@@ -116,7 +114,6 @@
 
     //使表格行下移，接收参数为链接对象
     function moveDown(_a){
-
         //通过链接对象获取表格行的引用
         var _row=_a.parentNode.parentNode.parentNode;
         //如果不是最后一行，则与下一行交换顺序
@@ -142,37 +139,54 @@
         else
             _parent.appendChild(node1);
     }
-
 </script>
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/jquery.tips.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+
+<!--<script th:src="@{/js/bootstrap.min.js}"></script>-->
+<!--<script th:src="@{/js/jquery.tips.js}"></script>-->
 <script th:src="@{/js/views/addpglist/addpglist.js}"></script>
 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
-<script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+<!--<script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>-->
+<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 <!--时间插件-->
-<script>
-    laydate({
-        elem:"#broaddate",
-        event:"focus"
-    });
+<script th:inline="javascript">
     laydate({
         elem:"#broaddate",
         event:"focus"
     });
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
-        //执行一个laydate实例
         laydate.render({
             elem:"#broad",
             type: 'time',
         });
     });
 </script>
-<script>
-    $(document).ready(function(){$(".sortable-list").sortable({connectWith:".connectList"}).disableSelection()});
+<script th:inline="javascript">
+    function queryAreaTree(){
+        var url = ctx + "broad/areaGrouping/treeData";
+        function zTreeOnCheck(event, treeId, treeNode) {
+            console.log(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+            var treeObj = $.fn.zTree.getZTreeObj("tree");
+            var nodes = treeObj.getCheckedNodes(true);
+        }
+        function zOnClick(event, treeId, treeNode) {
+            $("#parentaid").val(treeNode.aid);
+            $.table.search();
+        }
+        var options = {
+            url: url,
+            check: {
+                enable: true,
+                chkStyle: "checkbox"
+            },
+            onCheck: zTreeOnCheck,
+            onClick : zOnClick
+        };
+        $.tree.init(options);
+    }
+    queryAreaTree()
 </script>
-<div th:include="include :: footer"></div>
 </body>
 </html>

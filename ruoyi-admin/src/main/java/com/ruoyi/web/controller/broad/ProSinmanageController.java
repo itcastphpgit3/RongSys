@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import com.ruoyi.broad.domain.ProChamanage;
-import com.ruoyi.broad.domain.ProList;
-import com.ruoyi.broad.domain.Program;
+import com.ruoyi.broad.domain.*;
 import com.ruoyi.broad.service.IProChamanageService;
 import com.ruoyi.broad.service.IProListService;
 import com.ruoyi.broad.service.IProgramService;
+import com.ruoyi.broad.service.impl.ProSinmanageServiceImpl;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.json.JSONObject;
+import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
@@ -24,7 +24,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.broad.domain.ProSinmanage;
 import com.ruoyi.broad.service.IProSinmanageService;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.common.page.TableDataInfo;
@@ -55,7 +54,8 @@ public class ProSinmanageController extends BaseController
 	private IProChamanageService iProChamanageService;
 	@Autowired
 	private ISysUserService sysUserService;
-
+	@Autowired
+	private IProSinmanageService ProSinmanageService;
 	@RequiresPermissions("broad:proSinmanage:view")
 	@GetMapping()
 	public String proSinmanage()
@@ -80,7 +80,7 @@ public class ProSinmanageController extends BaseController
 			List<ProSinmanage> list = proSinmanageService.selectProSinmanageList(proSinmanage);
 			return getDataTable(list);
 		}else{
-			proSinmanage.setUserid(userid);
+			proSinmanage.setUserid(userid.toString());
 			startPage();
 			List<ProSinmanage> list = proSinmanageService.selectProSinmanageList(proSinmanage);
 			return getDataTable(list);
@@ -288,7 +288,6 @@ public class ProSinmanageController extends BaseController
 
 	/**
 	 * 获取新增播出单详情数据
-	 * @param ProData
 	 * @param ProDay
 	 * @param ProIMEI
 	 * @param ProLists
@@ -296,10 +295,43 @@ public class ProSinmanageController extends BaseController
 	 */
 	@RequestMapping("/addProList")
 	@ResponseBody
-	public Map<String,Object> addProList(@RequestParam("userId") String userId,@RequestParam("ProDate") String ProData,
-										 @RequestParam("ProDay") String ProDay, @RequestParam("ProIMEI") String ProIMEI,
+	public Map<String,Object> addProList(@RequestParam("userId") String userId,
+										 @RequestParam("ProDate") String ProDate,
+										 @RequestParam("ProDay") String ProDay,
+										 @RequestParam("ProIMEI") List ProIMEI,
 										 @RequestParam("ProData") JSONObject.JSONArray ProLists){
-		System.out.println(">>>userId>>>"+userId+">>>ProData>>>"+ProData+">>>ProDay>>>"+ProDay+">>>ProIMEI>>>"+ProIMEI+">>>ProLists>>>"+ProLists.getClass());
+		System.out.println(">>>userId>>>"+userId+">>>ProData>>>"+ProDate+">>>ProDay>>>"+ProDay+">>>ProIMEI>>>"+ProIMEI+">>>ProLists>>>"+ProLists.getClass());
+
+		//节目播出单，ProSinmanage
+		ProSinmanage ps = new ProSinmanage();
+		ps.setUserid(userId);
+		ps.setCreatetime(DateUtil.getTime());
+		ps.setScategory("正常播出单");
+		ps.setBroaddate(ProDate);//节目播放开始日期
+		ps.setBroadtimes(ProDay);
+	 	int programmeID = ProSinmanageService.insertProSinmanage(ps);//返回的新创建的节目单id
+
+		List<String> ptlist = new ArrayList<>();
+		for (int i = 0; i < ProIMEI.size(); i++) {
+			String data = (String) ProIMEI.get(i);
+			data= data.replace("[","");
+			data = data.replace("]","");
+			data = data.replaceAll("\"","");
+			ptlist.add(data);
+		}
+		List<ProTerminal> ptlists = new ArrayList<>();
+		for (int i = 0; i < ptlist.size(); i++) {
+			ProTerminal proTerminal = new ProTerminal();
+			proTerminal.setProgrammeID(programmeID);
+			proTerminal.setTerminalID(ptlist.get(i));
+			ptlists.add(proTerminal);
+		}
+		ProSinmanageService.addProTerminals(ptlists);
+
+
+//		ProSinmanageService.
+		System.out.println(programmeID+"++++++++++++++++++++++++++++++++++++++++++++++");
+		//解析出所有的单个节目，存放到节目单proList中
 		List<String> list = new ArrayList<>();
 		for (int i=0;i<ProLists.size();i++){
 			String data = ProLists.get(i).toString()
@@ -308,12 +340,12 @@ public class ProSinmanageController extends BaseController
 					.replace("[","")
 					.replace("]","")
 					.replace("\"","");
-			//System.out.println(">>>"+data.substring(data.indexOf(":")+2,data.length()-1));
 			list.add(data.substring(data.indexOf(":")+2,data.length()-1));
 		}
 		List<ProList> lists = new ArrayList<>();
 		for(int j=0,i=0;j<list.size()/5;j++){
 			ProList proList = new ProList();
+			proList.setPid(String.valueOf(programmeID));
 			proList.setPtp(list.get(i));
 			proList.setFid(list.get(i+1));
 			proList.setfN(list.get(i+2));
@@ -322,7 +354,9 @@ public class ProSinmanageController extends BaseController
 			i+=5;
 			lists.add(proList);
 		}
-		System.out.println(">>>"+lists.toString());
+		//将节目单proList的节目批量存储到数据库pro_list表
+		int a = ProSinmanageService.addProList(lists);
+//		System.out.println(">>>"+lists.toString());
 		Map<String, Object> map = new HashMap<>();
 		map.put("code",200);
 		return map;

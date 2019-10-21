@@ -682,9 +682,18 @@ function saves(){
     }
     //获取选择终端
     //var nodes = zTree.getCheckedNodes();
-    var terids = $("#treeName").val()
+    var treeObj = $.fn.zTree.getZTreeObj("tree");
+    var nodes = treeObj.getCheckedNodes(true);
+    var terids = [];
+    nodes.forEach((a,b)=>{
+        // console.log(a,b,'dasdada')
+        if(a.id.length==15){
+            terids.push(Number(a.id));
+        }
+    })
+    // terids = $("#treeName").val()
     console.log("选择的终端>>>",terids)
-    if(terids==""){
+    if(terids==""||terids==null||typeof(terids) == "undefined"){
         layer.tips('请选择播出终端','#saves', {
             tips: [1, '#3595CC'],
             time: 4000
@@ -721,7 +730,7 @@ function saves(){
             userId:userId,
             ProDate: broaddate,
             ProDay:continuenum,
-            ProIMEI:terids,
+            ProIMEI:JSON.stringify(terids),
             ProData:JSON.stringify(prolist)
         },
         dataType: 'json',

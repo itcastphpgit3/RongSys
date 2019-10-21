@@ -252,7 +252,6 @@ function save(){
         });
         return false;
     }
-    debugger
     if(onindex!=0 ||(offindex-onindex)<=0 || (stopindex-offindex)!=1){
         $("#appon").tips({
             side:3,

@@ -98,12 +98,10 @@ public class BeaCountry extends BaseController {
         villageplan.setMpic(address);//给project实体的“文件地址”赋值
         return toAjax(villageplanService.insertVillageplan(villageplan));
     }
-
     @GetMapping("/Link")
     @CrossOrigin
     @ApiOperation(value = "链接列表")
     public RongApiRes selectLinkList(Link link){
-
         return RongApiService.get_list(linkService.selectLinkList(link));
     }
 }

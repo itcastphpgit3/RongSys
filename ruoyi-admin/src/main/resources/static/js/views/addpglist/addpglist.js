@@ -252,6 +252,7 @@ function save(){
         });
         return false;
     }
+
     if(onindex!=0 ||(offindex-onindex)<=0 || (stopindex-offindex)!=1){
         $("#appon").tips({
             side:3,
@@ -270,15 +271,15 @@ function save(){
         }
     }
     terids = terids.substring(0,terids.length-1);
-    // if(terids==""){
-    //     $("#tertitle").tips({
-    //         side:3,
-    //         msg:'请选择播出终端',
-    //         bg:'#AE81FF',
-    //         time:3
-    //     });
-    //     return false;
-    // }
+    if(terids==""){
+        $("#tertitle").tips({
+            side:3,
+            msg:'请选择播出终端',
+            bg:'#AE81FF',
+            time:3
+        });
+        return false;
+    }
 
     var continuenum = $("#continuenum").val();
     if(/^\d+$/.test(continuenum)) { //全为数字
@@ -396,7 +397,7 @@ function getTime(intervaltime,times){
         } //2017-11-11 80:00:00
         var Se = seconds-28800+basenum;
         restData = addTime(intervaltime,Se);  //后面的是：前一个tr标签的播放开始时间+文件时长-08：00：00（28800s）+间隔时间
-       // console.log(Se+">>>"+restData);
+        // console.log(Se+">>>"+restData);
 
     }
     var nule = restData.toString().split(" ")[1];
@@ -519,8 +520,8 @@ function doFile() {
             var filenames = res.data_filenames.toString().replace("[","").replace("]","").replace("\"","").split(",");
             var filename = res.data_filename.toString().replace("[","").replace("]","").replace("\"","").split(",");
             var filetime = res.data_file.toString().replace("[","").replace("]","").replace("\"","").split(",");
-           //console.log(">>>重复次数"+res.data_num+">>>文件id"+res.data_fileID+">>>节目"+res.data_filenames+">>>节目文件"+res.data_filename+">>>时长"+res.data_file+">>>间隔时长"+res.data_time)
-           // console.log(">>>重复次数"+res.data_num+">>>文件id"+id+">>>节目"+filenames+">>>节目文件"+filename+">>>时长"+filetime+">>>间隔时长"+res.data_time)
+            //console.log(">>>重复次数"+res.data_num+">>>文件id"+res.data_fileID+">>>节目"+res.data_filenames+">>>节目文件"+res.data_filename+">>>时长"+res.data_file+">>>间隔时长"+res.data_time)
+            // console.log(">>>重复次数"+res.data_num+">>>文件id"+id+">>>节目"+filenames+">>>节目文件"+filename+">>>时长"+filetime+">>>间隔时长"+res.data_time)
             var time = getTime(data+" "+baseTime,res.data_time);
             for(var i=1;i<=res.data_num;i++){
                 for(var j=0;j<res.data_length;j++){
@@ -680,12 +681,20 @@ function saves(){
         });
         return false;
     }
-   // 获取选择终端
-    var nodes = zTree.getCheckedNodes();
-    // console.log(nodes);
-    var terids = $("#treeName").val()
+    //获取选择终端
+    //var nodes = zTree.getCheckedNodes();
+    var treeObj = $.fn.zTree.getZTreeObj("tree");
+    var nodes = treeObj.getCheckedNodes(true);
+    var terids = [];
+    nodes.forEach((a,b)=>{
+        // console.log(a,b,'dasdada')
+        if(a.id.length==15){
+        terids.push(Number(a.id));
+    }
+})
+    // terids = $("#treeName").val()
     console.log("选择的终端>>>",terids)
-    if(terids==""){
+    if(terids==""||terids==null||typeof(terids) == "undefined"){
         layer.tips('请选择播出终端','#saves', {
             tips: [1, '#3595CC'],
             time: 4000
@@ -711,7 +720,6 @@ function saves(){
         });
         return false;
     }
-    debugger
     prolist = "["+prolist.substring(0,prolist.length-1)+"]";
     console.log("表单数据>>>",JSON.stringify(prolist))
     $.ajax({
@@ -723,7 +731,7 @@ function saves(){
             userId:userId,
             ProDate: broaddate,
             ProDay:continuenum,
-            ProIMEI:terids,
+            ProIMEI:JSON.stringify(terids),
             ProData:JSON.stringify(prolist)
         },
         dataType: 'json',

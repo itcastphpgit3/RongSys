@@ -39,7 +39,7 @@ public abstract class DefaultCommand implements Command{
 		this.session = session;
 		this.content = content;
 		if(content.length > 7) {
-			dataresourecs = bConvert.subBytes(content, 5, content.length-7);
+			dataresourecs = bConvert.subBytes(content, 4, content.length-6);
 			try {
 				datainfo = new String(dataresourecs, GBK);
 				if(session.getAttribute(MinaCastHandler.CLIENTINFO) != null){

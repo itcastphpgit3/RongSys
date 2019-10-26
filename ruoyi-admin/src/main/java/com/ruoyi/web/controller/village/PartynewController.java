@@ -103,6 +103,7 @@ public class PartynewController extends BaseController
 	@PostMapping("/add")
 	/*这里支持多文件上传*/
 	/*这里加入Project project是为了获得html页面form返回来的数据*/
+	@ResponseBody
 	public AjaxResult addSave(Partynew partynew,@RequestParam(value = "files") MultipartFile file[],
 							  @RequestParam(value = "filesnum", required = false) int filesnum,
 							  @RequestParam(value = "filename", required = false) String fname,
@@ -114,9 +115,7 @@ public class PartynewController extends BaseController
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyyMMddhhmmss");
 		System.out.println(dateFormat.format(date));
 		String maxfileid = dateFormat.format(date); //获取文件上传时的时间参数字符串作为文件名，防止储存同名文件
-
 		//文件上传调用工具类
-		try{
 			int i;
 			String fileaddress = "";
 			for(i=0;i<filesnum;i++)
@@ -127,13 +126,10 @@ public class PartynewController extends BaseController
 				fileaddress = fileaddress + g.getAddress() + ";";//通过fileaddress来储存文件地址
 			}
 			partynew.setMpic(fileaddress);//给project实体的“文件地址”赋值
-
-			return toAjax(partynewService.insertPartynew(partynew));//将project实体中的值插入数据表中
-		}catch (Exception e){
-			//return "上传文件失败";
-			System.out.println("失败");
-			return toAjax(0);
-		}
+			partynewService.insertPartynew(partynew);
+//			partynewService.selectPartynewList(partynew);
+//			return toAjax(1);//将project实体中的值插入数据表中
+			return toAjax(1);
 	}
 
 	/**

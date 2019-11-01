@@ -9,6 +9,7 @@
  */
 package com.ruoyi.broadserver.server;
 
+import java.net.InetAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 
@@ -41,6 +42,9 @@ public class MinaCastHandler extends IoHandlerAdapter
 	public  MinaCastHandler(String type){
         this.type = type;
     }
+
+    /**已连接客户端地址*/
+    public static String address = "";
 	//private int Number = 1;
     /**
      * MINA的异常回调方法。
@@ -73,6 +77,7 @@ public class MinaCastHandler extends IoHandlerAdapter
     @Override
     public void messageReceived(IoSession session, Object message)throws Exception 
     {
+    	address = session.getRemoteAddress().toString();
 		IoBuffer buffer = (IoBuffer) message;
 		byte[] content = new byte[buffer.limit()];
 		buffer.get(content);
@@ -122,6 +127,7 @@ public class MinaCastHandler extends IoHandlerAdapter
 	     //String clientIP = ((InetSocketAddress)session.getRemoteAddress()).getAddress().getHostAddress();
 	     //session.setAttribute("KEY_SESSION_CLIENT_IP", clientIP);
 	     //logger.info("sessionCreated, client IP: " + clientIP);
+
 	 }
 
 	 //心跳检测触发接口，设置好心跳值后，如果规定时间内未有心跳，则调用此方法，常用于检测终端状态，断开连接等
@@ -140,6 +146,13 @@ public class MinaCastHandler extends IoHandlerAdapter
 	 }
 	 @Override
 	 public void sessionOpened(IoSession session) throws Exception {
+		 //		infologger.info("socketChannelList num："+SocketServer.socketChannelList.size());
+    	/*新增逻辑保存连接和IMEI*/
+		 MinaCastThread.Iosession.add(session);
+		 SocketInfo si = new SocketInfo();
+		 MinaCastThread.clients.add(si);
+		 si.setChannelAddress(session.getRemoteAddress().toString());
+		 super.sessionOpened(session);
 		 logger.info("连接打开："+session.getLocalAddress());
 	 }
 }

@@ -18,9 +18,13 @@ public class SocketInfo {
     private InetAddress  ipAddress;//终端IP地址
     private Date lastTime; //最后通信时间
 
-    private Integer byteCount=0;//标志终端下载字节总数
+
     private ByteBuffer byteFile = null; //老终端发送的文件信息
 
+//    private byte[] byteFile; //老终端发送的文件信息
+    private String channelAddress;
+    private Integer byteCount=0;//标志当前文件发送到哪个位置
+    private String filelength; //设置当前发送文件的总字节数
 
 
     public String getImei() {
@@ -29,24 +33,12 @@ public class SocketInfo {
     public void setImei(String imei) {
         this.imei = imei;
     }
-    public Integer getByteCount() {
-        return byteCount;
-    }
-    public void setByteCount(Integer byteCount) {
-        this.byteCount = byteCount;
-    }
 
-    public ByteBuffer getByteFile() {
-        return byteFile;
-    }
-
-    public void setByteFile(ByteBuffer byteFile) {
-        this.byteFile = byteFile;
-    }
 
     public Date getLastTime() {
         return lastTime;
     }
+
     public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
     }
@@ -89,6 +81,38 @@ public class SocketInfo {
 
     public void setCommandSession(IoSession commandSession) {
         this.commandSession = commandSession;
+    }
+
+    public ByteBuffer getByteFile() {
+        return byteFile;
+    }
+
+    public void setByteFile(ByteBuffer byteFile) {
+        this.byteFile = byteFile;
+    }
+
+    public Integer getByteCount() {
+        return byteCount;
+    }
+
+    public void setByteCount(Integer byteCount) {
+        this.byteCount = byteCount;
+    }
+
+    public String getChannelAddress() {
+        return channelAddress;
+    }
+
+    public void setChannelAddress(String channelAddress) {
+        this.channelAddress = channelAddress;
+    }
+
+    public String getFilelength() {
+        return filelength;
+    }
+
+    public void setFilelength(String filelength) {
+        this.filelength = filelength;
     }
 
     /*做等同判断*/

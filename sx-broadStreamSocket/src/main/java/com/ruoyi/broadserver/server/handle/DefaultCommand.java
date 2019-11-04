@@ -27,14 +27,14 @@ public abstract class DefaultCommand implements Command{
 	protected static IOrganizationService organizationService = (OrganizationServiceImpl) SpringUtils.getBean(OrganizationServiceImpl.class);//终端配置信息处理
 	protected static IConditionsService conditionsService = (ConditionsServiceImpl) SpringUtils.getBean(ConditionsServiceImpl.class);//终端设备硬件信息处理
 	public final static String GBK = "GBK";
-    //private SessionManager sessionservice = (SessionService) SpringContextUtils.getBeanByClass(SessionService.class);
-    
+	//private SessionManager sessionservice = (SessionService) SpringContextUtils.getBeanByClass(SessionService.class);
+
 	protected IoSession session;
 	protected byte[] content;
 	protected String datainfo = null;
 	protected byte[] dataresourecs;
 	protected String Tid = null;
-	
+
 	public DefaultCommand(IoSession session, byte[] content) {
 		this.session = session;
 		this.content = content;
@@ -42,6 +42,11 @@ public abstract class DefaultCommand implements Command{
 			dataresourecs = bConvert.subBytes(content, 5, content.length-7);
 			try {
 				datainfo = new String(dataresourecs, GBK);
+				if(!datainfo.contains(".txt")){
+					this.session.setAttribute(MinaCastHandler.CLIENTINFO,datainfo);
+				}else{
+					datainfo = new String(bConvert.subBytes(content, 4, content.length-6), GBK);
+				}
 				if(session.getAttribute(MinaCastHandler.CLIENTINFO) != null){
 					Tid = session.getAttribute(MinaCastHandler.CLIENTINFO).toString();
 				}
@@ -61,21 +66,19 @@ public abstract class DefaultCommand implements Command{
 			byte[] length = bConvert.intToByteArray(2+res.length);
 			encoded.put(length);//发包的数据长度 命令1字节+data长度+校验1字节
 			encoded.put(bConvert.hexStringToBytes(command));//发包命令
-			if(data != null) {
+			if(data != null)
 				encoded.put(res);//发包数据
-			}
-            if(isChecked){//是否启用动态校验
-                byte[] checkData = new byte[res.length+3];//用来计算校验和
-                System.arraycopy(length, 0, checkData, 0, length.length);
-                checkData[2] = (byte)Integer.parseInt(command);
-                if(data != null) {
+			if(isChecked){//是否启用动态校验
+				byte[] checkData = new byte[res.length+3];//用来计算校验和
+				System.arraycopy(length, 0, checkData, 0, length.length);
+				checkData[2] = (byte)Integer.parseInt(command);
+				if(data != null)
 					System.arraycopy(res, 0, checkData, 3, res.length);
-				}
-                String check = bConvert.checksum(checkData);
-                encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的动态校验
-            }else{
-                encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.CHECKCODE));//发包的默认校验
-            }
+				String check = bConvert.checksum(checkData);
+				encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的动态校验
+			}else{
+				encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.CHECKCODE));//发包的默认校验
+			}
 			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.ENDCHECK));//发包的结尾
 			encoded.flip();
 			byte[] bs = new byte[encoded.remaining()];

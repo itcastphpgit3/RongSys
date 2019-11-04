@@ -11,14 +11,18 @@ package com.ruoyi.broadserver.server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.ruoyi.broadserver.domain.SocketInfo;
 import com.ruoyi.broadserver.global.GlobalInfo;
 import com.ruoyi.broadserver.server.handle.SimpleCommandFactory;
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.session.IdleStatus;
+import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.filter.logging.LogLevel;
 import org.apache.mina.filter.logging.LoggingFilter;
@@ -44,6 +48,11 @@ public class MinaCastThread implements Runnable {
 	private Integer idletime; //空闲时间
 	private String type; //线程池名字
     private static Logger logger = LoggerFactory.getLogger(MinaCastThread.class);
+
+    /**新增数组存放数组接口*/
+	public static List<IoSession> Iosession = new ArrayList<>();
+
+	public static List<SocketInfo> clients = new ArrayList<>();
     /**
 	 * 
 	 * TODO 无地址初始化
@@ -140,7 +149,7 @@ public class MinaCastThread implements Runnable {
 		}
 		@Override
 		public Thread newThread(Runnable r) {
-			Thread thread=  new Thread(r,String.format(Locale.CHINA,"%s%d",name,threadNumberAtomicInteger.getAndIncrement()));
+			Thread thread =  new Thread(r,String.format(Locale.CHINA,"%s%d",name,threadNumberAtomicInteger.getAndIncrement()));
             /* thread.setDaemon(true);//是否是守护线程
             thread.setPriority(Thread.NORM_PRIORITY);//设置优先级 1~10 有3个常量 默认 Thread.MIN_PRIORITY*/
 			return thread;

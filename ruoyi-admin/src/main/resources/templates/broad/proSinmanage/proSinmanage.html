@@ -64,6 +64,9 @@
 			<!--</div>-->
 
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
 				<!--<a class="btn btn-success" onclick="$.operate.add()">-->
 					<!--<i class="fa fa-plus"></i> 添加-->
 				<!--</a>-->
@@ -85,7 +88,7 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
-                createUrl: prefix + "/add",
+                createUrl: prefix + "/addtest",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
@@ -97,14 +100,14 @@
 					field : 'sfid',
 					title : '播出单ID',
 				},
-                {
-                    field : 'submittime',
-                    title : '时间',
-                },
-                {
-                    field : 'pname',
-                    title : '节目名称',
-                },
+                // {
+                //     field : 'submittime',
+                //     title : '时间',
+                // },
+                // {
+                //     field : 'pname',
+                //     title : '节目名称',
+                // },
 				{
 					field : 'scategory',
 					title : '节目播出单类别',

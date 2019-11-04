@@ -743,6 +743,7 @@ function saves(){
                     time: 1000,
                     shade: [0.1, '#8F8F8F']
                 })
+                $.modal.openTab("节目播出单管理","/broad/proSinmanage");
             }else {
                 layer.msg("错误", {
                     icon: $.modal.icon("error"),

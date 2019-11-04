@@ -86,7 +86,7 @@
 <script th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
 <script th:src="@{/js/jquery-form.js}"></script>
 <script>
-	var prefix = ctx + "village/partynew"
+	var prefix = ctx + "village/partynew";
 
 	var Upload=document.getElementById("files");
 	//var formData=new FormData(); //通过FormData对象可以组装一组用 [XMLHttpRequest]发送请求的键/值对,它可以更灵活方便的发送表单数据。
@@ -116,16 +116,17 @@
 	};
 	function aa(){
 		let  file = checkFile();
-		// let size = file.size;
+		let size = file.size;
 		// console.log("文件大小",size);
 		//获取录音时长
 		let url = URL.createObjectURL(file);
 		let audioElement = new Audio(url);
 		let duration = audioElement.duration/60; //音频长度 视频不行
 		$("#flenth").attr("value",duration);
-		$("#fsize").attr("value","666");
+		$("#fsize").attr("value",size);
 		/*console.log(duration,size)*/
 	};
+
 	function submitHandler() {
 		if (!checkFile()) {
 			alert('请先选择文件');
@@ -138,7 +139,7 @@
 			$("#form-partynew-add").ajaxSubmit(function (data) {
 				$.operate.successCallback({"code": data.code, "msg": data.msg});
 			});
-			$.modal.close();
+//			$.modal.close();
 			return false;
 		}
 	}
@@ -148,7 +149,7 @@
 		while (true) {
 			now = new Date();
 			if (now.getTime() > exitTime)
-				return;
+				return ;
 		}
 	}
 

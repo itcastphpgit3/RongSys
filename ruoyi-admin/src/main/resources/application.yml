@@ -14,6 +14,10 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务端口
+<<<<<<< .merge_file_a21076
+=======
+#  port: 80
+>>>>>>> .merge_file_a19428
   port: 5050
   servlet:
     # 项目contextPath

@@ -605,7 +605,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="state != null  and state != ''  ">grouptype = #{state}</if>
             <if test="uname != null  and uname != '' "> and vname LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
-            <if test="politics != null  and politics != '' "> and politics LIKE CONCAT(CONCAT('%', #{politics}),'%')</if>
+            <if test="politics = '%','党员'"> and politics LIKE CONCAT(CONCAT('%',  #{politics}),'%')</if>
         </where>
         ORDER BY vname asc
         limit #{pageSize} offset #{pageIndex}

@@ -22,10 +22,13 @@ import org.slf4j.LoggerFactory;
 
 
 public abstract class DefaultCommand implements Command{
-	private static Map<String, SocketInfo> IMEI_SocketInfo = new HashMap<>();//终端IMEI与其对应信息
+	/**终端IMEI与其对应信息*/
+	private static Map<String, SocketInfo> IMEI_SocketInfo = new HashMap<>();
 	protected static final Logger logger = LoggerFactory.getLogger(DefaultCommand.class);
-	protected static IOrganizationService organizationService = (OrganizationServiceImpl) SpringUtils.getBean(OrganizationServiceImpl.class);//终端配置信息处理
-	protected static IConditionsService conditionsService = (ConditionsServiceImpl) SpringUtils.getBean(ConditionsServiceImpl.class);//终端设备硬件信息处理
+	/**终端配置信息处理*/
+	protected static IOrganizationService organizationService = (OrganizationServiceImpl) SpringUtils.getBean(OrganizationServiceImpl.class);
+	/**终端设备硬件信息处理*/
+	protected static IConditionsService conditionsService = (ConditionsServiceImpl) SpringUtils.getBean(ConditionsServiceImpl.class);
 	public final static String GBK = "GBK";
 	//private SessionManager sessionservice = (SessionService) SpringContextUtils.getBeanByClass(SessionService.class);
 
@@ -45,7 +48,7 @@ public abstract class DefaultCommand implements Command{
 				if(!datainfo.contains(".txt")){
 					this.session.setAttribute(MinaCastHandler.CLIENTINFO,datainfo);
 				}else{
-					datainfo = new String(bConvert.subBytes(content, 4, content.length-6), GBK);
+					datainfo = new String(bConvert.subBytes(content, 5, 8), GBK);
 				}
 				if(session.getAttribute(MinaCastHandler.CLIENTINFO) != null){
 					Tid = session.getAttribute(MinaCastHandler.CLIENTINFO).toString();
@@ -61,25 +64,35 @@ public abstract class DefaultCommand implements Command{
 		try {
 			byte[] res = data!= null?data.getBytes(GBK):new byte[0];
 			ByteBuffer encoded = ByteBuffer.allocate(res.length+7);
-			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.PACKETHEAD));//发包的数据头
-			encoded.put(bConvert.hexStringToBytes(type));//发包的类型
+			/**发包的数据头*/
+			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.PACKETHEAD));
+			/**发包的类型*/
+			encoded.put(bConvert.hexStringToBytes(type));
 			byte[] length = bConvert.intToByteArray(2+res.length);
-			encoded.put(length);//发包的数据长度 命令1字节+data长度+校验1字节
-			encoded.put(bConvert.hexStringToBytes(command));//发包命令
+			/**发包的数据长度 命令1字节+data长度+校验1字节*/
+			encoded.put(length);
+			/**发包命令*/
+			encoded.put(bConvert.hexStringToBytes(command));
 			if(data != null)
-				encoded.put(res);//发包数据
-			if(isChecked){//是否启用动态校验
-				byte[] checkData = new byte[res.length+3];//用来计算校验和
+				/**发包数据*/
+				encoded.put(res);
+			/**是否启用动态校验*/
+			if(isChecked){
+				/**用来计算校验和*/
+				byte[] checkData = new byte[res.length+3];
 				System.arraycopy(length, 0, checkData, 0, length.length);
 				checkData[2] = (byte)Integer.parseInt(command);
 				if(data != null)
 					System.arraycopy(res, 0, checkData, 3, res.length);
 				String check = bConvert.checksum(checkData);
-				encoded.put(bConvert.hexStringToBytes(check)[0]);//发包的动态校验
+				/**发包的动态校验*/
+				encoded.put(bConvert.hexStringToBytes(check)[0]);
 			}else{
-				encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.CHECKCODE));//发包的默认校验
+				/**发包的默认校验*/
+				encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.CHECKCODE));
 			}
-			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.ENDCHECK));//发包的结尾
+			/**发包的结尾*/
+			encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.ENDCHECK));
 			encoded.flip();
 			byte[] bs = new byte[encoded.remaining()];
 			encoded.get(bs);
@@ -90,7 +103,7 @@ public abstract class DefaultCommand implements Command{
 		}
 		return null;
 	}
-	//发文件的返回格式
+	/**发文件的返回格式*/
 	protected byte[] returnFile(String type,String command,String data) {//data可能为null
 		/*ByteBuffer encoded = ByteBuffer.allocate(data.length()+20);
 		encoded.put(bConvert.hexStringToBytes(ProtocolsToClient.PACKETHEAD));//发包的数据头
@@ -136,7 +149,8 @@ public abstract class DefaultCommand implements Command{
 				SocketInfo selfInfo = getSocketInfoByIMEI(Tid);
 				if (selfInfo != null) {
 					synchronized (selfInfo) {
-						selfInfo.setLastTime(new Date());//存储最后通信时间
+						/**存储最后通信时间*/
+						selfInfo.setLastTime(new Date());
 					}
 				}
 			}else{

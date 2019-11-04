@@ -68,9 +68,9 @@
         <include refid="tableName"></include> g
         LEFT JOIN <include refid="userstable"></include> ui on g.userid=ui.userid
         <where>
-            <if test="fid != null and fid != '' "> and fid like '%${fid}%'</if>
+            <if test="uname != null and uname != '' "> and ui.uname like '%${uname}%'</if>
             <if test="fname != null  and fname != '' "> and fname like '%${fname}%'</if>
-            <if test="createdtime != null  and createdtime != '' "> and createdtime like '%${createdtime}%'</if>
+            <if test="ispublic != null "> and ispublic = ${ispublic}</if>
         </where>
         order by  createdtime desc,fid desc
     </select>

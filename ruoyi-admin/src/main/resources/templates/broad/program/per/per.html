@@ -9,36 +9,36 @@
 </head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content" style="padding-top: 20px; padding-left: 20px;">
-	<div class="row">
-		<div class="col-sm-2">
-			<div class="ibox">
-				<div class="ibox-content">
-					<button class="btn btn-primary" onclick="startRecording(this);">录音</button>
-					<button class="btn btn-success" onclick="stopRecording(this);" disabled>停止录音</button>
-					<h2>录音</h2>
+     <div class="wrapper wrapper-content" style="padding-top: 20px; padding-left: 20px;">
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="ibox">
+					<div class="ibox-content">
+						<button class="btn btn-primary" onclick="startRecording(this);">录音</button>
+						<button class="btn btn-success" onclick="stopRecording(this);" disabled>停止录音</button>
+						<h2>录音</h2>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-sm-3">
-			<div class="ibox">
-				<div class="ibox-content">
-					<h1 id="count_dev" class="no-margins"></h1>
-					<ul id="recordingslist"></ul>
+			<div class="col-sm-3">
+				<div class="ibox">
+					<div class="ibox-content">
+						<h1 id="count_dev" class="no-margins"></h1>
+						<ul id="recordingslist"></ul>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="col-sm-7">
-			<div class="ibox">
-				<div class="ibox-content">
-					<audio class="recPlay" style="width:100%"></audio>
+			<div class="col-sm-7">
+				<div class="ibox">
+					<div class="ibox-content">
+						<audio class="recPlay" style="width:100%"></audio>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -46,13 +46,18 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								节目编号：<input type="text" name="fid"/>
-							</li>
-
-							<li>
 								节目名称：<input type="text" name="fname"/>
 							</li>
-
+							<li>
+								所属用户：<input type="text" name="uname"/>
+							</li>
+							<li>
+								<select class="form-control" name="ispublic">
+									<option value="">所有</option>
+									<option value="0">非公共</option>
+									<option value="1">公共</option>
+								</select>
+							</li>
 							<li class="select-time">
 								<label>创建时间：</label><input class="laydate-icon  layer-date"
 														   name="downtime"
@@ -73,11 +78,11 @@
 									   placeholder="结束日期"
 									   title="结束日期"/>
 							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
+
 						</ul>
 					</div>
 				</form>

@@ -109,7 +109,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userid != null  and userid != '' "> uid = #{userid}</if>
             <if test="title != null  and title != ''  ">and mtitle LIKE CONCAT(CONCAT('%', #{title}),'%')</if>
         </where>
-        ORDER BY pushdate DESC
-        limit #{pageSize} offset #{pageIndex}
+        <choose>
+            <when test="ordername=='01'">
+                ORDER BY pushdate DESC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='011'" >
+                ORDER BY pushdate ASC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='02'" >
+                ORDER BY mcontent DESC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='021'" >
+                ORDER BY mcontent ASC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='03'" >
+                ORDER BY mtitle DESC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='031'" >
+                ORDER BY mtitle ASC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='04'" >
+                ORDER BY note DESC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+            <when test="ordername=='041'" >
+                ORDER BY note ASC
+                limit #{pageSize} offset #{pageIndex}
+            </when>
+        </choose>
     </select>
 </mapper>

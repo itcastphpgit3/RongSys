@@ -18,7 +18,17 @@ public class pubObjApi extends BaseEntity
     private String uname; //姓名
     private String proid;//项目id
     private String vtype;//美丽乡村类别
+    private String ordername;//备忘录排序
+
     private List<String> listaid;
+
+    public String getOrdername() {
+        return ordername;
+    }
+
+    public void setOrdername(String ordername) {
+        this.ordername = ordername;
+    }
 
     public Integer getUserid() {
         return userid;

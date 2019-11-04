@@ -1,26 +1,25 @@
 package com.ruoyi.web.controller.village;
 
-import java.util.List;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.framework.web.base.BaseController;
+import com.ruoyi.village.domain.VillagerInfo;
+import com.ruoyi.village.service.IVillagerInfoService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.village.domain.VillagerInfo;
-import com.ruoyi.village.service.IVillagerInfoService;
-import com.ruoyi.framework.web.base.BaseController;
-import com.ruoyi.common.page.TableDataInfo;
-import com.ruoyi.common.base.AjaxResult;
-import com.ruoyi.common.utils.ExcelUtil;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 村民 信息操作处理
@@ -99,8 +98,15 @@ public class VillagerInfoController extends BaseController
 	public String edit(@PathVariable("vid") Integer vid, ModelMap mmap)
 	{
 		VillagerInfo villagerInfo = villagerInfoService.selectVillagerInfoById(vid);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date1=formatter.format(villagerInfo.getGetlowdate());  //转成string格式yyyy-mm-dd
+		String date2=formatter.format(villagerInfo.getDemobdate());
+		Date date3=java.sql.Date.valueOf(date1);
+		Date date4=java.sql.Date.valueOf(date2);
+		villagerInfo.setGetlowdate(date3);//将日期set回去
+		villagerInfo.setDemobdate(date4);
 		mmap.put("villagerInfo", villagerInfo);
-	    return prefix + "/edit";
+		return prefix + "/edit";
 	}
 	
 	/**

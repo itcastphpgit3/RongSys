@@ -4,6 +4,7 @@ import com.ruoyi.village.domain.Mcount;
 import com.ruoyi.village.domain.PersonApi;
 import com.ruoyi.village.domain.VillagerInfo;
 import com.ruoyi.village.domain.pubObjApi;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,6 +23,13 @@ public interface VillagerInfoMapper
 	 * @return 村民信息
 	 */
 	public VillagerInfo selectVillagerInfoById(Integer vid);
+
+	/**
+	 * 通过区域查询村名集合
+	 * @param grouptype 区域
+	 * @return 村民集合
+	 */
+	public List<VillagerInfo> selectVillagerInfoBygrouptype(@Param(value="grouptype") String grouptype);
 
 	/**
 	 * 查询村民列表

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<div class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <!--<li>-->
+                            <!--请选择地域编号：<input type="text" name="aid" id="aid" onclick="selectAidTree()"/>-->
+                        <!--</li>-->
+                        <li>
+                            请选择所属村组：<input type="text" name="grouptype" id="grouptype" onclick="selectAidTree()"/>
+                        </li>
+
+
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="countsearch()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>性别比例统计</h5>
+                    <div class="ibox-tools">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-superpowers"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a onclick="init_sex_terminalstate()_terminalstate()">原始数据</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="sex_terminalstate"></div>
+                </div>
+            </div>
+
+            </div>
+            <!--<table id="bootstrap-table" data-mobile-responsive="true"></table>-->
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<!--js-->
+<script th:src="@{/js/plugins/simditor/module.js}"></script>
+
+<!--echarts 可视化图形 插件-->
+<script th:src="@{/js/plugins/echarts/echarts.min.js}"></script>
+<script th:src="@{/js/plugins/echarts/echarts-gl.min.js}"></script>
+<script>
+    var prefix = ctx + "village/analysis";
+
+    function countsearch()
+    {
+        $.modal.loading("正在查询，请稍后...");
+           var grouptype=$("#grouptype").val();
+        $.ajax({
+            url:prefix + "/count",
+            data :{"grouptype":$("#grouptype").val()},
+            type : 'POST',
+            dataType : 'text',
+            success:function(data){
+                var count=data.split('|')[0];
+                var fnum=data.split('|')[1];  //男
+                var fmnun=data.split('|')[2]; //女
+                $.modal.closeLoading();
+               init_sex_terminalstate(count,fnum,fmnun);
+
+            }
+        })
+
+
+    }
+
+
+    //男女比例样式
+    function init_sex_terminalstate(count,fnum,fmnum) {
+        var bd_terminalstate = echarts.init(document.getElementById('sex_terminalstate'));
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['男性数量', '女性数量']
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '90%',
+                    center: ['50%', '50%'],
+                    data: [
+                        {value: fnum, name: '男性数量'},
+                        {value: fmnum, name: '女性数量'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+
+        };
+        bd_terminalstate.setOption(option);
+    }
+
+    // $(function() {
+    //     var options = {
+    //         url: prefix + "/list",
+    //
+    //         modalName: "村民",
+    //
+    //
+    //         columns: [{
+    //             checkbox: true
+    //         },
+    //             {
+    //                 field : 'vid',
+    //                 title : '数据编号',
+    //                 visible: false
+    //             },
+    //             {
+    //                 field : 'vname',
+    //                 title : '记录总数',
+    //                 sortable: true
+    //             },
+    //             {
+    //                 field : 'sex',
+    //                 title : '男性人数',
+    //                 sortable: true
+    //             },
+    //
+    //             {
+    //                 field : 'sex',
+    //                 title : '女性人数',
+    //                 sortable: true
+    //             },
+    //
+    //             {
+    //                 field : 'phone',
+    //                 title : '图表',
+    //                 sortable: true
+    //             },
+    //
+    //            ]
+    //     };
+    //     $.table.init(options);
+    // });
+
+    /*用户管理-新增-选择用户所属区域树*/
+    function selectAidTree() {
+        var url = "/broad/organization/selectAidTree";
+        var options = {
+            title: '选择区域',
+            width: "380",
+            url: "/broad/organization/selectAidTree",
+            callBack: doSubmitAid
+        };
+        $.modal.openOptions(options);
+    }
+
+    /*该模块是选择用户所属区域树的提交功能模块，body.find()方法中该使用框架固定的treeId、treeName*/
+    function doSubmitAid(index, layero){
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowParents(tree)) {
+            var body = layer.getChildFrame('body', index);
+            // $("#aid").val(body.find('#treeId').val());
+            var groupname=(body.find('#treeName').val()).replace("组","");
+            $("#grouptype").val(groupname);
+            /*console.log(body.find('#treeId').val());
+            console.log(body.find('#treeName').val());*/
+            layer.close(index);
+        }
+    }
+
+    function doSubmit(index, layero){
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowParents(tree)) {
+            var body = layer.getChildFrame('body', index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            layer.close(index);
+        }
+    }
+</script>
+
+</script>
+</body>
+</html>

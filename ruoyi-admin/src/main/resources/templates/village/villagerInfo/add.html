@@ -882,18 +882,18 @@
 			}
 		}
 
-		/*该模块是选择用户所属区域树的提交功能模块，body.find()方法中该使用框架固定的treeId、treeName*/
-		function doSubmitAid(index, layero){
-			var tree = layero.find("iframe")[0].contentWindow.$._tree;
-			if ($.tree.notAllowParents(tree)) {
-				var body = layer.getChildFrame('body', index);
-				$("#aid").val(body.find('#treeId').val());
-				$("#aidName").val(body.find('#treeName').val());
-				/*console.log(body.find('#treeId').val());
-                console.log(body.find('#treeName').val());*/
-				layer.close(index);
-			}
-		}
+		// /*该模块是选择用户所属区域树的提交功能模块，body.find()方法中该使用框架固定的treeId、treeName*/
+		// function doSubmitAid(index, layero){
+		// 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
+		// 	if ($.tree.notAllowParents(tree)) {
+		// 		var body = layer.getChildFrame('body', index);
+		// 		$("#aid").val(body.find('#treeId').val());
+		// 		$("#aidName").val(body.find('#treeName').val());
+		// 		/*console.log(body.find('#treeId').val());
+         //        console.log(body.find('#treeName').val());*/
+		// 		layer.close(index);
+		// 	}
+		// }
 
 		function submitHandler() {
 	        if ($.validate.form()) {

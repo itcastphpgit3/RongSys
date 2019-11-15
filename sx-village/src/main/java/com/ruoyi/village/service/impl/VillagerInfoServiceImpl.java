@@ -38,7 +38,19 @@ public class VillagerInfoServiceImpl implements IVillagerInfoService
 	{
 		return villagerInfoMapper.selectVillagerInfoById(vid);
 	}
-	
+
+	/**
+	 * 通过区域查询村名集合
+	 * @param grouptype 区域
+	 * @return 村民集合
+	 */
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<VillagerInfo> selectVillagerInfoListBygrouptype(String grouptype){
+		return villagerInfoMapper.selectVillagerInfoBygrouptype(grouptype);
+	}
+
+
 	/**
      * 查询村民列表
      * 

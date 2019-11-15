@@ -32,6 +32,13 @@ public interface IVillagerInfoService
 	public List<VillagerInfo> selectVillagerInfoList(VillagerInfo villagerInfo);
 
 	/**
+	 * 通过区域查询村名集合
+	 * @param grouptype 区域
+	 * @return 村民集合
+	 */
+	public List<VillagerInfo> selectVillagerInfoListBygrouptype(String grouptype);
+
+	/**
 	 * 新增村民
 	 *
 	 * @param villagerInfo 村民信息

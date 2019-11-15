@@ -118,10 +118,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sum2"    column="sum2"    />
         <result property="sum3"    column="sum3"    />
     </resultMap>
+
+
+
 	<sql id="selectVillagerInfoVo">
         select vid, aid, vname, age, sex, nativeplace, nation, politics, partyjoindate, edulevel, marital, idcard, phone, health, special, entitle, familyplan, medical, subsidy, insurance, criminal, drug, drive, car, vtype, carnum, job, company, pra, home, grouptype, house, height, hhdnum, hhd, hhdidcard, hhdrelation, jobrank, hobby, trend, jobstate, pr, medinsur, fmi, fmistate, security, bsecurity, subsis, fiveinsur, poor, drivenum, techtype, techgrade, titgrade, prt, move, fieldarea, forestarea, poolarea, income, totalppt, mincome, yincome, bank, bankcardnum, landowner, control, housearea, loginname, selfmanage, managetype, cost, mmincome, myincome, organization, landtransfer, landincome, foresttransfer, forestincome, levy, rent, housestate, psa, ca, woban, water, ssa, gfs, wdr, rth, iscadre, cadrelevel, islowincome, getlowdate, isdemob, demobdate, winaward, punish, personphoto, hkphoto, idphoto, carphoto, housephoto, isuse from villager_info
     </sql>
-	
+
+
+    <select id="selectVillagerInfoBygrouptype" parameterType="String" resultMap="VillagerInfoResult">
+    <include refid="selectVillagerInfoVo"/>
+       <where>
+            grouptype = #{grouptype}
+       </where>
+    </select>
+
     <select id="selectVillagerInfoList" parameterType="VillagerInfo" resultMap="VillagerInfoResult">
         <include refid="selectVillagerInfoVo"/>
         <where>  
@@ -231,7 +242,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="isuse != null "> and isuse = #{isuse}</if>
          </where>
     </select>
-    
+
+
+
+
     <select id="selectVillagerInfoById" parameterType="Integer" resultMap="VillagerInfoResult">
         <include refid="selectVillagerInfoVo"/>
         where vid = #{vid}

@@ -37,6 +37,7 @@ public class MinaCastHandler extends IoHandlerAdapter
     private static Logger logger = LoggerFactory.getLogger(MinaCastHandler.class);  
     public static final CharsetDecoder decoder = (Charset.forName("ISO-8859-1")).newDecoder();
 	public static final String CLIENTINFO = "CLIENTINFO";
+	public static final String TID = "TID";
 	private static final SimpleCommandFactory commandFactory = new SimpleCommandFactory();
 	private String type;
 	public  MinaCastHandler(String type){
@@ -75,7 +76,7 @@ public class MinaCastHandler extends IoHandlerAdapter
      * @throws Exception 当有错误发生时将抛出异常
      */
     @Override
-    public void messageReceived(IoSession session, Object message)throws Exception 
+    public void messageReceived(IoSession session, Object message)throws Exception
     {
     	address = session.getRemoteAddress().toString();
 		IoBuffer buffer = (IoBuffer) message;

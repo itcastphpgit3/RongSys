@@ -45,6 +45,9 @@ public abstract class DefaultCommand implements Command{
 			dataresourecs = bConvert.subBytes(content, 5, content.length-7);
 			try {
 				datainfo = new String(dataresourecs, GBK);
+				if(content.length==22){
+					this.session.setAttribute(MinaCastHandler.TID,datainfo);
+				}
 				if(!datainfo.contains(".txt")){
 					this.session.setAttribute(MinaCastHandler.CLIENTINFO,datainfo);
 				}else{

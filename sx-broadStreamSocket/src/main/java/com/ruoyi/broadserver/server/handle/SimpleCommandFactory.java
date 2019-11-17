@@ -15,52 +15,70 @@ public class SimpleCommandFactory {
 	public DefaultCommand createCommand(IoSession session, byte[] content) {
 		if(bConvert.byteToHexString(content[0]).equals(ProtocolsToClient.PACKETHEAD)) {
 			DefaultCommand command = null;
-			switch (bConvert.byteToHexString(content[1])) {//类型判断
-				case ProtocolsToClient.REGISTER://终端命令端口注册登录
+			/**类型判断*/
+			switch (bConvert.byteToHexString(content[1])) {
+				/**终端命令端口注册登录*/
+				case ProtocolsToClient.REGISTER:
 					command = new Register(session,content);
 					break;
-				case ProtocolsToClient.STATU://获取终端硬件信息状态
+				/**获取终端硬件信息状态*/
+				case ProtocolsToClient.STATU:
 					command = new ReadClientInfo(session,content);
 					break;
-				case ProtocolsToClient.LIST://发送文件信息
+				/**发送文件信息*/
+				case ProtocolsToClient.LIST:
 					command = new SendFile(session,content);
 					break;
-				case ProtocolsToClient.PHONELIST://获取终端硬件信息状态
+				/**获取终端硬件信息状态*/
+				case ProtocolsToClient.PHONELIST:
 					command = new RW_Tels(session,content);
 					break;
-				case ProtocolsToClient.MUTUALTIME://设置终端交互时间
+				/**设置终端交互时间*/
+				case ProtocolsToClient.MUTUALTIME:
 					command = new RW_Time(session,content);
 					break;
-				case ProtocolsToClient.E_FM_RECIVE://获取RDS码(读写)
+				/**获取RDS码(读写)*/
+				case ProtocolsToClient.E_FM_RECIVE:
 					command = new RW_RDS(session,content);
 					break;
-				case ProtocolsToClient.CLIENTREAD://获取终端只读信息
+				/**获取终端只读信息*/
+				case ProtocolsToClient.CLIENTREAD:
 					command = new ReadClientFM(session,content);
 					break;
-				case ProtocolsToClient.CELLPOS://获取基站信息
+				/**获取基站信息*/
+				case ProtocolsToClient.CELLPOS:
 					command = new ReadBS(session,content);
 					break;
-				case ProtocolsToClient.UPDATELED://LED字幕更新(终端发起)
+				/**LED字幕更新(终端发起)*/
+				case ProtocolsToClient.UPDATELED:
 					command = new ClientLED(session,content);
 					break;
-				case ProtocolsToClient.GETPARAMATER://物联网终端参数透传接口（终端主动请求获取，端口:8900）
+				/**物联网终端参数透传接口（终端主动请求获取，端口:8900）*/
+				case ProtocolsToClient.GETPARAMATER:
 					command = new HeartIOT(session,content);
 					break;
 				/*case ProtocolsToClient.GETCLIENTDATA://物联网终端参数透传接口 终端回传参数
 					command = new ReadIOT(session,content);
 					break;*/
-				case ProtocolsToClient.POSITION://终端经纬度信息
+				/**终端经纬度信息*/
+				case ProtocolsToClient.POSITION:
 					command = new ReadGPS(session,content);
 					break;
-				case ProtocolsToClient.REQUEST://发送终端紧急接收的频率
+				/**发送终端紧急接收的频率*/
+				case ProtocolsToClient.REQUEST:
 					command = new SendBand(session,content);
 					break;
-				case ProtocolsToClient.PROGINFO://统计节目的下载播出，短信播出，重启的次数
+				/**统计节目的下载播出，短信播出，重启的次数*/
+				case ProtocolsToClient.PROGINFO:
 					command = new ReadProInfo(session,content);
 					break;
-				case ProtocolsToClient.BROADCAST://紧急界面播出回执（新建连接）
+				/**紧急界面播出回执（新建连接）*/
+				case ProtocolsToClient.BROADCAST:
 					command = new BroadCast(session,content);
 					break;
+				/**终端音量接口*/
+				case ProtocolsToClient.VOL:
+					command = new RW_VOL(session,content);
 				default:
 					break;
 			}

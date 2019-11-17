@@ -21,10 +21,14 @@ public class RW_VOL extends DefaultCommand {
 	@Override
 	public byte[] execute() {
 		// TODO Auto-generated method stub
-		String reinfo = (String)get(session);//获取修改的音量
-		String command = save("")?"1":"0";//保存音量或者执行对应操作
-		
-		loggersession();//插入日志
+		/**获取修改的音量*/
+		String reinfo = (String)get(dataresourecs);
+
+		/**保存音量或者执行对应操作*/
+		String command = save("")?"1":"0";
+
+		/**插入日志*/
+		loggersession();
 
 		return returnBytes(ProtocolsToClient.VOL, command, reinfo,true);
 	}
@@ -33,8 +37,8 @@ public class RW_VOL extends DefaultCommand {
 	public boolean save(Object obj) {
 		// TODO Auto-generated method stub
 		try {
-			if(dataresourecs.length == 4 && Tid != null){
-				Conditions conditions = new Conditions(Tid);
+			if(dataresourecs.length == 4 && session.getAttribute(MinaCastHandler.TID).toString() != null){
+				Conditions conditions = new Conditions(session.getAttribute(MinaCastHandler.TID).toString());
 				conditions.setMp3(String.valueOf((int)dataresourecs[0]));
 				conditions.setFm(String.valueOf((int)dataresourecs[1]));
 				conditions.setGsm(String.valueOf((int)dataresourecs[2]));
@@ -53,8 +57,8 @@ public class RW_VOL extends DefaultCommand {
 	public Object get(Object obj) {
 		// TODO Auto-generated method stub
 		try {
-			if(Tid != null) {
-				Conditions conditions = conditionsService.selectConditionsById(Tid);
+			if(session.getAttribute(MinaCastHandler.TID).toString() != null) {
+				Conditions conditions = conditionsService.selectConditionsById(session.getAttribute(MinaCastHandler.TID).toString());
 				byte[] vols = new byte[4];
 				vols[0] = conditions.getMp3() != null?(byte) Integer.parseInt(conditions.getMp3()):(byte)0;
 				vols[1] = conditions.getFm() != null?(byte) Integer.parseInt(conditions.getFm()):(byte)0;

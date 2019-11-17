@@ -545,4 +545,24 @@
         FROM terminaltels
         WHERE tid = #{tid}
     </select>
+
+    <insert id="addphoneEdit" parameterType="TerminalTels" keyProperty="telid">
+        INSERT INTO `broad`.`terminaltels`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tid != null and tid != '' ">tid,</if>
+            <if test="tel != null and tel != '' ">tel,</if>
+            <if test="telperson != null and telperson != '' ">telperson,</if>
+            <if test="isuse != null and isuse != '' ">isuse,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tid != null and tid != '' ">#{tid},</if>
+            <if test="tel != null and tel != '' ">#{tel},</if>
+            <if test="telperson != null and telperson != '' ">#{telperson},</if>
+            <if test="isuse != null and isuse != '' ">#{isuse},</if>
+        </trim>
+    </insert>
+<!--    根据telid删除授权号码-->
+    <delete id="deletephoneedit" parameterType="String">
+        delete from `broad`.`terminaltels` where telid = #{telid}
+    </delete>
 </mapper>

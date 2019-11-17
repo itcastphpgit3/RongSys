@@ -19,7 +19,7 @@
 		<div class="form-group">
 			<label class="col-sm-3 control-label">文件上传：</label>
 			<div class="col-sm-8">
-				<input id="files" name="files" class="form-control" type="file" accept="audio/mpeg">
+				<input id="test" name="files" class="form-control" type="file" accept="audio/mpeg"><audio id="audio" autoplay="false" ></audio>
 			</div>
 		</div>
 		<div class="form-group">
@@ -40,12 +40,8 @@
 <div th:include="include::footer"></div>
 <script type="text/javascript">
     var prefix = ctx + "broad/per";
-    // 检测是否选择文件，如果选择，返回文件对象;如果没选择，返回false
     function checkFile(){
-        // 获取文件对象(该对象的类型是[object FileList]，其下有个length属性)
-        var fileList = $('#files')[0].files;
-
-        // 如果文件对象的length属性为0，就是没文件
+        var fileList = $('#test')[0].files;
         if (fileList.length === 0) {
             console.log('没选择文件');
             return false;
@@ -53,71 +49,76 @@
         return fileList[0];
     };
 
-    function aa(){
-        let  file = checkFile();
-        let size = file.size;
-        console.log("文件大小",size);
-        //获取录音时长
-        let url = URL.createObjectURL(file);
-        //经测试，发现audio也可获取视频的时长
-        let audioElement = new Audio(url);
-        //let duration;
-       let duration = audioElement.duration/60; //音频长度 视频不行
-       //  audioElement.addEventListener("loadedmetadata", function () { //视频，音频都行
-       //      duration = audioElement.duration/60;
-       //  });
-        $("#flenth").attr("value",duration);
-        $("#fsize").attr("value",size);
-		console.log(duration,size)
-    };
-    function submitHandler() {
-        aa();
+	function submitHandler() {
         $.modal.loading("正在处理中，请稍后...");
         if (!checkFile()) {
             alert('请先选择文件');
             return false;
         }
         else{
-//            $("#form-filemanager-add").submit();
             $(function(){
-                /** 验证文件是否导入成功  */
                 $("#form-filemanager-add").ajaxSubmit(function (data) {
                     $.operate.successCallback({"code":data.code,"msg":data.msg});
-                    //alert("post success." + data.code+"--"+data.msg);
                 });
                 return false;
             });
+        }
+    }
 
-            //$.operate.successCallback({"code":0,"msg":"上传成功"});
-            // console.log(filenames,file)
-            // var config = {
-            //     url: prefix + "/add",
-            //     type: "post",
-            //     dataType: "json",
-            //     async:true, //是否使用异步请求的方式
-            //     timeout:5000, //请求超时的时间，以毫秒计
-            //     cache: false,			//上传文件无需缓存
-            //     processData: false,		//用于对data参数进行序列化处理 这里必须false
-            //     data:{
-            //         filename:filenames,
-            // 		files:file
-            // 	} ,//JSON.stringify({"files":file})
-            //     success: function(result) {
-            //         $.operate.successCallback(result);
-            //     }
-            // };
-            //$.ajax(config)
-        }
-    }
-    function sleep(numberMillis) {
-        var now = new Date();
-        var exitTime = now.getTime() + numberMillis;
-        while (true) {
-            now = new Date();
-            if (now.getTime() > exitTime)
-                return;
-        }
-    }
+
+	$(function () {
+		$("#test").change(function () {
+			var objUrl = getObjectURL(this.files[0]);
+			$("#audio").attr("src", objUrl);
+			let  file = checkFile();
+			let size = file.size;
+        	console.log("文件大小",size);
+			$("#fsize").attr("value",size);
+			getTime();
+		});
+	});
+
+	function getTime() {
+		setTimeout(function () {
+			var duration = $("#audio")[0].duration;
+			if(isNaN(duration)){
+				getTime();
+			}
+			else{
+				var time = formateSeconds($("#audio")[0].duration)
+				$("#flenth").attr("value",time);
+			}
+		}, 10);
+	}
+
+	function formateSeconds(endTime){
+		let secondTime = parseInt(endTime)
+		let min = 0
+		let h =0
+		let result=''
+		if(secondTime>60){
+			min=parseInt(secondTime/60)
+			secondTime=parseInt(secondTime%60)
+			if(min>60){
+				h=parseInt(min/60)
+				min=parseInt(min%60)
+			}
+		}
+		result=`${h.toString().padStart(2,'0')}:${min.toString().padStart(2,'0')}:${secondTime.toString().padStart(2,'0')}`
+		return result
+	}
+
+	function getObjectURL(file) {
+		var url = null;
+		if (window.createObjectURL != undefined) { // basic
+			url = window.createObjectURL(file);
+		} else if (window.URL != undefined) { // mozilla(firefox)
+			url = window.URL.createObjectURL(file);
+		} else if (window.webkitURL != undefined) { // webkit or chrome
+			url = window.webkitURL.createObjectURL(file);
+		}
+		return url;
+	}
 </script>
 <script>
     $(document).ready(function(){Dropzone.options.myAwesomeDropzone={autoProcessQueue:false,uploadMultiple:true,parallelUploads:100,maxFiles:100,init:function(){var myDropzone=this;this.element.querySelector("button[type=submit]").addEventListener("click",function(e){e.preventDefault();e.stopPropagation();myDropzone.processQueue()});this.on("sendingmultiple",function(){});this.on("successmultiple",function(files,response){});this.on("errormultiple",function(files,response){})}}});
@@ -125,5 +126,4 @@
 <script th:src="@{/js/plugins/dropzone/dropzone.js}"></script>
 <script th:src="@{/js/jquery-form.js}"></script>
 </body>
-
 </html>

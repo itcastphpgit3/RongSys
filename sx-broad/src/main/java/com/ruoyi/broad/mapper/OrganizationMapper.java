@@ -169,4 +169,7 @@ public interface OrganizationMapper
 
 	public  List<Area> listNextAidName(String aid);
 
+	public int addphoneEdit(TerminalTels terminalTels);
+
+	public int deletephoneedit(String telid);
 }

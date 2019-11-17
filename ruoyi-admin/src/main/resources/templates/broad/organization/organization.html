@@ -31,7 +31,6 @@
 
 <div class="container-div ui-layout-center">
 	<div class="row">
-
 		<div class="col-sm-12 search-collapse">
 			<form id="formId">
 				<div class="select-list">
@@ -110,7 +109,6 @@
 		</div>
 	</div>
 </div>
-
 <div th:include="include :: footer"></div>
 <script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
 <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
@@ -146,6 +144,7 @@
                     width: 50 ,
                     formatter: function (value, row, index) {
                         var actions = [];
+						actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="phoneEdit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>修改授权号码</a> ');
                         actions.push('<a class="btn btn-success btn-xs ' + '" href="#" onclick="$.operate.edit(\'' + row.tid + '\')"><i class="fa fa-edit" ></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs '  + '" href="#" onclick="$.operate.remove(\'' + row.tid + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
@@ -385,7 +384,6 @@
         var url = ctx + "broad/organization/listProBroadTree";
         var options = {
             url: url,
-//            expandLevel: 2,
             onClick : zOnClick
         };
         $.tree.init(options);
@@ -396,6 +394,9 @@
         }
         $.tree.init(options);
     }
+    function phoneEdit(data) {
+		$.modal.openTab("添加" + "授权管理号码","broad/organization/phoneEdit/"+data);
+	}
 </script>
 
 </body>

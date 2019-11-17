@@ -169,4 +169,8 @@ public interface IOrganizationService
 	 * @return 终端信息集合信息
 	 */
 	public List<Organization> exportOrganization(Organization organization);
+
+	public int addphoneEdit(TerminalTels terminalTels);
+
+	public int deletephoneedit(String telid);
 }

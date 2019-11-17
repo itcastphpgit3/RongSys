@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.broad;
 import com.ruoyi.broad.domain.Area;
 import com.ruoyi.broad.domain.BroadMessage;
 import com.ruoyi.broad.domain.Organization;
+import com.ruoyi.broad.domain.TerminalTels;
 import com.ruoyi.broad.service.IAreaService;
 import com.ruoyi.broad.service.IMessageService;
 import com.ruoyi.broad.service.IOrganizationService;
@@ -100,9 +101,9 @@ public class OrganizationController extends BaseController
 	@GetMapping("/edit/{tid}")
 	public String edit(@PathVariable("tid") String tid, ModelMap mmap)
 	{
-		Organization organization = organizationService.selectOrganizationByTid(tid);
-		mmap.put("organization", organization);
-		return prefix + "/edit";
+        Organization organization = organizationService.selectOrganizationByTid(tid);
+        mmap.put("organization", organization);
+        return prefix + "/edit";
 	}
 	/**
 	 * 编辑保存终端信息
@@ -131,8 +132,6 @@ public class OrganizationController extends BaseController
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(Organization organization){
-
-
 		return toAjax(organizationService.insertOrganization(organization));
 	}
 
@@ -201,6 +200,30 @@ public class OrganizationController extends BaseController
 		mmap.put("organization", areaService.selectAreaById(aid));
 		/*return prefix + "/tree";*/
 		return prefix + "/listProBroadTree";
+	}
+	@GetMapping("/phoneEdit/{tid}")
+	public String phoneEdit(@PathVariable("tid") String tid, ModelMap mmap){
+		return prefix + "/phoneEdit";
+	}
+	@PostMapping("/phoneEdit/{tid}")
+	@ResponseBody
+	public List<TerminalTels> phoneEditpost(@PathVariable("tid") String tid, ModelMap mmap){
+		List<TerminalTels> terminalTels= organizationService.selectTelsByTid(tid);
+		mmap.put("terminalTels", terminalTels);
+		return terminalTels;
+	}
+
+	@PostMapping("/addphoneedit")
+	@ResponseBody
+	public int addphoneEdit(TerminalTels terminalTels){
+		return organizationService.addphoneEdit(terminalTels);
+	}
+
+	@GetMapping("/deletephoneedit/{telid}")
+	@ResponseBody
+	public String deletephoneedit(@PathVariable("telid") String telid){
+		if(organizationService.deletephoneedit(telid)==1);
+		return "操作成功";
 	}
 }
 

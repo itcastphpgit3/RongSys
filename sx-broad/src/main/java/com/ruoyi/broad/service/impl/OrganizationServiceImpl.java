@@ -322,4 +322,13 @@ public class OrganizationServiceImpl implements IOrganizationService
 	@DataSource(value = DataSourceType.SLAVE)
 	public List<Organization> exportOrganization(Organization organization){return organizationMapper.exportOrganization(organization);}
 
+	@Override
+	public int addphoneEdit(TerminalTels terminalTels) {
+		return organizationMapper.addphoneEdit(terminalTels);
+	}
+
+	public int deletephoneedit(String telid) {
+		return organizationMapper.deletephoneedit(telid);
+	}
+
 }

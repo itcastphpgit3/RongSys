@@ -52,6 +52,7 @@ public class ProreApplyController extends BaseController
 	 */
 	@RequiresPermissions("broad:proreApply:list")
 	@PostMapping("/list")
+	@Log(title = "查询节目申请",businessType = BusinessType.DELETE)
 	@ResponseBody
 	public TableDataInfo list(ProApplyUser proapplyuser)
 	{

@@ -99,12 +99,25 @@ public class VillagerInfoController extends BaseController
 	{
 		VillagerInfo villagerInfo = villagerInfoService.selectVillagerInfoById(vid);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String date1=formatter.format(villagerInfo.getGetlowdate());  //转成string格式yyyy-mm-dd
-		String date2=formatter.format(villagerInfo.getDemobdate());
-		Date date3=java.sql.Date.valueOf(date1);
-		Date date4=java.sql.Date.valueOf(date2);
-		villagerInfo.setGetlowdate(date3);//将日期set回去
-		villagerInfo.setDemobdate(date4);
+		if(villagerInfo.getGetlowdate()==null) {
+
+		}else {
+			String date1 = formatter.format(villagerInfo.getGetlowdate());
+			Date date3=java.sql.Date.valueOf(date1);
+			villagerInfo.setGetlowdate(date3);//将日期set回去
+		}//转成string格式yyyy-mm-dd
+		if(villagerInfo.getDemobdate()==null){
+
+		}else{
+			String date2=formatter.format(villagerInfo.getDemobdate());
+			Date date4=java.sql.Date.valueOf(date2);
+			villagerInfo.setDemobdate(date4);
+		}
+
+
+
+
+
 		mmap.put("villagerInfo", villagerInfo);
 		return prefix + "/edit";
 	}

@@ -64,7 +64,7 @@ public class ProjectController extends BaseController
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(Project project)
-	{ //从session中获取当前登陆用户的 userid
+	{   //从session中获取当前登陆用户的 userid
         SysUser currentUser = ShiroUtils.getSysUser();
         Long userid =  currentUser.getUserId();
         int returnId = new Long(userid).intValue();

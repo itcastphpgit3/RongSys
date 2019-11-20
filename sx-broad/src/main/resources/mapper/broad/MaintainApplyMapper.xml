@@ -43,7 +43,6 @@
         <if test="applytime != null  and applytime != '' ">and applytime like CONCAT('%',#{applytime},'%')</if>
         <if test="status != null  and status != '' ">and status like CONCAT('%',#{status},'%')</if>
         <if test="remark != null  and remark != '' ">and remark like CONCAT('%',#{remark},'%')</if>
-        <if test="uid != null  and uid != '' ">and uid like CONCAT('%',#{uid},'%')</if>
         </where>
         ORDER BY downtime DESC
     </select>

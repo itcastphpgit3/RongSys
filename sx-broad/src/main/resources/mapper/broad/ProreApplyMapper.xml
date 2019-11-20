@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="paid != null  and paid != '' ">and paid like CONCAT('%',#{paid},'%')</if>
             <if test="pname != null  and pname != '' ">and pname like CONCAT('%',#{pname},'%')</if>
             <if test="uname != null  and uname != '' ">and uname like CONCAT('%',#{uname},'%')</if>
-            <if test="userid != null  and userid != '' ">and userid like CONCAT('%',#{userid},'%')</if>
+            <if test="userid != null  and userid != '' ">and pa.userid like CONCAT('%',#{userid},'%')</if>
             <if test="isemergency != null  and isemergency != '' ">and isemergency like CONCAT('%',#{isemergency},'%')</if>
             <if test="timelimit != null  and timelimit != '' ">and timelimit like CONCAT('%',#{timelimit},'%')</if>
             <if test="submittime != null  and submittime != '' ">and submittime like CONCAT('%',#{submittime},'%')</if>

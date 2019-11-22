@@ -52,12 +52,14 @@ public class VillageplanController extends BaseController
 
 	/*乡村规划*/
 	@GetMapping("/1")
+	@RequiresPermissions("village:villageplan:view1")
 	public String villageplan1()
 	{
 		return prefix + "/villageplan1";
 	}
 
 	@PostMapping("/list1")
+	@RequiresPermissions("village:villageplan:list1")
 	@ResponseBody
 	public TableDataInfo list1(Villageplan villageplan)
 	{
@@ -87,12 +89,14 @@ public class VillageplanController extends BaseController
 
 	/*我爱我村*/
 	@GetMapping("/2")
+	@RequiresPermissions("village:villageplan:view2")
 	public String villageplan2()
 	{
 		return prefix + "/villageplan2";
 	}
 
 	@PostMapping("/list2")
+	@RequiresPermissions("village:villageplan:list2")
 	@ResponseBody
 	public TableDataInfo list2(Villageplan villageplan)
 	{
@@ -103,6 +107,7 @@ public class VillageplanController extends BaseController
 	}
 
 	@GetMapping("/add2")
+	@RequiresPermissions("village:villageplan:view3")
 	public String add2(ModelMap mmap)
 	{
 		//从session中获取当前登陆用户的 username、phone、userid
@@ -122,12 +127,14 @@ public class VillageplanController extends BaseController
 
 	/*文化活动*/
 	@GetMapping("/3")
+	@RequiresPermissions("village:villageplan:view3")
 	public String villageplan3()
 	{
 		return prefix + "/villageplan3";
 	}
 
 	@PostMapping("/list3")
+	@RequiresPermissions("village:villageplan:list3")
 	@ResponseBody
 	public TableDataInfo list3(Villageplan villageplan)
 	{
@@ -157,12 +164,14 @@ public class VillageplanController extends BaseController
 
 	/*农家乐*/
 	@GetMapping("/4")
+	@RequiresPermissions("village:villageplan:view4")
 	public String villageplan4()
 	{
 		return prefix + "/villageplan4";
 	}
 
 	@PostMapping("/list4")
+	@RequiresPermissions("village:villageplan:list4")
 	@ResponseBody
 	public TableDataInfo list4(Villageplan villageplan)
 	{
@@ -191,12 +200,14 @@ public class VillageplanController extends BaseController
 	}
 	/*民宿管理*/
 	@GetMapping("/5")
+	@RequiresPermissions("village:villageplan:view5")
 	public String villageplan5()
 	{
 		return prefix + "/villageplan5";
 	}
 
 	@PostMapping("/list5")
+	@RequiresPermissions("village:villageplan:list5")
 	@ResponseBody
 	public TableDataInfo list5(Villageplan villageplan)
 	{
@@ -225,12 +236,14 @@ public class VillageplanController extends BaseController
 	}
 	/*宣传*/
 	@GetMapping("/6")
+	@RequiresPermissions("village:villageplan:view6")
 	public String villageplan6()
 	{
 		return prefix + "/villageplan6";
 	}
 
 	@PostMapping("/list6")
+	@RequiresPermissions("village:villageplan:list6")
 	@ResponseBody
 	public TableDataInfo list6(Villageplan villageplan)
 	{
@@ -259,12 +272,14 @@ public class VillageplanController extends BaseController
 	}
 	/*咨询*/
 	@GetMapping("/7")
+	@RequiresPermissions("village:villageplan:view7")
 	public String villageplan7()
 	{
 		return prefix + "/villageplan7";
 	}
 
 	@PostMapping("/list7")
+	@RequiresPermissions("village:villageplan:list7")
 	@ResponseBody
 	public TableDataInfo list7(Villageplan villageplan)
 	{
@@ -294,8 +309,9 @@ public class VillageplanController extends BaseController
 	/**
 	 * 查询美丽乡村列表
 	 */
-	@RequiresPermissions("village:villageplan:list")
+
 	@PostMapping("/list")
+	@RequiresPermissions("village:villageplan:list")
 	@ResponseBody
 	public TableDataInfo list(Villageplan villageplan)
 	{

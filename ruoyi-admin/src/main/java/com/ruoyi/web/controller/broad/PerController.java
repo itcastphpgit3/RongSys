@@ -91,6 +91,7 @@ public class PerController extends BaseController {
         //	将aid、fname、uname传至add.html中
 //		mmap.put("aid", aid);//这里获得的aid是来自ry-》tb_user_admin
         mmp.put("username", username);
+        mmp.put("userid", userid);
         // mmp.put("userphone", phone);
 
         return prefix + "/add";
@@ -118,7 +119,8 @@ public class PerController extends BaseController {
 
         //保存图片
         //String path =  bFileUtil.saveImg(file,filename);
-        Program g = bFileUtil.uplodeFile(maxfileid, file, fname, flenth, fsize, year, uname);
+        String userid =  ShiroUtils.getSysUser().getUserId().toString();
+        Program g = bFileUtil.uplodeFile(maxfileid, file, fname, flenth, fsize, year, userid);
         System.out.println(g.toString());
         iProgramService.insertProgram(g);
         return toAjax(1);

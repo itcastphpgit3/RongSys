@@ -111,6 +111,11 @@
 	</div>
 </div>
 <div th:include="include :: footer"></div>
+<style>
+	input{
+		width:inherit!important;
+	}
+</style>
 <script th:inline="javascript">
 	var editFlag = [[${@permission.hasPermi('broad:conditions:edit')}]];
 	var removeFlag = [[${@permission.hasPermi('broad:conditions:remove')}]];

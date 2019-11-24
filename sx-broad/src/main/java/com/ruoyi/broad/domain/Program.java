@@ -25,6 +25,24 @@ public class Program extends BaseEntity {
     private Boolean islisten;//是否审听
     private Boolean ptype;//节目类型，是否是录制节目
     private String uname;//上传用户名
+    private String downtime;
+    private String endtime;
+
+    public String getDowntime() {
+        return downtime;
+    }
+
+    public void setDowntime(String downtime) {
+        this.downtime = downtime;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
 
     public String getFid() {
         return fid;

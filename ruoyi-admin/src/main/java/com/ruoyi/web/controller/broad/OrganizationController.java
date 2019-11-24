@@ -69,6 +69,7 @@ public class OrganizationController extends BaseController
 	public TableDataInfo list(Organization organization)
 	{
 		startPage();
+		organization.setAid(organization.getAid()+"%");
 		List<Organization> list = organizationService.selectOrganizationList1(organization);
 		return getDataTable(list);
 	}
@@ -228,6 +229,18 @@ public class OrganizationController extends BaseController
 	public String deletephoneedit(@PathVariable("telid") String telid){
 		if(organizationService.deletephoneedit(telid)==1);
 		return "操作成功";
+	}
+
+	/**
+	 * 查询节目单终端列表
+	 */
+	@PostMapping("/listProBroad")
+	@ResponseBody
+	public TableDataInfo listProBroad(Organization organization)
+	{
+		startPage() ;
+		List<Organization> list = organizationService.selectProBroadList(organization);
+		return getDataTable(list);
 	}
 }
 

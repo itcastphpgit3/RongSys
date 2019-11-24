@@ -126,7 +126,7 @@ public class bFileUtil {
                 g.setAddress(bPathUtil.getClasspath() + bConst.FILEPATHPER+mp3);
                 //System.out.println("Urls:--"+bConst.FILEPATHPER+path);
                 g.setUrls(bConst.FILEPATHPER+mp3);
-                g.setUname(uname);
+                g.setUserid(uname);
                 //System.out.println("Createdtime:--"+df.format(new Date()));
                 g.setCreatedtime(df.format(new Date()));
                 g.setIspublic(false);

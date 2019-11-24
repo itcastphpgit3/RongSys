@@ -315,7 +315,7 @@
             <if test="createdtime != null and createdtime != '' "> and t.createdtime = #{createdtime}</if>
             <if test="isuse != null and isuse != '' "> and t.isuse = #{isuse}</if>
             <if test="address != null and address != '' "> and t.address = #{address}</if>
-            <if test="aid != null and aid != '' "> and t.aid = #{aid}</if>
+            <if test="aid != null and aid != '' "> and t.aid like #{aid}</if>
             <if test="mflowusing != null and mflowusing != '' "> and t.mflowusing = #{mflowusing}</if>
             <if test="irfrequency != null and irfrequency != '' "> and t.irfrequency = #{irfrequency}</if>
             <if test="brfrequency != null and brfrequency != '' "> and t.brfrequency = #{brfrequency}</if>

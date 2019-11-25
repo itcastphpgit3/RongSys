@@ -362,9 +362,8 @@ function getTime(intervaltime,times){
     var restData = intervaltime;
     //console.log("???"+TimeNILL); //字符串转时间
     var trs = $("#tbody").find("tr");
-    if(trs.length>1){
+    if(trs.length>=1){
         var lasttime = trs[trs.length-1].cells[4].innerText;
-
         var timelenth = trs[trs.length-1].cells[5].innerText;
         if(timelenth.length==0){
             timelenth = "00:00:00";
@@ -398,7 +397,6 @@ function getTime(intervaltime,times){
         var Se = seconds-28800+basenum;
         restData = addTime(intervaltime,Se);  //后面的是：前一个tr标签的播放开始时间+文件时长-08：00：00（28800s）+间隔时间
        // console.log(Se+">>>"+restData);
-
     }
     var nule = restData.toString().split(" ")[1];
     if(nule!=null &&nule.length>0){

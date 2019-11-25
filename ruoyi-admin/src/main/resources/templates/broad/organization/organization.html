@@ -36,12 +36,12 @@
 				<div class="select-list">
 					<ul>
 						<li>
-							地域id：<input type="text" name="aid" id="aid" style="width: 100px"/>
+							<input type="text" name="aid" th:type="hidden" id="aid" style="width: 100px"/>
 						</li>
 
-						<li>
-							父地域id：<input type="text" name="parentaid" id="parentaid" style="width: 100px"/>
-						</li>
+						<!--<li>-->
+							<!--父地域id：<input type="text" name="parentaid" id="parentaid" style="width: 100px"/>-->
+						<!--</li>-->
 
 						<li>
 							终端名称：<input type="text" name="tname" id="tname" style="width: 100px"/>
@@ -164,7 +164,7 @@
                     align: 'center'
                 },
                 {
-                    field : 'username',
+                    field : 'uname',
                     title : '所属用户',
                     align: 'center'
                 },
@@ -383,7 +383,7 @@
 <script	>
     function queryAreaTree()
     {
-        var url = ctx + "broad/organization/listProBroadTree";
+        var url = ctx + "broad/area/treeData";
         var options = {
             url: url,
             onClick : zOnClick
@@ -391,7 +391,7 @@
         $.tree.init(options);
 
         function zOnClick(event, treeId, treeNode) {
-            $("#aid").val(treeNode.aid);
+            $("#aid").val(treeNode.id);
             $.table.search();
         }
         $.tree.init(options);

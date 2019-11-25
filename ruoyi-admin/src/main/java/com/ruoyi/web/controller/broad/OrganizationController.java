@@ -242,5 +242,12 @@ public class OrganizationController extends BaseController
 		List<Organization> list = organizationService.selectProBroadList(organization);
 		return getDataTable(list);
 	}
+
+	@PostMapping( "/isuseSet")
+	@ResponseBody
+	public AjaxResult isuseSet(String tid, Boolean isuse)
+	{
+		return toAjax(organizationService.updateIsuseByTid(tid,isuse));
+	}
 }
 

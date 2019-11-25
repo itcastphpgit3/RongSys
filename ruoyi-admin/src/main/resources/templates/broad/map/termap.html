@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -122,8 +122,8 @@
     var ctx = [[@{/}]];
     var terdata = [];
     var points = [];
+    debugger
     terdata = [[${mapinfoList}]];
-
     for (var i = 0; i < [[${mapinfoList.size()}]]; i++) {
         points.push({
             lng:terdata[i].longitude,
@@ -136,7 +136,6 @@
             isuse:terdata[i].isuse
         });
     }
-
     //创建地图
     var map = new BMap.Map("allmap");
     map.centerAndZoom(new BMap.Point(113.090025,28.18606), 11);  // 设置中心点
@@ -148,13 +147,9 @@
         ]}));
     map.enableScrollWheelZoom(true);
     addMarker(points);
-
-
     /*  var styleJson = [{
-      }];
-      map.setMapStyleV2({styleJson:styleJson});*/
-
-
+     }];
+     map.setMapStyleV2({styleJson:styleJson});*/
     //创建标注点并添加到地图中
     function addMarker(points) {
         //循环建立标注点
@@ -177,15 +172,11 @@
             })();
         }
     }
-
-
     function showInfo(thisMarker,point) {
         //获取点的信息
         var thePoint=JSON.stringify(point);
         if(point.isuse==true) {
             var sContent = "<ul style=\"margin:0 0 5px 0;padding:0.2em 0\">" +
-                "<li style=\"line-height: 26px;font-size: 15px;\">" +
-                "<a style=\"width: 150px;display: inline-block;\"  href='/broad/tempgroup?params="+point.tid+"'>新增节目</a>" + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
                 "<span style=\"width: 150px;display: inline-block;\">终端IEMI：</span>" + point.tid + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
@@ -202,8 +193,6 @@
                 "</ul>";
         }else if(point.isuse==false){
             var sContent = "<ul style=\"margin:0 0 5px 0;padding:0.2em 0\">" +
-                "<li style=\"line-height: 26px;font-size: 15px;\">" +
-                "<a style=\"width: 150px;display: inline-block;\" >添加节目</a>" + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
                 "<span style=\"width: 150px;display: inline-block;\">终端IEMI：</span>" + point.tid + "</li>" +
                 "<li style=\"line-height: 26px;font-size: 15px;\">" +
@@ -273,6 +262,5 @@
             })();
         }
     }
-
 </script>
 </html>

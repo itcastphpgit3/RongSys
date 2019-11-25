@@ -63,14 +63,14 @@
         limit 500
     </select>-->
     <select id="getAllMapInfo" parameterType="String" resultMap="MapResult">
-        SELECT DISTINCT tname,m.tid as tid,t.address as address,ui.uname as uname,a.aname,phone,basestation,latitude,longitude,manageruserid,managername,t.isuse as isuse
+        SELECT DISTINCT tname,m.tid as tid,t.address as address,ui.uname as uname,a.aname,phone,basestation,m.latitude,m.longitude,manageruserid,managername,t.isuse as isuse
         from (((((<include refid="tableName"/> m  JOIN <include refid="terminaltableName"/> t on m.tid=t.tid)
         LEFT JOIN <include refid="areatable"/> a on t.aid= a.aid)
         LEFT JOIN <include refid="usertable"/> ui on t.userid = ui.userid)
         LEFT JOIN <include refid="terconditiontable"/> tc on m.tid=tc.tid))
         left join (SELECT GROUP_CONCAT(tmt.userid) as manageruserid,GROUP_CONCAT(uname) as managername,tid from
         <include refid="managertertable"/> tmt LEFT JOIN <include refid="userinfotable"/> ui on tmt.userid=ui.userid  GROUP BY tid ) manager on m.tid=manager.tid
-        where latitude != 0.000000
+        where m.latitude != 0.000000
         <if test="_parameter  != null  and _parameter  != ''  ">
             and t.aid = #{_parameter}
         </if>

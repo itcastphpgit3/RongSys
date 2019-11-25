@@ -107,7 +107,6 @@ public class VillageplanController extends BaseController
 	}
 
 	@GetMapping("/add2")
-	@RequiresPermissions("village:villageplan:view3")
 	public String add2(ModelMap mmap)
 	{
 		//从session中获取当前登陆用户的 username、phone、userid

@@ -7,7 +7,7 @@
     <resultMap type="organization" id="OrganizationResult">
         <result property="tid"    column="tid"    />
         <result property="tname"    column="tname"    />
-        <result property="username"    column="username"    />
+        <result property="uname"    column="uname"    />
         <result property="aname"    column="aname"    />
         <result property="lastaccesstime"    column="lastaccesstime"    />
         <result property="intertime"    column="intertime"    />
@@ -89,7 +89,7 @@
         SELECT
 	t.tid,
 	t.tname,
-	userinfo.username,
+	userinfo.uname,
 	area.aname,
 	t.lastaccesstime,
 	t.mflowusing,

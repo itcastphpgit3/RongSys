@@ -13,9 +13,9 @@
                         <li>
                             节目名称：<input type="text" name="pname"/>
                         </li>
-                        <!--<li>-->
-                        <!--是否紧急：<input type="text" name="isemergency"/>-->
-                        <!--</li>-->
+                        <li>
+                        是否紧急：<input type="text" name="isemergency"/>
+                        </li>
                         <li class="select-time">
                             <label>申请时间：</label><input class="laydate-icon  layer-date"
                                                        name="downtime"
@@ -95,11 +95,18 @@
                     title : '申请时间',
                     sortable: true
                 },
-//				{
-//					field : 'isemergency',
-//					title : '是否紧急',
-//					sortable: true
-//				},
+				{
+					field : 'isemergency',
+					title : '是否紧急',
+					sortable: true,
+                    formatter:function(value,row) {
+                        if(value=="false"){
+                            return "不紧急"
+                        }else{
+                            return "紧急"
+                        }
+                    }
+				},
                 {
                     field : 'timelimit',
                     title : '时间要求',
@@ -108,12 +115,26 @@
                 {
                     field : 'iscancel',
                     title : '是否撤回',
-                    sortable: true
+                    sortable: true,
+                    formatter:function(value,row) {
+                        if(value=="false"){
+                            return "不能撤回"
+                        }else{
+                            return "可撤回"
+                        }
+                    }
                 },
                 {
                     field : 'isreply',
                     title : '是否回复',
-                    sortable: true
+                    sortable: true,
+                    formatter:function(value,row) {
+                        if(value=="false"){
+                            return "未回复"
+                        }else{
+                            return "已回复"
+                        }
+                    }
                 }
             ]
         };

@@ -71,6 +71,12 @@
             <if test="uname != null and uname != '' "> and ui.uname like '%${uname}%'</if>
             <if test="fname != null  and fname != '' "> and fname like '%${fname}%'</if>
             <if test="ispublic != null "> and ispublic = ${ispublic}</if>
+            <if test="downtime != null and downtime != ''"><!-- 开始时间检索 -->
+                AND date_format(createdtime,'%y%m%d') &gt;= date_format(#{downtime},'%y%m%d')
+            </if>
+            <if test="endtime != null and endtime != ''"><!-- 结束时间检索 -->
+                AND date_format(createdtime,'%y%m%d') &lt;= date_format(#{endtime},'%y%m%d')
+            </if>
         </where>
         order by  createdtime desc,fid desc
     </select>

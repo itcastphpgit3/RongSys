@@ -40,11 +40,15 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            分组编号：<input type="text" name="aid" id="aid"/>
+                          <input type="hidden" name="aid" id="aid"/>
                         </li>
 
                         <li>
                             <input type="hidden" name="parentaid" id="parentaid"/>
+                        </li>
+
+                        <li>
+                            <input type="test" name="aname" id="aname"/>
                         </li>
 
                         <li>
@@ -133,7 +137,7 @@
 
     function queryAreaTree()
     {
-        var url = ctx + "broad/areaGrouping/treeData";
+        var url = ctx + "broad/area/treeData";
         var options = {
             url: url,
 //            expandLevel: 2,
@@ -142,7 +146,7 @@
 //        $.tree.init(options);
 
         function zOnClick(event, treeId, treeNode) {
-            $("#parentaid").val(treeNode.aid);
+            $("#aid").val(treeNode.id);
             $.table.search();
         }
         $.tree.init(options);

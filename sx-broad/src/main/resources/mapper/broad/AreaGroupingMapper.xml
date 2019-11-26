@@ -21,7 +21,7 @@
         from area a
         <where>
             <if test="aid != null  and aid != '' ">and a.aid like CONCAT(#{aid},'%')</if>
-            <if test="aname != null  and aname != '' ">and a1.aname like CONCAT('%',#{aname},'%')</if>
+            <if test="aname != null  and aname != '' ">and a.aname like CONCAT('%',#{aname},'%')</if>
         </where>
     </select>
 

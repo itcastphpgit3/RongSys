@@ -22,6 +22,9 @@
 								用户所属地区村社区aid：<input type="text" name="aid"/>
 							</li>-->
 
+                            <li>
+                                活动类别:<input type="text" name="hdtype"/>
+                            </li>
 
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -69,7 +72,7 @@
 		        showExport: true,
                 columns: [{
 		            checkbox: true
-		        },
+		        }
 				{
 					field : 'hdid', 
 					title : '活动编号',

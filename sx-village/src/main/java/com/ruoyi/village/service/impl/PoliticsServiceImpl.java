@@ -30,8 +30,10 @@ public class PoliticsServiceImpl implements IPoliticsService {
 
         @Override
         @DataSource(value = DataSourceType.SXVILLAGE)
-        public int deletePoliticsByids(String id) {
-            return politicsMapper.deletePoliticsByids(Convert.toStrArray(id));
+        public int deletePoliticsByids(String ids) {
+            System.out.println(ids);
+            System.out.println("Convert.toStrArray:"+Convert.toStrArray(ids));
+            return politicsMapper.deletePoliticsByids(Convert.toStrArray(ids));
         }
 
         @Override
@@ -48,8 +50,8 @@ public class PoliticsServiceImpl implements IPoliticsService {
 
         @Override
         @DataSource(value = DataSourceType.SXVILLAGE)
-        public int deletePoliticsByIds(String shiid) {
-            return politicsMapper.deletePoliticsByIds(shiid);
+        public int deletePoliticsById(String shiid) {
+            return politicsMapper.deletePoliticsById(shiid);
         }
 
         @Override

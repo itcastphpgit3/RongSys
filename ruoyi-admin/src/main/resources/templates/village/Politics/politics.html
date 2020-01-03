@@ -14,6 +14,10 @@
 								政策标题：<input type="text" name="title"/>
 							</li>
 
+							<li>
+								政策内容：<input type="text" name="content"/>
+							</li>
+
 							<!--<li>
 								类型：<input type="text" name="type"/>
 							</li>-->
@@ -69,7 +73,7 @@
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove/{id}",
+                removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
                 modalName: "政策记录",
 				search: false,

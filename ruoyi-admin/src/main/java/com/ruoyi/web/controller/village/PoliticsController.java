@@ -93,11 +93,11 @@ public class PoliticsController extends BaseController {
      */
     @RequiresPermissions("village:politics:remove")
     @Log(title = "删除政策信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove/{shiid}")
+    @PostMapping( "/remove")
     @ResponseBody
-    public AjaxResult remove(@PathVariable("shiid") String shiid)
+    public AjaxResult remove(String ids)
     {
-        System.out.println("*******"+shiid);
-        return toAjax(politicsService.deletePoliticsByIds(shiid));
+        System.out.println("*******"+ids);
+        return toAjax(politicsService.deletePoliticsByids(ids));
     }
 }

@@ -86,7 +86,7 @@
 		</trim>
 	</insert>
 	<!--根据fbid删除数据-->
-	<delete id="deletePoliticsByIds" parameterType="String">
+	<delete id="deletePoliticsById" parameterType="String">
 		delete from
 		<include refid="tableName"/>
 		where shiid = #{shiid}

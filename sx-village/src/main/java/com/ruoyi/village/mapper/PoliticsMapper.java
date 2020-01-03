@@ -22,7 +22,7 @@ public interface PoliticsMapper {
      * 根据shiid删除数据
      * @param id
      */
-    int deletePoliticsByids(String[] id);
+    int deletePoliticsByids(String[] shiids);
 
     /**
      * 添加政策信息
@@ -50,5 +50,5 @@ public interface PoliticsMapper {
      * @param shiid
      * @return
      */
-    int deletePoliticsByIds(String shiid);
+    int deletePoliticsById(String shiid);
 }

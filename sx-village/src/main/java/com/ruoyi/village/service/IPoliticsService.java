@@ -24,7 +24,7 @@ public interface IPoliticsService {
      * 根据shiid删除数据
      * @param id
      */
-    public int deletePoliticsByids(String id);
+    public int deletePoliticsByids(String ids);
 
     /**
      * 添加政策公告数据
@@ -49,5 +49,5 @@ public interface IPoliticsService {
      * @param shiid
      * @return
      */
-    public int deletePoliticsByIds(String shiid);
+    public int deletePoliticsById(String shiid);
 }

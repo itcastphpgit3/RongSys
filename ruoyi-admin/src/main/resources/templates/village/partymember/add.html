@@ -90,7 +90,7 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">电话号码：</label>
 				<div class="col-sm-8">
-					<input id="phone" name="phone" class="form-control" type="text">
+					<input id="phone" name="phone" class="form-control" type="text" placeholder="请输入手机号码">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -124,53 +124,64 @@
 		var prefix = ctx + "village/partymember"
         $("#form-partymember-add").validate({
             rules: {
-                aid: {
+                /*aid: {
+
                     required: true,
                     minlength: 2
                 },
                 grouptype: {
+
                     required: true,
                     minlength: 2
                 },
                 nations: {
+
                     required: true,
                     minlength: 2
-                },
+                },*/
                 uname: {
+                	isName: true,
                     required: true,
                     minlength: 2
                 },
                 idcard: {
+					isIdentity: true,
                     required: true,
                     minlength: 15
                 },
                 phone: {
+                	isPhone: true,
                     required: true,
                     minlength: 11
                 }
             },
             messages: {
-                aid: {
+               /* aid: {
+                	isAid:"地域编号符合规范",
                     required: "请输入地域编号",
                     minlength: "地域编号不能小于2个字符"
                 },
                 grouptype: {
+                	isGroup: "党员小组符合规范",
                     required: "请输入党员小组",
                     minlength: "党员小组不能小于2位"
                 },
                 nations: {
                     required: "请输入民族",
                     minlength: "民族不能小于2个字符"
-                },
+                },*/
                 uname: {
+                	isName:"姓名规范",
                     required: "请输入党员姓名",
                     minlength: "党员姓名不能小于2个字符"
                 },
                 idcard: {
-                    required: "请输入身份证号码",
+					isIdentity:"身份证号码规范",
+					required: "请输入身份证号码",
                     minlength: "身份证号码不能小于15个字符"
                 },
                 phone: {
+                	isPhone:"电话号码符合规范",
                     required: "请输入手机号码",
                     minlength: "号码长度不能小于11位"
                 }

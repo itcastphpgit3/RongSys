@@ -90,9 +90,20 @@
 		var prefix = ctx + "village/guide"
 		$("#form-guide-add").validate({
 			rules:{
-				xxxx:{
-					required:true,
-				},
+
+				fphone: {
+					required: true,
+					minlength: 11
+				}
+
+			},
+			messages: {
+
+				fphone: {
+					required: "请输入负责人手机号",
+					minlength: "负责人手机号不能小于11位"
+
+				}
 			}
 		});
 

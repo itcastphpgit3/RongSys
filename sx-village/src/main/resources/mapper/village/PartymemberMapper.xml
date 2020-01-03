@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pid != null "> and pid = #{pid}</if>
              <if test="grouptype != null  and grouptype != '' "> and grouptype LIKE CONCAT(CONCAT('%', #{grouptype}),'%')</if>
              <if test="uname != null  and uname != '' "> and uname  LIKE CONCAT(CONCAT('%', #{uname}),'%')</if>
-             <if test="sex != null  and sex != '' "> and sex  LIKE CONCAT(CONCAT('%', #{sex}),'%')}</if>
+             <if test="sex != null  and sex != '' "> and sex  LIKE CONCAT(CONCAT('%', #{sex}),'%')</if>
              <if test="nations != null  and nations != '' "> and nations  LIKE CONCAT(CONCAT('%', #{nations}),'%')</if>
              <if test="idcard != null  and idcard != '' "> and idcard  LIKE CONCAT(CONCAT('%', #{idcard}),'%')</if>
              <if test="edulevel != null  and edulevel != '' "> and edulevel  LIKE CONCAT(CONCAT('%', #{edulevel}),'%')</if>

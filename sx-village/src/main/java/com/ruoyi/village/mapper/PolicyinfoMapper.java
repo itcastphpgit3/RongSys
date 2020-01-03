@@ -53,8 +53,8 @@ public interface PolicyinfoMapper {
      * @param poinid
      * @return
      */
+    int deletePolicyinfoByIds(Integer poinid);
     int deletePolicyinfoByIds(String poinid);
-
     /**
      * 按照时间倒序获取十条政策信息
      *

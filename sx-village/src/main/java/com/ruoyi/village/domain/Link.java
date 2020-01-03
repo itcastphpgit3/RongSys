@@ -6,14 +6,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 链接管理表 link
- * 
+ *
  * @author 张鸿权
  * @date 2019-08-18
  */
 public class Link extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/** 数据编号 */
 	private Integer mid;
 	/** 标题 */
@@ -25,6 +25,8 @@ public class Link extends BaseEntity
 	/** 发布人编号 */
 	private Integer uid;
 	/** 发布人姓名 */
+	private String telephonenumber;
+	/** 电话号码*/
 	private String uname;
 	/** 建立日期 */
 	private String pushdate;
@@ -37,60 +39,69 @@ public class Link extends BaseEntity
 	/** 备注 */
 	private String note;
 
-	public void setMid(Integer mid) 
+	public void setMid(Integer mid)
 	{
 		this.mid = mid;
 	}
 
-	public Integer getMid() 
+	public Integer getMid()
 	{
 		return mid;
 	}
-	public void setMtitle(String mtitle) 
+	public void setMtitle(String mtitle)
 	{
 		this.mtitle = mtitle;
 	}
 
-	public String getMtitle() 
+	public String getMtitle()
 	{
 		return mtitle;
 	}
-	public void setMpic(String mpic) 
+	public void setMpic(String mpic)
 	{
 		this.mpic = mpic;
 	}
 
-	public String getMpic() 
+	public String getMpic()
 	{
 		return mpic;
 	}
-	public void setMcontent(String mcontent) 
+	public void setMcontent(String mcontent)
 	{
 		this.mcontent = mcontent;
 	}
 
-	public String getMcontent() 
+	public String getMcontent()
 	{
 		return mcontent;
 	}
-	public void setUid(Integer uid) 
+	public void setUid(Integer uid)
 	{
 		this.uid = uid;
 	}
 
-	public Integer getUid() 
+	public Integer getUid()
 	{
 		return uid;
 	}
-	public void setUname(String uname) 
+	public void setUname(String uname)
 	{
 		this.uname = uname;
 	}
 
-	public String getUname() 
+	public String getUname()
 	{
 		return uname;
 	}
+
+	public String getTelephonenumber() {
+		return telephonenumber;
+	}
+
+	public void setTelephonenumber(String telephonenumber) {
+		this.telephonenumber = telephonenumber;
+	}
+
 	public void setPushdate(String pushdate)
 	{
 		this.pushdate = pushdate;
@@ -100,56 +111,57 @@ public class Link extends BaseEntity
 	{
 		return pushdate;
 	}
-	public void setGreadtotal(Integer greadtotal) 
+	public void setGreadtotal(Integer greadtotal)
 	{
 		this.greadtotal = greadtotal;
 	}
 
-	public Integer getGreadtotal() 
+	public Integer getGreadtotal()
 	{
 		return greadtotal;
 	}
-	public void setMtype(Integer mtype) 
+	public void setMtype(Integer mtype)
 	{
 		this.mtype = mtype;
 	}
 
-	public Integer getMtype() 
+	public Integer getMtype()
 	{
 		return mtype;
 	}
-	public void setAid(String aid) 
+	public void setAid(String aid)
 	{
 		this.aid = aid;
 	}
 
-	public String getAid() 
+	public String getAid()
 	{
 		return aid;
 	}
-	public void setNote(String note) 
+	public void setNote(String note)
 	{
 		this.note = note;
 	}
 
-	public String getNote() 
+	public String getNote()
 	{
 		return note;
 	}
 
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("mid", getMid())
-            .append("mtitle", getMtitle())
-            .append("mpic", getMpic())
-            .append("mcontent", getMcontent())
-            .append("uid", getUid())
-            .append("uname", getUname())
-            .append("pushdate", getPushdate())
-            .append("greadtotal", getGreadtotal())
-            .append("mtype", getMtype())
-            .append("aid", getAid())
-            .append("note", getNote())
-            .toString();
-    }
+	public String toString() {
+		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+				.append("mid", getMid())
+				.append("mtitle", getMtitle())
+				.append("mpic", getMpic())
+				.append("mcontent", getMcontent())
+				.append("uid", getUid())
+				.append("uname", getUname())
+				.append("telephonenumber", getTelephonenumber())
+				.append("pushdate", getPushdate())
+				.append("greadtotal", getGreadtotal())
+				.append("mtype", getMtype())
+				.append("aid", getAid())
+				.append("note", getNote())
+				.toString();
+	}
 }

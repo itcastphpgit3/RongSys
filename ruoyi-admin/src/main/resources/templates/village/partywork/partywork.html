@@ -19,7 +19,15 @@
 							</li>
 
 							<li>
-								值班时间：<input type="text" name="worktime"/>
+
+								<input class="laydate-icon  layer-date"
+									   name="worktime"
+									   id="worktime"
+									   value=""
+									   readonly="readonly"
+									   style="width:150px;"
+									   placeholder="值班时间"
+									   title="值班时间"/>
 							</li>
 
 							<li>
@@ -39,7 +47,11 @@
 							</li>
 
 							<li>
-								是否有效：<input type="text" name="remark"/>
+								是否有效：<input list="remark" name="remark"/>
+								<datalist id="remark">
+									<option value=0>无效</option>
+									<option value=1>有效</option>
+								</datalist>
 							</li>
 
 							<li>
@@ -148,5 +160,22 @@
             $.table.init(options);
         });
     </script>
+	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+	 <!--时间插件-->
+	 <script>
+         laydate({
+             elem:"#worktime",
+             event:"focus"
+         });
+         layui.use('laydate', function(){
+             var laydate = layui.laydate;
+             //执行一个laydate实例
+             laydate.render({
+                 elem:"#village",
+                 type: 'time',
+             });
+         });
+	 </script>
 </body>
 </html>

@@ -20,6 +20,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ruoyi-framework" />
+    <orderEntry type="module" module-name="ruoyi-system" />
+    <orderEntry type="module" module-name="ruoyi-quartz" />
+    <orderEntry type="module" module-name="ruoyi-generator" />
+    <orderEntry type="module" module-name="sx-broad" />
+    <orderEntry type="module" module-name="ruoyi-common" />
+    <orderEntry type="module" module-name="sx-village" />
+    <orderEntry type="module" module-name="sx-api" />
+    <orderEntry type="module" module-name="sx-broadStreamSocket" />
+    <orderEntry type="module" module-name="sx-iot" />
+    <orderEntry type="module" module-name="sx-rivervis" />
+    <orderEntry type="module" module-name="ruoyi-check" />
+    <orderEntry type="library" name="Maven: io.netty:netty-all:4.0.36.Final" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-devtools:2.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.1.1.RELEASE" level="project" />
@@ -150,7 +163,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.13" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-all:4.0.36.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.42.Final" level="project" />
     <orderEntry type="library" name="Maven: javax:javaee-api:7.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />

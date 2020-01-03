@@ -31,14 +31,13 @@
 							发布人：<input type="text" name="uname"/>
 						</li>
 
-						<li>
+						<!--<li>
 							状态：<input list="mtype" name="mtype"/>
 							<datalist id="mtype">
 								<option value=0>无效</option>
 								<option value=1>有效</option>
 							</datalist>
-						</li>
-
+						</li>-->
 						<li>
 							<input class="laydate-icon  layer-date"
 								   name="pushdate"
@@ -53,6 +52,22 @@
 						<li>
 							备注：<input type="text" name="note"/>
 						</li>
+
+						<input id="mtype" name="mtype" value="1" class="form-control" type="hidden" >
+						<div class="form-group">
+							<label class="col-sm-3 control-label">状态：</label>
+							<div class="col-sm-8">
+								<div class="onoffswitch">
+									<input type="checkbox"  class="onoffswitch-checkbox" id="ctype1" name="ctype1" checked onclick="changevalue();" />
+									<label class="onoffswitch-label" for="ctype1">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+
+								</div>
+							</div>
+						</div>
+
 
 						<li>
 							<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -105,7 +120,8 @@
 				{
 					field : 'mid',
 					title : '数据编号',
-					visible: false
+					visible: false,
+                    sortable: true,
 				},
 				{
 					field : 'vtype',
@@ -210,10 +226,44 @@
 		$.table.init(options);
 	});
 </script>
+<script>
+	   /*function changevalue() {
+        var ctype2 = document.getElementsByName("ctype1");
+        if (ctype2.checked == true){
+            $("#mtype").val("1");
+        }else{
+            $("#mtype").val("0");
+        }
+    }*/
+       $(function(){
+           var ctype2=document.getElementById("ctype1");
+           var data = $("#mtype").val();
+           if(data=="1"){
+               ctype2.checked=true;
+           }else{
+               ctype2.checked=false;
+           }
+       });
+       var aa = $("#mtype").val();
+       var aflag = 0;
+       function changevalue() {
+           aflag++;
+           if(aflag % 2 == 0) {
+               $("#mtype").val(aa);
+           }else{
+               if (aa == "1") {
+                   $("#mtype").val("0");
+               } else{
+                   $("#mtype").val("1");
+               }
+           }
+       }
+</script>
 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
 <!--时间插件-->
 <script>
+
 	laydate({
 		elem:"#pushdate",
 		event:"focus"

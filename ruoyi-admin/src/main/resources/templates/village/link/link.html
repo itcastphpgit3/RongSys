@@ -124,15 +124,16 @@
 					formatter:function(value,row) {
 						var s;
 						var url = row.mpic;
-						s = '<a  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + url + '" /></a>';
+						var imgdata = url.split(";");<!--imgdata[0]-->
+						s = '<a  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + imgdata[0] + '" /></a>';
 						return s;
 					}
 				},
-				{
+				/*{
 					field : 'mcontent',
 					title : '链接地址',
 					sortable: true
-				},
+				},*/
 				{
 					field : 'uname',
 					title : '发布人',

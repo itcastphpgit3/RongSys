@@ -121,11 +121,18 @@
 </div>
 <div th:include="include::footer"></div>
 <script type="text/javascript">
+
+    delete from myc_partymember where phone like '%';
+
     $.validator.addMethod("checkname",function(value,element,params){
 
         var checkname = /^[\u4e00-\u9fa5]{1,6}$/;
 
         return this.optional(element)||(checkname.test(value));},"请输入1-6位汉字");
+
+    pstmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+    pstmt.setDate(1, new java.sql.Date(newDate().getTime()));
+
     var prefix = ctx + "village/partymember"
     $("#form-partymember-add").validate({
         rules: {

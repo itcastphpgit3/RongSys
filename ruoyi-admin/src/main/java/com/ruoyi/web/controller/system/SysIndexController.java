@@ -29,6 +29,8 @@ public class SysIndexController extends BaseController
 
 
     // 系统首页
+
+
     @GetMapping("/index")
     public String index(ModelMap mmap)
     {

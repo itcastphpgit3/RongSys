@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header">
+</head>
+<div class="gray-bg">
+    <div class="container-div">
+
+    </div>
+</div>
+
+<div th:include="include :: footer"></div>
+<!--js-->
+<script th:src="@{/js/plugins/simditor/module.js}"></script>
+
+<!--echarts 可视化图形 插件-->
+<script th:src="@{/js/plugins/echarts/echarts.min.js}"></script>
+<script th:src="@{/js/plugins/echarts/echarts-gl.min.js}"></script>
+</body>
+</html>

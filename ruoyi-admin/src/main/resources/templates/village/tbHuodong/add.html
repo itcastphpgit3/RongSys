@@ -1,7 +1,15 @@
 <!DOCTYPE HTML>
 <html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head th:include="include :: header">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:href="@{favicon.ico}" rel="shortcut icon"/>
+	<link th:href="@{/css/bootstrap.min14ed.css?v=3.3.6}" rel="stylesheet"/>
+	<link th:href="@{/css/font-awesome.min93e3.css?v=4.4.0}" rel="stylesheet"/>
+	<link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
+	<link th:href="@{/css/plugins/simditor/simditor.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/style.min862f.css?v=4.1.0}" rel="stylesheet"/>
+</head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-tbHuodong-add">
@@ -20,7 +28,7 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">活动地点：</label>
 				<div class="col-sm-8">
-					<input id="hdloc" name="hdloc" class="form-control" type="text">
+					<input id="hdloc" name="hdloc" class="form-control" type="text" onclick="selectAidTree()">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -29,16 +37,40 @@
 					<input id="hdnum" name="hdnum" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+			<!--<div class="form-group">
 				<label class="col-sm-3 control-label">活动开始时间：</label>
 				<div class="col-sm-8">
-					<input id="hdbtime" name="hdbtime" class="form-control" type="text">
+					<input id="hdbtime" name="hdbtime" class="form-control" type="date">
 				</div>
 			</div>
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">活动结束日期：</label>
 				<div class="col-sm-8">
-					<input id="hdetime" name="hdetime" class="form-control" type="text">
+					<input id="hdetime" name="hdetime" class="form-control" type="date">
+				</div>
+			</div>-->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">活动开始时间：</label>
+				<div class="col-sm-8">
+					<input class="form-control laydate-icon  layer-date"
+						   name="hdbtime"
+						   id="hdbtime"
+						   value=""
+						   style="width:120px;"
+						   placeholder="活动开始时间"
+						   title="活动开始时间"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">活动结束日期：</label>
+				<div class="col-sm-8">
+					<input class="form-control laydate-icon  layer-date"
+						   name="hdetime"
+						   id="hdetime"
+						   value=""
+						   style="width:120px;"
+						   placeholder="活动结束日期"
+						   title="活动结束日期"/>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -53,10 +85,22 @@
 					<input id="hdsum" name="hdsum" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
+		<!--<div class="form-group">
 				<label class="col-sm-3 control-label">活动添加日期：</label>
 				<div class="col-sm-8">
-					<input id="hdadddate" name="hdadddate" class="form-control" type="text">
+					<input id="hdadddate" name="hdadddate" class="form-control" type="date">
+				</div>
+			</div>-->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">活动添加日期：</label>
+				<div class="col-sm-8">
+					<input class="form-control laydate-icon  layer-date"
+						   name="hdadddate"
+						   id="hdadddate"
+						   value=""
+						   style="width:120px;"
+						   placeholder="活动添加日期"
+						   title="活动添加日期"/>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -74,7 +118,7 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">用户所属地区村社区 aid：</label>
 				<div class="col-sm-8">
-					<input id="aid" name="aid" class="form-control" type="text">
+					<input id="aid" name="aid" class="form-control" type="text" onclick="selectAidTree()">
 				</div>
 			</div>
 			<div class="form-group">	
@@ -101,6 +145,70 @@
 	            $.operate.save(prefix + "/add", $('#form-tbHuodong-add').serialize());
 	        }
 	    }
+
+
+        function selectAidTree() {
+            var url = "/broad/organization/selectAidTree";
+            var options = {
+                title: '选择区域',
+                width: "380",
+                url: "/broad/organization/selectAidTree",
+                callBack: doSubmitAid
+            };
+            $.modal.openOptions(options);
+        }
+
+        /*该模块是选择用户所属区域树的提交功能模块，body.find()方法中该使用框架固定的treeId、treeName*/
+        function doSubmitAid(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowParents(tree)) {
+                var body = layer.getChildFrame('body', index);
+                // $("#aid").val(body.find('#treeId').val());
+                var groupname=(body.find('#treeName').val()).replace("组","");
+                $("#aid").val(groupname);
+                $("#hdloc").val(groupname);
+
+                /*console.log(body.find('#treeId').val());
+                console.log(body.find('#treeName').val());*/
+                layer.close(index);
+            }
+        }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowParents(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+	</script>
+
+	<script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+	<script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+	<!--时间插件-->
+	<script>
+        laydate({
+            elem:"#hdbtime",
+            event:"focus"
+        });
+        laydate({
+            elem:"#hdetime",
+            event:"focus"
+        });
+        laydate({
+            elem:"#hdadddate",
+            event:"focus"
+        });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem:"#village",
+                type: 'time',
+            });
+        });
 	</script>
 </body>
 </html>

@@ -131,8 +131,17 @@
 				{
 					field : 'mcontent',
 					title : '链接地址',
-					sortable: true
-				},
+					sortable: true,
+                    formatter: function(value,row,index){
+
+                        return '<a style="color:#ff1fc0" href="'+row.mcontent+'">'+row.mcontent+'</a>';
+
+                        //formatter:function formatOper(val,row){
+                       //return "<a href='javacript:;' onclick=mngRol('" + row.mcontent + "');>" + row.mcontent + "</a>";
+                         //return '<a href="#" onclick="reviewProject('+row.mcontent+')">" + row.mcontent + "</a>';
+    }
+
+    },
 				{
 					field : 'uname',
 					title : '发布人',

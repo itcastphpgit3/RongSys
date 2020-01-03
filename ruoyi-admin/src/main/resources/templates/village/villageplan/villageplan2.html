@@ -206,7 +206,29 @@
 		$.table.init(options);
 	});
 
-
+    $(function(){
+        var ctype2=document.getElementById("ctype1");
+        var data = $("#mtype").val();
+        if(data=="1"){
+            ctype2.checked=true;
+        }else{
+            ctype2.checked=false;
+        }
+    });
+    var aa = $("#mtype").val();
+    var aflag = 0;
+    function changevalue() {
+        aflag++;
+        if(aflag % 2 == 0) {
+            $("#mtype").val(aa);
+        }else{
+            if (aa == "1") {
+                $("#mtype").val("0");
+            } else{
+                $("#mtype").val("1");
+            }
+        }
+    }
 </script>
 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>

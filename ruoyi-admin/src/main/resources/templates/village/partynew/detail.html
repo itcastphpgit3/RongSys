@@ -19,12 +19,16 @@
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="pull-right">
+                        <font color="#dc143c">
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.uname}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.pushdate}]]</button>
                         <input id="mpic" name="mpic" th:value="${listByid.mpic}"  type="hidden">
+                        </font>
                     </div>
                     <div class="text-center article-title">
-                        <h1 th:text="${listByid.mtitle}"></h1>
+                        <font style="font-family: 幼圆">
+                        <h2 th:text="${listByid.mtitle}"></h2>
+                        </font>
                     </div>
                     <p th:utext="${listByid.mcontent}"></p>
                     <div class="layui-carousel" id="test1">
@@ -37,8 +41,6 @@
             </div>
         </div>
     </div>
-
-</div>
 <script src="../../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../../js/content.min.js?v=1.0.0"></script>

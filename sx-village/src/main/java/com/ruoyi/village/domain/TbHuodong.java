@@ -7,14 +7,14 @@ import java.util.Date;
 
 /**
  * 党员活动表 tb_huodong
- * 
+ *
  * @author 张鸿权
  * @date 2019-11-16
  */
 public class TbHuodong extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	/** 活动编号 */
 	private Integer hdid;
 	/** 活动昵称 */
@@ -43,121 +43,123 @@ public class TbHuodong extends BaseEntity
 	private String aid;
 	/** 是否有效 */
 	private String remark;
+	/** 活动备注 */
+	private String note;
 
-	public void setHdid(Integer hdid) 
+	public void setHdid(Integer hdid)
 	{
 		this.hdid = hdid;
 	}
 
-	public Integer getHdid() 
+	public Integer getHdid()
 	{
 		return hdid;
 	}
-	public void setHdtitle(String hdtitle) 
+	public void setHdtitle(String hdtitle)
 	{
 		this.hdtitle = hdtitle;
 	}
 
-	public String getHdtitle() 
+	public String getHdtitle()
 	{
 		return hdtitle;
 	}
-	public void setHdtype(String hdtype) 
+	public void setHdtype(String hdtype)
 	{
 		this.hdtype = hdtype;
 	}
 
-	public String getHdtype() 
+	public String getHdtype()
 	{
 		return hdtype;
 	}
-	public void setHdloc(String hdloc) 
+	public void setHdloc(String hdloc)
 	{
 		this.hdloc = hdloc;
 	}
 
-	public String getHdloc() 
+	public String getHdloc()
 	{
 		return hdloc;
 	}
-	public void setHdnum(String hdnum) 
+	public void setHdnum(String hdnum)
 	{
 		this.hdnum = hdnum;
 	}
 
-	public String getHdnum() 
+	public String getHdnum()
 	{
 		return hdnum;
 	}
-	public void setHdbtime(String hdbtime) 
+	public void setHdbtime(String hdbtime)
 	{
 		this.hdbtime = hdbtime;
 	}
 
-	public String getHdbtime() 
+	public String getHdbtime()
 	{
 		return hdbtime;
 	}
-	public void setHdetime(String hdetime) 
+	public void setHdetime(String hdetime)
 	{
 		this.hdetime = hdetime;
 	}
 
-	public String getHdetime() 
+	public String getHdetime()
 	{
 		return hdetime;
 	}
-	public void setHdpic(String hdpic) 
+	public void setHdpic(String hdpic)
 	{
 		this.hdpic = hdpic;
 	}
 
-	public String getHdpic() 
+	public String getHdpic()
 	{
 		return hdpic;
 	}
-	public void setHdsum(String hdsum) 
+	public void setHdsum(String hdsum)
 	{
 		this.hdsum = hdsum;
 	}
 
-	public String getHdsum() 
+	public String getHdsum()
 	{
 		return hdsum;
 	}
-	public void setHdadddate(Date hdadddate) 
+	public void setHdadddate(Date hdadddate)
 	{
 		this.hdadddate = hdadddate;
 	}
 
-	public Date getHdadddate() 
+	public Date getHdadddate()
 	{
 		return hdadddate;
 	}
-	public void setUid(String uid) 
+	public void setUid(String uid)
 	{
 		this.uid = uid;
 	}
 
-	public String getUid() 
+	public String getUid()
 	{
 		return uid;
 	}
-	public void setUname(String uname) 
+	public void setUname(String uname)
 	{
 		this.uname = uname;
 	}
 
-	public String getUname() 
+	public String getUname()
 	{
 		return uname;
 	}
-	public void setAid(String aid) 
+	public void setAid(String aid)
 	{
 		this.aid = aid;
 	}
 
-	public String getAid() 
+	public String getAid()
 	{
 		return aid;
 	}
@@ -166,28 +168,39 @@ public class TbHuodong extends BaseEntity
 	{
 		this.remark = remark;
 	}
-    @Override
+	@Override
 	public String getRemark()
 	{
 		return remark;
 	}
+	public void setNote(String note)
+	{
+		this.note = note;
+	}
 
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("hdid", getHdid())
-            .append("hdtitle", getHdtitle())
-            .append("hdtype", getHdtype())
-            .append("hdloc", getHdloc())
-            .append("hdnum", getHdnum())
-            .append("hdbtime", getHdbtime())
-            .append("hdetime", getHdetime())
-            .append("hdpic", getHdpic())
-            .append("hdsum", getHdsum())
-            .append("hdadddate", getHdadddate())
-            .append("uid", getUid())
-            .append("uname", getUname())
-            .append("aid", getAid())
-            .append("remark", getRemark())
-            .toString();
-    }
+	public String getNote()
+	{
+		return note;
+	}
+
+
+	public String toString() {
+		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+				.append("hdid", getHdid())
+				.append("hdtitle", getHdtitle())
+				.append("hdtype", getHdtype())
+				.append("hdloc", getHdloc())
+				.append("hdnum", getHdnum())
+				.append("hdbtime", getHdbtime())
+				.append("hdetime", getHdetime())
+				.append("hdpic", getHdpic())
+				.append("hdsum", getHdsum())
+				.append("hdadddate", getHdadddate())
+				.append("uid", getUid())
+				.append("uname", getUname())
+				.append("aid", getAid())
+				.append("remark", getRemark())
+				.append("note", getNote())
+				.toString();
+	}
 }

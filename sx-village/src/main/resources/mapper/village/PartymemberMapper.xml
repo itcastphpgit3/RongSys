@@ -80,6 +80,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectPartymemberVo"/>
         where pid = #{pid}
     </select>
+
+    <select id="selectPartymemberBygrouptype" parameterType="String" resultMap="PartymemberResult">
+        <include refid="selectPartymemberVo"/>
+        <where>
+            grouptype = #{grouptype}
+        </where>
+    </select>
         
     <insert id="insertPartymember" parameterType="Partymember">
         insert into myc_partymember

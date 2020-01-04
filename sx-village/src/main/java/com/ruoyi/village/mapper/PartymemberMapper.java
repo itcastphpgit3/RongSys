@@ -4,6 +4,7 @@ import com.ruoyi.village.domain.Partymember;
 import com.ruoyi.village.domain.Pedulevel;
 import com.ruoyi.village.domain.Pmcount;
 import com.ruoyi.village.domain.pubObjApi;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -75,4 +76,6 @@ public interface PartymemberMapper
 	public List<Pedulevel> countbyedulevel();
 
 	public List<Partymember> selectPartymemberListBytype(pubObjApi group);
+
+	public List<Partymember> selectPartymemberBygrouptype(@Param(value="grouptype") String grouptype);
 }

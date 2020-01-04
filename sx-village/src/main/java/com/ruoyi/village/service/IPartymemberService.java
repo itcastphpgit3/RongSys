@@ -68,4 +68,6 @@ public interface IPartymemberService
 
 	public List<Partymember> selectPartymemberListBytype(pubObjApi group);
 
+	public List<Partymember> selectPartymemberBygrouptype(String grouptype);
+
 }

@@ -4,13 +4,10 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
-import com.ruoyi.village.domain.Pedulevel;
-import com.ruoyi.village.domain.Pmcount;
-import com.ruoyi.village.domain.pubObjApi;
+import com.ruoyi.village.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.village.mapper.PartymemberMapper;
-import com.ruoyi.village.domain.Partymember;
 import com.ruoyi.village.service.IPartymemberService;
 import com.ruoyi.common.support.Convert;
 
@@ -25,6 +22,18 @@ public class PartymemberServiceImpl implements IPartymemberService
 {
 	@Autowired
 	private PartymemberMapper partymemberMapper;
+
+
+	/**
+	 * 通过区域查询村名集合
+	 * @param grouptype 区域
+	 * @return 村民集合
+	 */
+	@Override
+	@DataSource(value = DataSourceType.SXVILLAGE)
+	public List<Partymember> selectPartymemberBygrouptype(String grouptype){
+		return partymemberMapper.selectPartymemberBygrouptype(grouptype);
+	}
 
 	/**
      * 查询暮云党员信息

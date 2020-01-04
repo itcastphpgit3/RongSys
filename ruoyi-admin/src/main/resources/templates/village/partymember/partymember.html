@@ -36,7 +36,6 @@
 								手机：<input type="text" name="phone"/>
 							</li>
 
-
 							<li>学历：</li>
 							<li>
 								<select style="width:160px;" id="edulevel" name="edulevel"  type="text">
@@ -51,10 +50,20 @@
 								</select>
 							</li>
 
+							<li>
+								地址：<input type="text" name="address"/>
+							</li>
 
-							<!--<li>-->
-								<!--住址：<input type="text" name="address"/>-->
-							<!--</li>-->
+							<li>入党时间：</li>
+							<li>
+								<input class="laydate-icon  layer-date"
+									   name="partyjoindate"
+									   id="partyjoindate"
+									   value=""
+									   style="width:150px;"
+									   placeholder="入党时间"
+									   title="入党时间"/>
+							</li>
 
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -154,6 +163,11 @@
 					title : '手机号',
 					sortable: true
 				},
+				{
+					field : 'address',
+					title : '地址',
+					sortable: true
+                 },
                     {
                         title: '操作',
                         align: 'center',
@@ -290,6 +304,23 @@
                  }
              });
          }
+	 </script>
+	 <script th:src="@{/js/plugins/layer/laydate/laydate.js}"></script>
+	 <script th:src="@{/js/plugins/layer/layui-v2.4.5/layui/layui.js}"></script>
+	 <script>
+         laydate({
+             elem:"#partyjoindate",
+             event:"focus"
+         });
+         layui.use('laydate', function(){
+             var laydate = layui.laydate;
+             //执行一个laydate实例
+             laydate.render({
+                 elem:"#village",
+                 type: 'date',
+				 dateFormat:'yyyy年MM月dd日'
+			 });
+         });
 	 </script>
 </body>
 </html>

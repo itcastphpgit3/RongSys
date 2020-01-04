@@ -4,47 +4,45 @@
 <head th:include="include :: header">
 </head>
 <div class="gray-bg">
-<div class="container-div">
-    <div class="row">
-        <div class="col-sm-12 search-collapse">
-            <form id="formId">
-                <div class="select-list">
-                    <ul>
-                        <!--<li>-->
-                            <!--请选择地域编号：<input type="text" name="aid" id="aid" onclick="selectAidTree()"/>-->
-                        <!--</li>-->
-                        <li>
-                            请选择所属村组：<input type="text" name="grouptype" id="grouptype" onclick="selectAidTree()"/>
-                        </li>
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+
+                            <li>
+                                请选择所属村组：<input type="text" name="grouptype" id="grouptype" onclick="selectAidTree()"/>
+                            </li>
 
 
 
-                        <li>
-                            <a class="btn btn-primary btn-rounded btn-sm" onclick="countsearch()"><i class="fa fa-search"></i>&nbsp;查询</a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-
-        <div class="col-sm-12 select-table table-striped">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>性别比例统计</h5>
-                    <div class="ibox-tools">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-superpowers"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a onclick="init_sex_terminalstate()_terminalstate()">原始数据</a>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="countsearch()"><i class="fa fa-search"></i>&nbsp;查询党员的学历</a>
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="ibox-content">
-                    <div class="echarts" id="sex_terminalstate"></div>
-                </div>
+                </form>
             </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>党员信息学历统计</h5>
+                        <div class="ibox-tools">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-superpowers"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a onclick="init_member_terminalstate()_terminalstate()">原始数据</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="member_terminalstate"></div>
+                    </div>
+                </div>
 
             </div>
             <!--<table id="bootstrap-table" data-mobile-responsive="true"></table>-->
@@ -64,7 +62,7 @@
     function countsearch()
     {
         $.modal.loading("正在查询，请稍后...");
-           var grouptype=$("#grouptype").val();
+        var grouptype=$("#grouptype").val();
         $.ajax({
             url:prefix + "/count",
             data :{"grouptype":$("#grouptype").val()},
@@ -72,10 +70,15 @@
             dataType : 'text',
             success:function(data){
                 var count=data.split('|')[0];
-                var fnum=data.split('|')[1];  //男
-                var fmnun=data.split('|')[2]; //女
+                var edu1=data.split('|')[1];//硕士研究生
+                var edu2=data.split('|')[2];//本科
+                var edu3=data.split('|')[2];//大专
+                var edu4=data.split('|')[2];//中专
+                var edu5=data.split('|')[2];//高中
+                var edu6=data.split('|')[2];//初中
+                var edu7=data.split('|')[2];//小学
                 $.modal.closeLoading();
-               init_sex_terminalstate(count,fnum,fmnun);
+                init_member_terminalstate(count,edu1,edu2,edu3,edu4,edu5,edu6,edu7);
 
             }
         })
@@ -83,10 +86,8 @@
 
     }
 
-
-    //男女比例样式
-    function init_sex_terminalstate(count,fnum,fmnum) {
-        var bd_terminalstate = echarts.init(document.getElementById('sex_terminalstate'));
+    function init_member_terminalstate(count,edu1,edu2,edu3,edu4,edu5,edu6,edu7) {
+        var bd_terminalstate = echarts.init(document.getElementById('member_terminalstate'));
         option = {
             tooltip: {
                 trigger: 'item',
@@ -95,7 +96,7 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['男性数量', '女性数量']
+                data: ['硕士研究生', '本科','大专','中专','高中','初中','小学']
             },
             series: [
                 {
@@ -104,8 +105,13 @@
                     radius: '90%',
                     center: ['50%', '50%'],
                     data: [
-                        {value: fnum, name: '男性数量'},
-                        {value: fmnum, name: '女性数量'}
+                        {value: edu1, name: '硕士研究生'},
+                        {value: edu2, name: '本科'},
+                        {value: edu3, name: '大专'},
+                        {value: edu4, name: '中专'},
+                        {value: edu5, name: '高中'},
+                        {value: edu6, name: '初中'},
+                        {value: edu7, name: '小学'}
                     ],
                     itemStyle: {
                         emphasis: {
@@ -119,49 +125,6 @@
         };
         bd_terminalstate.setOption(option);
     }
-
-    // $(function() {
-    //     var options = {
-    //         url: prefix + "/list",
-    //
-    //         modalName: "村民",
-    //
-    //
-    //         columns: [{
-    //             checkbox: true
-    //         },
-    //             {
-    //                 field : 'vid',
-    //                 title : '数据编号',
-    //                 visible: false
-    //             },
-    //             {
-    //                 field : 'vname',
-    //                 title : '记录总数',
-    //                 sortable: true
-    //             },
-    //             {
-    //                 field : 'sex',
-    //                 title : '男性人数',
-    //                 sortable: true
-    //             },
-    //
-    //             {
-    //                 field : 'sex',
-    //                 title : '女性人数',
-    //                 sortable: true
-    //             },
-    //
-    //             {
-    //                 field : 'phone',
-    //                 title : '图表',
-    //                 sortable: true
-    //             },
-    //
-    //            ]
-    //     };
-    //     $.table.init(options);
-    // });
 
     /*用户管理-新增-选择用户所属区域树*/
     function selectAidTree() {
@@ -199,6 +162,7 @@
         }
     }
 </script>
+
 
 </body>
 </html>

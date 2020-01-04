@@ -31,6 +31,7 @@ import java.util.List;
  * @author 张鸿权
  * @date 2019-08-18
  */
+
 @Controller
 @RequestMapping("/village/link")
 public class LinkController extends BaseController

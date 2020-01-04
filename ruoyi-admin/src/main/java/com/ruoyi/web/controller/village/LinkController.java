@@ -102,8 +102,9 @@ public class LinkController extends BaseController
 	@Log(title = "链接管理", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
+	public AjaxResult addSave(Link link){return toAjax(linkService.insertLink(link));}
 	/*这里加入Meeting meeting是为了获得html页面form返回来的数据*/
-	public AjaxResult addSave(Link link, @RequestParam(value = "files") MultipartFile file,
+	/*public AjaxResult addSave(Link link, @RequestParam(value = "files") MultipartFile file,
 							  @RequestParam(value = "filename", required = false) String fname,
 							  @RequestParam(value = "flenth" ,required = false)String flenth, //时长
 							  @RequestParam(value = "fsize",required = false) String fsize){//大小
@@ -127,7 +128,7 @@ public class LinkController extends BaseController
 			System.out.println("失败");
 			return toAjax(0);
 		}
-	}
+	}*/
 
 	/**
 	 * 修改链接管理

@@ -24,6 +24,7 @@ public class Message1Controller extends BaseController {
 
     private String prefix = "village/message";
 
+
     @Autowired
     private IVillagerInfoService villagerInfoService;
 

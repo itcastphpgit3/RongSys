@@ -16,26 +16,34 @@
             <div class="ibox">
                 <div class="ibox-content">
                     <div class="text-center article-title">
-                        <h1 th:text="${listByid.uname}"></h1>
+                        <font style="font-family: 幼圆">
+                        <h2 th:text="${listByid.uname}"></h2>
+                        </font>
                     </div>
                     <div class="text-center">
+                        <font style="color: #990000">
                         <button class="btn btn-white btn-xs" type="button">性别:[[${listByid.sex}]]</button>
                         <button class="btn btn-white btn-xs" type="button">党员小组:[[${listByid.grouptype}]]</button>
                         <button class="btn btn-white btn-xs" type="button">名族:[[${listByid.nations}]]</button>
                         <button class="btn btn-white btn-xs" type="button">生日:[[${listByid.birthday}]]</button>
                         <button class="btn btn-white btn-xs" type="button">[[${listByid.partyjoindate}]]入党</button>
                         <button class="btn btn-white btn-xs" type="button">学历:[[${listByid.edulevel}]]</button>
+                        </font>
                     </div>
                     <div class="text-center">
+                        <font style="color: darkblue">
                         <button class="btn btn-white btn-xs" type="button">身份证号:[[${listByid.idcard}]]</button>
                         <button class="btn btn-white btn-xs" type="button">联系电话:[[${listByid.phone}]]</button>
+                        </font>
                     </div>
                     <div class="text-center">
+                        <font style="color: #0F769F">
                         <button class="btn btn-white btn-xs" type="button">现居住地：[[${listByid.address}]]</button>
+                        </font>
                     </div>
                 </div>
             </div>
-            <!--<div>-->
+            <!--<div>
                 <!--<h4>健康状况:</h4><p th:utext="${listByid.health}"></p>-->
                 <!--<h4>驾照:</h4><p th:utext="${listByid.drive}"></p>-->
                 <!--<h4>车辆:</h4><p th:utext="${listByid.car}"></p>-->
@@ -55,7 +63,7 @@
                 <!--<h4>保险情况:</h4><p th:utext="${listByid.insurance}"></p>-->
                 <!--<h4>犯罪史:</h4><p th:utext="${listByid.criminal}"></p>-->
                 <!--<h4>吸毒史:</h4><p th:utext="${listByid.drug}"></p>-->
-            <!--</div>-->
+            </div>-->
 
         </div>
 

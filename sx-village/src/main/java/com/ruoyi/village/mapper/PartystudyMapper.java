@@ -11,7 +11,10 @@ import java.util.List;
  * @author 张鸿权
  * @date 2019-08-25
  */
-public interface PartystudyMapper 
+public interface
+
+
+PartystudyMapper
 {
 	/**
      * 查询党员学习信息

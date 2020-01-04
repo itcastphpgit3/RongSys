@@ -68,6 +68,7 @@ public class StatisticsController extends BaseController {
                 edu7++;
             }
 
+
         }
         String result=count.toString()+'|'+edu1.toString()+'|'+ edu2.toString()+edu3.toString()+'|'+edu4.toString()+'|'+edu5.toString()+'|'+edu6.toString()+'|'+edu7.toString();
 

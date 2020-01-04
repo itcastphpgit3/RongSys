@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTbHuodongVo"/>
         <where>  
             <if test="hdid != null "> and hdid = #{hdid}</if>
-             <if test="hdtitle != null  and hdtitle != '' "> and hdtitle = #{hdtitle}</if>
+             <if test="hdtitle != null  and hdtitle != '' "> and hdtitle  like CONCAT('%',#{hdtitle,jdbcType=VARCHAR},'%')</if>
              <if test="hdtype != null  and hdtype != '' "> and hdtype = #{hdtype}</if>
              <if test="hdloc != null  and hdloc != '' "> and hdloc = #{hdloc}</if>
              <if test="hdnum != null  and hdnum != '' "> and hdnum = #{hdnum}</if>

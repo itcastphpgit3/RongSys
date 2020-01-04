@@ -87,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             grouptype = #{grouptype}
         </where>
     </select>
+
         
     <insert id="insertPartymember" parameterType="Partymember">
         insert into myc_partymember
